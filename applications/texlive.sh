@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Most of TeX Live can be built from source without a pre-existingbr3ak installation, but xindy (forbr3ak indexing) needs working versions of <span class=\"command\"><strong>latex</strong> and <span class=\"command\"><strong>pdflatex</strong> when configure is run,br3ak and the testsuite and install for <span class=\"command\"><strong>asy</strong> (for vector graphics) willbr3ak fail if TeX has not already been installed. Additionally,br3ak biber is not provided within thebr3ak texlive source.br3ak"
+DESCRIPTION=" Most of TeX Live can be built from source without a pre-existing installation, but xindy (for indexing) needs working versions of <span class=\"command\"><strong>latex</strong> and <span class=\"command\"><strong>pdflatex</strong> when configure is run, and the testsuite and install for <span class=\"command\"><strong>asy</strong> (for vector graphics) will fail if TeX has not already been installed. Additionally, biber is not provided within the texlive source."
 SECTION="pst"
 VERSION=20180414
 NAME="texlive"

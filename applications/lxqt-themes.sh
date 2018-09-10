@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-themes package provides abr3ak number of graphic files and themes for ithe LXQt desktop.br3ak"
+DESCRIPTION=" The lxqt-themes package provides a number of graphic files and themes for ithe LXQt desktop."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-themes"

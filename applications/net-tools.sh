@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Net-tools package is abr3ak collection of programs for controlling the network subsystem of thebr3ak Linux kernel.br3ak"
+DESCRIPTION=" The Net-tools package is a collection of programs for controlling the network subsystem of the Linux kernel."
 SECTION="basicnet"
 VERSION=20101030
 NAME="net-tools"

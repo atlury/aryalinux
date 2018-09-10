@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXMenu Data package providesbr3ak files required to build freedesktop.org menu spec-compliant desktopbr3ak menus for LXDE.br3ak"
+DESCRIPTION=" The LXMenu Data package provides files required to build freedesktop.org menu spec-compliant desktop menus for LXDE."
 SECTION="lxde"
 VERSION=0.1.5
 NAME="lxmenu-data"

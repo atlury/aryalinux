@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xcb-util-cursor packagebr3ak provides a module that implements the XCB cursor library. It is abr3ak the XCB replacement forbr3ak libXcursor.br3ak"
+DESCRIPTION=" The xcb-util-cursor package provides a module that implements the XCB cursor library. It is a the XCB replacement for libXcursor."
 SECTION="x"
 VERSION=0.1.3
 NAME="xcb-util-cursor"

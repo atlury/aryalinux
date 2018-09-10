@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Yasm is a complete rewrite of thebr3ak <a class=\"xref\" href=\"nasm.html\" title=\"NASM-2.13.03\">NASM-2.13.03</a> assembler. It supports the x86 andbr3ak AMD64 instruction sets, accepts NASM and GAS assembler syntaxes andbr3ak outputs binary, ELF32 and ELF64 object formats.br3ak"
+DESCRIPTION=" Yasm is a complete rewrite of the <a class=\"xref\" href=\"nasm.html\" title=\"NASM-2.13.03\">NASM-2.13.03</a> assembler. It supports the x86 and AMD64 instruction sets, accepts NASM and GAS assembler syntaxes and outputs binary, ELF32 and ELF64 object formats."
 SECTION="general"
 VERSION=1.3.0
 NAME="yasm"

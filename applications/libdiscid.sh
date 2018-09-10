@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libdiscid package contains abr3ak library for creating MusicBrainz DiscIDs from audio CDs. It reads abr3ak CD's table of contents (TOC) and generates an identifier which canbr3ak be used to lookup the CD at MusicBrainz (<a class=\"ulink\" href=\"http://musicbrainz.org\">http://musicbrainz.org</a>). Additionally,br3ak it provides a submission URL for adding the DiscID to the database.br3ak"
+DESCRIPTION=" The libdiscid package contains a library for creating MusicBrainz DiscIDs from audio CDs. It reads a CD's table of contents (TOC) and generates an identifier which can be used to lookup the CD at MusicBrainz (<a class=\"ulink\" href=\"http://musicbrainz.org\">http://musicbrainz.org</a>). Additionally, it provides a submission URL for adding the DiscID to the database."
 SECTION="multimedia"
 VERSION=0.6.2
 NAME="libdiscid"

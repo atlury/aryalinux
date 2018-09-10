@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak SWIG (Simplified Wrapper andbr3ak Interface Generator) is a compiler that integrates C and C++br3ak with languages including Perl,br3ak Python, Tcl, Ruby,br3ak PHP, Java, C#,br3ak D, Go, Lua,br3ak Octave, R, Scheme,br3ak Ocaml, Modula-3, Commonbr3ak Lisp, and Pike.br3ak SWIG can also export its parsebr3ak tree into Lisp s-expressions andbr3ak XML.br3ak"
+DESCRIPTION=" SWIG (Simplified Wrapper and Interface Generator) is a compiler that integrates C and C++ with languages including Perl, Python, Tcl, Ruby, PHP, Java, C#, D, Go, Lua, Octave, R, Scheme, Ocaml, Modula-3, Common Lisp, and Pike. SWIG can also export its parse tree into Lisp s-expressions and XML."
 SECTION="general"
 VERSION=3.0.12
 NAME="swig"

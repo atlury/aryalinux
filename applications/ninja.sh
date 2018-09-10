@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Ninja is a small build system withbr3ak a focus on speed.br3ak"
+DESCRIPTION=" Ninja is a small build system with a focus on speed."
 SECTION="general"
 VERSION=1.8.2
 NAME="ninja"

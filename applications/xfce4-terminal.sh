@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xfce4 Terminal is a GTK+3 terminal emulator. This is useful forbr3ak running commands or programs in the comfort of an Xorg window; youbr3ak can drag and drop files into the Xfce4br3ak Terminal or copy and paste text with your mouse.br3ak"
+DESCRIPTION=" Xfce4 Terminal is a GTK+3 terminal emulator. This is useful for running commands or programs in the comfort of an Xorg window; you can drag and drop files into the Xfce4 Terminal or copy and paste text with your mouse."
 SECTION="xfce"
 VERSION=0.8.7.4
 NAME="xfce4-terminal"

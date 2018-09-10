@@ -54,7 +54,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:zenity
 #REQ:gnome-bluetooth
 #REQ:gnome-keyring
-#REQ:clutter-gst2
+#REQ:clutter-gst
 #REQ:cups
 #REQ:cups-filters
 #REQ:gnome-settings-daemon
@@ -72,7 +72,6 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:baobab
 #REQ:brasero
 #REQ:cheese
-#REQ:eog
 #REQ:evince
 #REQ:file-roller
 #REQ:gedit
@@ -106,6 +105,19 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:aryalinux-gnome-settings
 #REQ:lightdm-gtk-greeter
 #REQ:gnome-tweak-tool
+#REQ:gnome-documents
+#REQ:gnome-calendar
+#REQ:gnome-clocks
+#REQ:gnome-contacts
+#REQ:dconf-editor
+#REQ:cantarell-fonts
+#REQ:gnome-font-viewer
+#REQ:gnome-getting-started-docs
+#REQ:gnome-mpv
+#REQ:gnome-photos
+#REQ:libmediaart
+#REQ:gnome-music
+
 
 pushd $SOURCE_DIR
 wget https://raw.githubusercontent.com/FluidIdeas/utils/master/wallpaper-list-update.sh

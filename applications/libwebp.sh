@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libwebp package contains abr3ak library and support programs to encode and decode images in WebPbr3ak format.br3ak"
+DESCRIPTION=" The libwebp package contains a library and support programs to encode and decode images in WebP format."
 SECTION="general"
 VERSION=1.0.0
 NAME="libwebp"

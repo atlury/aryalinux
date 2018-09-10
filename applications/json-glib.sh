@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The JSON GLib package is a librarybr3ak providing serialization and deserialization support for thebr3ak JavaScript Object Notation (JSON) format described by RFC 4627.br3ak"
+DESCRIPTION=" The JSON GLib package is a library providing serialization and deserialization support for the JavaScript Object Notation (JSON) format described by RFC 4627."
 SECTION="general"
 VERSION=1.4.2
 NAME="json-glib"
@@ -23,7 +23,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/json-glib/1.4/json-glib-1.4.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/json-glib/1.4/json-glib-1.4.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/json-glib/json-glib-1.4.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/json-glib/json-glib-1.4.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/json-glib/json-glib-1.4.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/json-glib/json-glib-1.4.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/json-glib/json-glib-1.4.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/json-glib/json-glib-1.4.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/json-glib/1.4/json-glib-1.4.2.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -42,17 +42,7 @@ mkdir build &&
 cd    build &&
 meson --prefix=/usr .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install
 
 
 

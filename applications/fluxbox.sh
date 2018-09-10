@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Fluxbox package contains abr3ak window manager.br3ak"
+DESCRIPTION=" The Fluxbox package contains a window manager."
 SECTION="x"
 VERSION=1.3.7
 NAME="fluxbox"

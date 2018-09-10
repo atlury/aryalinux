@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Hdparm package contains abr3ak utility that is useful for obtaining information about, andbr3ak controlling ATA/IDE controllers and hard drives. It allows tobr3ak increase performance and sometimes to increase stability.br3ak"
+DESCRIPTION=" The Hdparm package contains a utility that is useful for obtaining information about, and controlling ATA/IDE controllers and hard drives. It allows to increase performance and sometimes to increase stability."
 SECTION="general"
 VERSION=9.56
 NAME="hdparm"

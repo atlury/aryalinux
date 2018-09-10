@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The popt package contains thebr3ak popt libraries which are used bybr3ak some programs to parse command-line options.br3ak"
+DESCRIPTION=" The popt package contains the popt libraries which are used by some programs to parse command-line options."
 SECTION="general"
 VERSION=1.16
 NAME="popt"

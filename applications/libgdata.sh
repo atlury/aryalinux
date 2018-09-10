@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libgdata package is abr3ak GLib-based library for accessing online service APIs using thebr3ak GData protocol, most notably, Google's services. It provides APIsbr3ak to access the common Google services and has full asynchronousbr3ak support.br3ak"
+DESCRIPTION=" The libgdata package is a GLib-based library for accessing online service APIs using the GData protocol, most notably, Google's services. It provides APIs to access the common Google services and has full asynchronous support."
 SECTION="gnome"
 VERSION=0.17.9
 NAME="libgdata"

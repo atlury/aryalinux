@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gcab package contains abr3ak program and a library used to create Microsoft cabinet (.cab)br3ak archives.br3ak"
+DESCRIPTION=" The Gcab package contains a program and a library used to create Microsoft cabinet (.cab) archives."
 SECTION="general"
-VERSION=0.7
+VERSION=1.1
 NAME="gcab"
 
 #REQ:glib2
@@ -20,11 +20,11 @@ NAME="gcab"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gcab/0.7/gcab-0.7.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gcab-1.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gcab/0.7/gcab-0.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gc/gcab-0.7.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gc/gcab-0.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gc/gcab-0.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gc/gcab-0.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gc/gcab-0.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gc/gcab-0.7.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gcab/0.7/gcab-0.7.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -41,18 +41,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+sudo make install
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

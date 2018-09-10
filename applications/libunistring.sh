@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libunistring is a library that provides functions for manipulatingbr3ak Unicode strings and for manipulating C strings according to thebr3ak Unicode standard.br3ak"
+DESCRIPTION=" libunistring is a library that provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard."
 SECTION="general"
 VERSION=0.9.10
 NAME="libunistring"

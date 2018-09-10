@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak This package is intended to provide a simple way for applicationsbr3ak to take actions based on a system or user-specified paper size.br3ak"
+DESCRIPTION=" This package is intended to provide a simple way for applications to take actions based on a system or user-specified paper size."
 SECTION="general"
 VERSION=5
 NAME="libpaper"

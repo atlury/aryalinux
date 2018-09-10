@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The OpenJade package contains abr3ak DSSSL engine. This is useful for SGML and XML transformations intobr3ak RTF, TeX, SGML and XML.br3ak"
+DESCRIPTION=" The OpenJade package contains a DSSSL engine. This is useful for SGML and XML transformations into RTF, TeX, SGML and XML."
 SECTION="pst"
 VERSION=1.3.2
 NAME="openjade"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libburn is a library for writingbr3ak preformatted data onto optical media: CD, DVD and BD (Blu-Ray).br3ak"
+DESCRIPTION=" libburn is a library for writing preformatted data onto optical media: CD, DVD and BD (Blu-Ray)."
 SECTION="multimedia"
 VERSION=1.4.8
 NAME="libburn"

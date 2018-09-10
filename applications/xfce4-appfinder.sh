@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xfce4 Appfinder is a tool to findbr3ak and launch installed applications by searching the .desktop filesbr3ak installed on your system.br3ak"
+DESCRIPTION=" Xfce4 Appfinder is a tool to find and launch installed applications by searching the .desktop files installed on your system."
 SECTION="xfce"
 VERSION=4.12.0
 NAME="xfce4-appfinder"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The mpg123 package contains abr3ak console-based MP3 player. It claims to be the fastest MP3 decoderbr3ak for Unix.br3ak"
+DESCRIPTION=" The mpg123 package contains a console-based MP3 player. It claims to be the fastest MP3 decoder for Unix."
 SECTION="multimedia"
 VERSION=1.25.10
 NAME="mpg123"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libgpg-error package containsbr3ak a library that defines common error values for all GnuPG components.br3ak"
+DESCRIPTION=" The libgpg-error package contains a library that defines common error values for all GnuPG components."
 SECTION="general"
 VERSION=1.31
 NAME="libgpg-error"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The dosfstools package containsbr3ak various utilities for use with the FAT family of file systems.br3ak"
+DESCRIPTION=" The dosfstools package contains various utilities for use with the FAT family of file systems."
 SECTION="postlfs"
 VERSION=4.1
 NAME="dosfstools"

@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Gjs is a set of Javascriptbr3ak bindings for GNOME.br3ak"
+DESCRIPTION=" Gjs is a set of Javascript bindings for GNOME."
 SECTION="gnome"
-VERSION=1.52.0
+VERSION=1.53.92
 NAME="gjs"
 
 #REQ:cairo
@@ -22,11 +22,11 @@ NAME="gjs"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gjs/1.52/gjs-1.52.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gjs-1.53.92.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gjs/1.52/gjs-1.52.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gjs/gjs-1.52.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gjs/gjs-1.52.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gjs/gjs-1.52.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gjs/gjs-1.52.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gjs/gjs-1.52.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gjs/gjs-1.52.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gjs/1.52/gjs-1.52.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -43,18 +43,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+sudo make install
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Yelp package contains a helpbr3ak browser used for viewing help files.br3ak"
+DESCRIPTION=" The Yelp package contains a help browser used for viewing help files."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.28.1
 NAME="yelp"
 
 #REQ:gsettings-desktop-schemas
@@ -21,11 +21,11 @@ NAME="yelp"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/yelp/3.28/yelp-3.28.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/yelp-3.28.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/yelp/3.28/yelp-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/yelp/yelp-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/yelp/yelp-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/yelp/yelp-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/yelp/yelp-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/yelp/yelp-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/yelp/yelp-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/yelp/3.28/yelp-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -42,18 +42,8 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install &&
-update-desktop-database
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install &&
+sudo update-desktop-database
 
 
 

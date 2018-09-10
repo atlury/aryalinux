@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Kdenlive package is a KF5br3ak based video editor.br3ak"
+DESCRIPTION=" The Kdenlive package is a KF5 based video editor."
 SECTION="kde"
 VERSION=18.04.1
 NAME="kdenlive"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libndp package provides abr3ak wrapper for IPv6 Neighbor Discovery Protocol. It also provides abr3ak tool named ndptool for sending and receiving NDP messages.br3ak"
+DESCRIPTION=" The libndp package provides a wrapper for IPv6 Neighbor Discovery Protocol. It also provides a tool named ndptool for sending and receiving NDP messages."
 SECTION="basicnet"
 VERSION=1.6
 NAME="libndp"

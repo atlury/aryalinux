@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak PSUtils is a set of utilities tobr3ak manipulate PostScript files.br3ak"
+DESCRIPTION=" PSUtils is a set of utilities to manipulate PostScript files."
 SECTION="pst"
 VERSION=17
 NAME="psutils"

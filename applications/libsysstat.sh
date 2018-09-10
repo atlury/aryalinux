@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libsysstat package contains abr3ak library used to query system info and statistics.br3ak"
+DESCRIPTION=" The libsysstat package contains a library used to query system info and statistics."
 SECTION="lxqt"
 VERSION=0.4.0
 NAME="libsysstat"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libtasn1 is a highly portable Cbr3ak library that encodes and decodes DER/BER data following an ASN.1br3ak schema.br3ak"
+DESCRIPTION=" libtasn1 is a highly portable C library that encodes and decodes DER/BER data following an ASN.1 schema."
 SECTION="general"
 VERSION=4.13
 NAME="libtasn1"

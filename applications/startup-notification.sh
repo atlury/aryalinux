@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The startup-notification packagebr3ak contains <code class=\"filename\">startup-notificationbr3ak libraries. These are useful for building a consistent manner tobr3ak notify the user through the cursor that the application is loading.br3ak"
+DESCRIPTION=" The startup-notification package contains <code class=\"filename\">startup-notification libraries. These are useful for building a consistent manner to notify the user through the cursor that the application is loading."
 SECTION="x"
 VERSION=0.12
 NAME="startup-notification"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GTK Xfce Engine packagebr3ak contains several GTK+ 2 andbr3ak GTK+ 3 themes and libraries neededbr3ak to display them. This is useful for customising the appearance ofbr3ak your Xfce desktop.br3ak"
+DESCRIPTION=" The GTK Xfce Engine package contains several GTK+ 2 and GTK+ 3 themes and libraries needed to display them. This is useful for customising the appearance of your Xfce desktop."
 SECTION="xfce"
 VERSION=3.2.0
 NAME="gtk-xfce-engine"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXTask package contains abr3ak lightweight and desktop-independent task manager.br3ak"
+DESCRIPTION=" The LXTask package contains a lightweight and desktop-independent task manager."
 SECTION="lxde"
 VERSION=0.1.8
 NAME="lxtask"

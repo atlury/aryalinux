@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Colord GTK package containsbr3ak GTK+ bindings for Colord.br3ak"
+DESCRIPTION=" The Colord GTK package contains GTK+ bindings for Colord."
 SECTION="x"
 VERSION=0.1.26
 NAME="colord-gtk"

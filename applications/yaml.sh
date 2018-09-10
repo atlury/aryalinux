@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The YAML package contains a Cbr3ak library for parsing and emitting YAML (YAML Ain't Markup Language).br3ak"
+DESCRIPTION=" The YAML package contains a C library for parsing and emitting YAML (YAML Ain't Markup Language)."
 SECTION="general"
 VERSION=0.1.7
 NAME="yaml"

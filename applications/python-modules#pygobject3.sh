@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=3.28.2
+VERSION=3.29.3
 NAME="python-modules#pygobject3"
 
 #REQ:gobject-introspection
@@ -18,11 +18,11 @@ NAME="python-modules#pygobject3"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/pygobject/3.28/pygobject-3.28.2.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/pygobject-3.29.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/pygobject/3.28/pygobject-3.28.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pygobject/3.28/pygobject-3.28.2.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

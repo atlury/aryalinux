@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libuv package is abr3ak multi-platform support library with a focus on asynchronous I/O..br3ak"
+DESCRIPTION=" The libuv package is a multi-platform support library with a focus on asynchronous I/O.."
 SECTION="general"
 VERSION=1.20.3
 NAME="libuv"

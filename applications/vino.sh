@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Vino package is a VNC serverbr3ak for GNOME. VNC is a protocol thatbr3ak allows remote display of a user's desktop.br3ak"
+DESCRIPTION=" The Vino package is a VNC server for GNOME. VNC is a protocol that allows remote display of a user's desktop."
 SECTION="gnome"
 VERSION=3.22.0
 NAME="vino"

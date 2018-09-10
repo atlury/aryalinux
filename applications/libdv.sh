@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Quasar DV Codec (libdv) is abr3ak software CODEC for DV video, the encoding format used by mostbr3ak digital camcorders. It can be used to copy videos from camcordersbr3ak using a firewire (IEEE 1394) connection.br3ak"
+DESCRIPTION=" The Quasar DV Codec (libdv) is a software CODEC for DV video, the encoding format used by most digital camcorders. It can be used to copy videos from camcorders using a firewire (IEEE 1394) connection."
 SECTION="multimedia"
 VERSION=1.0.0
 NAME="libdv"

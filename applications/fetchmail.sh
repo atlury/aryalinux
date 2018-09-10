@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Fetchmail package contains abr3ak mail retrieval program. It retrieves mail from remote mail serversbr3ak and forwards it to the local (client) machine's delivery system, sobr3ak it can then be read by normal mail user agents.br3ak"
+DESCRIPTION=" The Fetchmail package contains a mail retrieval program. It retrieves mail from remote mail servers and forwards it to the local (client) machine's delivery system, so it can then be read by normal mail user agents."
 SECTION="basicnet"
 VERSION=6.3.26
 NAME="fetchmail"

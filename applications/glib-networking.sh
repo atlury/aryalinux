@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GLib Networking packagebr3ak contains Network related gio modules for GLib.br3ak"
+DESCRIPTION=" The GLib Networking package contains Network related gio modules for GLib."
 SECTION="basicnet"
 VERSION=2.56.1
 NAME="glib-networking"

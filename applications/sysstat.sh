@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Sysstat package containsbr3ak utilities to monitor system performance and usage activity.br3ak Sysstat contains the <span class=\"command\"><strong>sar</strong> utility, common to manybr3ak commercial Unixes, and tools you can schedule via cron to collectbr3ak and historize performance and activity data.br3ak"
+DESCRIPTION=" The Sysstat package contains utilities to monitor system performance and usage activity. Sysstat contains the <span class=\"command\"><strong>sar</strong> utility, common to many commercial Unixes, and tools you can schedule via cron to collect and historize performance and activity data."
 SECTION="general"
 VERSION=11.6.3
 NAME="sysstat"

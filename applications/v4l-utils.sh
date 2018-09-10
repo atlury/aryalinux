@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak v4l-utils provides a series ofbr3ak utilities for media devices, allowing to handle the proprietarybr3ak formats available at most webcams (libv4l), and providing tools tobr3ak test V4L devices.br3ak"
+DESCRIPTION=" v4l-utils provides a series of utilities for media devices, allowing to handle the proprietary formats available at most webcams (libv4l), and providing tools to test V4L devices."
 SECTION="multimedia"
 VERSION=1.14.2
 NAME="v4l-utils"

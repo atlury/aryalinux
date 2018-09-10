@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Konsole package is a KF5 basedbr3ak terminal emulator.br3ak"
+DESCRIPTION=" The Konsole package is a KF5 based terminal emulator."
 SECTION="kde"
 VERSION=18.04.1
 NAME="konsole5"

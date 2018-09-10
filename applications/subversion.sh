@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Subversion is a version controlbr3ak system that is designed to be a compelling replacement forbr3ak CVS in the open source community.br3ak It extends and enhances CVS'br3ak feature set, while maintaining a similar interface for thosebr3ak already familiar with CVS. Thesebr3ak instructions install the client and server software used tobr3ak manipulate a Subversionbr3ak repository. Creation of a repository is covered at <a class=\"xref\" br3ak href=\"svnserver.html\" title=\"Running a Subversion Server\">Running abr3ak Subversion Server</a>.br3ak"
+DESCRIPTION=" Subversion is a version control system that is designed to be a compelling replacement for CVS in the open source community. It extends and enhances CVS' feature set, while maintaining a similar interface for those already familiar with CVS. These instructions install the client and server software used to manipulate a Subversion repository. Creation of a repository is covered at <a class=\"xref\"  href=\"svnserver.html\" title=\"Running a Subversion Server\">Running a Subversion Server</a>."
 SECTION="general"
 VERSION=1.10.0
 NAME="subversion"

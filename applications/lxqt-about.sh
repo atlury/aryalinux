@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-about package providesbr3ak the standalone LXQtbr3ak “<span class=\"quote\">About” dialog.br3ak"
+DESCRIPTION=" The lxqt-about package provides the standalone LXQt “<span class=\"quote\">About” dialog."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-about"

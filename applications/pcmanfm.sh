@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The PCManFM package contains anbr3ak extremely fast, lightweight, yet feature-rich file manager withbr3ak tabbed browsing.br3ak"
+DESCRIPTION=" The PCManFM package contains an extremely fast, lightweight, yet feature-rich file manager with tabbed browsing."
 SECTION="lxde"
 VERSION=1.3.0
 NAME="pcmanfm"

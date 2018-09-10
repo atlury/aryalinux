@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Kwayland is a Qt-style API tobr3ak interact with the wayland-clientbr3ak and wayland-server API.br3ak"
+DESCRIPTION=" Kwayland is a Qt-style API to interact with the wayland-client and wayland-server API."
 SECTION="lxqt"
 VERSION=5.46.0
 NAME="lxqt-kwayland"

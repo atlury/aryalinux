@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Traceroute package contains abr3ak program which is used to display the network route that packetsbr3ak take to reach a specified host. This is a standard networkbr3ak troubleshooting tool. If you find yourself unable to connect tobr3ak another system, traceroute can help pinpoint the problem.br3ak"
+DESCRIPTION=" The Traceroute package contains a program which is used to display the network route that packets take to reach a specified host. This is a standard network troubleshooting tool. If you find yourself unable to connect to another system, traceroute can help pinpoint the problem."
 SECTION="basicnet"
 VERSION=2.1.0
 NAME="traceroute"

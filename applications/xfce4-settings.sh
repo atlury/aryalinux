@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xfce4 Settings packagebr3ak contains a collection of programs that are useful for adjustingbr3ak your Xfce preferences.br3ak"
+DESCRIPTION=" The Xfce4 Settings package contains a collection of programs that are useful for adjusting your Xfce preferences."
 SECTION="xfce"
 VERSION=4.12.3
 NAME="xfce4-settings"

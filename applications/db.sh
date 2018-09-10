@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Berkeley DB package containsbr3ak programs and utilities used by many other applications for databasebr3ak related functions.br3ak"
+DESCRIPTION=" The Berkeley DB package contains programs and utilities used by many other applications for database related functions."
 SECTION="server"
 VERSION=6.2.32
 NAME="db"

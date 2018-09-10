@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xorg font packages providebr3ak some scalable fonts and supporting packages for Xorg applications. Many people will want tobr3ak install other TTF or OTF fonts in addition to, or instead of,br3ak these. Some are listed at <a class=\"xref\" href=\"TTF-and-OTF-fonts.html\" title=\"TTF and OTF fonts\">the sectionbr3ak called “TTF and OTF fonts”</a>.br3ak"
+DESCRIPTION=" The Xorg font packages provide some scalable fonts and supporting packages for Xorg applications. Many people will want to install other TTF or OTF fonts in addition to, or instead of, these. Some are listed at <a class=\"xref\" href=\"TTF-and-OTF-fonts.html\" title=\"TTF and OTF fonts\">the section called “TTF and OTF fonts”</a>."
 SECTION="x"
 NAME="x7font"
 

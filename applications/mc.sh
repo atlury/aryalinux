@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak MC (Midnight Commander) is abr3ak text-mode full-screen file manager and visual shell. It provides abr3ak clear, user-friendly, and somewhat protected interface to a Unixbr3ak system while making many frequent file operations more efficientbr3ak and preserving the full power of the command prompt.br3ak"
+DESCRIPTION=" MC (Midnight Commander) is a text-mode full-screen file manager and visual shell. It provides a clear, user-friendly, and somewhat protected interface to a Unix system while making many frequent file operations more efficient and preserving the full power of the command prompt."
 SECTION="general"
 VERSION=4.8.20
 NAME="mc"

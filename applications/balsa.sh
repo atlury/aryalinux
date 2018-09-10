@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Balsa package contains abr3ak GNOME-2 based mail client.br3ak"
+DESCRIPTION=" The Balsa package contains a GNOME-2 based mail client."
 SECTION="xsoft"
 VERSION=2.5.5
 NAME="balsa"

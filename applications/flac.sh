@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak FLAC is an audio CODEC similar tobr3ak MP3, but lossless, meaning that audio is compressed without losingbr3ak any information.br3ak"
+DESCRIPTION=" FLAC is an audio CODEC similar to MP3, but lossless, meaning that audio is compressed without losing any information."
 SECTION="multimedia"
 VERSION=1.3.2
 NAME="flac"

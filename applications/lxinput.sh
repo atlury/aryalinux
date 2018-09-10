@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXInput package contains abr3ak small program used to configure keyboard and mouse for LXDE.br3ak"
+DESCRIPTION=" The LXInput package contains a small program used to configure keyboard and mouse for LXDE."
 SECTION="lxde"
 VERSION=0.3.5
 NAME="lxinput"

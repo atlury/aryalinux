@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Simple DirectMedia Layer Version 2 (SDL2 for short) is a cross-platform librarybr3ak designed to make it easy to write multimedia software, such asbr3ak games and emulators.br3ak"
+DESCRIPTION=" The Simple DirectMedia Layer Version 2 (SDL2 for short) is a cross-platform library designed to make it easy to write multimedia software, such as games and emulators."
 SECTION="multimedia"
 VERSION=2.0.8
 NAME="sdl2"

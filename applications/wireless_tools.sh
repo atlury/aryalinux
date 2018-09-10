@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Wireless Extension (WE) is a generic API in the Linux kernelbr3ak allowing a driver to expose configuration and statistics specificbr3ak to common Wireless LANs to user space. A single set of tools canbr3ak support all the variations of Wireless LANs, regardless of theirbr3ak type as long as the driver supports Wireless Extensions. WEbr3ak parameters may also be changed on the fly without restarting thebr3ak driver (or Linux).br3ak"
+DESCRIPTION=" The Wireless Extension (WE) is a generic API in the Linux kernel allowing a driver to expose configuration and statistics specific to common Wireless LANs to user space. A single set of tools can support all the variations of Wireless LANs, regardless of their type as long as the driver supports Wireless Extensions. WE parameters may also be changed on the fly without restarting the driver (or Linux)."
 SECTION="basicnet"
 VERSION=29
 NAME="wireless_tools"

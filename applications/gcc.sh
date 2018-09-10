@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GCC package contains the GNUbr3ak Compiler Collection. This page describes the installation ofbr3ak compilers for the following languages: C, C++, Fortran, Objectivebr3ak C, Objective C++, and Go. One additional language, Ada, isbr3ak available in the collection. It has specific requirements, so it isbr3ak described in a separate page (<a class=\"xref\" href=\"gcc-ada.html\" br3ak title=\"GCC-Ada-7.3.0\">GCC-Ada-7.3.0</a>). Since C and C++ arebr3ak installed in LFS, this page is either for upgrading C and C++, orbr3ak for installing additional compilers.br3ak"
+DESCRIPTION=" The GCC package contains the GNU Compiler Collection. This page describes the installation of compilers for the following languages: C, C++, Fortran, Objective C, Objective C++, and Go. One additional language, Ada, is available in the collection. It has specific requirements, so it is described in a separate page (<a class=\"xref\" href=\"gcc-ada.html\"  title=\"GCC-Ada-7.3.0\">GCC-Ada-7.3.0</a>). Since C and C++ are installed in LFS, this page is either for upgrading C and C++, or for installing additional compilers."
 SECTION="general"
 VERSION=7.3.0
 NAME="gcc"

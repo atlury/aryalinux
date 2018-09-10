@@ -6,7 +6,8 @@ set +h
 . /var/lib/alps/functions
 
 NAME="simple-scan"
-VERSION="3.25.1"
+VERSION=3.29.92
+DESCRIPTION="Simple Scan — a GNOME document scanning application. Simple Scan allows you to capture images using image scanners (e.g. flatbed scanners) that have suitable SANE drivers installed"
 
 #REQ:packagekit
 #REQ:sane
@@ -14,9 +15,8 @@ VERSION="3.25.1"
 
 cd $SOURCE_DIR
 
-URL=https://launchpad.net/simple-scan/3.25/3.25.1/+download/simple-scan-3.25.1.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/simple-scan-3.29.92.tar.xz
 wget -nc $URL
-wget -nc https://launchpadlibrarian.net/316974617/simple-scan-3.25.1-fix-vala-syntax.patch
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
 
@@ -24,7 +24,6 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-patch -Np1 -i ../simple-scan-3.25.1-fix-vala-syntax.patch &&
 mkdir build &&
 cd    build &&
 meson --prefix=/usr         \

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ALSA Tools package containsbr3ak advanced tools for certain sound cards.br3ak"
+DESCRIPTION=" The ALSA Tools package contains advanced tools for certain sound cards."
 SECTION="multimedia"
 VERSION=1.1.6
 NAME="alsa-tools"

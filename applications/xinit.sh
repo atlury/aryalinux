@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xinit package contains abr3ak usable script to start the xserver.br3ak"
+DESCRIPTION=" The xinit package contains a usable script to start the xserver."
 SECTION="x"
 VERSION=1.4.0
 NAME="xinit"

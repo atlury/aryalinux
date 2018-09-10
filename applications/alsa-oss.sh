@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ALSA OSS package contains thebr3ak ALSA OSS compatibility library. This is used by programs which wishbr3ak to use the ALSA OSS sound interface.br3ak"
+DESCRIPTION=" The ALSA OSS package contains the ALSA OSS compatibility library. This is used by programs which wish to use the ALSA OSS sound interface."
 SECTION="multimedia"
 VERSION=1.1.6
 NAME="alsa-oss"

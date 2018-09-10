@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Logs package contains abr3ak log viewer for the systemd journal.br3ak"
+DESCRIPTION=" The GNOME Logs package contains a log viewer for the systemd journal."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.29.4
 NAME="gnome-logs"
 
 #REQ:gtk3
@@ -22,11 +22,11 @@ NAME="gnome-logs"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.28/gnome-logs-3.28.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gnome-logs-3.29.4.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.28/gnome-logs-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-logs/gnome-logs-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-logs/gnome-logs-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-logs/gnome-logs-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-logs/gnome-logs-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-logs/gnome-logs-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-logs/gnome-logs-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.28/gnome-logs-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -43,18 +43,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+sudo make install
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak pavucontrol-qt is the Qt port ofbr3ak volume control pavucontrol of sound server PulseAudio. Its use isbr3ak not limited to LXQt.br3ak"
+DESCRIPTION=" pavucontrol-qt is the Qt port of volume control pavucontrol of sound server PulseAudio. Its use is not limited to LXQt."
 SECTION="lxqt"
 VERSION=0.3.0
 NAME="pavucontrol-qt"

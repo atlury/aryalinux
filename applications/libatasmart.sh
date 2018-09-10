@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libatasmart package is a diskbr3ak reporting library. It only supports a subset of the ATA S.M.A.R.T.br3ak functionality.br3ak"
+DESCRIPTION=" The libatasmart package is a disk reporting library. It only supports a subset of the ATA S.M.A.R.T. functionality."
 SECTION="general"
 VERSION=0.19
 NAME="libatasmart"

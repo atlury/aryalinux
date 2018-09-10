@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xclock package contains abr3ak simple clock application which is used in the default xinitbr3ak configuration.br3ak"
+DESCRIPTION=" The xclock package contains a simple clock application which is used in the default xinit configuration."
 SECTION="x"
 VERSION=1.0.7
 NAME="xclock"

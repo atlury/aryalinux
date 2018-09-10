@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The UDisks package provides abr3ak daemon, tools and libraries to access and manipulate disks andbr3ak storage devices.br3ak"
+DESCRIPTION=" The UDisks package provides a daemon, tools and libraries to access and manipulate disks and storage devices."
 SECTION="general"
 VERSION=2.7.6
 NAME="udisks2"

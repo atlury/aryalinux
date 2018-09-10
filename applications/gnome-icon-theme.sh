@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Icon Theme packagebr3ak contains an assortment of non-scalable icons of different sizes andbr3ak themes.br3ak"
+DESCRIPTION=" The GNOME Icon Theme package contains an assortment of non-scalable icons of different sizes and themes."
 SECTION="x"
 VERSION=3.12.0
 NAME="gnome-icon-theme"

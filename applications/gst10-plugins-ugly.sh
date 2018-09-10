@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GStreamer Ugly Plug-ins is abr3ak set of plug-ins considered by the GStreamer developers to have good quality andbr3ak correct functionality, but distributing them might pose problems.br3ak The license on either the plug-ins or the supporting librariesbr3ak might not be how the GStreamerbr3ak developers would like. The code might be widely known to presentbr3ak patent problems.br3ak"
+DESCRIPTION=" The GStreamer Ugly Plug-ins is a set of plug-ins considered by the GStreamer developers to have good quality and correct functionality, but distributing them might pose problems. The license on either the plug-ins or the supporting libraries might not be how the GStreamer developers would like. The code might be widely known to present patent problems."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gst10-plugins-ugly"

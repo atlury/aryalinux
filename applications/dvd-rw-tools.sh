@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The dvd+rw-tools package containsbr3ak several utilities to master the DVD media, both +RW/+R and -R[W].br3ak The principle tool is <span class=\"command\"><strong>growisofs</strong> which provides a way tobr3ak both lay down <span class=\"strong\"><strong>and</strong> growbr3ak an ISO9660 file system on (as well as to burn an arbitrarybr3ak pre-mastered image to) all supported DVD media. This is useful forbr3ak creating a new DVD or adding to an existing image on a partiallybr3ak burned DVD.br3ak"
+DESCRIPTION=" The dvd+rw-tools package contains several utilities to master the DVD media, both +RW/+R and -R[W]. The principle tool is <span class=\"command\"><strong>growisofs</strong> which provides a way to both lay down <span class=\"strong\"><strong>and</strong> grow an ISO9660 file system on (as well as to burn an arbitrary pre-mastered image to) all supported DVD media. This is useful for creating a new DVD or adding to an existing image on a partially burned DVD."
 SECTION="multimedia"
 VERSION=7.1
 NAME="dvd-rw-tools"

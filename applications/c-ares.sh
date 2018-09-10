@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak c-ares is a C library forbr3ak asynchronous DNS requests.br3ak"
+DESCRIPTION=" c-ares is a C library for asynchronous DNS requests."
 SECTION="basicnet"
 VERSION=1.14.0
 NAME="c-ares"

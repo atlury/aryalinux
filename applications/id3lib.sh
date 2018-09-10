@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak id3lib is a library for reading,br3ak writing and manipulating id3v1 and id3v2 multimedia databr3ak containers.br3ak"
+DESCRIPTION=" id3lib is a library for reading, writing and manipulating id3v1 and id3v2 multimedia data containers."
 SECTION="multimedia"
 VERSION=3.8.3
 NAME="id3lib"

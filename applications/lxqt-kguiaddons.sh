@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The KDE GUI addons provide utilities for graphical user interfacesbr3ak in the areas of colors, fonts, text, images, and keyboard input.br3ak"
+DESCRIPTION=" The KDE GUI addons provide utilities for graphical user interfaces in the areas of colors, fonts, text, images, and keyboard input."
 SECTION="lxqt"
 VERSION=5.46.0
 NAME="lxqt-kguiaddons"

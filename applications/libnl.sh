@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libnl suite is a collection ofbr3ak libraries providing APIs to netlink protocol based Linux kernelbr3ak interfaces.br3ak"
+DESCRIPTION=" The libnl suite is a collection of libraries providing APIs to netlink protocol based Linux kernel interfaces."
 SECTION="basicnet"
 VERSION=3.4.0
 NAME="libnl"

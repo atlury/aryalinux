@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xmlto package is a front-endbr3ak to a XSL toolchain. It chooses an appropriate stylesheet for thebr3ak conversion you want and applies it using an external XSLTbr3ak processor. It also performs any necessary post-processing.br3ak"
+DESCRIPTION=" The xmlto package is a front-end to a XSL toolchain. It chooses an appropriate stylesheet for the conversion you want and applies it using an external XSLT processor. It also performs any necessary post-processing."
 SECTION="pst"
 VERSION=0.0.28
 NAME="xmlto"

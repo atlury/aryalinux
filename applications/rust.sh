@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Rust programming language isbr3ak designed to be a safe, concurrent, practical language.br3ak"
+DESCRIPTION=" The Rust programming language is designed to be a safe, concurrent, practical language."
 SECTION="general"
 VERSION=1.25.0
 NAME="rust"

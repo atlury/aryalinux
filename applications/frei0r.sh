@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Frei0r is a minimalistic pluginbr3ak API for video effects. Note that the 0 in the name is a zero, not abr3ak capital letter o.br3ak"
+DESCRIPTION=" Frei0r is a minimalistic plugin API for video effects. Note that the 0 in the name is a zero, not a capital letter o."
 SECTION="multimedia"
 VERSION=1.6.1
 NAME="frei0r"

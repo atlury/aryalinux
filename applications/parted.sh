@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Parted package is a diskbr3ak partitioning and partition resizing tool.br3ak"
+DESCRIPTION=" The Parted package is a disk partitioning and partition resizing tool."
 SECTION="postlfs"
 VERSION=3.2
 NAME="parted"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ssh-askpass is a genericbr3ak executable name for many packages, with similar names, that providebr3ak a interactive X service to grab password for packages requiringbr3ak administrative privileges to be run. It prompts the user with abr3ak window box where the necessary password can be inserted. Here, webr3ak choose Damien Miller's package distributed in the OpenSSH tarball.br3ak"
+DESCRIPTION=" The ssh-askpass is a generic executable name for many packages, with similar names, that provide a interactive X service to grab password for packages requiring administrative privileges to be run. It prompts the user with a window box where the necessary password can be inserted. Here, we choose Damien Miller's package distributed in the OpenSSH tarball."
 SECTION="postlfs"
 VERSION=7.7p1
 NAME="ssh-askpass"

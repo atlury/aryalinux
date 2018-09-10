@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Openbox is a highly configurablebr3ak desktop window manager with extensive standards support. It allowsbr3ak you to control almost every aspect of how you interact with yourbr3ak desktop.br3ak"
+DESCRIPTION=" Openbox is a highly configurable desktop window manager with extensive standards support. It allows you to control almost every aspect of how you interact with your desktop."
 SECTION="x"
 VERSION=3.6.1
 NAME="openbox"

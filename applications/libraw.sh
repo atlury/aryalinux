@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Libraw is a library for readingbr3ak RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF,br3ak DNG, and others).br3ak"
+DESCRIPTION=" Libraw is a library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)."
 SECTION="general"
 VERSION=0.18.11
 NAME="libraw"

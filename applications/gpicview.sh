@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GPicView package contains abr3ak lightweight image viewer.br3ak"
+DESCRIPTION=" The GPicView package contains a lightweight image viewer."
 SECTION="lxde"
 VERSION=0.2.5
 NAME="gpicview"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-config package providesbr3ak the LXQt system settings center.br3ak"
+DESCRIPTION=" The lxqt-config package provides the LXQt system settings center."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-config"

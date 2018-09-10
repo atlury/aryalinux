@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak gexiv2 is a GObject-based wrapper around the Exiv2 library.br3ak"
+DESCRIPTION=" gexiv2 is a GObject-based wrapper around the Exiv2 library."
 SECTION="gnome"
 VERSION=0.10.8
 NAME="gexiv2"

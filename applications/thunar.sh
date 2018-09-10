@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Thunar is the Xfce file manager, a GTK+ 2 GUI to organise the files on yourbr3ak computer.br3ak"
+DESCRIPTION=" Thunar is the Xfce file manager, a GTK+ 2 GUI to organise the files on your computer."
 SECTION="xfce"
 VERSION=1.7.0
 NAME="thunar"

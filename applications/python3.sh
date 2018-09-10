@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Python 3 package contains thebr3ak Python development environment.br3ak This is useful for object-oriented programming, writing scripts,br3ak prototyping large programs or developing entire applications.br3ak"
+DESCRIPTION=" The Python 3 package contains the Python development environment. This is useful for object-oriented programming, writing scripts, prototyping large programs or developing entire applications."
 SECTION="general"
 VERSION=3.6.5
 NAME="python3"

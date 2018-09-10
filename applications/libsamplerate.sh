@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libsamplerate is a sample ratebr3ak converter for audio.br3ak"
+DESCRIPTION=" libsamplerate is a sample rate converter for audio."
 SECTION="multimedia"
 VERSION=0.1.9
 NAME="libsamplerate"

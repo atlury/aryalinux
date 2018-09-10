@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Cdrtools package contains CDbr3ak recording utilities. These are useful for reading, creating orbr3ak writing (burning) CDs, DVDs, and Blu-ray discs.br3ak"
+DESCRIPTION=" The Cdrtools package contains CD recording utilities. These are useful for reading, creating or writing (burning) CDs, DVDs, and Blu-ray discs."
 SECTION="multimedia"
 VERSION=09
 NAME="cdrtools"

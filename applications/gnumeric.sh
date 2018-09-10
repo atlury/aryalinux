@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gnumeric package contains abr3ak spreadsheet program which is useful for mathematical analysis.br3ak"
+DESCRIPTION=" The Gnumeric package contains a spreadsheet program which is useful for mathematical analysis."
 SECTION="xsoft"
 VERSION=1.12.41
 NAME="gnumeric"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Apache Ant package is abr3ak Java-based build tool. In theory,br3ak it is like the <span class=\"command\"><strong>make</strong>br3ak command, but without <span class=\"command\"><strong>make</strong>'s wrinkles. Ant is different. Instead of a model that isbr3ak extended with shell-based commands, Ant is extended using Java classes. Instead of writing shellbr3ak commands, the configuration files are XML-based, calling out abr3ak target tree that executes various tasks. Each task is run by anbr3ak object that implements a particular task interface.br3ak"
+DESCRIPTION=" The Apache Ant package is a Java-based build tool. In theory, it is like the <span class=\"command\"><strong>make</strong> command, but without <span class=\"command\"><strong>make</strong>'s wrinkles. Ant is different. Instead of a model that is extended with shell-based commands, Ant is extended using Java classes. Instead of writing shell commands, the configuration files are XML-based, calling out a target tree that executes various tasks. Each task is run by an object that implements a particular task interface."
 SECTION="general"
 VERSION=1.10.3
 NAME="apache-ant"

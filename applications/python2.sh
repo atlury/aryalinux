@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Python 2 package contains thebr3ak Python development environment. Itbr3ak is useful for object-oriented programming, writing scripts,br3ak prototyping large programs or developing entire applications. Thisbr3ak version is for backward compatibility with other dependentbr3ak packages.br3ak"
+DESCRIPTION=" The Python 2 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs or developing entire applications. This version is for backward compatibility with other dependent packages."
 SECTION="general"
 VERSION=2.7.15
 NAME="python2"

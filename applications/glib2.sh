@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GLib package containsbr3ak low-level libraries useful for providing data structure handlingbr3ak for C, portability wrappers and interfaces for such runtimebr3ak functionality as an event loop, threads, dynamic loading and anbr3ak object system.br3ak"
+DESCRIPTION=" The GLib package contains low-level libraries useful for providing data structure handling for C, portability wrappers and interfaces for such runtime functionality as an event loop, threads, dynamic loading and an object system."
 SECTION="general"
-VERSION=2.56.1
+VERSION=2.57.3
 NAME="glib2"
 
 #REC:pcre
@@ -24,12 +24,11 @@ NAME="glib2"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.1.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/glib-2.57.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.1.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/glib-2.56.1-skip_warnings-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/glib/glib-2.56.1-skip_warnings-1.patch
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -44,25 +43,11 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../glib-2.56.1-skip_warnings-1.patch
-
-
 ./configure --prefix=/usr      \
             --with-pcre=system \
             --with-python=/usr/bin/python3 &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

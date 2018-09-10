@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Wireshark package contains abr3ak network protocol analyzer, also known as a “<span class=\"quote\">sniffer”. This is useful for analyzing databr3ak captured “<span class=\"quote\">off the wire” frombr3ak a live network connection, or data read from a capture file.br3ak"
+DESCRIPTION=" The Wireshark package contains a network protocol analyzer, also known as a “<span class=\"quote\">sniffer”. This is useful for analyzing data captured “<span class=\"quote\">off the wire” from a live network connection, or data read from a capture file."
 SECTION="basicnet"
 VERSION=2.6.1
 NAME="wireshark"

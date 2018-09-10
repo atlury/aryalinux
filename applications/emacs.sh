@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Emacs package contains anbr3ak extensible, customizable, self-documenting real-time displaybr3ak editor.br3ak"
+DESCRIPTION=" The Emacs package contains an extensible, customizable, self-documenting real-time display editor."
 SECTION="postlfs"
 VERSION=26.1
 NAME="emacs"

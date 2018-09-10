@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak MLT package is the Media Lovinbr3ak Toolkit. It is an open source multimedia framework, designed andbr3ak developed for television broadcasting. It provides a toolkit forbr3ak broadcasters, video editors, media players, transcoders, webbr3ak streamers and many more types of applications.br3ak"
+DESCRIPTION=" MLT package is the Media Lovin Toolkit. It is an open source multimedia framework, designed and developed for television broadcasting. It provides a toolkit for broadcasters, video editors, media players, transcoders, web streamers and many more types of applications."
 SECTION="multimedia"
 VERSION=6.8.0
 NAME="mlt"

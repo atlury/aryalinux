@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xdg-user-dirs is a tool to helpbr3ak manage “<span class=\"quote\">well known” userbr3ak directories like the desktop folder and the music folder. It alsobr3ak handles localization (i.e. translation) of the filenames.br3ak"
+DESCRIPTION=" Xdg-user-dirs is a tool to help manage “<span class=\"quote\">well known” user directories like the desktop folder and the music folder. It also handles localization (i.e. translation) of the filenames."
 SECTION="general"
 VERSION=0.17
 NAME="xdg-user-dirs"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=y
-DESCRIPTION="br3ak The DocBook DSSSL Stylesheetsbr3ak package contains DSSSL stylesheets. These are used by OpenJade or other tools to transform SGML andbr3ak XML DocBook files.br3ak"
+DESCRIPTION=" The DocBook DSSSL Stylesheets package contains DSSSL stylesheets. These are used by OpenJade or other tools to transform SGML and XML DocBook files."
 SECTION="pst"
 VERSION=1.79
 NAME="docbook-dsssl"

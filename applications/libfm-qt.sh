@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libfm-qt is the Qt port of libfm,br3ak a library providing components to build desktop file managers.br3ak"
+DESCRIPTION=" libfm-qt is the Qt port of libfm, a library providing components to build desktop file managers."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="libfm-qt"

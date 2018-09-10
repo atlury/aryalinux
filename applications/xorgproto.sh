@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xorgproto package provides thebr3ak header files required to build the X Window system, and to allowbr3ak other applications to build against the installed X Window system.br3ak"
+DESCRIPTION=" The xorgproto package provides the header files required to build the X Window system, and to allow other applications to build against the installed X Window system."
 SECTION="x"
 VERSION=2018.4
 NAME="xorgproto"

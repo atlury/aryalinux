@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Garcon package contains abr3ak freedesktop.org compliant menu implementation based on GLib and GIO.br3ak"
+DESCRIPTION=" The Garcon package contains a freedesktop.org compliant menu implementation based on GLib and GIO."
 SECTION="xfce"
 VERSION=0.6.1
 NAME="garcon"

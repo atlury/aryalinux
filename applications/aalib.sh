@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak AAlib is a library to render anybr3ak graphic into ASCII Art.br3ak"
+DESCRIPTION=" AAlib is a library to render any graphic into ASCII Art."
 SECTION="general"
 VERSION=5
 NAME="aalib"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The CDParanoia package contains abr3ak CD audio extraction tool. This is useful for extractingbr3ak <code class=\"filename\">.wav files from audio CDs. A CDDAbr3ak capable CDROM drive is needed. Practically all drives supported bybr3ak Linux can be used.br3ak"
+DESCRIPTION=" The CDParanoia package contains a CD audio extraction tool. This is useful for extracting <code class=\"filename\">.wav files from audio CDs. A CDDA capable CDROM drive is needed. Practically all drives supported by Linux can be used."
 SECTION="multimedia"
 VERSION=10.2
 NAME="cdparanoia"

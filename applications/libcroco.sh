@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libcroco package contains abr3ak standalone CSS2 parsing and manipulation library.br3ak"
+DESCRIPTION=" The libcroco package contains a standalone CSS2 parsing and manipulation library."
 SECTION="general"
 VERSION=0.6.12
 NAME="libcroco"

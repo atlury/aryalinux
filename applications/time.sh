@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The time utility is a program thatbr3ak measures many of the CPU resources, such as time and memory, thatbr3ak other programs use. The GNU version can format the output inbr3ak arbitrary ways by using a printf-style format string to includebr3ak various resource measurements.br3ak"
+DESCRIPTION=" The time utility is a program that measures many of the CPU resources, such as time and memory, that other programs use. The GNU version can format the output in arbitrary ways by using a printf-style format string to include various resource measurements."
 SECTION="general"
 VERSION=1.9
 NAME="time"

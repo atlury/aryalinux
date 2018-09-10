@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Autoconf2.13 is an old version ofbr3ak Autoconf . This old versionbr3ak accepts switches which are not valid in more recent versions. Nowbr3ak that firefox has started to usebr3ak python2 for configuring, this oldbr3ak version is required even if configure files have not been changed.br3ak"
+DESCRIPTION=" Autoconf2.13 is an old version of Autoconf . This old version accepts switches which are not valid in more recent versions. Now that firefox has started to use python2 for configuring, this old version is required even if configure files have not been changed."
 SECTION="general"
 VERSION=2.13
 NAME="autoconf213"

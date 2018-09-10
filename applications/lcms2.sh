@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Little Color Management System is a small-footprint colorbr3ak management engine, with special focus on accuracy and performance.br3ak It uses the International Color Consortium standard (ICC), which isbr3ak the modern standard for color management.br3ak"
+DESCRIPTION=" The Little Color Management System is a small-footprint color management engine, with special focus on accuracy and performance. It uses the International Color Consortium standard (ICC), which is the modern standard for color management."
 SECTION="general"
 VERSION=2.9
 NAME="lcms2"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Lynx is a text based web browser.br3ak"
+DESCRIPTION=" Lynx is a text based web browser."
 SECTION="basicnet"
 VERSION=.2
 NAME="lynx"

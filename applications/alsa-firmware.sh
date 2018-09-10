@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ALSA Firmware package containsbr3ak firmware for certain sound cards.br3ak"
+DESCRIPTION=" The ALSA Firmware package contains firmware for certain sound cards."
 SECTION="multimedia"
 VERSION=1.0.29
 NAME="alsa-firmware"

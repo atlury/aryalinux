@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak SCons is a tool for buildingbr3ak software (and other files) implemented in Python.br3ak"
+DESCRIPTION=" SCons is a tool for building software (and other files) implemented in Python."
 SECTION="general"
 VERSION=3.0.0
 NAME="scons"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak FFTW is a C subroutine library for computing the discrete Fourierbr3ak transform (DFT) in one or more dimensions, of arbitrary input size,br3ak and of both real and complex data (as well as of even/odd data,br3ak i.e. the discrete cosine/sine transforms or DCT/DST).br3ak"
+DESCRIPTION=" FFTW is a C subroutine library for computing the discrete Fourier transform (DFT) in one or more dimensions, of arbitrary input size, and of both real and complex data (as well as of even/odd data, i.e. the discrete cosine/sine transforms or DCT/DST)."
 SECTION="general"
 VERSION=3.3.8
 NAME="fftw"

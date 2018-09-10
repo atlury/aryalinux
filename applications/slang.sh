@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak S-Lang (slang) is an interpretedbr3ak language that may be embedded into an application to make thebr3ak application extensible. It provides facilities required bybr3ak interactive applications such as display/screen management,br3ak keyboard input and keymaps.br3ak"
+DESCRIPTION=" S-Lang (slang) is an interpreted language that may be embedded into an application to make the application extensible. It provides facilities required by interactive applications such as display/screen management, keyboard input and keymaps."
 SECTION="general"
 VERSION=2.3.2
 NAME="slang"

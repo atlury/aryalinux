@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The OpenSSL-1.0.2o packagebr3ak contains libraries relating to cryptography. These are useful forbr3ak providing cryptographic functions to other packages, such as emailbr3ak applications and web browsers (for accessing HTTPS sites). Thisbr3ak package provides only the libraries and headers for packages thatbr3ak have not yet been ported to openssl-1.1.x or later.br3ak"
+DESCRIPTION=" The OpenSSL-1.0.2o package contains libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as email applications and web browsers (for accessing HTTPS sites). This package provides only the libraries and headers for packages that have not yet been ported to openssl-1.1.x or later."
 SECTION="postlfs"
 VERSION=1.0.2o
 NAME="openssl10"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GOffice package contains abr3ak library of GLib/GTK document centric objects and utilities.br3ak This is useful for performing common operations for documentbr3ak centric applications that are conceptually simple, but complex tobr3ak implement fully. Some of the operations provided by thebr3ak GOffice library include supportbr3ak for plugins, load/save routines for application documents andbr3ak undo/redo functions.br3ak"
+DESCRIPTION=" The GOffice package contains a library of GLib/GTK document centric objects and utilities. This is useful for performing common operations for document centric applications that are conceptually simple, but complex to implement fully. Some of the operations provided by the GOffice library include support for plugins, load/save routines for application documents and undo/redo functions."
 SECTION="x"
 VERSION=0.10.41
 NAME="goffice010"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Exo is a support library used inbr3ak the Xfce desktop. It also has somebr3ak helper applications that are used throughout Xfce.br3ak"
+DESCRIPTION=" Exo is a support library used in the Xfce desktop. It also has some helper applications that are used throughout Xfce."
 SECTION="xfce"
 VERSION=0.12.0
 NAME="exo"

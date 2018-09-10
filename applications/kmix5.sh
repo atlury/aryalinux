@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The KMix package contains a KF5br3ak based Sound Mixer application.br3ak"
+DESCRIPTION=" The KMix package contains a KF5 based Sound Mixer application."
 SECTION="kde"
 VERSION=18.04.1
 NAME="kmix5"

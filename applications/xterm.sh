@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak xterm is a terminal emulator forbr3ak the X Window System.br3ak"
+DESCRIPTION=" xterm is a terminal emulator for the X Window System."
 SECTION="x"
 VERSION=333
 NAME="xterm"

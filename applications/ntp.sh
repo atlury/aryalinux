@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ntp package contains a clientbr3ak and server to keep the time synchronized between various computersbr3ak over a network. This package is the official referencebr3ak implementation of the NTP protocol.br3ak"
+DESCRIPTION=" The ntp package contains a client and server to keep the time synchronized between various computers over a network. This package is the official reference implementation of the NTP protocol."
 SECTION="basicnet"
 VERSION=11
 NAME="ntp"

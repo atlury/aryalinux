@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak"
+DESCRIPTION=" Chromium is an open-source browser project that aims to build a safer, faster, and more stable way for all users to experience the web."
 SECTION="xsoft"
 VERSION=64.0.3282.186
 NAME="chromium"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Qca aims to provide abr3ak straightforward and cross-platform crypto API, using Qt datatypes and conventions. Qca separates the API from the implementation,br3ak using plugins known as Providers.br3ak"
+DESCRIPTION=" Qca aims to provide a straightforward and cross-platform crypto API, using Qt datatypes and conventions. Qca separates the API from the implementation, using plugins known as Providers."
 SECTION="general"
 VERSION=2.1.3
 NAME="qca"

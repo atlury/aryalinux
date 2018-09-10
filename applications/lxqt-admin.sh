@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-admin package providesbr3ak two GUI tools to adjust setiings of the operating systembr3ak LXQt is running on.br3ak"
+DESCRIPTION=" The lxqt-admin package provides two GUI tools to adjust setiings of the operating system LXQt is running on."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-admin"

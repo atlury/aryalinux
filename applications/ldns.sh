@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak ldns is a fast DNS library withbr3ak the goal to simplify DNS programming and to allow developers tobr3ak easily create software conforming to current RFCs and Internetbr3ak drafts. This packages also includes the <span class=\"command\"><strong>drill</strong> tool.br3ak"
+DESCRIPTION=" ldns is a fast DNS library with the goal to simplify DNS programming and to allow developers to easily create software conforming to current RFCs and Internet drafts. This packages also includes the <span class=\"command\"><strong>drill</strong> tool."
 SECTION="basicnet"
 VERSION=1.7.0
 NAME="ldns"

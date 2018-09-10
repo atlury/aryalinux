@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gutenprint (formerlybr3ak Gimp-Print) package contains highbr3ak quality drivers for many brands and models of printers for use withbr3ak <a class=\"xref\" href=\"cups.html\" title=\"Cups-2.2.7\">Cups-2.2.7</a>br3ak and the GIMP-2.0. See a list ofbr3ak supported printers at <a class=\"ulink\" href=\"http://gutenprint.sourceforge.net/p_Supported_Printers.php\">http://gutenprint.sourceforge.net/p_Supported_Printers.php</a>.br3ak"
+DESCRIPTION=" The Gutenprint (formerly Gimp-Print) package contains high quality drivers for many brands and models of printers for use with <a class=\"xref\" href=\"cups.html\" title=\"Cups-2.2.7\">Cups-2.2.7</a> and the GIMP-2.0. See a list of supported printers at <a class=\"ulink\" href=\"http://gutenprint.sourceforge.net/p_Supported_Printers.php\">http://gutenprint.sourceforge.net/p_Supported_Printers.php</a>."
 SECTION="pst"
 VERSION=5.2.14
 NAME="gutenprint"

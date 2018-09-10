@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GTK Engines package containsbr3ak eight themes/engines and two additional engines for GTK2.br3ak"
+DESCRIPTION=" The GTK Engines package contains eight themes/engines and two additional engines for GTK2."
 SECTION="x"
 VERSION=2.20.2
 NAME="gtk-engines"

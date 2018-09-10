@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Sound Theme Freedesktopbr3ak package contains sound themes for the desktop.br3ak"
+DESCRIPTION=" The Sound Theme Freedesktop package contains sound themes for the desktop."
 SECTION="multimedia"
 VERSION=0.8
 NAME="sound-theme-freedesktop"

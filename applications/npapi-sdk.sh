@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak NPAPI-SDK is a bundle of Netscapebr3ak Plugin Application Programming Interface headers by Mozilla. Thisbr3ak package provides a clear way to install those headers and depend onbr3ak them.br3ak"
+DESCRIPTION=" NPAPI-SDK is a bundle of Netscape Plugin Application Programming Interface headers by Mozilla. This package provides a clear way to install those headers and depend on them."
 SECTION="general"
 VERSION=0.27.2
 NAME="npapi-sdk"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The FriBidi package is anbr3ak implementation of the <a class=\"ulink\" href=\"http://www.unicode.org/reports/tr9/\">Unicode Bidirectionalbr3ak Algorithm (BIDI)</a>. This is useful for supporting Arabic andbr3ak Hebrew alphabets in other packages.br3ak"
+DESCRIPTION=" The FriBidi package is an implementation of the <a class=\"ulink\" href=\"http://www.unicode.org/reports/tr9/\">Unicode Bidirectional Algorithm (BIDI)</a>. This is useful for supporting Arabic and Hebrew alphabets in other packages."
 SECTION="general"
 VERSION=1.0.3
 NAME="fribidi"

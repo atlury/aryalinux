@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Transcode was a fast, versatilebr3ak and command-line based audio/video everything to everythingbr3ak converter primarily focussed on producing AVI video files with MP3br3ak audio, but also including a program to read all the video and audiobr3ak streams from a DVD.br3ak"
+DESCRIPTION=" Transcode was a fast, versatile and command-line based audio/video everything to everything converter primarily focussed on producing AVI video files with MP3 audio, but also including a program to read all the video and audio streams from a DVD."
 SECTION="multimedia"
 VERSION=1.1.7
 NAME="transcode"

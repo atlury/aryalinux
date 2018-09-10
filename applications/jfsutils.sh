@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The jfsutils package containsbr3ak administration and debugging tools for the jfs file system.br3ak"
+DESCRIPTION=" The jfsutils package contains administration and debugging tools for the jfs file system."
 SECTION="postlfs"
 VERSION=1.1.15
 NAME="jfsutils"

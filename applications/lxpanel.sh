@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXPanel package contains abr3ak lightweight X11 desktop panel.br3ak"
+DESCRIPTION=" The LXPanel package contains a lightweight X11 desktop panel."
 SECTION="lxde"
 VERSION=0.9.3
 NAME="lxpanel"

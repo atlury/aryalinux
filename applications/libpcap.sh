@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libpcap provides functions forbr3ak user-level packet capture, used in low-level network monitoring.br3ak"
+DESCRIPTION=" libpcap provides functions for user-level packet capture, used in low-level network monitoring."
 SECTION="basicnet"
 VERSION=1.8.1
 NAME="libpcap"

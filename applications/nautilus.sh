@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Nautilus package contains thebr3ak GNOME file manager.br3ak"
+DESCRIPTION=" The Nautilus package contains the GNOME file manager."
 SECTION="gnome"
-VERSION=3.28.0.1
+VERSION=3.29.92
 NAME="nautilus"
 
 #REQ:gexiv2
@@ -27,11 +27,11 @@ NAME="nautilus"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/nautilus/3.28/nautilus-3.28.0.1.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/nautilus-3.29.92.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/nautilus/3.28/nautilus-3.28.0.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/nautilus/3.28/nautilus-3.28.0.1.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -55,18 +55,8 @@ meson --prefix=/usr      \
       -Dpackagekit=false \
       .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install &&
-glib-compile-schemas /usr/share/glib-2.0/schemas
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install &&
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas
 
 
 

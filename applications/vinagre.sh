@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Vinagre is a VNC client for thebr3ak GNOME Desktop.br3ak"
+DESCRIPTION=" Vinagre is a VNC client for the GNOME Desktop."
 SECTION="gnome"
 VERSION=3.22.0
 NAME="vinagre"

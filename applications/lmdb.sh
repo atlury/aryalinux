@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lmdb package is a fast,br3ak compact, key-value embedded data store. It uses memory-mappedbr3ak files, so it has the read performance of a pure in-memory databasebr3ak while still offering the persistence of standard disk-basedbr3ak databases, and is only limited to the size of the virtual addressbr3ak spacebr3ak"
+DESCRIPTION=" The lmdb package is a fast, compact, key-value embedded data store. It uses memory-mapped files, so it has the read performance of a pure in-memory database while still offering the persistence of standard disk-based databases, and is only limited to the size of the virtual address space"
 SECTION="server"
 VERSION=0.9.22
 NAME="lmdb"

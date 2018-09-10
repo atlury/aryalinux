@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Libsndfile is a library of Cbr3ak routines for reading and writing files containing sampled audiobr3ak data.br3ak"
+DESCRIPTION=" Libsndfile is a library of C routines for reading and writing files containing sampled audio data."
 SECTION="multimedia"
 VERSION=1.0.28
 NAME="libsndfile"

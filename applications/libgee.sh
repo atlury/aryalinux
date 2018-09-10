@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libgee package is a collectionbr3ak library providing GObject based interfaces and classes for commonlybr3ak used data structures.br3ak"
+DESCRIPTION=" The libgee package is a collection library providing GObject based interfaces and classes for commonly used data structures."
 SECTION="gnome"
 VERSION=0.20.1
 NAME="libgee"

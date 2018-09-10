@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Shared Mime Info packagebr3ak contains a MIME database. This allows central updates of MIMEbr3ak information for all supporting applications.br3ak"
+DESCRIPTION=" The Shared Mime Info package contains a MIME database. This allows central updates of MIME information for all supporting applications."
 SECTION="general"
 VERSION=1.9
 NAME="shared-mime-info"

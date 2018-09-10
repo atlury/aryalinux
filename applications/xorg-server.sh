@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xorg Server is the core of thebr3ak X Window system.br3ak"
+DESCRIPTION=" The Xorg Server is the core of the X Window system."
 SECTION="x"
 VERSION=1.20.0
 NAME="xorg-server"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Libkexiv2 is a KDE wrapper aroundbr3ak the Exiv2 library for manipulating image metadata.br3ak"
+DESCRIPTION=" Libkexiv2 is a KDE wrapper around the Exiv2 library for manipulating image metadata."
 SECTION="kde"
 VERSION=18.04.1
 NAME="libkexiv2"

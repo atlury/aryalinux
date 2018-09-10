@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gtkmm package provides a C++br3ak interface to GTK+ 2. It can bebr3ak installed alongside <a class=\"xref\" href=\"gtkmm3.html\" title=\"Gtkmm-3.22.2\">Gtkmm-3.22.2</a> (the GTK+br3ak 3 version) with no namespace conflicts.br3ak"
+DESCRIPTION=" The Gtkmm package provides a C++ interface to GTK+ 2. It can be installed alongside <a class=\"xref\" href=\"gtkmm3.html\" title=\"Gtkmm-3.22.2\">Gtkmm-3.22.2</a> (the GTK+ 3 version) with no namespace conflicts."
 SECTION="x"
 VERSION=2.24.5
 NAME="gtkmm2"

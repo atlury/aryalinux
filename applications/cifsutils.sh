@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The cifs-utils provides a meansbr3ak for mounting SMB/CIFS shares on a Linux system.br3ak"
+DESCRIPTION=" The cifs-utils provides a means for mounting SMB/CIFS shares on a Linux system."
 SECTION="basicnet"
 VERSION=6.8
 NAME="cifsutils"

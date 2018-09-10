@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Links is a text and graphics modebr3ak WWW browser. It includes support for rendering tables and frames,br3ak features background downloads, can display colors and has manybr3ak other features.br3ak"
+DESCRIPTION=" Links is a text and graphics mode WWW browser. It includes support for rendering tables and frames, features background downloads, can display colors and has many other features."
 SECTION="basicnet"
 VERSION=2.16
 NAME="links"

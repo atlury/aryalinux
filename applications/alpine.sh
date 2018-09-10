@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Alpine is a text-based emailbr3ak client developed by the University of Washington.br3ak"
+DESCRIPTION=" Alpine is a text-based email client developed by the University of Washington."
 SECTION="basicnet"
 VERSION=2.21
 NAME="alpine"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xcb-util package providesbr3ak additional extensions to the XCBbr3ak library, many that were previously found in Xlib, but are not part of core X protocol.br3ak"
+DESCRIPTION=" The xcb-util package provides additional extensions to the XCB library, many that were previously found in Xlib, but are not part of core X protocol."
 SECTION="x"
 VERSION=0.4.0
 NAME="xcb-util"

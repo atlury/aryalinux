@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Baobab package contains abr3ak graphical directory tree analyzer.br3ak"
+DESCRIPTION=" The Baobab package contains a graphical directory tree analyzer."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.30.0
 NAME="baobab"
 
 #REQ:adwaita-icon-theme
@@ -20,11 +20,11 @@ NAME="baobab"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/baobab/3.28/baobab-3.28.0.tar.xz
+URL=https://download.gnome.org/sources/baobab/3.30/baobab-3.30.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/baobab/3.28/baobab-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/baobab/baobab-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/baobab/baobab-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/baobab/baobab-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/baobab/baobab-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/baobab/baobab-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/baobab/baobab-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/baobab/3.28/baobab-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -43,19 +43,10 @@ mkdir build &&
 cd    build &&
 meson --prefix=/usr .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
+sudo ninja install
+sudo sed -i "s@MimeType=inode/directory@#MimeType=inode/directory@g" /usr/share/applications/org.gnome.baobab.desktop
+sudo update-desktop-database
+sudo update-mime-database /usr/share/mime
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 

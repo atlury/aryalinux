@@ -7,11 +7,11 @@ set +h
 . /var/lib/alps/functions
 
 NAME="network-manager-vpnc"
-VERSION="1.2.4"
+VERSION="1.2.6"
 
 #REQ:vpnc
 
-URL=https://ftp.gnome.org/pub/gnome/sources/NetworkManager-vpnc/1.2/NetworkManager-vpnc-1.2.4.tar.xz
+URL=https://download.gnome.org/sources/NetworkManager-vpnc/1.2/NetworkManager-vpnc-1.2.6.tar.xz
 
 cd $SOURCE_DIR
 

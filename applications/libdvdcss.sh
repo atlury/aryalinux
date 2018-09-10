@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libdvdcss is a simple librarybr3ak designed for accessing DVDs as a block device without having tobr3ak bother about the decryption.br3ak"
+DESCRIPTION=" libdvdcss is a simple library designed for accessing DVDs as a block device without having to bother about the decryption."
 SECTION="multimedia"
 VERSION=1.4.2
 NAME="libdvdcss"

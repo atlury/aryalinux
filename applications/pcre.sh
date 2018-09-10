@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The PCRE package containsbr3ak Perl Compatible Regular Expressionbr3ak libraries. These are useful for implementing regular expressionbr3ak pattern matching using the same syntax and semantics asbr3ak Perl 5.br3ak"
+DESCRIPTION=" The PCRE package contains Perl Compatible Regular Expression libraries. These are useful for implementing regular expression pattern matching using the same syntax and semantics as Perl 5."
 SECTION="general"
 VERSION=8.42
 NAME="pcre"

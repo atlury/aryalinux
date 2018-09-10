@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXDE Common package provides abr3ak set of default configuration for LXDE.br3ak"
+DESCRIPTION=" The LXDE Common package provides a set of default configuration for LXDE."
 SECTION="lxde"
 VERSION=0.99.2
 NAME="lxde-common"

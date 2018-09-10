@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-runner package provides abr3ak tool used to launch programs quickly by typing their names.br3ak"
+DESCRIPTION=" The lxqt-runner package provides a tool used to launch programs quickly by typing their names."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-runner"

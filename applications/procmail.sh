@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Procmail package contains anbr3ak autonomous mail processor. This is useful for filtering and sortingbr3ak incoming mail.br3ak"
+DESCRIPTION=" The Procmail package contains an autonomous mail processor. This is useful for filtering and sorting incoming mail."
 SECTION="basicnet"
 VERSION=3.22
 NAME="procmail"

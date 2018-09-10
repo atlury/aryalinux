@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GStreamer Good Plug-ins is abr3ak set of plug-ins considered by the GStreamer developers to have good qualitybr3ak code, correct functionality, and the preferred license (LGPL forbr3ak the plug-in code, LGPL or LGPL-compatible for the supportingbr3ak library). A wide range of video and audio decoders, encoders, andbr3ak filters are included.br3ak"
+DESCRIPTION=" The GStreamer Good Plug-ins is a set of plug-ins considered by the GStreamer developers to have good quality code, correct functionality, and the preferred license (LGPL for the plug-in code, LGPL or LGPL-compatible for the supporting library). A wide range of video and audio decoders, encoders, and filters are included."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gst10-plugins-good"

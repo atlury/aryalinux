@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak xdg-utils is a a set of commandbr3ak line tools that assist applications with a variety of desktopbr3ak integration tasks. It is required for Linux Standards Base (LSB)br3ak conformance.br3ak"
+DESCRIPTION=" xdg-utils is a a set of command line tools that assist applications with a variety of desktop integration tasks. It is required for Linux Standards Base (LSB) conformance."
 SECTION="xsoft"
 VERSION=1.1.3
 NAME="xdg-utils"

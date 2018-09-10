@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-globalkeys packagebr3ak contains a daemon used to register global keyboard shortcuts and abr3ak key shortcut GUI editor.br3ak"
+DESCRIPTION=" The lxqt-globalkeys package contains a daemon used to register global keyboard shortcuts and a key shortcut GUI editor."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-globalkeys"

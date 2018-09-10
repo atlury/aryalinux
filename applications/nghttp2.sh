@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak nghttp2 is an implementation ofbr3ak HTTP/2 and its header compression algorithm, HPACK.br3ak"
+DESCRIPTION=" nghttp2 is an implementation of HTTP/2 and its header compression algorithm, HPACK."
 SECTION="basicnet"
 VERSION=1.32.0
 NAME="nghttp2"

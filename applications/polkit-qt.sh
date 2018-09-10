@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Polkit-Qt provides an API tobr3ak PolicyKit in the Qt environment.br3ak"
+DESCRIPTION=" Polkit-Qt provides an API to PolicyKit in the Qt environment."
 SECTION="kde"
 VERSION=0.112.0
 NAME="polkit-qt"

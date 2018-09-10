@@ -7,11 +7,11 @@ set +h
 . /var/lib/alps/functions
 
 NAME="network-manager-openvpn"
-VERSION="1.8.0"
+VERSION="1.8.4"
 
 #REQ:openvpn
 
-URL=https://download.gnome.org/sources/NetworkManager-openvpn/1.8/NetworkManager-openvpn-1.8.0.tar.xz
+URL=https://download.gnome.org/sources/NetworkManager-openvpn/1.8/NetworkManager-openvpn-1.8.4.tar.xz
 
 cd $SOURCE_DIR
 

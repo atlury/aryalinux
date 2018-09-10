@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The D-Bus GLib package containsbr3ak GLib interfaces to thebr3ak D-Bus API.br3ak"
+DESCRIPTION=" The D-Bus GLib package contains GLib interfaces to the D-Bus API."
 SECTION="general"
 VERSION=0.110
 NAME="dbus-glib"

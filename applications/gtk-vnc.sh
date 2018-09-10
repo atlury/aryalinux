@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gtk VNC package contains a VNCbr3ak viewer widget for GTK+. It isbr3ak built using coroutines allowing it to be completely asynchronousbr3ak while remaining single threaded.br3ak"
+DESCRIPTION=" The Gtk VNC package contains a VNC viewer widget for GTK+. It is built using coroutines allowing it to be completely asynchronous while remaining single threaded."
 SECTION="x"
 VERSION=0.7.2
 NAME="gtk-vnc"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xcb-util-image packagebr3ak provides additional extensions to the XCB library.br3ak"
+DESCRIPTION=" The xcb-util-image package provides additional extensions to the XCB library."
 SECTION="x"
 VERSION=0.4.0
 NAME="xcb-util-image"

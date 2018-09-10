@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Git is a free and open source,br3ak distributed version control system designed to handle everythingbr3ak from small to very large projects with speed and efficiency. Everybr3ak Git clone is a full-fledgedbr3ak repository with complete history and full revision trackingbr3ak capabilities, not dependent on network access or a central server.br3ak Branching and merging are fast and easy to do. Git is used for version control of files, muchbr3ak like tools such as <a class=\"xref\" href=\"mercurial.html\" title=\"Mercurial-4.6\">Mercurial-4.6</a>, Bazaar, <a class=\"xref\" href=\"subversion.html\" br3ak title=\"Subversion-1.10.0\">Subversion-1.10.0</a>, <a class=\"ulink\" br3ak href=\"http://www.nongnu.org/cvs/\">CVS</a>, Perforce, and Teambr3ak Foundation Server.br3ak"
+DESCRIPTION=" Git is a free and open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Every Git clone is a full-fledged repository with complete history and full revision tracking capabilities, not dependent on network access or a central server. Branching and merging are fast and easy to do. Git is used for version control of files, much like tools such as <a class=\"xref\" href=\"mercurial.html\" title=\"Mercurial-4.6\">Mercurial-4.6</a>, Bazaar, <a class=\"xref\" href=\"subversion.html\"  title=\"Subversion-1.10.0\">Subversion-1.10.0</a>, <a class=\"ulink\"  href=\"http://www.nongnu.org/cvs/\">CVS</a>, Perforce, and Team Foundation Server."
 SECTION="general"
 VERSION=2.17.1
 NAME="git"

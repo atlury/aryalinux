@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Brasero is an application used tobr3ak burn CD/DVD on the GNOME Desktop.br3ak It is designed to be as simple as possible and has some uniquebr3ak features that enable users to create their discs easily andbr3ak quickly.br3ak"
+DESCRIPTION=" Brasero is an application used to burn CD/DVD on the GNOME Desktop. It is designed to be as simple as possible and has some unique features that enable users to create their discs easily and quickly."
 SECTION="gnome"
 VERSION=3.12.2
 NAME="brasero"

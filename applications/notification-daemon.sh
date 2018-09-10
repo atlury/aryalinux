@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Notification Daemon packagebr3ak contains a daemon that displays passive pop-up notifications.br3ak"
+DESCRIPTION=" The Notification Daemon package contains a daemon that displays passive pop-up notifications."
 SECTION="gnome"
 VERSION=3.20.0
 NAME="notification-daemon"

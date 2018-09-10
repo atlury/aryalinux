@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Falkon is a KDE web browser usingbr3ak the QtWebEngine rendering engine. It was previously known asbr3ak QupZilla. It aims to be abr3ak lightweight web browser available through all major platforms.br3ak"
+DESCRIPTION=" Falkon is a KDE web browser using the QtWebEngine rendering engine. It was previously known as QupZilla. It aims to be a lightweight web browser available through all major platforms."
 SECTION="xsoft"
 VERSION=3.0.1
 NAME="falkon"

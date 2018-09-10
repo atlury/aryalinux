@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak This package provides a Phononbr3ak backend which utilizes the VLCbr3ak media framework.br3ak"
+DESCRIPTION=" This package provides a Phonon backend which utilizes the VLC media framework."
 SECTION="kde"
 VERSION=0.10.1
 NAME="phonon-backend-vlc"

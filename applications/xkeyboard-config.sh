@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The XKeyboardConfig packagebr3ak contains the keyboard configuration database for the X Windowbr3ak System.br3ak"
+DESCRIPTION=" The XKeyboardConfig package contains the keyboard configuration database for the X Window System."
 SECTION="x"
 VERSION=2.23.1
 NAME="xkeyboard-config"

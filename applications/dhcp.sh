@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ISC DHCP package contains bothbr3ak the client and server programs for DHCP. <span class=\"command\"><strong>dhclient</strong> (the client) is used forbr3ak connecting to a network which uses DHCP to assign networkbr3ak addresses. <span class=\"command\"><strong>dhcpd</strong> (thebr3ak server) is used for assigning network addresses on privatebr3ak networks.br3ak"
+DESCRIPTION=" The ISC DHCP package contains both the client and server programs for DHCP. <span class=\"command\"><strong>dhclient</strong> (the client) is used for connecting to a network which uses DHCP to assign network addresses. <span class=\"command\"><strong>dhcpd</strong> (the server) is used for assigning network addresses on private networks."
 SECTION="basicnet"
 VERSION=4.4.1
 NAME="dhcp"

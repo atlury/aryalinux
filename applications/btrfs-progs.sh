@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The btrfs-progs package containsbr3ak administration and debugging tools for the B-tree file systembr3ak (btrfs).br3ak"
+DESCRIPTION=" The btrfs-progs package contains administration and debugging tools for the B-tree file system (btrfs)."
 SECTION="postlfs"
 VERSION=4.16.1
 NAME="btrfs-progs"

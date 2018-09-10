@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The K3b package contains abr3ak KF5-based graphical interface to the Cdrtools and dvd+rw-tools CD/DVD manipulation tools. Itbr3ak also combines the capabilities of many other multimedia packagesbr3ak into one central interface to provide a simple-to-operatebr3ak application that can be used to handle many of your CD/DVDbr3ak recording and formatting requirements. It is used for creatingbr3ak audio, data, video and mixed-mode CDs as well as copying, rippingbr3ak and burning CDs and DVDs.br3ak"
+DESCRIPTION=" The K3b package contains a KF5-based graphical interface to the Cdrtools and dvd+rw-tools CD/DVD manipulation tools. It also combines the capabilities of many other multimedia packages into one central interface to provide a simple-to-operate application that can be used to handle many of your CD/DVD recording and formatting requirements. It is used for creating audio, data, video and mixed-mode CDs as well as copying, ripping and burning CDs and DVDs."
 SECTION="kde"
 VERSION=18.04.1
 NAME="k3b"

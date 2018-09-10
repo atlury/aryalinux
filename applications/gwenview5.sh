@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Gwenview is a fast and easy-to-usebr3ak image viewer for KDE.br3ak"
+DESCRIPTION=" Gwenview is a fast and easy-to-use image viewer for KDE."
 SECTION="kde"
 VERSION=18.04.1
 NAME="gwenview5"

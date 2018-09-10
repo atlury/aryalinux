@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXAppearance OBconf packagebr3ak contains a plugin for LXAppearancebr3ak to configure OpenBox.br3ak"
+DESCRIPTION=" The LXAppearance OBconf package contains a plugin for LXAppearance to configure OpenBox."
 SECTION="lxde"
 VERSION=0.2.3
 NAME="lxappearance-obconf"

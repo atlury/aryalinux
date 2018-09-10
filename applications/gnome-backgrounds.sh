@@ -7,20 +7,20 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Backgrounds packagebr3ak contains a collection of graphics files which can be used asbr3ak backgrounds in the GNOME Desktopbr3ak environment. Additionally, the package creates the proper frameworkbr3ak and directory structure so that you can add your own files to thebr3ak collection.br3ak"
+DESCRIPTION=" The GNOME Backgrounds package contains a collection of graphics files which can be used as backgrounds in the GNOME Desktop environment. Additionally, the package creates the proper framework and directory structure so that you can add your own files to the collection."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.29.90
 NAME="gnome-backgrounds"
 
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-backgrounds/3.28/gnome-backgrounds-3.28.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gnome-backgrounds-3.29.90.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-backgrounds/3.28/gnome-backgrounds-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-backgrounds/gnome-backgrounds-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-backgrounds/gnome-backgrounds-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-backgrounds/gnome-backgrounds-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-backgrounds/gnome-backgrounds-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-backgrounds/gnome-backgrounds-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-backgrounds/gnome-backgrounds-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-backgrounds/3.28/gnome-backgrounds-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,17 +39,7 @@ mkdir build &&
 cd    build &&
 meson --prefix=/usr .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install
 
 
 

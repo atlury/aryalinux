@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Evince is a document viewer forbr3ak multiple document formats. It supports PDF, Postscript, DjVu, TIFFbr3ak and DVI. It is useful for viewing documents of various types usingbr3ak one simple application instead of the multiple document viewersbr3ak that once existed on the GNOMEbr3ak Desktop.br3ak"
+DESCRIPTION=" Evince is a document viewer for multiple document formats. It supports PDF, Postscript, DjVu, TIFF and DVI. It is useful for viewing documents of various types using one simple application instead of the multiple document viewers that once existed on the GNOME Desktop."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.29.92
 NAME="evince"
 
 #REQ:adwaita-icon-theme
@@ -33,12 +33,11 @@ NAME="evince"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/evince/3.28/evince-3.28.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/evince-3.29.92.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/evince/3.28/evince-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/evince/evince-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/evince/evince-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/evince/evince-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/evince/evince-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/evince/evince-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/evince/evince-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/evince/3.28/evince-3.28.0.tar.xz
-wget -nc http://www.ibiblio.org/pub/Linux/libs/graphics/t1lib-5.1.2.tar.gz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -58,18 +57,7 @@ whoami > /tmp/currentuser
             --enable-introspection            \
             --disable-static                  &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+sudo make install
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xfce4 Session is a session managerbr3ak for Xfce. Its task is to save thebr3ak state of your desktop (opened applications and their location) andbr3ak restore it during a next startup. You can create several differentbr3ak sessions and choose one of them on startup.br3ak"
+DESCRIPTION=" Xfce4 Session is a session manager for Xfce. Its task is to save the state of your desktop (opened applications and their location) and restore it during a next startup. You can create several different sessions and choose one of them on startup."
 SECTION="xfce"
 VERSION=4.12.1
 NAME="xfce4-session"

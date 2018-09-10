@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The BlueZ package contains thebr3ak Bluetooth protocol stack for Linux.br3ak"
+DESCRIPTION=" The BlueZ package contains the Bluetooth protocol stack for Linux."
 SECTION="general"
 VERSION=5.49
 NAME="bluez"

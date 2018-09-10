@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libusb package contains abr3ak library used by some applications for USB device access.br3ak"
+DESCRIPTION=" The libusb package contains a library used by some applications for USB device access."
 SECTION="general"
 VERSION=1.0.22
 NAME="libusb"

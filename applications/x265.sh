@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak x265 package provides a librarybr3ak for encoding video streams into the H.265/HEVC format.br3ak"
+DESCRIPTION=" x265 package provides a library for encoding video streams into the H.265/HEVC format."
 SECTION="multimedia"
 VERSION=265_2.8
 NAME="x265"

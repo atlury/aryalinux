@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak This is a library that provides cross platform access to statisticsbr3ak about the system on which it's run. It's written in C and presentsbr3ak a selection of useful interfaces which can be used to access keybr3ak system statistics. The current list of statistics includes CPUbr3ak usage, memory utilisation, disk usage, process counts, networkbr3ak traffic, disk I/O, and more.br3ak"
+DESCRIPTION=" This is a library that provides cross platform access to statistics about the system on which it's run. It's written in C and presents a selection of useful interfaces which can be used to access key system statistics. The current list of statistics includes CPU usage, memory utilisation, disk usage, process counts, network traffic, disk I/O, and more."
 SECTION="general"
 VERSION=0.91
 NAME="libstatgrab"

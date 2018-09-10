@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libical package contains anbr3ak implementation of the iCalendar protocols and data formats.br3ak"
+DESCRIPTION=" The libical package contains an implementation of the iCalendar protocols and data formats."
 SECTION="general"
 VERSION=3.0.3
 NAME="libical"

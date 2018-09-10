@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Babl package is a dynamic, anybr3ak to any, pixel format translation library.br3ak"
+DESCRIPTION=" The Babl package is a dynamic, any to any, pixel format translation library."
 SECTION="general"
 VERSION=0.1.50
 NAME="babl"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak AbiWord is a word processor whichbr3ak is useful for writing reports, letters and other formattedbr3ak documents.br3ak"
+DESCRIPTION=" AbiWord is a word processor which is useful for writing reports, letters and other formatted documents."
 SECTION="xsoft"
 VERSION=3.0.2
 NAME="AbiWord"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The FreeType2 package contains abr3ak library which allows applications to properly render TrueType fonts.br3ak"
+DESCRIPTION=" The FreeType2 package contains a library which allows applications to properly render TrueType fonts."
 SECTION="general"
 VERSION=2.9.1
 NAME="freetype2-without-harfbuzz"

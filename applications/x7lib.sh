@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xorg libraries provide librarybr3ak routines that are used within all X Window applications.br3ak"
+DESCRIPTION=" The Xorg libraries provide library routines that are used within all X Window applications."
 SECTION="x"
 NAME="x7lib"
 

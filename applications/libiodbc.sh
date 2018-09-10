@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libiodbc is an API to ODBCbr3ak compatible databases.br3ak"
+DESCRIPTION=" libiodbc is an API to ODBC compatible databases."
 SECTION="general"
 VERSION=3.52.12
 NAME="libiodbc"

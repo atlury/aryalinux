@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The PCI Utils package contains abr3ak set of programs for listing PCI devices, inspecting their statusbr3ak and setting their configuration registers.br3ak"
+DESCRIPTION=" The PCI Utils package contains a set of programs for listing PCI devices, inspecting their status and setting their configuration registers."
 SECTION="general"
 VERSION=3.5.6
 NAME="pciutils"

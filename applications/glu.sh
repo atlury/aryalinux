@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak This package provides the Mesa OpenGL Utility library.br3ak"
+DESCRIPTION=" This package provides the Mesa OpenGL Utility library."
 SECTION="x"
 VERSION=9.0.0
 NAME="glu"

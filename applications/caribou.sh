@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Caribou is an input assistivebr3ak technology intended for switch and pointer users.br3ak"
+DESCRIPTION=" Caribou is an input assistive technology intended for switch and pointer users."
 SECTION="gnome"
 VERSION=0.4.21
 NAME="caribou"

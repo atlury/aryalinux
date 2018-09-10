@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Khelpcenter is an application tobr3ak show KDE Applications' documentation.br3ak"
+DESCRIPTION=" Khelpcenter is an application to show KDE Applications' documentation."
 SECTION="kde"
 VERSION=18.04.1
 NAME="khelpcenter"

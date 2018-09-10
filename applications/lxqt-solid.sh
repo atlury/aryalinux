@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Solid is a device integrationbr3ak framework. It provides a way of querying and interacting withbr3ak hardware independently of the underlying operating system.br3ak"
+DESCRIPTION=" Solid is a device integration framework. It provides a way of querying and interacting with hardware independently of the underlying operating system."
 SECTION="lxqt"
 VERSION=5.46.0
 NAME="lxqt-solid"

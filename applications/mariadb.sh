@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak MariaDB is a community-developedbr3ak fork and a drop-in replacement for the MySQL relational database management system.br3ak"
+DESCRIPTION=" MariaDB is a community-developed fork and a drop-in replacement for the MySQL relational database management system."
 SECTION="server"
 VERSION=10.3.7
 NAME="mariadb"

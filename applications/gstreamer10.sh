@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak gstreamer is a streaming mediabr3ak framework that enables applications to share a common set ofbr3ak plugins for things like video encoding and decoding, audio encodingbr3ak and decoding, audio and video filters, audio visualisation, webbr3ak streaming and anything else that streams in real-time or otherwise.br3ak This package only provides base functionality and libraries. Youbr3ak may need at least <a class=\"xref\" href=\"gst10-plugins-base.html\" br3ak title=\"gst-plugins-base-1.14.1\">gst-plugins-base-1.14.1</a> and onebr3ak of Good, Bad, Ugly or Libav plugins.br3ak"
+DESCRIPTION=" gstreamer is a streaming media framework that enables applications to share a common set of plugins for things like video encoding and decoding, audio encoding and decoding, audio and video filters, audio visualisation, web streaming and anything else that streams in real-time or otherwise. This package only provides base functionality and libraries. You may need at least <a class=\"xref\" href=\"gst10-plugins-base.html\"  title=\"gst-plugins-base-1.14.1\">gst-plugins-base-1.14.1</a> and one of Good, Bad, Ugly or Libav plugins."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gstreamer10"

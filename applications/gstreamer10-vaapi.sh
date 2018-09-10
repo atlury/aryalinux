@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The gstreamer-vaapi packagebr3ak contains a gstreamer plugin forbr3ak hardware accelerated video decode/encode for the prevailing codingbr3ak standards today (MPEG-2, MPEG-4 ASP/H.263, MPEG-4 AVC/H.264, andbr3ak VC-1/VMW3).br3ak"
+DESCRIPTION=" The gstreamer-vaapi package contains a gstreamer plugin for hardware accelerated video decode/encode for the prevailing coding standards today (MPEG-2, MPEG-4 ASP/H.263, MPEG-4 AVC/H.264, and VC-1/VMW3)."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gstreamer10-vaapi"

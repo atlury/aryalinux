@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXDE Icon Theme packagebr3ak contains nuoveXT 2.2 Icon Theme for LXDE.br3ak"
+DESCRIPTION=" The LXDE Icon Theme package contains nuoveXT 2.2 Icon Theme for LXDE."
 SECTION="x"
 VERSION=0.5.1
 NAME="lxde-icon-theme"

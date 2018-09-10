@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=y
-DESCRIPTION="br3ak The DocBook XSL Stylesheetsbr3ak package contains XSL stylesheets. These are useful for performingbr3ak transformations on XML DocBook files.br3ak"
+DESCRIPTION=" The DocBook XSL Stylesheets package contains XSL stylesheets. These are useful for performing transformations on XML DocBook files."
 SECTION="pst"
 VERSION=1.79.2
 NAME="docbook-xsl"

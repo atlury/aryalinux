@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak rox-filer is a fast, lightweight,br3ak gtk2 file manager.br3ak"
+DESCRIPTION=" rox-filer is a fast, lightweight, gtk2 file manager."
 SECTION="xsoft"
 VERSION=2.11
 NAME="rox-filer"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Sshfs package contains abr3ak filesystem client based on the SSH File Transfer Protocol. This isbr3ak useful for mounting a remote computer that you have ssh access tobr3ak as a local filesystem. This allows you to drag and drop files orbr3ak run shell commands on the remote files as if they were on yourbr3ak local computer.br3ak"
+DESCRIPTION=" The Sshfs package contains a filesystem client based on the SSH File Transfer Protocol. This is useful for mounting a remote computer that you have ssh access to as a local filesystem. This allows you to drag and drop files or run shell commands on the remote files as if they were on your local computer."
 SECTION="postlfs"
 VERSION=3.3.2
 NAME="sshfs"

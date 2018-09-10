@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The icon-naming-utils packagebr3ak contains a Perl script used forbr3ak maintaining backwards compatibility with current desktop iconbr3ak themes, while migrating to the names specified in the <a class=\"ulink\" href=\"http://standards.freedesktop.org/icon-naming-spec/latest/\">Iconbr3ak Naming Specification</a>.br3ak"
+DESCRIPTION=" The icon-naming-utils package contains a Perl script used for maintaining backwards compatibility with current desktop icon themes, while migrating to the names specified in the <a class=\"ulink\" href=\"http://standards.freedesktop.org/icon-naming-spec/latest/\">Icon Naming Specification</a>."
 SECTION="x"
 VERSION=0.8.90
 NAME="icon-naming-utils"

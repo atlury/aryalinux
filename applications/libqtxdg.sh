@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libqtxdg is a Qtbr3ak implementation of freedesktop.org xdg specifications.br3ak"
+DESCRIPTION=" The libqtxdg is a Qt implementation of freedesktop.org xdg specifications."
 SECTION="lxqt"
 VERSION=3.1.0
 NAME="libqtxdg"

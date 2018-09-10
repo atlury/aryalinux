@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The sawfish package contains abr3ak window manager. This is useful for organizing and displayingbr3ak windows where all window decorations are configurable and allbr3ak user-interface policy is controlled through the extension language.br3ak"
+DESCRIPTION=" The sawfish package contains a window manager. This is useful for organizing and displaying windows where all window decorations are configurable and all user-interface policy is controlled through the extension language."
 SECTION="x"
 VERSION=1.12.0
 NAME="sawfish"

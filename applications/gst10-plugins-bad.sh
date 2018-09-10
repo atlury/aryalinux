@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GStreamer Bad Plug-ins packagebr3ak contains a set of plug-ins that aren't up to par compared to thebr3ak rest. They might be close to being good quality, but they'rebr3ak missing something - be it a good code review, some documentation, abr3ak set of tests, a real live maintainer, or some actual wide use.br3ak"
+DESCRIPTION=" The GStreamer Bad Plug-ins package contains a set of plug-ins that aren't up to par compared to the rest. They might be close to being good quality, but they're missing something - be it a good code review, some documentation, a set of tests, a real live maintainer, or some actual wide use."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gst10-plugins-bad"

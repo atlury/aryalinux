@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak cryptsetup is used to set up transparent encryption of blockbr3ak devices using the kernel crypto API.br3ak"
+DESCRIPTION=" cryptsetup is used to set up transparent encryption of block devices using the kernel crypto API."
 SECTION="postlfs"
 VERSION=2.0.3
 NAME="cryptsetup"

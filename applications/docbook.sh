@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=y
-DESCRIPTION="br3ak The DocBook XML DTD-4.5 packagebr3ak contains document type definitions for verification of XML databr3ak files against the DocBook rule set. These are useful forbr3ak structuring books and software documentation to a standard allowingbr3ak you to utilize transformations already written for that standard.br3ak"
+DESCRIPTION=" The DocBook XML DTD-4.5 package contains document type definitions for verification of XML data files against the DocBook rule set. These are useful for structuring books and software documentation to a standard allowing you to utilize transformations already written for that standard."
 SECTION="pst"
 VERSION=4.5
 NAME="docbook"

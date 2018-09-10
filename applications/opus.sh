@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Opus is a lossy audio compressionbr3ak format developed by the Internet Engineering Task Force (IETF) thatbr3ak is particularly suitable for interactive speech and audiobr3ak transmission over the Internet. This package provides the Opusbr3ak development library and headers.br3ak"
+DESCRIPTION=" Opus is a lossy audio compression format developed by the Internet Engineering Task Force (IETF) that is particularly suitable for interactive speech and audio transmission over the Internet. This package provides the Opus development library and headers."
 SECTION="multimedia"
 VERSION=1.2.1
 NAME="opus"

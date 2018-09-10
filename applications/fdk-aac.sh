@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak fdk-aac package provides thebr3ak Fraunhofer FDK AAC library, which is purported to be a high qualitybr3ak Advanced Audio Coding implementation.br3ak"
+DESCRIPTION=" fdk-aac package provides the Fraunhofer FDK AAC library, which is purported to be a high quality Advanced Audio Coding implementation."
 SECTION="multimedia"
 VERSION=0.1.6
 NAME="fdk-aac"

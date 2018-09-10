@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libusb-compat package aims tobr3ak look, feel and behave exactly like libusb-0.1. It is a compatibility layer neededbr3ak by packages that have not been upgraded to the libusb-1.0 API.br3ak"
+DESCRIPTION=" The libusb-compat package aims to look, feel and behave exactly like libusb-0.1. It is a compatibility layer needed by packages that have not been upgraded to the libusb-1.0 API."
 SECTION="general"
 VERSION=0.1.5
 NAME="libusb-compat"

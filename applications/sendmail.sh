@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The sendmail package contains abr3ak Mail Transport Agent (MTA).br3ak"
+DESCRIPTION=" The sendmail package contains a Mail Transport Agent (MTA)."
 SECTION="server"
 VERSION=8.15.2
 NAME="sendmail"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Nettle package contains abr3ak low-level cryptographic library that is designed to fit easily inbr3ak many contexts.br3ak"
+DESCRIPTION=" The Nettle package contains a low-level cryptographic library that is designed to fit easily in many contexts."
 SECTION="postlfs"
 VERSION=3.4
 NAME="nettle"

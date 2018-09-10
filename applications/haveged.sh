@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Haveged package contains abr3ak daemon that generates an unpredictable stream of random numbers andbr3ak feeds the /dev/random device.br3ak"
+DESCRIPTION=" The Haveged package contains a daemon that generates an unpredictable stream of random numbers and feeds the /dev/random device."
 SECTION="postlfs"
 VERSION=1.9.2
 NAME="haveged"

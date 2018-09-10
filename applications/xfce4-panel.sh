@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xfce4 Panel package containsbr3ak the Xfce4 Panel.br3ak"
+DESCRIPTION=" The Xfce4 Panel package contains the Xfce4 Panel."
 SECTION="xfce"
 VERSION=4.12.2
 NAME="xfce4-panel"

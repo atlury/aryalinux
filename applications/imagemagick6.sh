@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak ImageMagick underwent many changesbr3ak in its libraries between versions 6 and 7. Most packages in BLFSbr3ak which use ImageMagick can usebr3ak version 7, but for the others this page will install only thebr3ak libraries, headers and general documentation (not programs,br3ak manpages, perl modules), and it will rename the unversionedbr3ak pkgconfig files so that they do not overwrite the same-named filesbr3ak from version 7.br3ak"
+DESCRIPTION=" ImageMagick underwent many changes in its libraries between versions 6 and 7. Most packages in BLFS which use ImageMagick can use version 7, but for the others this page will install only the libraries, headers and general documentation (not programs, manpages, perl modules), and it will rename the unversioned pkgconfig files so that they do not overwrite the same-named files from version 7."
 SECTION="general"
 VERSION=35
 NAME="imagemagick6"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Freeglut is intended to be a 100%br3ak compatible, completely opensourced clone of the GLUT library. GLUTbr3ak is a window system independent toolkit for writing OpenGL programs,br3ak implementing a simple windowing API, which makes learning about andbr3ak exploring OpenGL programming very easy.br3ak"
+DESCRIPTION=" Freeglut is intended to be a 100% compatible, completely opensourced clone of the GLUT library. GLUT is a window system independent toolkit for writing OpenGL programs, implementing a simple windowing API, which makes learning about and exploring OpenGL programming very easy."
 SECTION="x"
 VERSION=3.0.0
 NAME="freeglut"

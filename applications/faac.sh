@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak FAAC is an encoder for a lossybr3ak sound compression scheme specified in MPEG-2 Part 7 and MPEG-4 Partbr3ak 3 standards and known as Advanced Audio Coding (AAC). This encoderbr3ak is useful for producing files that can be played back on iPod.br3ak Moreover, iPod does not understand other sound compression schemesbr3ak in video files.br3ak"
+DESCRIPTION=" FAAC is an encoder for a lossy sound compression scheme specified in MPEG-2 Part 7 and MPEG-4 Part 3 standards and known as Advanced Audio Coding (AAC). This encoder is useful for producing files that can be played back on iPod. Moreover, iPod does not understand other sound compression schemes in video files."
 SECTION="multimedia"
 VERSION=1.29.9.2
 NAME="faac"

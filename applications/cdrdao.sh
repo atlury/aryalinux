@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Cdrdao package contains CDbr3ak recording utilities. These are useful for burning a CD inbr3ak disk-at-once mode.br3ak"
+DESCRIPTION=" The Cdrdao package contains CD recording utilities. These are useful for burning a CD in disk-at-once mode."
 SECTION="multimedia"
 VERSION=1.2.4
 NAME="cdrdao"

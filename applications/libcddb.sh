@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libcddb is a library thatbr3ak implements the different protocols (CDDBP, HTTP, SMTP) to accessbr3ak data on a CDDB server.br3ak"
+DESCRIPTION=" The libcddb is a library that implements the different protocols (CDDBP, HTTP, SMTP) to access data on a CDDB server."
 SECTION="multimedia"
 VERSION=1.3.2
 NAME="libcddb"

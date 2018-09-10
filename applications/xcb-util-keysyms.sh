@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xcb-util-keysyms packagebr3ak contains a library for handling standard X key constants andbr3ak conversion to/from keycodes.br3ak"
+DESCRIPTION=" The xcb-util-keysyms package contains a library for handling standard X key constants and conversion to/from keycodes."
 SECTION="x"
 VERSION=0.4.0
 NAME="xcb-util-keysyms"

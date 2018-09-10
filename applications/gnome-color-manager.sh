@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak GNOME Color Manager is a sessionbr3ak framework for the GNOME desktopbr3ak environment that makes it easy to manage, install and generatebr3ak color profiles.br3ak"
+DESCRIPTION=" GNOME Color Manager is a session framework for the GNOME desktop environment that makes it easy to manage, install and generate color profiles."
 SECTION="gnome"
 VERSION=3.28.0
 NAME="gnome-color-manager"
@@ -30,7 +30,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/gnome-color-manager/3.28/gnome-color-
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-color-manager/3.28/gnome-color-manager-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-color-manager/gnome-color-manager-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-color-manager/gnome-color-manager-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-color-manager/gnome-color-manager-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-color-manager/gnome-color-manager-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-color-manager/gnome-color-manager-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-color-manager/gnome-color-manager-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-color-manager/3.28/gnome-color-manager-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -49,17 +49,7 @@ mkdir build &&
 cd    build &&
 meson --prefix=/usr .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install
 
 
 

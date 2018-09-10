@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The gnome-autoar package providesbr3ak a framework for automatic archive extraction, compression, andbr3ak management.br3ak"
+DESCRIPTION=" The gnome-autoar package provides a framework for automatic archive extraction, compression, and management."
 SECTION="gnome"
 VERSION=0.2.3
 NAME="gnome-autoar"
@@ -23,7 +23,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/gnome-autoar/0.2/gnome-autoar-0.2.3.t
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-autoar/0.2/gnome-autoar-0.2.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-autoar/gnome-autoar-0.2.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-autoar/gnome-autoar-0.2.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-autoar/gnome-autoar-0.2.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-autoar/gnome-autoar-0.2.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-autoar/gnome-autoar-0.2.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-autoar/gnome-autoar-0.2.3.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-autoar/0.2/gnome-autoar-0.2.3.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,17 +40,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
 
 
 

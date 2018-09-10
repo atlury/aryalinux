@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Nettool package is abr3ak network information tool which provides GUI interface for some ofbr3ak the most common command line network tools.br3ak"
+DESCRIPTION=" The GNOME Nettool package is a network information tool which provides GUI interface for some of the most common command line network tools."
 SECTION="gnome"
 VERSION=3.8.1
 NAME="gnome-nettool"

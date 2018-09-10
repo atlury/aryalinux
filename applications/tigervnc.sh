@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Tigervnc is an advanced VNCbr3ak (Virtual Network Computing) implementation. It allows creation ofbr3ak an Xorg server not tied to a physical console and also provides abr3ak client for viewing of the remote graphical desktop.br3ak"
+DESCRIPTION=" Tigervnc is an advanced VNC (Virtual Network Computing) implementation. It allows creation of an Xorg server not tied to a physical console and also provides a client for viewing of the remote graphical desktop."
 SECTION="xsoft"
 VERSION=1.8.0
 NAME="tigervnc"

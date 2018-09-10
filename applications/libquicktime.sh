@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libquicktime package containsbr3ak the <code class=\"filename\">libquicktime library, variousbr3ak plugins and codecs, along with graphical and command line utilitiesbr3ak used for encoding and decoding QuickTime files. This is useful forbr3ak reading and writing files in the QuickTime format. The goal of thebr3ak project is to enhance, while providing compatibility with thebr3ak Quicktime 4 Linux library.br3ak"
+DESCRIPTION=" The libquicktime package contains the <code class=\"filename\">libquicktime library, various plugins and codecs, along with graphical and command line utilities used for encoding and decoding QuickTime files. This is useful for reading and writing files in the QuickTime format. The goal of the project is to enhance, while providing compatibility with the Quicktime 4 Linux library."
 SECTION="multimedia"
 VERSION=1.2.4
 NAME="libquicktime"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xine User Interface packagebr3ak contains a multimedia player. It plays back CDs, DVDs and VCDs. Itbr3ak also decodes multimedia files like AVI, MOV, WMV, MPEG and MP3 frombr3ak local disk drives, and displays multimedia streamed over thebr3ak Internet.br3ak"
+DESCRIPTION=" The xine User Interface package contains a multimedia player. It plays back CDs, DVDs and VCDs. It also decodes multimedia files like AVI, MOV, WMV, MPEG and MP3 from local disk drives, and displays multimedia streamed over the Internet."
 SECTION="multimedia"
 VERSION=0.99.10
 NAME="xine-ui"

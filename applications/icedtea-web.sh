@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The IcedTea-Web package containsbr3ak both a Java browser plugin, and abr3ak new webstart implementation, licensed under GPLV3.br3ak"
+DESCRIPTION=" The IcedTea-Web package contains both a Java browser plugin, and a new webstart implementation, licensed under GPLV3."
 SECTION="xsoft"
 VERSION=1.7.1
 NAME="icedtea-web"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libbytesize package is abr3ak library facilitates the common operations with sizes in bytes.br3ak"
+DESCRIPTION=" The libbytesize package is a library facilitates the common operations with sizes in bytes."
 SECTION="general"
 VERSION=1.3
 NAME="libbytesize"

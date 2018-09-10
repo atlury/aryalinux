@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The unixODBC package is an Openbr3ak Source ODBC (Open DataBase Connectivity) sub-system and an ODBC SDKbr3ak for Linux, Mac OSX, and UNIX. ODBC is an open specification forbr3ak providing application developers with a predictable API with whichbr3ak to access data sources. Data sources include optional SQL Serversbr3ak and any data source with an ODBC Driver. unixODBC contains the following componentsbr3ak used to assist with the manipulation of ODBC data sources: a driverbr3ak manager, an installer library and command line tool, command linebr3ak tools to help install a driver and work with SQL, drivers andbr3ak driver setup libraries.br3ak"
+DESCRIPTION=" The unixODBC package is an Open Source ODBC (Open DataBase Connectivity) sub-system and an ODBC SDK for Linux, Mac OSX, and UNIX. ODBC is an open specification for providing application developers with a predictable API with which to access data sources. Data sources include optional SQL Servers and any data source with an ODBC Driver. unixODBC contains the following components used to assist with the manipulation of ODBC data sources: a driver manager, an installer library and command line tool, command line tools to help install a driver and work with SQL, drivers and driver setup libraries."
 SECTION="general"
 VERSION=2.3.6
 NAME="unixodbc"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Expect package was installedbr3ak in the LFS temporary tools directory for testing other packages.br3ak These procedures install it in a permanent location. It containsbr3ak tools for automating interactive applications such as <span class=\"command\"><strong>telnet</strong>, <span class=\"command\"><strong>ftp</strong>, <span class=\"command\"><strong>passwd</strong>, <span class=\"command\"><strong>fsck</strong>, <span class=\"command\"><strong>rlogin</strong>, <span class=\"command\"><strong>tip</strong>, etc. Expect is also useful for testing these samebr3ak applications as well as easing all sorts of tasks that arebr3ak prohibitively difficult with anything else.br3ak"
+DESCRIPTION=" The Expect package was installed in the LFS temporary tools directory for testing other packages. These procedures install it in a permanent location. It contains tools for automating interactive applications such as <span class=\"command\"><strong>telnet</strong>, <span class=\"command\"><strong>ftp</strong>, <span class=\"command\"><strong>passwd</strong>, <span class=\"command\"><strong>fsck</strong>, <span class=\"command\"><strong>rlogin</strong>, <span class=\"command\"><strong>tip</strong>, etc. Expect is also useful for testing these same applications as well as easing all sorts of tasks that are prohibitively difficult with anything else."
 SECTION="general"
 VERSION=5.45.4
 NAME="expect"

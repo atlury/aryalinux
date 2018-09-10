@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The reiserfsprogs package containsbr3ak various utilities for use with the Reiser file system.br3ak"
+DESCRIPTION=" The reiserfsprogs package contains various utilities for use with the Reiser file system."
 SECTION="postlfs"
 VERSION=3.6.27
 NAME="reiserfs"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Folks is a library that aggregatesbr3ak people from multiple sources (e.g, Telepathy connection managers and eventuallybr3ak Evolution Data Server, Facebook,br3ak etc.) to create metacontacts.br3ak"
+DESCRIPTION=" Folks is a library that aggregates people from multiple sources (e.g, Telepathy connection managers and eventually Evolution Data Server, Facebook, etc.) to create metacontacts."
 SECTION="gnome"
 VERSION=0.11.4
 NAME="folks"
@@ -27,7 +27,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/folks/0.11/folks-0.11.4.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/folks/0.11/folks-0.11.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/folks/folks-0.11.4.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/folks/folks-0.11.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/folks/folks-0.11.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/folks/folks-0.11.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/folks/folks-0.11.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/folks/folks-0.11.4.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/folks/0.11/folks-0.11.4.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -44,17 +44,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-fatal-warnings &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
 
 
 

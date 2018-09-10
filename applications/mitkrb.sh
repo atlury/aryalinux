@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak MIT Kerberos V5 is a freebr3ak implementation of Kerberos 5. Kerberos is a network authenticationbr3ak protocol. It centralizes the authentication database and usesbr3ak kerberized applications to work with servers or services thatbr3ak support Kerberos allowing single logins and encrypted communicationbr3ak over internal networks or the Internet.br3ak"
+DESCRIPTION=" MIT Kerberos V5 is a free implementation of Kerberos 5. Kerberos is a network authentication protocol. It centralizes the authentication database and uses kerberized applications to work with servers or services that support Kerberos allowing single logins and encrypted communication over internal networks or the Internet."
 SECTION="postlfs"
 VERSION=1.16.1
 NAME="mitkrb"

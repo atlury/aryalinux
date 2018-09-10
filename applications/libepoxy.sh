@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libepoxy is a library for handlingbr3ak OpenGL function pointer management.br3ak"
+DESCRIPTION=" libepoxy is a library for handling OpenGL function pointer management."
 SECTION="x"
 VERSION=1.5.2
 NAME="libepoxy"

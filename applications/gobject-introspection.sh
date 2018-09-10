@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=y
-DESCRIPTION="br3ak The GObject Introspection is usedbr3ak to describe the program APIs and collect them in a uniform, machinebr3ak readable format.br3ak"
+DESCRIPTION=" The GObject Introspection is used to describe the program APIs and collect them in a uniform, machine readable format."
 SECTION="general"
 VERSION=1.56.1
 NAME="gobject-introspection"

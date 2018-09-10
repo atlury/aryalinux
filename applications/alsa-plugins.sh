@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ALSA Plugins package containsbr3ak plugins for various audio libraries and sound servers.br3ak"
+DESCRIPTION=" The ALSA Plugins package contains plugins for various audio libraries and sound servers."
 SECTION="multimedia"
 VERSION=1.1.6
 NAME="alsa-plugins"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The rpcsvc-proto package containsbr3ak the rcpsvc protocol.x files and headers, formerly included withbr3ak GlibC, that are not included in replacement <a class=\"xref\" href=\"libtirpc.html\" title=\"libtirpc-1.0.3\">libtirpc-1.0.3</a>, alongbr3ak with the rpcgen program.br3ak"
+DESCRIPTION=" The rpcsvc-proto package contains the rcpsvc protocol.x files and headers, formerly included with GlibC, that are not included in replacement <a class=\"xref\" href=\"libtirpc.html\" title=\"libtirpc-1.0.3\">libtirpc-1.0.3</a>, along with the rpcgen program."
 SECTION="basicnet"
 VERSION=1.4
 NAME="rpcsvc-proto"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libxml2 package containsbr3ak libraries and utilities used for parsing XML files.br3ak"
+DESCRIPTION=" The libxml2 package contains libraries and utilities used for parsing XML files."
 SECTION="general"
 VERSION=2.9.8
 NAME="libxml2"

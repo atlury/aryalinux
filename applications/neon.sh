@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak neon is an HTTP and WebDAV clientbr3ak library, with a C interface.br3ak"
+DESCRIPTION=" neon is an HTTP and WebDAV client library, with a C interface."
 SECTION="basicnet"
 VERSION=0.30.2
 NAME="neon"

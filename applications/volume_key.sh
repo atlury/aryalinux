@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The volume_key package provides abr3ak library for manipulating storage volume encryption keys and storingbr3ak them separately from volumes to handle forgotten passphrases.br3ak"
+DESCRIPTION=" The volume_key package provides a library for manipulating storage volume encryption keys and storing them separately from volumes to handle forgotten passphrases."
 SECTION="postlfs"
 VERSION=0.3.10
 NAME="volume_key"

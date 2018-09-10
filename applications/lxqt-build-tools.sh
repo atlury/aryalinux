@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-build-tools packagebr3ak provides several tools needed to build LXQt itself as well as otherbr3ak components maintained by the LXQt project.br3ak"
+DESCRIPTION=" The lxqt-build-tools package provides several tools needed to build LXQt itself as well as other components maintained by the LXQt project."
 SECTION="lxqt"
 VERSION=0.4.0
 NAME="lxqt-build-tools"

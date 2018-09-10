@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The HarfBuzz package contains anbr3ak OpenType text shaping engine.br3ak"
+DESCRIPTION=" The HarfBuzz package contains an OpenType text shaping engine."
 SECTION="general"
 VERSION=1.7.6
 NAME="harfbuzz"

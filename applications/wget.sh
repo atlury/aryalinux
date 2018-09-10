@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Wget package contains abr3ak utility useful for non-interactive downloading of files from thebr3ak Web.br3ak"
+DESCRIPTION=" The Wget package contains a utility useful for non-interactive downloading of files from the Web."
 SECTION="basicnet"
 VERSION=1.19.5
 NAME="wget"

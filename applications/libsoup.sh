@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libsoup is a HTTPbr3ak client/server library for GNOME.br3ak It uses GObject and the GLib main loop to integrate withbr3ak GNOME applications and it also hasbr3ak an asynchronous API for use in threaded applications.br3ak"
+DESCRIPTION=" The libsoup is a HTTP client/server library for GNOME. It uses GObject and the GLib main loop to integrate with GNOME applications and it also has an asynchronous API for use in threaded applications."
 SECTION="basicnet"
-VERSION=2.62.2
+VERSION=2.63.92
 NAME="libsoup"
 
 #REQ:glib-networking
@@ -27,11 +27,11 @@ NAME="libsoup"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/libsoup/2.62/libsoup-2.62.2.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/libsoup-2.63.92.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/libsoup/2.62/libsoup-2.62.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsoup/libsoup-2.62.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libsoup/libsoup-2.62.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsoup/libsoup-2.62.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsoup/libsoup-2.62.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsoup/libsoup-2.62.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsoup/libsoup-2.62.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.62/libsoup-2.62.2.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -48,17 +48,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
 
 
 

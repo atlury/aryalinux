@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libxkbcommon is a keymap compilerbr3ak and support library which processes a reduced subset of keymaps asbr3ak defined by the XKB specification.br3ak"
+DESCRIPTION=" libxkbcommon is a keymap compiler and support library which processes a reduced subset of keymaps as defined by the XKB specification."
 SECTION="general"
 VERSION=0.8.0
 NAME="libxkbcommon"

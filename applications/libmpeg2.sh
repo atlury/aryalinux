@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libmpeg2 package contains abr3ak library for decoding MPEG-2 and MPEG-1 video streams. The librarybr3ak is able to decode all MPEG streams that conform to certainbr3ak restrictions: “<span class=\"quote\">constrainedbr3ak parameters” for MPEG-1, and “<span class=\"quote\">main profile” for MPEG-2. This is useful forbr3ak programs and applications needing to decode MPEG-2 and MPEG-1 videobr3ak streams.br3ak"
+DESCRIPTION=" The libmpeg2 package contains a library for decoding MPEG-2 and MPEG-1 video streams. The library is able to decode all MPEG streams that conform to certain restrictions: “<span class=\"quote\">constrained parameters” for MPEG-1, and “<span class=\"quote\">main profile” for MPEG-2. This is useful for programs and applications needing to decode MPEG-2 and MPEG-1 video streams."
 SECTION="multimedia"
 VERSION=0.5.1
 NAME="libmpeg2"

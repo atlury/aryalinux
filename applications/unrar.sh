@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The UnRar package contains abr3ak <code class=\"filename\">RAR extraction utility used forbr3ak extracting files from <code class=\"filename\">RAR archives.br3ak <code class=\"filename\">RAR archives are usually created withbr3ak WinRAR, primarily in a Windowsbr3ak environment.br3ak"
+DESCRIPTION=" The UnRar package contains a <code class=\"filename\">RAR extraction utility used for extracting files from <code class=\"filename\">RAR archives. <code class=\"filename\">RAR archives are usually created with WinRAR, primarily in a Windows environment."
 SECTION="general"
 VERSION=5.6.4
 NAME="unrar"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The SBC is a digital audio encoderbr3ak and decoder used to transfer data to Bluetooth audio output devicesbr3ak like headphones or loudspeakers.br3ak"
+DESCRIPTION=" The SBC is a digital audio encoder and decoder used to transfer data to Bluetooth audio output devices like headphones or loudspeakers."
 SECTION="multimedia"
 VERSION=1.3
 NAME="sbc"

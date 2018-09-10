@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Cogl is a modern 3D graphics APIbr3ak with associated utility APIs designed to expose the features of 3Dbr3ak graphics hardware using a direct state access API design, asbr3ak opposed to the state-machine style of OpenGL.br3ak"
+DESCRIPTION="Cogl is a modern 3D graphics API with associated utility APIs designed to expose the features of 3D graphics hardware using a direct state access API design, as opposed to the state-machine style of OpenGL."
 SECTION="x"
 VERSION=1.22.2
 NAME="cogl"
@@ -31,7 +31,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -47,21 +47,17 @@ fi
 whoami > /tmp/currentuser
 
 sed -i 's/^#if COGL/#ifdef COGL/' cogl/winsys/cogl-winsys-egl.c &&
-./configure --prefix=/usr --enable-gles1 --enable-gles2 --enable-kms-egl-platform --enable-wayland-egl-platform --enable-xlib-egl-platform --enable-wayland-egl-server         \
-    --enable-{kms,wayland,xlib}-egl-platform                    \
-    --enable-wayland-egl-server                                 &&
+./configure --prefix=/usr \
+	--enable-gles1 \
+	--enable-gles2 \
+	--enable-kms-egl-platform \
+	--enable-wayland-egl-platform \
+	--enable-xlib-egl-platform \
+	--enable-wayland-egl-server \
+    --enable-{kms,wayland,xlib}-egl-platform \
+    --enable-wayland-egl-server &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
 
 
 

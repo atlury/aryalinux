@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Nmap is a utility for networkbr3ak exploration and security auditing. It supports ping scanning, portbr3ak scanning and TCP/IP fingerprinting.br3ak"
+DESCRIPTION=" Nmap is a utility for network exploration and security auditing. It supports ping scanning, port scanning and TCP/IP fingerprinting."
 SECTION="basicnet"
 VERSION=7.70
 NAME="nmap"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The zsh package contains a commandbr3ak interpreter (shell) usable as an interactive login shell and as abr3ak shell script command processor. Of the standard shells,br3ak zsh most closely resemblesbr3ak ksh but includes manybr3ak enhancements.br3ak"
+DESCRIPTION=" The zsh package contains a command interpreter (shell) usable as an interactive login shell and as a shell script command processor. Of the standard shells, zsh most closely resembles ksh but includes many enhancements."
 SECTION="postlfs"
 VERSION=5.5.1
 NAME="zsh"

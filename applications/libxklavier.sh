@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libxklavier package contains abr3ak utility library for X keyboard.br3ak"
+DESCRIPTION=" The libxklavier package contains a utility library for X keyboard."
 SECTION="x"
 VERSION=5.4
 NAME="libxklavier"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libatomic_ops providesbr3ak implementations for atomic memory update operations on a number ofbr3ak architectures. This allows direct use of these in reasonablybr3ak portable code. Unlike earlier similar packages, this one explicitlybr3ak considers memory barrier semantics, and allows the construction ofbr3ak code that involves minimum overhead across a variety ofbr3ak architectures.br3ak"
+DESCRIPTION=" libatomic_ops provides implementations for atomic memory update operations on a number of architectures. This allows direct use of these in reasonably portable code. Unlike earlier similar packages, this one explicitly considers memory barrier semantics, and allows the construction of code that involves minimum overhead across a variety of architectures."
 SECTION="general"
 VERSION=7.6.4
 NAME="libatomic_ops"

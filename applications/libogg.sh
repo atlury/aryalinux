@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libogg package contains thebr3ak Ogg file structure. This is useful for creating (encoding) orbr3ak playing (decoding) a single physical bit stream.br3ak"
+DESCRIPTION=" The libogg package contains the Ogg file structure. This is useful for creating (encoding) or playing (decoding) a single physical bit stream."
 SECTION="multimedia"
 VERSION=1.3.3
 NAME="libogg"

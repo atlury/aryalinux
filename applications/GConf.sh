@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GConf package contains abr3ak configuration database system used by many GNOME applications.br3ak"
+DESCRIPTION=" The GConf package contains a configuration database system used by many GNOME applications."
 SECTION="gnome"
 VERSION=3.2.6
 NAME="GConf"

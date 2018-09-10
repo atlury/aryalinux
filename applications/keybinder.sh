@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The keybinder package contains abr3ak utility library registering global X keyboard shortcuts.br3ak"
+DESCRIPTION=" The keybinder package contains a utility library registering global X keyboard shortcuts."
 SECTION="x"
 VERSION=0.3.0
 NAME="keybinder"

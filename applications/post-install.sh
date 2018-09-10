@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Final steps, before starting LXQt.br3ak"
+DESCRIPTION=" Final steps, before starting LXQt."
 SECTION="lxqt"
 NAME="post-install"
 

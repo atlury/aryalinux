@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gvfs package is a userspacebr3ak virtual filesystem designed to work with the I/O abstractions ofbr3ak GLib's GIO library.br3ak"
+DESCRIPTION=" The Gvfs package is a userspace virtual filesystem designed to work with the I/O abstractions of GLib's GIO library."
 SECTION="gnome"
-VERSION=1.36.0
+VERSION=1.37.92
 NAME="gvfs"
 
 #REQ:dbus
@@ -40,11 +40,11 @@ NAME="gvfs"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gvfs/1.36/gvfs-1.36.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gvfs-1.37.92.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gvfs/1.36/gvfs-1.36.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gvfs/1.36/gvfs-1.36.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -74,27 +74,8 @@ meson --prefix=/usr     \
       -Dgoa=false       \
       -Dgoogle=false    &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-glib-compile-schemas /usr/share/glib-2.0/schemas
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas
 
 
 

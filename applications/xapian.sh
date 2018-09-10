@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xapian is an open source search engine library.br3ak"
+DESCRIPTION=" Xapian is an open source search engine library."
 SECTION="general"
 VERSION=1.4.5
 NAME="xapian"

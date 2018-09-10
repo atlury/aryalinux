@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak MPlayer is a powerful audio/videobr3ak player controlled via the command line or a graphical interfacebr3ak that is able to play almost every popular audio and video filebr3ak format. With supported video hardware and additional drivers,br3ak MPlayer can play video filesbr3ak without an X Window Systembr3ak installed.br3ak"
+DESCRIPTION=" MPlayer is a powerful audio/video player controlled via the command line or a graphical interface that is able to play almost every popular audio and video file format. With supported video hardware and additional drivers, MPlayer can play video files without an X Window System installed."
 SECTION="multimedia"
 VERSION=1.3.0
 NAME="mplayer"

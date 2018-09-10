@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The oxygen icons 5 theme is a photo-realistic icon style, with abr3ak high standard of graphics quality.br3ak"
+DESCRIPTION=" The oxygen icons 5 theme is a photo-realistic icon style, with a high standard of graphics quality."
 SECTION="x"
 VERSION=5.46.0
 NAME="oxygen-icons5"

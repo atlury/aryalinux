@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libevent is an asynchronous eventbr3ak notification software library. The libevent API provides a mechanism to execute abr3ak callback function when a specific event occurs on a file descriptorbr3ak or after a timeout has been reached. Furthermore, libevent also supports callbacks due tobr3ak signals or regular timeouts.br3ak"
+DESCRIPTION=" libevent is an asynchronous event notification software library. The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached. Furthermore, libevent also supports callbacks due to signals or regular timeouts."
 SECTION="basicnet"
 VERSION=2.1.8
 NAME="libevent"

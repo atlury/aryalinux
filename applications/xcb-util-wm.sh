@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xcb-util-wm package containsbr3ak libraries which provide client and window-manager helpers for EWMHbr3ak and ICCCM.br3ak"
+DESCRIPTION=" The xcb-util-wm package contains libraries which provide client and window-manager helpers for EWMH and ICCCM."
 SECTION="x"
 VERSION=0.4.1
 NAME="xcb-util-wm"

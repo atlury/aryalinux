@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=y
-DESCRIPTION="br3ak The DocBook-utils package is abr3ak collection of utility scripts used to convert and analyze SGMLbr3ak documents in general, and DocBook files in particular. The scriptsbr3ak are used to convert from DocBook or other SGML formats intobr3ak “<span class=\"quote\">classical” file formatsbr3ak like HTML, man, info, RTF and many more. There's also a utility tobr3ak compare two SGML files and only display the differences in markup.br3ak This is useful for comparing documents prepared for differentbr3ak languages.br3ak"
+DESCRIPTION=" The DocBook-utils package is a collection of utility scripts used to convert and analyze SGML documents in general, and DocBook files in particular. The scripts are used to convert from DocBook or other SGML formats into “<span class=\"quote\">classical” file formats like HTML, man, info, RTF and many more. There's also a utility to compare two SGML files and only display the differences in markup. This is useful for comparing documents prepared for different languages."
 SECTION="pst"
 VERSION=0.6.14
 NAME="docbook-utils"

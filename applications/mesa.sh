@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Mesa is an OpenGL compatible 3Dbr3ak graphics library.br3ak"
+DESCRIPTION=" Mesa is an OpenGL compatible 3D graphics library."
 SECTION="x"
 VERSION=18.1.7
 NAME="mesa"

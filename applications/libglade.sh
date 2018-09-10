@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libglade package containsbr3ak <code class=\"filename\">libglade libraries. These are usefulbr3ak for loading Glade interface files in a program at runtime.br3ak"
+DESCRIPTION=" The libglade package contains <code class=\"filename\">libglade libraries. These are useful for loading Glade interface files in a program at runtime."
 SECTION="x"
 VERSION=2.6.4
 NAME="libglade"

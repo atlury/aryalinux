@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libwacom package contains abr3ak library used to identify wacom tablets and their model-specificbr3ak features.br3ak"
+DESCRIPTION=" The libwacom package contains a library used to identify wacom tablets and their model-specific features."
 SECTION="general"
 VERSION=0.29
 NAME="libwacom"

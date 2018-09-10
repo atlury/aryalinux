@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The OpenSSH package containsbr3ak <span class=\"command\"><strong>ssh</strong> clients and thebr3ak <span class=\"command\"><strong>sshd</strong> daemon. This isbr3ak useful for encrypting authentication and subsequent traffic over abr3ak network. The <span class=\"command\"><strong>ssh</strong> andbr3ak <span class=\"command\"><strong>scp</strong> commands arebr3ak secure implementations of <span class=\"command\"><strong>telnet</strong> and <span class=\"command\"><strong>rcp</strong> respectively.br3ak"
+DESCRIPTION=" The OpenSSH package contains <span class=\"command\"><strong>ssh</strong> clients and the <span class=\"command\"><strong>sshd</strong> daemon. This is useful for encrypting authentication and subsequent traffic over a network. The <span class=\"command\"><strong>ssh</strong> and <span class=\"command\"><strong>scp</strong> commands are secure implementations of <span class=\"command\"><strong>telnet</strong> and <span class=\"command\"><strong>rcp</strong> respectively."
 SECTION="postlfs"
 VERSION=7.7p1
 NAME="openssh"

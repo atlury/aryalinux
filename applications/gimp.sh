@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gimp package contains the GNUbr3ak Image Manipulation Program which is useful for photo retouching,br3ak image composition and image authoring.br3ak"
+DESCRIPTION=" The Gimp package contains the GNU Image Manipulation Program which is useful for photo retouching, image composition and image authoring."
 SECTION="xsoft"
 VERSION=2.10.2
 NAME="gimp"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Postfix package contains abr3ak Mail Transport Agent (MTA). This is useful for sending email tobr3ak other users of your host machine. It can also be configured to be abr3ak central mail server for your domain, a mail relay agent or simply abr3ak mail delivery agent to your local Internet Service Provider.br3ak"
+DESCRIPTION=" The Postfix package contains a Mail Transport Agent (MTA). This is useful for sending email to other users of your host machine. It can also be configured to be a central mail server for your domain, a mail relay agent or simply a mail delivery agent to your local Internet Service Provider."
 SECTION="server"
 VERSION=3.3.1
 NAME="postfix"

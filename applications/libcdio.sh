@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libcdio is a library forbr3ak CD-ROM and CD image access. The associated libcdio-cdparanoia library reads audio frombr3ak the CD-ROM directly as data, with no analog step between, andbr3ak writes the data to a file or pipe as .wav, .aifc or as raw 16 bitbr3ak linear PCM.br3ak"
+DESCRIPTION=" The libcdio is a library for CD-ROM and CD image access. The associated libcdio-cdparanoia library reads audio from the CD-ROM directly as data, with no analog step between, and writes the data to a file or pipe as .wav, .aifc or as raw 16 bit linear PCM."
 SECTION="multimedia"
 VERSION=2.0.0
 NAME="libcdio"

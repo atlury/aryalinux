@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Ruby package contains thebr3ak Ruby development environment. Thisbr3ak is useful for object-oriented scripting.br3ak"
+DESCRIPTION=" The Ruby package contains the Ruby development environment. This is useful for object-oriented scripting."
 SECTION="general"
 VERSION=2.5.1
 NAME="ruby"

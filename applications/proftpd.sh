@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ProFTPD package contains abr3ak secure and highly configurable FTP daemon. This is useful forbr3ak serving large file archives over a network.br3ak"
+DESCRIPTION=" The ProFTPD package contains a secure and highly configurable FTP daemon. This is useful for serving large file archives over a network."
 SECTION="server"
 VERSION=1.3.6
 NAME="proftpd"

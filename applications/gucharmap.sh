@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Gucharmap is a Unicode characterbr3ak map and font viewer. It allows you to browse through all thebr3ak available Unicode characters and categories for the installedbr3ak fonts, and to examine their detailed properties. It is an easy waybr3ak to find the character you might only know by its Unicode name orbr3ak code point.br3ak"
+DESCRIPTION=" Gucharmap is a Unicode character map and font viewer. It allows you to browse through all the available Unicode characters and categories for the installed fonts, and to examine their detailed properties. It is an easy way to find the character you might only know by its Unicode name or code point."
 SECTION="gnome"
 VERSION=10.0.4
 NAME="gucharmap"

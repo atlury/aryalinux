@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Compface provides utilities and abr3ak library to convert from/to X-Face format, a 48x48 bitmap formatbr3ak used to carry thumbnails of email authors in a mail header.br3ak"
+DESCRIPTION=" Compface provides utilities and a library to convert from/to X-Face format, a 48x48 bitmap format used to carry thumbnails of email authors in a mail header."
 SECTION="general"
 VERSION=1.5.2
 NAME="compface"

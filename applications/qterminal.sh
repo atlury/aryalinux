@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The qterminal package contains abr3ak Qt widget based terminal emulator for Qt with support for multiple tabs.br3ak"
+DESCRIPTION=" The qterminal package contains a Qt widget based terminal emulator for Qt with support for multiple tabs."
 SECTION="lxqt"
 VERSION=0.8.0
 NAME="qterminal"

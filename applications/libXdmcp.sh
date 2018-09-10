@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libXdmcp package contains abr3ak library implementing the X Display Manager Control Protocol. Thisbr3ak is useful for allowing clients to interact with the X Displaybr3ak Manager.br3ak"
+DESCRIPTION=" The libXdmcp package contains a library implementing the X Display Manager Control Protocol. This is useful for allowing clients to interact with the X Display Manager."
 SECTION="x"
 VERSION=1.1.2
 NAME="libXdmcp"

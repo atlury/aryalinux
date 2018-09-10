@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ALSA Utilities packagebr3ak contains various utilities which are useful for controlling yourbr3ak sound card.br3ak"
+DESCRIPTION=" The ALSA Utilities package contains various utilities which are useful for controlling your sound card."
 SECTION="multimedia"
 VERSION=1.1.6
 NAME="alsa-utils"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Okular is a document viewer for KDE. It can view documents of manybr3ak types including PDF, PostScript, TIFF, Microsoft CHM, DjVu, DVI,br3ak XPS and ePub.br3ak"
+DESCRIPTION=" Okular is a document viewer for KDE. It can view documents of many types including PDF, PostScript, TIFF, Microsoft CHM, DjVu, DVI, XPS and ePub."
 SECTION="kde"
 VERSION=18.04.1
 NAME="okular5"

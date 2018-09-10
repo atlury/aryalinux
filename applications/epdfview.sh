@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak ePDFView is a free standalonebr3ak lightweight PDF document viewer using Poppler and GTK+ libraries. It is a good replacement forbr3ak Evince as it does not rely uponbr3ak GNOME libraries.br3ak"
+DESCRIPTION=" ePDFView is a free standalone lightweight PDF document viewer using Poppler and GTK+ libraries. It is a good replacement for Evince as it does not rely upon GNOME libraries."
 SECTION="pst"
 VERSION=0.1.8
 NAME="epdfview"

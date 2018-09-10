@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The IJS package contains a librarybr3ak which implements a protocol for transmission of raster page images.br3ak"
+DESCRIPTION=" The IJS package contains a library which implements a protocol for transmission of raster page images."
 SECTION="general"
 VERSION=0.35
 NAME="ijs"

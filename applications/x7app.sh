@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xorg applications provide thebr3ak expected applications available in previous X Windowbr3ak implementations.br3ak"
+DESCRIPTION=" The Xorg applications provide the expected applications available in previous X Window implementations."
 SECTION="x"
 NAME="x7app"
 

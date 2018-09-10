@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Sharutils package containsbr3ak utilities that can create 'shell' archives.br3ak"
+DESCRIPTION=" The Sharutils package contains utilities that can create 'shell' archives."
 SECTION="general"
 VERSION=4.15.2
 NAME="sharutils"

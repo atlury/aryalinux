@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GMime package contains a setbr3ak of utilities for parsing and creating messages using thebr3ak Multipurpose Internet Mail Extension (MIME) as defined by thebr3ak applicable RFCs. See the <a class=\"ulink\" href=\"http://spruce.sourceforge.net/gmime/\">GMime web site</a> for thebr3ak RFCs resourced. This is useful as it provides an API which adheresbr3ak to the MIME specification as closely as possible while alsobr3ak providing programmers with an extremely easy to use interface tobr3ak the API functions.br3ak"
+DESCRIPTION=" The GMime package contains a set of utilities for parsing and creating messages using the Multipurpose Internet Mail Extension (MIME) as defined by the applicable RFCs. See the <a class=\"ulink\" href=\"http://spruce.sourceforge.net/gmime/\">GMime web site</a> for the RFCs resourced. This is useful as it provides an API which adheres to the MIME specification as closely as possible while also providing programmers with an extremely easy to use interface to the API functions."
 SECTION="general"
 VERSION=3.2.0
 NAME="gmime3"

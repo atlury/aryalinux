@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libfm-extra package contains abr3ak library and other files required by <span class=\"command\"><strong>menu-cache-gen</strong> libexec ofbr3ak <a class=\"xref\" href=\"menu-cache.html\" title=\"menu-cache-1.1.0\">menu-cache-1.1.0</a>.br3ak"
+DESCRIPTION=" The libfm-extra package contains a library and other files required by <span class=\"command\"><strong>menu-cache-gen</strong> libexec of <a class=\"xref\" href=\"menu-cache.html\" title=\"menu-cache-1.1.0\">menu-cache-1.1.0</a>."
 SECTION="lxde"
 VERSION=1.3.0.2
 NAME="libfm-extra"

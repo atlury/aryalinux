@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libarchive library provides abr3ak single interface for reading/writing various compression formats.br3ak"
+DESCRIPTION=" The libarchive library provides a single interface for reading/writing various compression formats."
 SECTION="general"
 VERSION=3.3.2
 NAME="libarchive"

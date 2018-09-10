@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Power Manager packagebr3ak contains a tool used to report on power management on the system.br3ak"
+DESCRIPTION=" The GNOME Power Manager package contains a tool used to report on power management on the system."
 SECTION="gnome"
 VERSION=3.26.0
 NAME="gnome-power-manager"

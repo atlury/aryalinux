@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The opencv package containsbr3ak graphics libraries mainly aimed at real-time computer vision.br3ak"
+DESCRIPTION=" The opencv package contains graphics libraries mainly aimed at real-time computer vision."
 SECTION="general"
 VERSION=3.4.1
 NAME="opencv"

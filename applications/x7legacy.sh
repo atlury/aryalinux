@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xorg's ancestor (X11R1, in 1987)br3ak at first only provided bitmap fonts, with a tool (<span class=\"command\"><strong>bdftopcf</strong>) to assist in theirbr3ak installation. With the introduction of xorg-server-1.19.0 and libXfont2 many people will not need them.br3ak There are still a few old packages which might require, or benefitbr3ak from, these deprecated fonts and so the following packages arebr3ak shown here.br3ak"
+DESCRIPTION=" Xorg's ancestor (X11R1, in 1987) at first only provided bitmap fonts, with a tool (<span class=\"command\"><strong>bdftopcf</strong>) to assist in their installation. With the introduction of xorg-server-1.19.0 and libXfont2 many people will not need them. There are still a few old packages which might require, or benefit from, these deprecated fonts and so the following packages are shown here."
 SECTION="x"
 NAME="x7legacy"
 

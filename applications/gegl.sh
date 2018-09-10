@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak This package provides the GEneric Graphics Library, which is abr3ak graph based image processing format.br3ak"
+DESCRIPTION=" This package provides the GEneric Graphics Library, which is a graph based image processing format."
 SECTION="general"
 VERSION=0.4.2
 NAME="gegl"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Wicd is a network manager writtenbr3ak in Python. It simplifies network setup by automatically detectingbr3ak and connecting to wireless and wired networks. Wicd includesbr3ak support for WPA authentication and DHCP configuration. It providesbr3ak Curses- and GTK-based graphical frontends for user-friendlybr3ak control. An excellent KDE-based frontend is also availablebr3ak <a class=\"ulink\" href=\"http://projects.kde.org/projects/extragear/network/wicd-kde\">http://projects.kde.org/projects/extragear/network/wicd-kde</a>.br3ak"
+DESCRIPTION=" Wicd is a network manager written in Python. It simplifies network setup by automatically detecting and connecting to wireless and wired networks. Wicd includes support for WPA authentication and DHCP configuration. It provides Curses- and GTK-based graphical frontends for user-friendly control. An excellent KDE-based frontend is also available <a class=\"ulink\" href=\"http://projects.kde.org/projects/extragear/network/wicd-kde\">http://projects.kde.org/projects/extragear/network/wicd-kde</a>."
 SECTION="basicnet"
 VERSION=1.7.4
 NAME="wicd"

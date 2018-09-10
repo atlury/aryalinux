@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libdvdread is a library whichbr3ak provides a simple foundation for reading DVDs.br3ak"
+DESCRIPTION=" libdvdread is a library which provides a simple foundation for reading DVDs."
 SECTION="multimedia"
 VERSION=6.0.0
 NAME="libdvdread"

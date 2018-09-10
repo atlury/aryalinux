@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Ekiga is a VoIP, IP Telephony, andbr3ak Video Conferencing application that allows you to make audio andbr3ak video calls to remote users with SIP or H.323 compatible hardwarebr3ak and software. It supports many audio and video codecs and allbr3ak modern VoIP features for both SIP and H.323. Ekiga is the first Open Source application tobr3ak support both H.323 and SIP, as well as audio and video.br3ak"
+DESCRIPTION=" Ekiga is a VoIP, IP Telephony, and Video Conferencing application that allows you to make audio and video calls to remote users with SIP or H.323 compatible hardware and software. It supports many audio and video codecs and all modern VoIP features for both SIP and H.323. Ekiga is the first Open Source application to support both H.323 and SIP, as well as audio and video."
 SECTION="xsoft"
 VERSION=4.0.1
 NAME="ekiga"

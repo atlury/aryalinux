@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GTK+ 2 package containsbr3ak libraries used for creating graphical user interfaces forbr3ak applications.br3ak"
+DESCRIPTION=" The GTK+ 2 package contains libraries used for creating graphical user interfaces for applications."
 SECTION="x"
 VERSION=2.24.32
 NAME="gtk2"

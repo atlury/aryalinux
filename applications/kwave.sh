@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The KWave package contains a KF5br3ak based Sound Editor application.br3ak"
+DESCRIPTION=" The KWave package contains a KF5 based Sound Editor application."
 SECTION="multimedia"
 VERSION=18.04.1
 NAME="kwave"

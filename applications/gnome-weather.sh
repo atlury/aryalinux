@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak GNOME Weather is a smallbr3ak application that allows you to monitor the current weatherbr3ak conditions for your city, or anywhere in the world, and to accessbr3ak updated forecasts provided by various internet services.br3ak"
+DESCRIPTION=" GNOME Weather is a small application that allows you to monitor the current weather conditions for your city, or anywhere in the world, and to access updated forecasts provided by various internet services."
 SECTION="gnome"
 VERSION=3.26.0
 NAME="gnome-weather"

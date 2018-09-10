@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Tcl package contains the Toolbr3ak Command Language, a robust general-purpose scripting language.br3ak"
+DESCRIPTION=" The Tcl package contains the Tool Command Language, a robust general-purpose scripting language."
 SECTION="general"
 VERSION=8.6.8
 NAME="tcl"

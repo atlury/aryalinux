@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXRandR package contains abr3ak monitor configuration tool for LXDE.br3ak"
+DESCRIPTION=" The LXRandR package contains a monitor configuration tool for LXDE."
 SECTION="lxde"
 VERSION=0.3.1
 NAME="lxrandr"

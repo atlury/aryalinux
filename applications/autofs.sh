@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Autofs controls the operation ofbr3ak the automount daemons. The automount daemons automatically mountbr3ak filesystems when they are accessed and unmount them after a periodbr3ak of inactivity. This is done based on a set of pre-configured maps.br3ak"
+DESCRIPTION=" Autofs controls the operation of the automount daemons. The automount daemons automatically mount filesystems when they are accessed and unmount them after a period of inactivity. This is done based on a set of pre-configured maps."
 SECTION="general"
 VERSION=5.1.4
 NAME="autofs"

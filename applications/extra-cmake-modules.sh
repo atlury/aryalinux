@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Extra Cmake Modules packagebr3ak contains extra CMake modules usedbr3ak by KDE Frameworks 5 and otherbr3ak packages.br3ak"
+DESCRIPTION=" The Extra Cmake Modules package contains extra CMake modules used by KDE Frameworks 5 and other packages."
 SECTION="kde"
 VERSION=5.47
 NAME="extra-cmake-modules"

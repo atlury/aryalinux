@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The vsftpd package contains a verybr3ak secure and very small FTP daemon. This is useful for serving filesbr3ak over a network.br3ak"
+DESCRIPTION=" The vsftpd package contains a very secure and very small FTP daemon. This is useful for serving files over a network."
 SECTION="server"
 VERSION=3.0.3
 NAME="vsftpd"

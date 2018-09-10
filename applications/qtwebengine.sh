@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak QtWebEngine integratesbr3ak chromium\"s web capabilities intobr3ak Qt. It ships with its own copy of ninja which it uses for the buildbr3ak if it cannot find a system copy, and various copies of librariesbr3ak from ffmpeg, icu, libvpx, and zlib (including libminizip) whichbr3ak have been forked by the chromiumbr3ak developers.br3ak"
+DESCRIPTION=" QtWebEngine integrates chromium\"s web capabilities into Qt. It ships with its own copy of ninja which it uses for the build if it cannot find a system copy, and various copies of libraries from ffmpeg, icu, libvpx, and zlib (including libminizip) which have been forked by the chromium developers."
 SECTION="x"
 VERSION=5.11.1
 NAME="qtwebengine"

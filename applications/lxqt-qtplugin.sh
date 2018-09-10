@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-qtplugin package providesbr3ak an LXQt Qt platform integration plugin.br3ak"
+DESCRIPTION=" The lxqt-qtplugin package provides an LXQt Qt platform integration plugin."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-qtplugin"

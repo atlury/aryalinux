@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Highlight is an utility thatbr3ak converts source code to formatted text with syntax highlighting.br3ak"
+DESCRIPTION=" Highlight is an utility that converts source code to formatted text with syntax highlighting."
 SECTION="general"
 VERSION=3.43
 NAME="highlight"

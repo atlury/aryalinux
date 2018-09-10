@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xfconf is the configurationbr3ak storage system for Xfce.br3ak"
+DESCRIPTION=" Xfconf is the configuration storage system for Xfce."
 SECTION="xfce"
 VERSION=4.12.1
 NAME="xfconf"

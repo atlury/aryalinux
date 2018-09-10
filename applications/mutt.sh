@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Mutt package contains a Mailbr3ak User Agent. This is useful for reading, writing, replying to,br3ak saving, and deleting your email.br3ak"
+DESCRIPTION=" The Mutt package contains a Mail User Agent. This is useful for reading, writing, replying to, saving, and deleting your email."
 SECTION="basicnet"
 VERSION=1.10.0
 NAME="mutt"

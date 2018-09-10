@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak GDM is a system service that isbr3ak responsible for providing graphical logins and managing local andbr3ak remote displays.br3ak"
+DESCRIPTION=" GDM is a system service that is responsible for providing graphical logins and managing local and remote displays."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.29.91
 NAME="gdm"
 
 #REQ:accountsservice
@@ -26,11 +26,11 @@ NAME="gdm"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gdm/3.28/gdm-3.28.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gdm-3.29.91.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gdm/3.28/gdm-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gdm/gdm-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gdm/gdm-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gdm/gdm-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gdm/gdm-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gdm/gdm-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gdm/gdm-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gdm/3.28/gdm-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -46,16 +46,10 @@ fi
 whoami > /tmp/currentuser
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-groupadd -g 21 gdm &&
-useradd -c "GDM Daemon Owner" -d /var/lib/gdm -u 21 \
+sudo groupadd -g 21 gdm &&
+sudo useradd -c "GDM Daemon Owner" -d /var/lib/gdm -u 21 \
         -g gdm -s /bin/false gdm &&
-passwd -ql gdm
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
+sudo passwd -ql gdm
 
 
 ./configure --prefix=/usr         \
@@ -66,18 +60,8 @@ sudo rm rootscript.sh
             --enable-gdm-xsession \
             --with-pam-mod-dir=/lib/security &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install &&
-install -v -m644 data/gdm.service /lib/systemd/system/gdm.service
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install &&
+sudo install -v -m644 data/gdm.service /lib/systemd/system/gdm.service
 
 
 

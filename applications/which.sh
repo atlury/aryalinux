@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The first option is to install the actual GNU which package.br3ak"
+DESCRIPTION=" The first option is to install the actual GNU which package."
 SECTION="general"
 VERSION=2.21
 NAME="general_which"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak MuPDF is a lightweight PDF and XPSbr3ak viewer.br3ak"
+DESCRIPTION=" MuPDF is a lightweight PDF and XPS viewer."
 SECTION="pst"
 VERSION=1.13.0
 NAME="mupdf"

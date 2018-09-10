@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Tk package contains a TCL GUIbr3ak Toolkit.br3ak"
+DESCRIPTION=" The Tk package contains a TCL GUI Toolkit."
 SECTION="general"
 VERSION=8.6.8
 NAME="tk"

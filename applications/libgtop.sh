@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libgtop package contains thebr3ak GNOME top libraries.br3ak"
+DESCRIPTION=" The libgtop package contains the GNOME top libraries."
 SECTION="gnome"
 VERSION=2.38.0
 NAME="libgtop"
@@ -24,7 +24,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/libgtop/2.38/libgtop-2.38.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/libgtop/2.38/libgtop-2.38.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgtop/libgtop-2.38.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libgtop/libgtop-2.38.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgtop/libgtop-2.38.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgtop/libgtop-2.38.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgtop/libgtop-2.38.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgtop/libgtop-2.38.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libgtop/2.38/libgtop-2.38.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -41,18 +41,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+sudo make install
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

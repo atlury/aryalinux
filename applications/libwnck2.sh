@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libwnck package contains abr3ak Window Navigator Construction Kit.br3ak"
+DESCRIPTION=" The libwnck package contains a Window Navigator Construction Kit."
 SECTION="xfce"
 VERSION=2.30.7
 NAME="libwnck2"

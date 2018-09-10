@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak rxvt-unicode is a clone of thebr3ak terminal emulator rxvt, an Xbr3ak Window System terminal emulator which includes support for XFT andbr3ak Unicode.br3ak"
+DESCRIPTION=" rxvt-unicode is a clone of the terminal emulator rxvt, an X Window System terminal emulator which includes support for XFT and Unicode."
 SECTION="xsoft"
 VERSION=9.22
 NAME="rxvt-unicode"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak IBus is an Intelligent Input Bus.br3ak It is a new input framework for Linux OS. It provides a fullbr3ak featured and user friendly input method user interface.br3ak"
+DESCRIPTION=" IBus is an Intelligent Input Bus. It is a new input framework for Linux OS. It provides a full featured and user friendly input method user interface."
 SECTION="general"
 VERSION=1.5.18
 NAME="ibus"

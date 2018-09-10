@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak a2ps is a filter utilized mainlybr3ak in the background and primarily by printing scripts to convertbr3ak almost every input format into PostScript output. The application'sbr3ak name expands appropriately to “<span class=\"quote\">all tobr3ak PostScript”.br3ak"
+DESCRIPTION=" a2ps is a filter utilized mainly in the background and primarily by printing scripts to convert almost every input format into PostScript output. The application's name expands appropriately to “<span class=\"quote\">all to PostScript”."
 SECTION="pst"
 VERSION=4.14
 NAME="a2ps"

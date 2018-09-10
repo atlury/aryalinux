@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Vte is a library (libvte)br3ak implementing a terminal emulator widget for GTK+ 2, and a minimal demonstrationbr3ak application (vte) that uses libvte.br3ak"
+DESCRIPTION=" Vte is a library (libvte) implementing a terminal emulator widget for GTK+ 2, and a minimal demonstration application (vte) that uses libvte."
 SECTION="lxde"
 VERSION=0.28.2
 NAME="vte2"

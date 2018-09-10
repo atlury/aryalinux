@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Avahi package is a systembr3ak which facilitates service discovery on a local network.br3ak"
+DESCRIPTION=" The Avahi package is a system which facilitates service discovery on a local network."
 SECTION="basicnet"
 VERSION=0.7
 NAME="avahi"

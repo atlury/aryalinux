@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Kate package contains anbr3ak advanced KF5 based graphical text editor.br3ak"
+DESCRIPTION=" The Kate package contains an advanced KF5 based graphical text editor."
 SECTION="postlfs"
 VERSION=18.04.1
 NAME="kate5"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The hicolor-icon-theme packagebr3ak contains a default fallback theme for implementations of the iconbr3ak theme specification.br3ak"
+DESCRIPTION=" The hicolor-icon-theme package contains a default fallback theme for implementations of the icon theme specification."
 SECTION="x"
 VERSION=0.17
 NAME="hicolor-icon-theme"

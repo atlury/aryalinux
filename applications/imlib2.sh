@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak imlib2 is a graphics library forbr3ak fast file loading, saving, rendering and manipulation.br3ak"
+DESCRIPTION=" imlib2 is a graphics library for fast file loading, saving, rendering and manipulation."
 SECTION="x"
 VERSION=1.5.1
 NAME="imlib2"

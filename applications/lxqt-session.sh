@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-session package containsbr3ak the default session manager for LXQt.br3ak"
+DESCRIPTION=" The lxqt-session package contains the default session manager for LXQt."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-session"

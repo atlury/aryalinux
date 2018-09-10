@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libqmi package contains abr3ak GLib-based library for talking to WWAN modems and devices whichbr3ak speak the Qualcomm MSM Interface (QMI) protocol.br3ak"
+DESCRIPTION=" The libqmi package contains a GLib-based library for talking to WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol."
 SECTION="general"
 VERSION=1.20.0
 NAME="libqmi"

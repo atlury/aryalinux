@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The FontForge package contains anbr3ak outline font editor that lets you create your own postscript,br3ak truetype, opentype, cid-keyed, multi-master, cff, svg and bitmapbr3ak (bdf, FON, NFNT) fonts, or edit existing ones.br3ak"
+DESCRIPTION=" The FontForge package contains an outline font editor that lets you create your own postscript, truetype, opentype, cid-keyed, multi-master, cff, svg and bitmap (bdf, FON, NFNT) fonts, or edit existing ones."
 SECTION="xsoft"
 VERSION=20170731
 NAME="fontforge"

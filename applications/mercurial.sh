@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Mercurial is a distributed sourcebr3ak control management tool similar to Git and Bazaar. Mercurial is written in Python and is used by projects such as Mozillabr3ak and Vim.br3ak"
+DESCRIPTION=" Mercurial is a distributed source control management tool similar to Git and Bazaar. Mercurial is written in Python and is used by projects such as Mozilla and Vim."
 SECTION="general"
 VERSION=4.6
 NAME="mercurial"

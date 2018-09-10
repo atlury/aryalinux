@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak ModemManager provides a unifiedbr3ak high level API for communicating with mobile broadband modems,br3ak regardless of the protocol used to communicate with the actualbr3ak device.br3ak"
+DESCRIPTION=" ModemManager provides a unified high level API for communicating with mobile broadband modems, regardless of the protocol used to communicate with the actual device."
 SECTION="general"
 VERSION=1.6.12
 NAME="ModemManager"

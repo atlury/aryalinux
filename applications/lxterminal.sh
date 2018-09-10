@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXTerminal package contains abr3ak VTE-based terminal emulator for LXDE with support for multiple tabs.br3ak"
+DESCRIPTION=" The LXTerminal package contains a VTE-based terminal emulator for LXDE with support for multiple tabs."
 SECTION="lxde"
 VERSION=0.3.1
 NAME="lxterminal"

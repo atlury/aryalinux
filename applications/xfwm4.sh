@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Xfwm4 is the window manager forbr3ak Xfce.br3ak"
+DESCRIPTION=" Xfwm4 is the window manager for Xfce."
 SECTION="xfce"
 VERSION=4.12.4
 NAME="xfwm4"

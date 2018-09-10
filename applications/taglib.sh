@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Taglib is a library used forbr3ak reading, writing and manipulating audio file tags and is used bybr3ak applications such as Amarok andbr3ak VLC.br3ak"
+DESCRIPTION=" Taglib is a library used for reading, writing and manipulating audio file tags and is used by applications such as Amarok and VLC."
 SECTION="multimedia"
 VERSION=1.11.1
 NAME="taglib"

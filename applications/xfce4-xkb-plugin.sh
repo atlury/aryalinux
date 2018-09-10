@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak If your system has a standard (US) keyboard, you probably do notbr3ak need to install this plugin.br3ak"
+DESCRIPTION=" If your system has a standard (US) keyboard, you probably do not need to install this plugin."
 SECTION="xfce"
 VERSION=0.7.1
 NAME="xfce4-xkb-plugin"

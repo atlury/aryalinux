@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Libkdcraw is a KDE wrapper aroundbr3ak the <a class=\"xref\" href=\"../general/libraw.html\" title=\"libraw-0.18.11\">libraw-0.18.11</a> library for manipulating imagebr3ak metadata.br3ak"
+DESCRIPTION=" Libkdcraw is a KDE wrapper around the <a class=\"xref\" href=\"../general/libraw.html\" title=\"libraw-0.18.11\">libraw-0.18.11</a> library for manipulating image metadata."
 SECTION="kde"
 VERSION=18.04.1
 NAME="libkdcraw"

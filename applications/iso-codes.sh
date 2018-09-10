@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The ISO Codes package contains abr3ak list of country, language and currency names and it is used as abr3ak central database for accessing this data.br3ak"
+DESCRIPTION=" The ISO Codes package contains a list of country, language and currency names and it is used as a central database for accessing this data."
 SECTION="general"
 VERSION=3.77
 NAME="iso-codes"

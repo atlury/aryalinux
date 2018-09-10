@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 NAME="network-manager-pptp"
-VERSION="1.2.4"
+VERSION="1.2.6"
 
-URL=https://ftp.gnome.org/pub/gnome/sources/NetworkManager-pptp/1.2/NetworkManager-pptp-1.2.4.tar.xz
+URL=https://download.gnome.org/sources/NetworkManager-pptp/1.2/NetworkManager-pptp-1.2.6.tar.xz
 
 cd $SOURCE_DIR
 

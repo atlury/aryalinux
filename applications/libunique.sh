@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libunique package contains abr3ak library for writing single instance applications.br3ak"
+DESCRIPTION=" The libunique package contains a library for writing single instance applications."
 SECTION="general"
 VERSION=1.1.6
 NAME="libunique"

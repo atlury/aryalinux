@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The UnZip package containsbr3ak <code class=\"filename\">ZIP extraction utilities. These arebr3ak useful for extracting files from <code class=\"filename\">ZIPbr3ak archives. <code class=\"filename\">ZIP archives are createdbr3ak with PKZIP or Info-ZIP utilities, primarily in a DOSbr3ak environment.br3ak"
+DESCRIPTION=" The UnZip package contains <code class=\"filename\">ZIP extraction utilities. These are useful for extracting files from <code class=\"filename\">ZIP archives. <code class=\"filename\">ZIP archives are created with PKZIP or Info-ZIP utilities, primarily in a DOS environment."
 SECTION="general"
 VERSION=60
 NAME="unzip"

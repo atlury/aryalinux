@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The obconf-qt package is anbr3ak OpenBox Qt based configurationbr3ak tool.br3ak"
+DESCRIPTION=" The obconf-qt package is an OpenBox Qt based configuration tool."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="obconf-qt"

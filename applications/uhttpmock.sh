@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The uhttpmock package contains abr3ak library for mocking web service APIs which use HTTP or HTTPS.br3ak"
+DESCRIPTION=" The uhttpmock package contains a library for mocking web service APIs which use HTTP or HTTPS."
 SECTION="basicnet"
 VERSION=0.5.1
 NAME="uhttpmock"

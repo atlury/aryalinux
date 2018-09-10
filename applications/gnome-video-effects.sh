@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Video Effects packagebr3ak contains a collection of GStreamerbr3ak effects.br3ak"
+DESCRIPTION=" The GNOME Video Effects package contains a collection of GStreamer effects."
 SECTION="gnome"
 VERSION=0.4.3
 NAME="gnome-video-effects"
@@ -20,7 +20,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/gnome-video-effects/0.4/gnome-video-e
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-video-effects/0.4/gnome-video-effects-0.4.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-video-effects/gnome-video-effects-0.4.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-video-effects/gnome-video-effects-0.4.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-video-effects/gnome-video-effects-0.4.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-video-effects/gnome-video-effects-0.4.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-video-effects/gnome-video-effects-0.4.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-video-effects/gnome-video-effects-0.4.3.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-video-effects/0.4/gnome-video-effects-0.4.3.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,17 +37,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
 
 
 

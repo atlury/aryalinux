@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Menu Cache package contains abr3ak library for creating and utilizing caches to speed up thebr3ak manipulation for freedesktop.org defined application menus.br3ak"
+DESCRIPTION=" The Menu Cache package contains a library for creating and utilizing caches to speed up the manipulation for freedesktop.org defined application menus."
 SECTION="lxde"
 VERSION=1.1.0
 NAME="menu-cache"

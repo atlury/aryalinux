@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The SQLite package is a softwarebr3ak library that implements a self-contained, serverless,br3ak zero-configuration, transactional SQL database engine.br3ak"
+DESCRIPTION=" The SQLite package is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine."
 SECTION="server"
 VERSION=3230100
 NAME="sqlite"

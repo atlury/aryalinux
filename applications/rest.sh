@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The rest package contains abr3ak library that was designed to make it easier to access web servicesbr3ak that claim to be \"RESTful\". It includes convenience wrappers forbr3ak libsoup and libxml to ease remote use of the RESTful API.br3ak"
+DESCRIPTION=" The rest package contains a library that was designed to make it easier to access web services that claim to be \"RESTful\". It includes convenience wrappers for libsoup and libxml to ease remote use of the RESTful API."
 SECTION="gnome"
 VERSION=0.8.1
 NAME="rest"

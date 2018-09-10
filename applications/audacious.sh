@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Audacious is an audio player.br3ak"
+DESCRIPTION=" Audacious is an audio player."
 SECTION="multimedia"
 VERSION=3.9
 NAME="audacious"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libblockdev is a C library supporting GObject introspection forbr3ak manipulation of block devices. It has a plugin-based architecturebr3ak where each technology (like LVM, Btrfs, MD RAID, Swap,...) isbr3ak implemented in a separate plugin, possibly with multiplebr3ak implementations (e.g. using LVM CLI or the new LVM DBus API).br3ak"
+DESCRIPTION=" libblockdev is a C library supporting GObject introspection for manipulation of block devices. It has a plugin-based architecture where each technology (like LVM, Btrfs, MD RAID, Swap,...) is implemented in a separate plugin, possibly with multiple implementations (e.g. using LVM CLI or the new LVM DBus API)."
 SECTION="general"
 VERSION=2.17
 NAME="libblockdev"

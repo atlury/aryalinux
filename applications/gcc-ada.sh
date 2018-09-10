@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Ada is a modern programming language designed for large, long-livedbr3ak applications — and embedded systems in particular —br3ak where reliability and efficiency are essential. It has a set ofbr3ak unique technical features that make it highly effective for use inbr3ak large, complex and safety-critical projects.br3ak"
+DESCRIPTION=" Ada is a modern programming language designed for large, long-lived applications — and embedded systems in particular — where reliability and efficiency are essential. It has a set of unique technical features that make it highly effective for use in large, complex and safety-critical projects."
 SECTION="general"
 VERSION=7.3.0
 NAME="gcc-ada"

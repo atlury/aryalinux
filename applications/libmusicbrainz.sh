@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libmusicbrainz packagebr3ak contains a library which allows you to access the data held on thebr3ak MusicBrainz server. This is useful for adding MusicBrainz lookupbr3ak capabilities to other applications.br3ak"
+DESCRIPTION=" The libmusicbrainz package contains a library which allows you to access the data held on the MusicBrainz server. This is useful for adding MusicBrainz lookup capabilities to other applications."
 SECTION="multimedia"
 VERSION=2.1.5
 NAME="libmusicbrainz"

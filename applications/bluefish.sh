@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Bluefish is a GTK+ text editor targeted towards programmersbr3ak and web designers, with many options to write websites, scripts andbr3ak programming code. Bluefishbr3ak supports many programming and markup languages, and it focuses onbr3ak editing dynamic and interactive websites.br3ak"
+DESCRIPTION=" Bluefish is a GTK+ text editor targeted towards programmers and web designers, with many options to write websites, scripts and programming code. Bluefish supports many programming and markup languages, and it focuses on editing dynamic and interactive websites."
 SECTION="postlfs"
 VERSION=2.2.10
 NAME="bluefish"

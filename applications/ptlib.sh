@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Ptlib (Portable Tools Library)br3ak package contains a class library that has its genesis many yearsbr3ak ago as PWLib (portable Windows Library), a method to producebr3ak applications to run on various platforms.br3ak"
+DESCRIPTION=" The Ptlib (Portable Tools Library) package contains a class library that has its genesis many years ago as PWLib (portable Windows Library), a method to produce applications to run on various platforms."
 SECTION="general"
 VERSION=2.10.11
 NAME="ptlib"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GStreamer Base Plug-ins is abr3ak well-groomed and well-maintained collection of GStreamer plug-ins and elements, spanning thebr3ak range of possible types of elements one would want to write forbr3ak GStreamer. You will need at leastbr3ak one of Good, Bad, Ugly or Libav plugins for GStreamer applications to function properly.br3ak"
+DESCRIPTION=" The GStreamer Base Plug-ins is a well-groomed and well-maintained collection of GStreamer plug-ins and elements, spanning the range of possible types of elements one would want to write for GStreamer. You will need at least one of Good, Bad, Ugly or Libav plugins for GStreamer applications to function properly."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gst10-plugins-base"

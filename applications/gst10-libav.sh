@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GStreamer Libav packagebr3ak contains GStreamer plugins forbr3ak Libav (a fork of FFmpeg).br3ak"
+DESCRIPTION=" The GStreamer Libav package contains GStreamer plugins for Libav (a fork of FFmpeg)."
 SECTION="multimedia"
 VERSION=1.14.1
 NAME="gst10-libav"

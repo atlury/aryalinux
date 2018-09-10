@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Libssh2 package is a client-side Cbr3ak library implementing the SSH2 protocol.br3ak"
+DESCRIPTION=" Libssh2 package is a client-side C library implementing the SSH2 protocol."
 SECTION="general"
 VERSION=1.8.0
 NAME="libssh2"

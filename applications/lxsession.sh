@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXSession package contains thebr3ak default session manager for LXDE.br3ak"
+DESCRIPTION=" The LXSession package contains the default session manager for LXDE."
 SECTION="lxde"
 VERSION=0.5.3
 NAME="lxsession"

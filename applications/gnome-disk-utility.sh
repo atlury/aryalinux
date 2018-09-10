@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Disk Utility packagebr3ak provides applications used for dealing with storage devices.br3ak"
+DESCRIPTION=" The GNOME Disk Utility package provides applications used for dealing with storage devices."
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.29.92
 NAME="gnome-disk-utility"
 
 #REQ:gnome-settings-daemon
@@ -22,11 +22,11 @@ NAME="gnome-disk-utility"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-disk-utility/3.28/gnome-disk-utility-3.28.0.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/gnome-disk-utility-3.29.92.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-disk-utility/3.28/gnome-disk-utility-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-disk-utility/gnome-disk-utility-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-disk-utility/gnome-disk-utility-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-disk-utility/gnome-disk-utility-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-disk-utility/gnome-disk-utility-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-disk-utility/gnome-disk-utility-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-disk-utility/gnome-disk-utility-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-disk-utility/3.28/gnome-disk-utility-3.28.0.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -45,17 +45,7 @@ mkdir build &&
 cd    build &&
 meson --prefix=/usr --sysconfdir=/etc &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install
 
 
 

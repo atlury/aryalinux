@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Tracker is the file indexing andbr3ak search provider used in the GNOMEbr3ak desktop environment.br3ak"
+DESCRIPTION=" Tracker is the file indexing and search provider used in the GNOME desktop environment."
 SECTION="gnome"
 VERSION=2.0.3
 NAME="tracker"

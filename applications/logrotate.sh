@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The logrotate package allowsbr3ak automatic rotation, compression, removal, and mailing of log files.br3ak"
+DESCRIPTION=" The logrotate package allows automatic rotation, compression, removal, and mailing of log files."
 SECTION="general"
 VERSION=3.11.0
 NAME="logrotate"

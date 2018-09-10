@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-panel package contains abr3ak lightweight X11 desktop panel.br3ak"
+DESCRIPTION=" The lxqt-panel package contains a lightweight X11 desktop panel."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-panel"

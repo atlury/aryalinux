@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libpeas is a GObject based pluginsbr3ak engine, and is targeted at giving every application the chance tobr3ak assume its own extensibility.br3ak"
+DESCRIPTION=" libpeas is a GObject based plugins engine, and is targeted at giving every application the chance to assume its own extensibility."
 SECTION="gnome"
 VERSION=1.22.0
 NAME="libpeas"

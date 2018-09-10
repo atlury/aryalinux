@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-l10n package providesbr3ak translations for all components of the LXQt desktop.br3ak"
+DESCRIPTION=" The lxqt-l10n package provides translations for all components of the LXQt desktop."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-l10n"

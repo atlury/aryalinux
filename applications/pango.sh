@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Pango is a library for laying outbr3ak and rendering of text, with an emphasis on internationalization. Itbr3ak can be used anywhere that text layout is needed, though most of thebr3ak work on Pango so far has been donebr3ak in the context of the GTK+ widgetbr3ak toolkit.br3ak"
+DESCRIPTION=" Pango is a library for laying out and rendering of text, with an emphasis on internationalization. It can be used anywhere that text layout is needed, though most of the work on Pango so far has been done in the context of the GTK+ widget toolkit."
 SECTION="x"
-VERSION=1.42.1
+VERSION=1.42.4
 NAME="pango"
 
 #REQ:fontconfig
@@ -26,11 +26,11 @@ NAME="pango"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/pango/1.42/pango-1.42.1.tar.xz
+URL=https://download.gnome.org/core/3.29/3.29.92/sources/pango-1.42.4.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/pango/1.42/pango-1.42.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pango/pango-1.42.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pango/pango-1.42.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pango/pango-1.42.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pango/pango-1.42.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pango/pango-1.42.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pango/pango-1.42.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pango/1.42/pango-1.42.1.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -49,18 +49,8 @@ mkdir build &&
 cd    build &&
 meson --prefix=/usr --sysconfdir=/etc .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install &&
-install -vm 644 ../pango-view/pango-view.1.in /usr/share/man/man1/pango-view.1
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo ninja install &&
+sudo install -vm 644 ../pango-view/pango-view.1.in /usr/share/man/man1/pango-view.1
 
 
 

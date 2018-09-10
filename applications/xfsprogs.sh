@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xfsprogs package containsbr3ak administration and debugging tools for the XFS file system.br3ak"
+DESCRIPTION=" The xfsprogs package contains administration and debugging tools for the XFS file system."
 SECTION="postlfs"
 VERSION=4.16.1
 NAME="xfsprogs"

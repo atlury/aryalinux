@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The xbitmaps package containsbr3ak bitmap images used by multiple applications built in Xorg chapter.br3ak"
+DESCRIPTION=" The xbitmaps package contains bitmap images used by multiple applications built in Xorg chapter."
 SECTION="x"
 VERSION=1.1.2
 NAME="xbitmaps"

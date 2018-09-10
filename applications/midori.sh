@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Midori is a lightweight webbr3ak browser that uses WebKitGTK+.br3ak"
+DESCRIPTION=" Midori is a lightweight web browser that uses WebKitGTK+."
 SECTION="xsoft"
 VERSION=0.5.11
 NAME="midori"

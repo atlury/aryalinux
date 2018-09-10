@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-powermanagement packagebr3ak provides the power management module for LXQt.br3ak"
+DESCRIPTION=" The lxqt-powermanagement package provides the power management module for LXQt."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-powermanagement"

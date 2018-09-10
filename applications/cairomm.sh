@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Cairomm package provides a C++br3ak interface to Cairo.br3ak"
+DESCRIPTION=" The Cairomm package provides a C++ interface to Cairo."
 SECTION="x"
 VERSION=1.12.2
 NAME="cairomm"

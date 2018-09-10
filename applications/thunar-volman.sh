@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Thunar Volume Manager is anbr3ak extension for the Thunar filebr3ak manager, which enables automatic management of removable drives andbr3ak media.br3ak"
+DESCRIPTION=" The Thunar Volume Manager is an extension for the Thunar file manager, which enables automatic management of removable drives and media."
 SECTION="xfce"
 VERSION=0.8.1
 NAME="thunar-volman"

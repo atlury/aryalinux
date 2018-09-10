@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Talloc provides a hierarchical,br3ak reference counted memory pool system with destructors. It is thebr3ak core memory allocator used in Samba.br3ak"
+DESCRIPTION=" Talloc provides a hierarchical, reference counted memory pool system with destructors. It is the core memory allocator used in Samba."
 SECTION="general"
 VERSION=2.1.13
 NAME="talloc"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The OpenLDAP package provides anbr3ak open source implementation of the Lightweight Directory Accessbr3ak Protocol.br3ak"
+DESCRIPTION=" The OpenLDAP package provides an open source implementation of the Lightweight Directory Access Protocol."
 SECTION="server"
 VERSION=2.4.46
 NAME="openldap"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Enscript converts ASCII text filesbr3ak to PostScript, HTML, RTF, ANSI and overstrikes.br3ak"
+DESCRIPTION=" Enscript converts ASCII text files to PostScript, HTML, RTF, ANSI and overstrikes."
 SECTION="pst"
 VERSION=1.6.6
 NAME="enscript"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libsecret package contains abr3ak GObject based library for accessing the Secret Service API.br3ak"
+DESCRIPTION=" The libsecret package contains a GObject based library for accessing the Secret Service API."
 SECTION="gnome"
 VERSION=0.18.6
 NAME="libsecret"

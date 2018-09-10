@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libisofs is a library to create anbr3ak ISO-9660 filesystem with extensions like RockRidge or Joliet.br3ak"
+DESCRIPTION=" libisofs is a library to create an ISO-9660 filesystem with extensions like RockRidge or Joliet."
 SECTION="multimedia"
 VERSION=1.4.8
 NAME="libisofs"

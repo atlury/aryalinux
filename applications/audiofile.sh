@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The AudioFile package contains thebr3ak audio file libraries and two sound file support programs useful tobr3ak support basic sound file formats.br3ak"
+DESCRIPTION=" The AudioFile package contains the audio file libraries and two sound file support programs useful to support basic sound file formats."
 SECTION="multimedia"
 VERSION=0.3.6
 NAME="audiofile"

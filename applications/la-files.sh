@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak In LFS we installed a package, libtool, that is used by manybr3ak packages to build on a variety of Unix platforms. This includesbr3ak platforms such as AIX, Solaris, IRIX, HP-UX, and Cygwin as well asbr3ak Linux. The origins of this tool are quite dated. It was intended tobr3ak manage libraries on systems with less advanced capabilities than abr3ak modern Linux system.br3ak"
+DESCRIPTION=" In LFS we installed a package, libtool, that is used by many packages to build on a variety of Unix platforms. This includes platforms such as AIX, Solaris, IRIX, HP-UX, and Cygwin as well as Linux. The origins of this tool are quite dated. It was intended to manage libraries on systems with less advanced capabilities than a modern Linux system."
 SECTION="introduction"
 NAME="la-files"
 

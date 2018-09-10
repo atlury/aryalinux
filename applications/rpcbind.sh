@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The rpcbind program is abr3ak replacement for portmap. It isbr3ak required for import or export of Network File System (NFS) sharedbr3ak directories.br3ak"
+DESCRIPTION=" The rpcbind program is a replacement for portmap. It is required for import or export of Network File System (NFS) shared directories."
 SECTION="basicnet"
 VERSION=0.2.4
 NAME="rpcbind"

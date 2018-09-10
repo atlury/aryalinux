@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The LXAppearance package containsbr3ak a desktop-independent theme switcher for GTK+.br3ak"
+DESCRIPTION=" The LXAppearance package contains a desktop-independent theme switcher for GTK+."
 SECTION="lxde"
 VERSION=0.6.3
 NAME="lxappearance"

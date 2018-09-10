@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The util-macros package containsbr3ak the m4 macros used by all of thebr3ak Xorg packages.br3ak"
+DESCRIPTION=" The util-macros package contains the m4 macros used by all of the Xorg packages."
 SECTION="x"
 VERSION=1.19.2
 NAME="util-macros"

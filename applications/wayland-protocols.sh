@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Wayland-Protocols packagebr3ak contains additional Wayland protocols that add functionalitybr3ak outside of protocols already in the Wayland core.br3ak"
+DESCRIPTION=" The Wayland-Protocols package contains additional Wayland protocols that add functionality outside of protocols already in the Wayland core."
 SECTION="general"
 VERSION=1.14
 NAME="wayland-protocols"

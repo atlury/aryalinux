@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak"
+DESCRIPTION=" Biber is a BibTeX replacement for users of biblatex, written in Perl, with full Unicode support."
 SECTION="pst"
 VERSION=2.11
 NAME="biber"

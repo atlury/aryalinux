@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak GDB, the GNU Project debugger,br3ak allows you to see what is going on “<span class=\"quote\">inside” another program while it executes --br3ak or what another program was doing at the moment it crashed. Notebr3ak that GDB is most effective whenbr3ak tracing programs and libraries that were built with debuggingbr3ak symbols and not stripped.br3ak"
+DESCRIPTION=" GDB, the GNU Project debugger, allows you to see what is going on “<span class=\"quote\">inside” another program while it executes -- or what another program was doing at the moment it crashed. Note that GDB is most effective when tracing programs and libraries that were built with debugging symbols and not stripped."
 SECTION="general"
 VERSION=8.1
 NAME="gdb"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The next part of this chapter deals with firewalls. The principalbr3ak firewall tool for Linux is Iptables. You will need to installbr3ak Iptables if you intend on usingbr3ak any form of a firewall.br3ak"
+DESCRIPTION=" The next part of this chapter deals with firewalls. The principal firewall tool for Linux is Iptables. You will need to install Iptables if you intend on using any form of a firewall."
 SECTION="postlfs"
 VERSION=1.6.2
 NAME="iptables"

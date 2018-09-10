@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak As the name suggests, the qtermwidget is a terminal widget forbr3ak Qt.br3ak"
+DESCRIPTION=" As the name suggests, the qtermwidget is a terminal widget for Qt."
 SECTION="lxqt"
 VERSION=0.8.0
 NAME="qtermwidget"

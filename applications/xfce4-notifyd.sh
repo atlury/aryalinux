@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Xfce4 Notification Daemon is abr3ak small program that implements the \"server-side\" portion of thebr3ak Freedesktop desktop notifications specification. Applications thatbr3ak wish to pop up a notification bubble in a standard way can usebr3ak Xfce4-Notifyd to do so by sendingbr3ak standard messages over D-Bus usingbr3ak the org.freedesktop.Notifications interface.br3ak"
+DESCRIPTION=" The Xfce4 Notification Daemon is a small program that implements the \"server-side\" portion of the Freedesktop desktop notifications specification. Applications that wish to pop up a notification bubble in a standard way can use Xfce4-Notifyd to do so by sending standard messages over D-Bus using the org.freedesktop.Notifications interface."
 SECTION="xfce"
 VERSION=0.4.2
 NAME="xfce4-notifyd"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Fontconfig package contains abr3ak library and support programs used for configuring and customizingbr3ak font access.br3ak"
+DESCRIPTION=" The Fontconfig package contains a library and support programs used for configuring and customizing font access."
 SECTION="general"
 VERSION=2.13.0
 NAME="fontconfig"

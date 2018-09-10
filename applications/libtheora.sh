@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libtheora is a referencebr3ak implementation of the Theora video compression format beingbr3ak developed by the Xiph.Org Foundation.br3ak"
+DESCRIPTION=" libtheora is a reference implementation of the Theora video compression format being developed by the Xiph.Org Foundation."
 SECTION="multimedia"
 VERSION=1.1.1
 NAME="libtheora"

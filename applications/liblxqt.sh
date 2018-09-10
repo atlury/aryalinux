@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The liblxqt is the core utilitybr3ak library for all LXQt components.br3ak"
+DESCRIPTION=" The liblxqt is the core utility library for all LXQt components."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="liblxqt"

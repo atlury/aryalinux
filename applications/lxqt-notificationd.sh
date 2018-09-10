@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The lxqt-notificationd package isbr3ak the LXQt notification daemon.br3ak"
+DESCRIPTION=" The lxqt-notificationd package is the LXQt notification daemon."
 SECTION="lxqt"
 VERSION=0.12.0
 NAME="lxqt-notificationd"

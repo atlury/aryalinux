@@ -117,7 +117,7 @@ def inputBuildProperties():
 	if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
-			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n\nEnter your choice (1-4): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
+			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Gnome\n\nEnter your choice (1-2): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
 	response = raw_input('Do you want to configure advanced build options? (y/n) : ')
 	if response == 'y' or response == 'Y':
 		readInput("Enter build architecture/gcc -march flag value (generic): ", 'BUILD_ARCH', propsFile, 'generic')
@@ -250,24 +250,11 @@ def freshBuild(startFrom):
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			try:
 				logCurrentStage('7')
-				if getParamValue('DESKTOP_ENVIRONMENT') == '2':
-					desktopEnv = 'mate'
-					print 'Installing ' + desktopEnv
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'mate-desktop-environment'])
-				elif getParamValue('DESKTOP_ENVIRONMENT') == '1':
+				if getParamValue('DESKTOP_ENVIRONMENT') == '1':
 					desktopEnv = 'xfce'
 					print 'Installing ' + desktopEnv
 					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
-				elif getParamValue('DESKTOP_ENVIRONMENT') == '3':
-					desktopEnv = 'kde5'
-					print 'Installing ' + desktopEnv
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gtk2'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gtk3'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'GConf'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'pulseaudio'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'qt5'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'kde-desktop-environment'])
-				elif getParamValue('DESKTOP_ENVIRONMENT') == '4':
+				elif getParamValue('DESKTOP_ENVIRONMENT') == '2':
 					desktopEnv = 'gnome'
 					print 'Installing ' + desktopEnv
 					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gnome-desktop-environment']);

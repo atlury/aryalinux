@@ -57,10 +57,6 @@ if [ "x$INSTALL_DESKTOP_ENVIRONMENT" == "xy" ]; then
     if [ "x$DESKTOP_ENVIRONMENT" == "x1" ]; then
         DE="XFCE"
     elif [ "x$DESKTOP_ENVIRONMENT" == "x2" ]; then
-        DE="Mate";
-    elif [ "x$DESKTOP_ENVIRONMENT" == "x3" ]; then
-        DE="KDE5"
-    elif [ "x$DESKTOP_ENVIRONMENT" == "x4" ]; then
         DE="GNOME"
     else
         DE="Builder"

@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="089-systemd.sh"
-TARBALL="systemd-238.tar.gz"
+TARBALL="systemd-239.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -38,7 +38,6 @@ ln -svf /tools/bin/env /usr/bin/
 ln -svf /tools/lib/libblkid.so.1 /usr/lib/
 ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
-tar -xf ../systemd-man-pages-238.tar.xz
 sed '171,$ d' -i src/resolve/meson.build
 sed -i '527,565 d'                  src/basic/missing.h
 sed -i '24 d'                       src/core/load-fragment.c

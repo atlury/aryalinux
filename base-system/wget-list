@@ -65,8 +65,7 @@ http://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz
 http://ftp.gnu.org/gnu/sed/sed-4.5.tar.xz
 https://github.com/shadow-maint/shadow/releases/download/4.6/shadow-4.6.tar.xz
 http://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz
-https://github.com/systemd/systemd/archive/v238/systemd-238.tar.gz
-http://anduin.linuxfromscratch.org/LFS/systemd-man-pages-238.tar.xz
+https://github.com/systemd/systemd/archive/v239.tar.gz
 http://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.89.tar.bz2
 http://ftp.gnu.org/gnu/tar/tar-1.30.tar.xz
 https://downloads.sourceforge.net/tcl/tcl8.6.8-src.tar.gz

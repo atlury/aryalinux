@@ -185,13 +185,13 @@ if ! grep syslinux /sources/build-log &> /dev/null
 then
 
 cd $SOURCE_DIR
-tar xf syslinux-4.06.tar.xz
-cd syslinux-4.06
+tar xf syslinux-6.03.tar.xz
+cd syslinux-6.03
 cd utils
 make
 cp isohybrid /usr/bin/
 cd $SOURCE_DIR
-rm -r syslinux-4.06
+rm -r syslinux-6.03
 
 echo "syslinux" >> /sources/build-log
 

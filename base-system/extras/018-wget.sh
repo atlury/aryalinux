@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="018-wget.sh"
-TARBALL="wget-1.19.1.tar.xz"
+TARBALL="wget-1.19.5.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then

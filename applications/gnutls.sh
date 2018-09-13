@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION=" The GnuTLS package contains libraries and userspace tools which provide a secure layer over a reliable transport layer. Currently the GnuTLS library implements the proposed standards by the IETF's TLS working group. Quoting from the TLS protocol specification:"
 SECTION="postlfs"
-VERSION=3.5.18
+VERSION=3.6.3
 NAME="gnutls"
 
 #REQ:nettle
@@ -31,11 +31,11 @@ NAME="gnutls"
 
 cd $SOURCE_DIR
 
-URL=https://www.gnupg.org/ftp/gcrypt/gnutls/v3.5/gnutls-3.5.18.tar.xz
+URL=https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.gnupg.org/ftp/gcrypt/gnutls/v3.5/gnutls-3.5.18.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnutls/gnutls-3.5.18.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnutls/gnutls-3.5.18.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnutls/gnutls-3.5.18.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnutls/gnutls-3.5.18.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnutls/gnutls-3.5.18.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnutls/gnutls-3.5.18.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -53,27 +53,8 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr \
             --with-default-trust-store-pkcs11="pkcs11:" &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make -C doc/reference install-data-local
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
+sudo make -C doc/reference install-data-local
 
 
 

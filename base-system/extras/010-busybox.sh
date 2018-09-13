@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="010-busybox.sh"
-TARBALL="busybox-1.20.2.tar.bz2"
+TARBALL="busybox-1.29.3.tar.bz2"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -27,7 +27,6 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
-patch -Np1 -i ../busybox-1.20.2-sys-resource.patch
 make defconfig
 sed 's/# CONFIG_STATIC is not set/CONFIG_STATIC=y/' -i .config
 

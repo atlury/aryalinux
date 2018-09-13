@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="017-gnutls.sh"
-TARBALL="gnutls-3.5.14.tar.xz"
+TARBALL="gnutls-3.6.3.tar.xz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then

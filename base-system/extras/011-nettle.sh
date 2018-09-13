@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="011-nettle.sh"
-TARBALL="nettle-3.3.tar.gz"
+TARBALL="nettle-3.4.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then

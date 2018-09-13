@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="012-libtasn1.sh"
-TARBALL="libtasn1-4.12.tar.gz"
+TARBALL="libtasn1-4.13.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then

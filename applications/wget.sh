@@ -27,7 +27,7 @@ URL=https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wget/wget-1.19.5.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/wget/wget-1.19.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wget/wget-1.19.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wget/wget-1.19.5.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wget/wget-1.19.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wget/wget-1.19.5.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/wget/wget-1.19.5.tar.gz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -46,18 +46,7 @@ whoami > /tmp/currentuser
             --sysconfdir=/etc  \
             --with-ssl=openssl &&
 make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+sudo make install
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

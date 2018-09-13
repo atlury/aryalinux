@@ -29,14 +29,14 @@ install -v -m644    doc/cpio.{html,txt} \
 cd /sources
 rm -rf cpio-2.12
 
-tar xf dash-0.5.9.1.tar.gz
-cd dash-0.5.9.1
+tar xf dash-0.5.10.tar.gz
+cd dash-0.5.10
 ./configure --prefix=/usr --enable-static
 make
 make install
 
 cd /sources
-rm -rf dash-0.5.9.1
+rm -rf dash-0.5.10
 
 tar xf dracut-master.tar.xz
 cd dracut-master

@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="019-sudo.sh"
-TARBALL="sudo-1.8.20p2.tar.gz"
+TARBALL="sudo-1.8.25p1.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -28,7 +28,7 @@ CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-mar
             --with-secure-path         \
             --with-all-insults         \
             --with-env-editor          \
-            --docdir=/usr/share/doc/sudo-1.8.20p2 \
+            --docdir=/usr/share/doc/sudo-1.8.25p1 \
             --with-passprompt="[sudo] password for %p: " &&
 make
 make install &&

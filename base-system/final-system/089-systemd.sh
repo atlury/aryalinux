@@ -38,18 +38,12 @@ ln -svf /tools/bin/env /usr/bin/
 ln -svf /tools/lib/libblkid.so.1 /usr/lib/
 ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
-sed '171,$ d' -i src/resolve/meson.build
-sed -i '527,565 d'                  src/basic/missing.h
-sed -i '24 d'                       src/core/load-fragment.c
-sed -i '53 a#include <sys/mount.h>' src/shared/bus-unit-util.c
-sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
-
 export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
-mkdir -p build
-cd       build
+mkdir -pv build
+cd        build
 LANG=en_US.UTF-8                   \
 meson --prefix=/usr                \
       --sysconfdir=/etc            \

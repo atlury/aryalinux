@@ -50,14 +50,6 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i '527,565 d'                  src/basic/missing.h
-sed -i '24 d'                       src/core/load-fragment.c
-sed -i '53 a#include <sys/mount.h>' src/shared/bus-unit-util.c
-
-
-sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
-
-
 mkdir build &&
 cd    build &&
 meson --prefix=/usr         \

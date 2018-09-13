@@ -42,6 +42,8 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
+patch -Np1 ../0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch
+
 mkdir -pv build
 cd        build
 LANG=en_US.UTF-8                   \

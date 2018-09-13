@@ -37,6 +37,7 @@ URL=https://github.com/systemd/systemd/archive/v239.tar.gz
 if [ ! -z $URL ]
 then
 wget --content-disposition -nc $URL
+wget -nc https://raw.githubusercontent.com/openembedded/openembedded-core/master/meta/recipes-core/systemd/systemd/0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch
 TARBALL="systemd-239.tar.gz"
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
 	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -49,6 +50,8 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
+
+patch -Np1 ../0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch
 
 mkdir build &&
 cd    build &&

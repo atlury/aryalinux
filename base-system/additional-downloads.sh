@@ -48,6 +48,7 @@ wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/dd59ff658aa9ec0a24de
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/dd59ff658aa9ec0a24de11fa6d5f0acda9bb7628/aufs4-kbuild.patch
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/dd59ff658aa9ec0a24de11fa6d5f0acda9bb7628/aufs4-mmap.patch
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/dd59ff658aa9ec0a24de11fa6d5f0acda9bb7628/aufs4-standalone.patch
+wget -nc https://raw.githubusercontent.com/openembedded/openembedded-core/master/meta/recipes-core/systemd/systemd/0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch
 wget -nc https://sourceware.org/ftp/elfutils/0.170/elfutils-0.170.tar.bz2
 
 pushd $CURRENT_DIR/../applications

@@ -33,6 +33,8 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
+ln -svf /tools/lib/libuuid.so.1 /usr/lib/
+
 mkdir -v build
 cd build
 ../configure --prefix=/usr           \
@@ -53,6 +55,8 @@ makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
 install -v -m644 doc/com_err.info /usr/share/info
 install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 
+
+rm /usr/lib/libuuid.so.1
 
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]

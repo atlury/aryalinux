@@ -33,6 +33,8 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
+ln -svf /tools/lib/libuuid.so.1 /usr/lib/
+
 patch -Np1 -i ../coreutils-8.30-i18n-1.patch
 sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk
 autoreconf -fiv
@@ -52,6 +54,7 @@ mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
 sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8
 mv -v /usr/bin/{head,sleep,nice} /bin
 
+rm /usr/lib/libuuid.so.1
 
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]

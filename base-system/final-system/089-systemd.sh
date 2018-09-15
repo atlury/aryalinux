@@ -42,11 +42,15 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
-patch -Np1 -i ../0001-binfmt-Don-t-install-dependency-links-at-install-tim.patch
+tar -xf ../systemd-man-pages-239.tar.xz
+sed '166,$ d' -i src/resolve/meson.build
+patch -Np1 -i ../systemd-239-glibc_statx_fix-1.patch
+sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 
-mkdir -pv build
-cd        build
-LANG=en_US.UTF-8                   \
+mkdir -p build
+cd       build
+
+LANG=$LOCALE                       \
 meson --prefix=/usr                \
       --sysconfdir=/etc            \
       --localstatedir=/var         \
@@ -67,8 +71,8 @@ meson --prefix=/usr                \
       -Dumount-path=/bin/umount    \
       -Db_lto=false                \
       ..
-LANG=en_US.UTF-8 ninja
-LANG=en_US.UTF-8 ninja install
+LANG=$LOCALE ninja
+LANG=$LOCALE ninja install
 rm -rfv /usr/lib/rpm
 rm -f /usr/bin/xsltproc
 

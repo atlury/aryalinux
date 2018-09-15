@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="044-glibc.sh"
-TARBALL="glibc-2.27.tar.xz"
+TARBALL="glibc-2.28.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../glibc-2.27-fhs-1.patch
+patch -Np1 -i ../glibc-2.28-fhs-1.patch
 ln -sfv /tools/lib/gcc /usr/lib
 case $(uname -m) in
     i?86)    GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/8.1.0/include

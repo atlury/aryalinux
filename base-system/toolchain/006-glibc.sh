@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="006-glibc.sh"
-TARBALL="glibc-2.27.tar.xz"
+TARBALL="glibc-2.28.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

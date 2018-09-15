@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="059-attr.sh"
-TARBALL="attr-2.4.47.src.tar.gz"
+STEPNAME="060-attr.sh"
+TARBALL="attr-2.4.48.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,14 +29,16 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
-sed -i -e "/SUBDIRS/s|man[25]||g" man/Makefile
-sed -i 's:{(:\\{(:' test/run
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr \
-            --disable-static
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
+./configure --prefix=/usr     \
+            --disable-static  \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/attr-2.4.48
 make
-make install install-dev install-lib
-chmod -v 755 /usr/lib/libattr.so
+make install
 mv -v /usr/lib/libattr.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so
 

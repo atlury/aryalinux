@@ -44,23 +44,9 @@ LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
 
-tar xf ../aufs-4.17.tar.gz
-for p in ../aufs*patch; do
-	patch -Np1 -i $p
-done
-
 make mrproper
 
-if [ `uname -m` != "x86_64" ]
-then
-	cp ../config-32 ./.config
-else
-	cp ../config-64 ./.config
-fi
-
-export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+cp ../config-64 ./.config
 
 make "-j`nproc`"
 make modules_install

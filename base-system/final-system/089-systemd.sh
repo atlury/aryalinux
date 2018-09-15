@@ -29,6 +29,10 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
 ln -sf /tools/bin/true /usr/bin/xsltproc
 
 ln -svf /tools/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/
@@ -38,18 +42,12 @@ ln -svf /tools/bin/env /usr/bin/
 ln -svf /tools/lib/libblkid.so.1 /usr/lib/
 ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
-export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-
 tar -xf ../systemd-man-pages-239.tar.xz
 sed '166,$ d' -i src/resolve/meson.build
 patch -Np1 -i ../systemd-239-glibc_statx_fix-1.patch
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
-
 mkdir -p build
 cd       build
-
 LANG=$LOCALE                       \
 meson --prefix=/usr                \
       --sysconfdir=/etc            \
@@ -75,7 +73,6 @@ LANG=$LOCALE ninja
 LANG=$LOCALE ninja install
 rm -rfv /usr/lib/rpm
 rm -f /usr/bin/xsltproc
-
 rm -f /usr/lib/pkgconfig/mount.pc
 rm -f /usr/lib/pkgconfig/blkid.pc
 rm -f /usr/lib/pkgconfig/uuid.pc

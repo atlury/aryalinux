@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="062-sed.sh"
-TARBALL="sed-4.5.tar.xz"
+STEPNAME="062-libcap.sh"
+TARBALL="libcap-2.25.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,14 +29,16 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i 's/usr/tools/'                 build-aux/help2man
-sed -i 's/testsuite.panic-tests.sh//' Makefile.in
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr --bindir=/bin
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
+sed -i '/install.*STALIBNAME/d' libcap/Makefile
 make
-make html
-make install
-install -d -m755           /usr/share/doc/sed-4.5
-install -m644 doc/sed.html /usr/share/doc/sed-4.5
+make RAISE_SETFCAP=no lib=lib prefix=/usr install
+chmod -v 755 /usr/lib/libcap.so
+mv -v /usr/lib/libcap.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so
 
 
 cd $SOURCE_DIR

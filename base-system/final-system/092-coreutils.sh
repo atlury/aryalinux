@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="092-coreutils.sh"
-TARBALL="coreutils-8.29.tar.xz"
+TARBALL="coreutils-8.30.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -31,8 +31,9 @@ fi
 
 export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" 
-patch -Np1 -i ../coreutils-8.29-i18n-1.patch
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
+patch -Np1 -i ../coreutils-8.30-i18n-1.patch
 sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk
 autoreconf -fiv
 FORCE_UNSAFE_CONFIGURE=1 ./configure \

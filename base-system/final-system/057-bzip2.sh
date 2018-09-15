@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="085-openssl.sh"
-TARBALL="openssl-1.1.0i.tar.gz"
+STEPNAME="057-bzip2.sh"
+TARBALL="bzip2-1.0.6.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -33,16 +33,19 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
-./config --prefix=/usr         \
-         --openssldir=/etc/ssl \
-         --libdir=lib          \
-         shared                \
-         zlib-dynamic
+patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+make -f Makefile-libbz2_so
+make clean
 make
-sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
-make MANSUFFIX=ssl install
-mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.0i
-cp -vfr doc/* /usr/share/doc/openssl-1.1.0i
+make PREFIX=/usr install
+cp -v bzip2-shared /bin/bzip2
+cp -av libbz2.so* /lib
+ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
+rm -v /usr/bin/{bunzip2,bzcat,bzip2}
+ln -sv bzip2 /bin/bunzip2
+ln -sv bzip2 /bin/bzcat
 
 
 cd $SOURCE_DIR

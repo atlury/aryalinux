@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="083-libelf.sh"
-TARBALL="elfutils-0.170.tar.bz2"
+STEPNAME="063-sed.sh"
+TARBALL="sed-4.5.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,15 +29,18 @@ then
 	cd $DIRECTORY
 fi
 
-sed -e '/ALIGN_PRSTATUS)/{ 
-        s/__attribute/attribute_packed &/
-        s/packed, //}' \
-    -i backends/linux-core-note.c
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL -Wno-format-truncation" ./configure --prefix=/usr
+sed -i 's/usr/tools/'                 build-aux/help2man
+sed -i 's/testsuite.panic-tests.sh//' Makefile.in
+./configure --prefix=/usr --bindir=/bin
 make
-make -C libelf install
-install -vm644 config/libelf.pc /usr/lib/pkgconfig
+make html
+make install
+install -d -m755           /usr/share/doc/sed-4.5
+install -m644 doc/sed.html /usr/share/doc/sed-4.5
 
 
 cd $SOURCE_DIR

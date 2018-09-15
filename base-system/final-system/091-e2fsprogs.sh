@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="091-e2fsprogs.sh"
-TARBALL="e2fsprogs-1.44.2.tar.gz"
+TARBALL="e2fsprogs-1.44.4.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,11 +29,13 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
 mkdir -v build
 cd build
-LIBS=-L/tools/lib                    \
-PKG_CONFIG_PATH=/tools/lib/pkgconfig \
-CFLAGS="-I/tools/include -march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ../configure --prefix=/usr           \
+../configure --prefix=/usr           \
              --bindir=/bin           \
              --with-root-prefix=""   \
              --enable-elf-shlibs     \

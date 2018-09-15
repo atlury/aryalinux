@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="106-dbus.sh"
-TARBALL="dbus-1.12.8.tar.gz"
+TARBALL="dbus-1.12.10.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,13 +29,17 @@ then
 	cd $DIRECTORY
 fi
 
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr                       \
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
+./configure --prefix=/usr                       \
               --sysconfdir=/etc                   \
               --localstatedir=/var                \
               --disable-static                    \
               --disable-doxygen-docs              \
               --disable-xml-docs                  \
-              --docdir=/usr/share/doc/dbus-1.12.8 \
+              --docdir=/usr/share/doc/dbus-1.12.10 \
               --with-console-auth-dir=/run/console
 make
 make install

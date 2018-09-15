@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="107-util-linux.sh"
-TARBALL="util-linux-2.32.tar.xz"
+TARBALL="util-linux-2.32.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,10 +29,14 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
 mkdir -pv /var/lib/hwclock
 rm -vf /usr/include/{blkid,libmount,uuid}
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-            --docdir=/usr/share/doc/util-linux-2.32 \
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --docdir=/usr/share/doc/util-linux-2.32.1 \
             --disable-chfn-chsh  \
             --disable-login      \
             --disable-nologin    \

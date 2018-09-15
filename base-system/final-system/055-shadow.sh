@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="056-bzip2.sh"
-TARBALL="bzip2-1.0.6.tar.gz"
+STEPNAME="055-shadow.sh"
+TARBALL="shadow-4.6.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -33,19 +33,21 @@ export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
-patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch
-sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
-sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-make -f Makefile-libbz2_so
-make clean
+sed -i 's/groups$(EXEEXT) //' src/Makefile.in
+find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
+find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
+find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
+sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
+       -e 's@/var/spool/mail@/var/mail@' etc/login.defs
+sed -i 's@DICTPATH.*@DICTPATH\t/lib/cracklib/pw_dict@' etc/login.defs
+sed -i 's/1000/999/' etc/useradd
+./configure --sysconfdir=/etc --with-group-name-max-length=32
 make
-make PREFIX=/usr install
-cp -v bzip2-shared /bin/bzip2
-cp -av libbz2.so* /lib
-ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
-rm -v /usr/bin/{bunzip2,bzcat,bzip2}
-ln -sv bzip2 /bin/bunzip2
-ln -sv bzip2 /bin/bzcat
+make install
+mv -v /usr/bin/passwd /bin
+pwconv
+grpconv
+sed -i 's/yes/no/' /etc/default/useradd
 
 
 cd $SOURCE_DIR

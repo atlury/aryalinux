@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="101-iproute2.sh"
-TARBALL="iproute2-4.17.0.tar.xz"
+TARBALL="iproute2-4.18.0.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,11 +29,15 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
 sed -i /ARPD/d Makefile
 rm -fv man/man8/arpd.8
 sed -i 's/.m_ipt.o//' tc/Makefile
 make
-make DOCDIR=/usr/share/doc/iproute2-4.17.0 install
+make DOCDIR=/usr/share/doc/iproute2-4.18.0 install
 
 
 cd $SOURCE_DIR

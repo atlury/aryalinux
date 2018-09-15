@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="055-gcc.sh"
-TARBALL="gcc-8.1.0.tar.xz"
+STEPNAME="056-gcc.sh"
+TARBALL="gcc-8.2.0.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,6 +29,10 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
 case $(uname -m) in
   x86_64)
     sed -e '/m64=/s/lib64/lib/' \
@@ -39,18 +43,20 @@ rm -f /usr/lib/gcc
 mkdir -v build
 cd       build
 SED=sed                               \
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ../configure --prefix=/usr            \
+../configure --prefix=/usr            \
              --enable-languages=c,c++ \
              --disable-multilib       \
              --disable-bootstrap      \
+             --disable-libmpx         \
              --with-system-zlib
 make
 ulimit -s 32768
+rm ../gcc/testsuite/g++.dg/pr83239.C
 make install
 ln -sv ../usr/bin/cpp /lib
 ln -sv gcc /usr/bin/cc
 install -v -dm755 /usr/lib/bfd-plugins
-ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/8.1.0/liblto_plugin.so \
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/8.2.0/liblto_plugin.so \
         /usr/lib/bfd-plugins/
 echo 'int main(){}' > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log

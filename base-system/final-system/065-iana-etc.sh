@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="065-iana-etc.sh"
-TARBALL="iana-etc-2.30.tar.gz"
+TARBALL="iana-etc-2.30.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="058-ncurses.sh"
+STEPNAME="059-ncurses.sh"
 TARBALL="ncurses-6.1.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
@@ -29,8 +29,12 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
 sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr           \
+./configure --prefix=/usr           \
             --mandir=/usr/share/man \
             --with-shared           \
             --without-debug         \
@@ -52,7 +56,7 @@ ln -sfv libncurses.so      /usr/lib/libcurses.so
 mkdir -v       /usr/share/doc/ncurses-6.1
 cp -v -R doc/* /usr/share/doc/ncurses-6.1
 make distclean
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr    \
+./configure --prefix=/usr    \
             --with-shared    \
             --without-normal \
             --without-debug  \

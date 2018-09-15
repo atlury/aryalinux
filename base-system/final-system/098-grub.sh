@@ -18,8 +18,8 @@ cd $SOURCE_DIR
 
 # Installation of pciutils
 
-tar xf pciutils-3.6.2.tar.xz
-cd pciutils-3.6.2
+tar xf pciutils-3.5.5.tar.xz
+cd pciutils-3.5.5
 
 make PREFIX=/usr                \
      SHAREDIR=/usr/share/hwdata \
@@ -32,23 +32,23 @@ make PREFIX=/usr                \
 chmod -v 755 /usr/lib/libpci.so
 
 cd $SOURCE_DIR
-rm -rf pciutils-3.6.2
+rm -rf pciutils-3.5.5
 
 # Installation of freetype2
 
-tar xf freetype-2.9.1.tar.bz2
-cd freetype-2.9.1
+tar xf freetype-2.9.tar.bz2
+cd freetype-2.9
 sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
 
 sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
     -i include/freetype/config/ftoption.h  &&
 
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr --disable-static &&
+./configure --prefix=/usr --disable-static &&
 make
 make install
 
 cd $SOURCE_DIR
-rm -rf freetype-2.9.1
+rm -rf freetype-2.9
 
 if [ "$TARBALL" != "" ]
 then
@@ -57,13 +57,12 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../grub-2.02-gcc.patch
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
 if [ `uname -m` == "x86_64" ]
 then
 
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr      \
+./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
 	--sysconfdir=/etc      \
@@ -79,7 +78,7 @@ make clean
 
 fi
 
-CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr      \
+./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
 	--sysconfdir=/etc      \

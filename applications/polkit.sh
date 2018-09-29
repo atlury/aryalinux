@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to communicate with privileged processes."
+DESCRIPTION="br3ak Polkit is a toolkit for definingbr3ak and handling authorizations. It is used for allowing unprivilegedbr3ak processes to communicate with privileged processes.br3ak"
 SECTION="postlfs"
 VERSION=0.114
 NAME="polkit"

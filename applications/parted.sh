@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Parted package is a disk partitioning and partition resizing tool."
+DESCRIPTION="br3ak The Parted package is a diskbr3ak partitioning and partition resizing tool.br3ak"
 SECTION="postlfs"
 VERSION=3.2
 NAME="parted"
@@ -43,6 +43,7 @@ whoami > /tmp/currentuser
 patch -Np1 -i ../parted-3.2-devmapper-1.patch
 
 
+sed -i '/utsname.h/a#include <sys/sysmacros.h>' libparted/arch/linux.c &&
 ./configure --prefix=/usr --disable-static &&
 make &&
 make -C doc html                                       &&

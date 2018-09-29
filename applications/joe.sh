@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" JOE (Joe's own editor) is a small text editor capable of emulating WordStar, Pico, and Emacs."
+DESCRIPTION="br3ak JOE (Joe's own editor) is a smallbr3ak text editor capable of emulating WordStar, Pico, and Emacs.br3ak"
 SECTION="postlfs"
 VERSION=4.6
 NAME="joe"

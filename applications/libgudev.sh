@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libgudev package contains GObject bindings for libudev."
+DESCRIPTION="br3ak The libgudev package containsbr3ak GObject bindings for libudev.br3ak"
 SECTION="general"
 VERSION=232
 NAME="libgudev"

@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The International Components for Unicode (ICU) package is a mature, widely used set of C/C++ libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms."
+DESCRIPTION="br3ak The International Components forbr3ak Unicode (ICU) package is a mature, widely used set of C/C++br3ak libraries providing Unicode and Globalization support for softwarebr3ak applications. ICU is widelybr3ak portable and gives applications the same results on all platforms.br3ak"
 SECTION="general"
-VERSION=61_1
+VERSION=62_1
 NAME="icu"
 
 #OPT:llvm
@@ -18,11 +18,11 @@ NAME="icu"
 
 cd $SOURCE_DIR
 
-URL=http://download.icu-project.org/files/icu4c/61.1/icu4c-61_1-src.tgz
+URL=http://download.icu-project.org/files/icu4c/62.1/icu4c-62_1-src.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc http://download.icu-project.org/files/icu4c/61.1/icu4c-61_1-src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icu/icu4c-61_1-src.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/icu/icu4c-61_1-src.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icu/icu4c-61_1-src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icu/icu4c-61_1-src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icu/icu4c-61_1-src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icu/icu4c-61_1-src.tgz
+wget -nc http://download.icu-project.org/files/icu4c/62.1/icu4c-62_1-src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icu/icu4c-62_1-src.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/icu/icu4c-62_1-src.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icu/icu4c-62_1-src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icu/icu4c-62_1-src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icu/icu4c-62_1-src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icu/icu4c-62_1-src.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

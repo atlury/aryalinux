@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libxslt package contains XSLT libraries used for extending <code class=\"filename\">libxml2 libraries to support XSLT files."
+DESCRIPTION="br3ak The libxslt package contains XSLTbr3ak libraries used for extending <code class=\"filename\">libxml2br3ak libraries to support XSLT files.br3ak"
 SECTION="general"
 VERSION=1.1.32
 NAME="libxslt"

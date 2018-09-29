@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Doxygen package contains a documentation system for C++, C, Java, Objective-C, Corba IDL and to some extent PHP, C# and D. It is useful for generating HTML documentation and/or an off-line reference manual from a set of documented source files. There is also support for generating output in RTF, PostScript, hyperlinked PDF, compressed HTML, and Unix man pages. The documentation is extracted directly from the sources, which makes it much easier to keep the documentation consistent with the source code."
+DESCRIPTION="br3ak The Doxygen package contains abr3ak documentation system for C++, C, Java, Objective-C, Corba IDL andbr3ak to some extent PHP, C# and D. It is useful for generating HTMLbr3ak documentation and/or an off-line reference manual from a set ofbr3ak documented source files. There is also support for generatingbr3ak output in RTF, PostScript, hyperlinked PDF, compressed HTML, andbr3ak Unix man pages. The documentation is extracted directly from thebr3ak sources, which makes it much easier to keep the documentationbr3ak consistent with the source code.br3ak"
 SECTION="general"
 VERSION=1.8.14
 NAME="doxygen"

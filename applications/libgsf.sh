@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libgsf package contains a library used for providing an extensible input/output abstraction layer for structured file formats."
+DESCRIPTION="br3ak The libgsf package contains abr3ak library used for providing an extensible input/output abstractionbr3ak layer for structured file formats.br3ak"
 SECTION="general"
 VERSION=1.14.44
 NAME="libgsf"
@@ -21,11 +21,11 @@ NAME="libgsf"
 
 cd $SOURCE_DIR
 
-URL=https://download.gnome.org/core/3.29/3.29.92/sources/libgsf-1.14.44.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.44.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
+wget -nc http://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.44.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgsf/libgsf-1.14.44.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libgsf/libgsf-1.14.44.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgsf/libgsf-1.14.44.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgsf/libgsf-1.14.44.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgsf/libgsf-1.14.44.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgsf/libgsf-1.14.44.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.44.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -42,7 +42,17 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
-sudo make install
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make install
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
 
 
 

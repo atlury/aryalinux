@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Telepathy GLib contains a library used by GLib based Telepathy components. Telepathy is a D-Bus framework for unifying real time communication, including instant messaging, voice calls and video calls. It abstracts differences between protocols to provide a unified interface for applications."
+DESCRIPTION="br3ak The Telepathy GLib contains abr3ak library used by GLib basedbr3ak Telepathy components. Telepathy isbr3ak a D-Bus framework for unifyingbr3ak real time communication, including instant messaging, voice callsbr3ak and video calls. It abstracts differences between protocols tobr3ak provide a unified interface for applications.br3ak"
 SECTION="general"
 VERSION=0.24.1
 NAME="telepathy-glib"

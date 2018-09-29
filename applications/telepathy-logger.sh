@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Telepathy Logger package is a headless observer client that logs information received by the Telepathy framework. It features pluggable backends to log different sorts of messages in different formats."
+DESCRIPTION="br3ak The Telepathy Logger package is abr3ak headless observer client that logs information received by thebr3ak Telepathy framework. It featuresbr3ak pluggable backends to log different sorts of messages in differentbr3ak formats.br3ak"
 SECTION="general"
 VERSION=0.8.2
 NAME="telepathy-logger"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The librep package contains a Lisp system. This is useful for scripting or for applications that may use the Lisp interpreter as an extension language."
+DESCRIPTION="br3ak The librep package contains a Lispbr3ak system. This is useful for scripting or for applications that maybr3ak use the Lisp interpreter as an extension language.br3ak"
 SECTION="general"
 VERSION=0.92.7
 NAME="librep"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" JS is Mozilla's JavaScript engine written in C. This package is present for GJS."
+DESCRIPTION="br3ak JS is Mozilla's JavaScript enginebr3ak written in C. This package is present for GJS and polkit.br3ak"
 SECTION="general"
 VERSION=1
 NAME="js52"

@@ -7,14 +7,14 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The GPGME package is a C library that allows cryptography support to be added to a program. It is designed to make access to public key crypto engines like GnuPG or GpgSM easier for applications. GPGME provides a high-level crypto API for encryption, decryption, signing, signature verification and key management."
+DESCRIPTION="br3ak The GPGME package is a C librarybr3ak that allows cryptography support to be added to a program. It isbr3ak designed to make access to public key crypto engines likebr3ak GnuPG or GpgSM easier forbr3ak applications. GPGME provides abr3ak high-level crypto API for encryption, decryption, signing,br3ak signature verification and key management.br3ak"
 SECTION="postlfs"
 VERSION=1.11.1
 NAME="gpgme"
 
 #REQ:libassuan
 #OPT:doxygen
-#REQ:gnupg
+#OPT:gnupg
 #OPT:clisp
 #OPT:python2
 #OPT:qt5
@@ -42,8 +42,8 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --disable-gpg-test --disable-gpgconf-test --disable-gpgsm-test --disable-g13-test &&
-make
+./configure --prefix=/usr --disable-gpg-test &&
+make "-j`nproc`" || make
 
 
 

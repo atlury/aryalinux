@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Libssh2 package is a client-side C library implementing the SSH2 protocol."
+DESCRIPTION="br3ak Libssh2 package is a client-side Cbr3ak library implementing the SSH2 protocol.br3ak"
 SECTION="general"
 VERSION=1.8.0
 NAME="libssh2"
@@ -22,7 +22,7 @@ URL=https://www.libssh2.org/download/libssh2-1.8.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.libssh2.org/download/libssh2-1.8.0.tar.gz
+wget -nc https://www.libssh2.org/download/libssh2-1.8.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libssh2/libssh2-1.8.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libssh2/libssh2-1.8.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libssh2/libssh2-1.8.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libssh2/libssh2-1.8.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libssh2/libssh2-1.8.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libssh2/libssh2-1.8.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

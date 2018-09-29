@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" MIT Kerberos V5 is a free implementation of Kerberos 5. Kerberos is a network authentication protocol. It centralizes the authentication database and uses kerberized applications to work with servers or services that support Kerberos allowing single logins and encrypted communication over internal networks or the Internet."
+DESCRIPTION="br3ak MIT Kerberos V5 is a freebr3ak implementation of Kerberos 5. Kerberos is a network authenticationbr3ak protocol. It centralizes the authentication database and usesbr3ak kerberized applications to work with servers or services thatbr3ak support Kerberos allowing single logins and encrypted communicationbr3ak over internal networks or the Internet.br3ak"
 SECTION="postlfs"
 VERSION=1.16.1
 NAME="mitkrb"
@@ -23,11 +23,11 @@ NAME="mitkrb"
 
 cd $SOURCE_DIR
 
-URL=https://web.mit.edu/kerberos/dist/krb5/1.16/krb5-1.16.1.tar.gz
+URL=https://kerberos.org/dist/krb5/1.16/krb5-1.16.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://web.mit.edu/kerberos/dist/krb5/1.16/krb5-1.16.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz
+wget -nc https://kerberos.org/dist/krb5/1.16/krb5-1.16.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.16.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

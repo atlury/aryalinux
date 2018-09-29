@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libdaemon package is a lightweight C library that eases the writing of UNIX daemons."
+DESCRIPTION="br3ak The libdaemon package is abr3ak lightweight C library that eases the writing of UNIX daemons.br3ak"
 SECTION="general"
 VERSION=0.14
 NAME="libdaemon"

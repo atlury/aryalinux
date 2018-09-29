@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" GNU Clisp is a Common Lisp implementation which includes an interpreter, compiler, debugger, and many extensions."
+DESCRIPTION="br3ak GNU Clisp is a Common Lispbr3ak implementation which includes an interpreter, compiler, debugger,br3ak and many extensions.br3ak"
 SECTION="general"
 VERSION=2.49
 NAME="clisp"

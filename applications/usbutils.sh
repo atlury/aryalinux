@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The USB Utils package contains utilities used to display information about USB buses in the system and the devices connected to them."
+DESCRIPTION="br3ak The USB Utils package containsbr3ak utilities used to display information about USB buses in the systembr3ak and the devices connected to them.br3ak"
 SECTION="general"
 VERSION=010
 NAME="usbutils"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The mdadm package contains administration tools for software RAID."
+DESCRIPTION="br3ak The mdadm package containsbr3ak administration tools for software RAID.br3ak"
 SECTION="postlfs"
 VERSION=4.0
 NAME="mdadm"

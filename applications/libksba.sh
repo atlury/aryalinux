@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Libksba package contains a library used to make X.509 certificates as well as making the CMS (Cryptographic Message Syntax) easily accessible by other applications. Both specifications are building blocks of S/MIME and TLS. The library does not rely on another cryptographic library but provides hooks for easy integration with Libgcrypt."
+DESCRIPTION="br3ak The Libksba package contains abr3ak library used to make X.509 certificates as well as making the CMSbr3ak (Cryptographic Message Syntax) easily accessible by otherbr3ak applications. Both specifications are building blocks of S/MIME andbr3ak TLS. The library does not rely on another cryptographic library butbr3ak provides hooks for easy integration with Libgcrypt.br3ak"
 SECTION="general"
 VERSION=1.3.5
 NAME="libksba"

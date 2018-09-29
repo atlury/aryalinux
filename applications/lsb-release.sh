@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The lsb_release script gives information about the Linux Standards Base (LSB) status of the distribution."
+DESCRIPTION="br3ak The lsb_release script givesbr3ak information about the Linux Standards Base (LSB) status of thebr3ak distribution.br3ak"
 SECTION="postlfs"
 VERSION=1.4
 NAME="lsb-release"

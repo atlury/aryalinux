@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Potrace™ is a tool for transforming a bitmap (PBM, PGM, PPM, or BMP format) into one of several vector file formats."
+DESCRIPTION="br3ak Potrace™ is a tool forbr3ak transforming a bitmap (PBM, PGM, PPM, or BMP format) into one ofbr3ak several vector file formats.br3ak"
 SECTION="general"
 VERSION=1.15
 NAME="potrace"

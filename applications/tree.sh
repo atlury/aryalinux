@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The tree application, as the name suggests, is useful to display, in a terminal, directory contents, including directories, files, links."
+DESCRIPTION="br3ak The tree application, as the namebr3ak suggests, is useful to display, in a terminal, directory contents,br3ak including directories, files, links.br3ak"
 SECTION="general"
 VERSION=1.7.0
 NAME="tree"

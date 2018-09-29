@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Sharutils package contains utilities that can create 'shell' archives."
+DESCRIPTION="br3ak The Sharutils package containsbr3ak utilities that can create 'shell' archives.br3ak"
 SECTION="general"
 VERSION=4.15.2
 NAME="sharutils"
@@ -35,6 +35,8 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c        &&
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h &&
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
 

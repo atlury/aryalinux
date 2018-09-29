@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The reiserfsprogs package contains various utilities for use with the Reiser file system."
+DESCRIPTION="br3ak The reiserfsprogs package containsbr3ak various utilities for use with the Reiser file system.br3ak"
 SECTION="postlfs"
 VERSION=3.6.27
 NAME="reiserfs"
@@ -35,6 +35,7 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -i '/parse_time.h/i #define _GNU_SOURCE' lib/parse_time.c &&
 autoreconf -fiv             &&
 ./configure --prefix=/usr   \
             --sbindir=/sbin &&

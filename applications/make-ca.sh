@@ -7,24 +7,24 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Public Key Infrastructure (PKI) is a method to validate the authenticity of an otherwise unknown entity across untrusted networks. PKI works by establishing a chain of trust, rather than trusting each individual host or entity explicitly. In order for a certificate presented by a remote entity to be trusted, that certificate must present a complete chain of certificates that can be validated using the root certificate of a Certificate Authority (CA) that is trusted by the local machine."
+DESCRIPTION="br3ak Public Key Infrastructure (PKI) is a method to validate thebr3ak authenticity of an otherwise unknown entity across untrustedbr3ak networks. PKI works by establishing a chain of trust, rather thanbr3ak trusting each individual host or entity explicitly. In order for abr3ak certificate presented by a remote entity to be trusted, thatbr3ak certificate must present a complete chain of certificates that canbr3ak be validated using the root certificate of a Certificate Authoritybr3ak (CA) that is trusted by the local machine.br3ak"
 SECTION="postlfs"
-VERSION=0.8
+VERSION=0.9
 NAME="make-ca"
 
+#REC:p11-kit
 #OPT:java
 #OPT:openjdk
 #OPT:nss
-#OPT:p11-kit
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/djlucas/make-ca/archive/v0.8/make-ca-0.8.tar.gz
+URL=https://github.com/djlucas/make-ca/archive/v0.9/make-ca-0.9.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/djlucas/make-ca/archive/v0.8/make-ca-0.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/make-ca/make-ca-0.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/make-ca/make-ca-0.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/make-ca/make-ca-0.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/make-ca/make-ca-0.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/make-ca/make-ca-0.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/make-ca/make-ca-0.8.tar.gz
+wget -nc https://github.com/djlucas/make-ca/archive/v0.9/make-ca-0.9.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/make-ca/make-ca-0.9.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/make-ca/make-ca-0.9.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/make-ca/make-ca-0.9.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/make-ca/make-ca-0.9.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/make-ca/make-ca-0.9.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/make-ca/make-ca-0.9.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

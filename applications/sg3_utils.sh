@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The sg3_utils package contains low level utilities for devices that use a SCSI command set. Apart from SCSI parallel interface (SPI) devices, the SCSI command set is used by ATAPI devices (CD/DVDs and tapes), USB mass storage devices, Fibre Channel disks, IEEE 1394 storage devices (that use the \"SBP\" protocol), SAS, iSCSI and FCoE devices (amongst others)."
+DESCRIPTION="br3ak The sg3_utils package contains lowbr3ak level utilities for devices that use a SCSI command set. Apart frombr3ak SCSI parallel interface (SPI) devices, the SCSI command set is usedbr3ak by ATAPI devices (CD/DVDs and tapes), USB mass storage devices,br3ak Fibre Channel disks, IEEE 1394 storage devices (that use the \"SBP\"br3ak protocol), SAS, iSCSI and FCoE devices (amongst others).br3ak"
 SECTION="general"
 VERSION=1.42
 NAME="sg3_utils"
@@ -21,6 +21,7 @@ URL=http://sg.danny.cz/sg/p/sg3_utils-1.42.tar.xz
 if [ ! -z $URL ]
 then
 wget -nc http://sg.danny.cz/sg/p/sg3_utils-1.42.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sg3_utils/sg3_utils-1.42.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sg3_utils/sg3_utils-1.42.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sg3_utils/sg3_utils-1.42.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sg3_utils/sg3_utils-1.42.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sg3_utils/sg3_utils-1.42.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sg3_utils/sg3_utils-1.42.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/sg3_utils-1.42-glibc_2.28-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/sg3_utils/sg3_utils-1.42-glibc_2.28-fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -35,6 +36,7 @@ fi
 
 whoami > /tmp/currentuser
 
+patch -Np1 -i ../sg3_utils-1.42-glibc_2.28-fixes-1.patch &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
 

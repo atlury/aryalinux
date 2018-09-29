@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The UPower package provides an interface to enumerating power devices, listening to device events and querying history and statistics. Any application or service on the system can access the org.freedesktop.UPower service via the system message bus."
+DESCRIPTION="br3ak The UPower package provides anbr3ak interface to enumerating power devices, listening to device eventsbr3ak and querying history and statistics. Any application or service onbr3ak the system can access the org.freedesktop.UPower service via thebr3ak system message bus.br3ak"
 SECTION="general"
 VERSION=0.99.7
 NAME="upower"

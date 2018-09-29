@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libxml2 package contains libraries and utilities used for parsing XML files."
+DESCRIPTION="br3ak The libxml2 package containsbr3ak libraries and utilities used for parsing XML files.br3ak"
 SECTION="general"
 VERSION=2.9.8
 NAME="libxml2"
@@ -54,6 +54,10 @@ make "-j`nproc`" || make
 
 
 tar xf ../xmlts20130923.tar.gz
+
+
+systemctl stop httpd.service
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"

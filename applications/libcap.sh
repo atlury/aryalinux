@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libcap package was installed in LFS, but if Linux-PAM support is desired, the PAM module must be built (after installation of Linux-PAM)."
+DESCRIPTION="br3ak The libcap package was installedbr3ak in LFS, but if Linux-PAM supportbr3ak is desired, the PAM module must be built (after installation ofbr3ak Linux-PAM).br3ak"
 SECTION="postlfs"
 VERSION=2.25
 NAME="libcap"

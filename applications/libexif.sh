@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libexif package contains a library for parsing, editing, and saving EXIF data. Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. All EXIF tags described in EXIF standard 2.1 are supported."
+DESCRIPTION="br3ak The libexif package contains abr3ak library for parsing, editing, and saving EXIF data. Most digitalbr3ak cameras produce EXIF files, which are JPEG files with extra tagsbr3ak that contain information about the image. All EXIF tags describedbr3ak in EXIF standard 2.1 are supported.br3ak"
 SECTION="general"
 VERSION=0.6.21
 NAME="libexif"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The mypaint-brushes package contains brushes used by packages which use libmypaint."
+DESCRIPTION="br3ak The mypaint-brushes packagebr3ak contains brushes used by packages which use libmypaint.br3ak"
 SECTION="general"
 VERSION=1.3.0
 NAME="mypaint-brushes"

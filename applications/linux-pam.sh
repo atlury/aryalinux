@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Linux PAM package contains Pluggable Authentication Modules used to enable the local system administrator to choose how applications authenticate users."
+DESCRIPTION="br3ak The Linux PAM package containsbr3ak Pluggable Authentication Modules used to enable the local systembr3ak administrator to choose how applications authenticate users.br3ak"
 SECTION="postlfs"
 VERSION=1.3.0
 NAME="linux-pam"

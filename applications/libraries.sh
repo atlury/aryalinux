@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The original libraries were simply an archive of routines from which the required routines were extracted and linked into the executable program. These are described as static libraries (libfoo.a). On some old operating systems they are the only type available."
+DESCRIPTION="br3ak The original libraries were simply an archive of routines frombr3ak which the required routines were extracted and linked into thebr3ak executable program. These are described as static librariesbr3ak (libfoo.a). On some old operating systems they are the only typebr3ak available.br3ak"
 SECTION="introduction"
 NAME="libraries"
 

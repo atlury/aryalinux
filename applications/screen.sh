@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Screen is a terminal multiplexor that runs several separate processes, typically interactive shells, on a single physical character-based terminal. Each virtual terminal emulates a DEC VT100 plus several ANSI X3.64 and ISO 2022 functions and also provides configurable input and output translation, serial port support, configurable logging, multi-user support, and many character encodings, including UTF-8. Screen sessions can be detached and resumed later on a different terminal."
+DESCRIPTION="br3ak Screen is a terminal multiplexorbr3ak that runs several separate processes, typically interactive shells,br3ak on a single physical character-based terminal. Each virtualbr3ak terminal emulates a DEC VT100 plus several ANSI X3.64 and ISO 2022br3ak functions and also provides configurable input and outputbr3ak translation, serial port support, configurable logging, multi-userbr3ak support, and many character encodings, including UTF-8. Screenbr3ak sessions can be detached and resumed later on a different terminal.br3ak"
 SECTION="general"
 VERSION=4.6.2
 NAME="screen"

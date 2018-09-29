@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The cups-pk-helper package contains a PolicyKit helper used to configure Cups with fine-grained privileges."
+DESCRIPTION="br3ak The cups-pk-helper packagebr3ak contains a PolicyKit helper usedbr3ak to configure Cups withbr3ak fine-grained privileges.br3ak"
 SECTION="general"
 VERSION=0.2.6
 NAME="cups-pk-helper"

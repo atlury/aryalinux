@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The cpio package contains tools for archiving."
+DESCRIPTION="br3ak The cpio package contains toolsbr3ak for archiving.br3ak"
 SECTION="general"
 VERSION=2.12
 NAME="cpio"

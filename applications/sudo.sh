@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Sudo package allows a system administrator to give certain users (or groups of users) the ability to run some (or all) commands as <code class=\"systemitem\">root or another user while logging the commands and arguments."
+DESCRIPTION="br3ak The Sudo package allows a systembr3ak administrator to give certain users (or groups of users) thebr3ak ability to run some (or all) commands as <code class=\"systemitem\">root or another user while logging the commandsbr3ak and arguments.br3ak"
 SECTION="postlfs"
-VERSION=1.8.25p1
+VERSION=1
 NAME="sudo"
 
 #OPT:linux-pam
@@ -19,11 +19,11 @@ NAME="sudo"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.ussg.iu.edu/security/sudo/sudo-1.8.25p1.tar.gz
+URL=http://www.sudo.ws/dist/sudo-1.8.25p1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
+wget -nc http://www.sudo.ws/dist/sudo-1.8.25p1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sudo/sudo-1.8.25p1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sudo/sudo-1.8.25p1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sudo/sudo-1.8.25p1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sudo/sudo-1.8.25p1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sudo/sudo-1.8.25p1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sudo/sudo-1.8.25p1.tar.gz || wget -nc ftp://ftp.sudo.ws/pub/sudo/sudo-1.8.25p1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

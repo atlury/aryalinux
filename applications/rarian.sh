@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Rarian package is a documentation metadata library based on the proposed Freedesktop.org spec. Rarian is designed to be a replacement for ScrollKeeper."
+DESCRIPTION="br3ak The Rarian package is abr3ak documentation metadata library based on the proposedbr3ak Freedesktop.org spec. Rarian isbr3ak designed to be a replacement for ScrollKeeper.br3ak"
 SECTION="general"
 VERSION=0.8.1
 NAME="rarian"

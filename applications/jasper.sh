@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The JasPer Project is an open-source initiative to provide a free software-based reference implementation of the JPEG-2000 codec."
+DESCRIPTION="br3ak The JasPer Project is anbr3ak open-source initiative to provide a free software-based referencebr3ak implementation of the JPEG-2000 codec.br3ak"
 SECTION="general"
 VERSION=2.0.14
 NAME="jasper"

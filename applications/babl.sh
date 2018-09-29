@@ -7,20 +7,20 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Babl package is a dynamic, any to any, pixel format translation library."
+DESCRIPTION="br3ak The Babl package is a dynamic, anybr3ak to any, pixel format translation library.br3ak"
 SECTION="general"
-VERSION=0.1.50
+VERSION=0.1.56
 NAME="babl"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://download.gimp.org/pub/babl/0.1/babl-0.1.50.tar.bz2
+URL=https://download.gimp.org/pub/babl/0.1/babl-0.1.56.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.gimp.org/pub/babl/0.1/babl-0.1.50.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/babl/babl-0.1.50.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/babl/babl-0.1.50.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/babl/babl-0.1.50.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/babl/babl-0.1.50.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/babl/babl-0.1.50.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/babl/babl-0.1.50.tar.bz2
+wget -nc https://download.gimp.org/pub/babl/0.1/babl-0.1.56.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/babl/babl-0.1.56.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/babl/babl-0.1.56.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/babl/babl-0.1.56.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/babl/babl-0.1.56.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/babl/babl-0.1.56.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/babl/babl-0.1.56.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

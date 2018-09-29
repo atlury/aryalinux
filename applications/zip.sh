@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Zip package contains Zip utilities. These are useful for compressing files into <code class=\"filename\">ZIP archives."
+DESCRIPTION="br3ak The Zip package containsbr3ak Zip utilities. These are usefulbr3ak for compressing files into <code class=\"filename\">ZIPbr3ak archives.br3ak"
 SECTION="general"
 VERSION=30
 NAME="zip"

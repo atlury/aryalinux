@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The hd2u package contains an any to any text format converter."
+DESCRIPTION="br3ak The hd2u package contains an anybr3ak to any text format converter.br3ak"
 SECTION="general"
 VERSION=1.0.4
 NAME="hd2u"

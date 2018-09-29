@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libgcrypt package contains a general purpose crypto library based on the code used in GnuPG. The library provides a high level interface to cryptographic building blocks using an extendable and flexible API."
+DESCRIPTION="br3ak The libgcrypt package contains abr3ak general purpose crypto library based on the code used inbr3ak GnuPG. The library provides a highbr3ak level interface to cryptographic building blocks using anbr3ak extendable and flexible API.br3ak"
 SECTION="general"
 VERSION=1.8.3
 NAME="libgcrypt"

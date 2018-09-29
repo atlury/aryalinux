@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" This is a library for handling page faults in user mode. A page fault occurs when a program tries to access to a region of memory that is currently not available. Catching and handling a page fault is a useful technique for implementing pageable virtual memory, memory-mapped access to persistent databases, generational garbage collectors, stack overflow handlers, and distributed shared memory."
+DESCRIPTION="br3ak This is a library for handling page faults in user mode. A pagebr3ak fault occurs when a program tries to access to a region of memorybr3ak that is currently not available. Catching and handling a page faultbr3ak is a useful technique for implementing pageable virtual memory,br3ak memory-mapped access to persistent databases, generational garbagebr3ak collectors, stack overflow handlers, and distributed shared memory.br3ak"
 SECTION="general"
 VERSION=2.12
 NAME="libsigsegv"

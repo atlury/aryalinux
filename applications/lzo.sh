@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" LZO is a data compression library which is suitable for data decompression and compression in real-time. This means it favors speed over compression ratio."
+DESCRIPTION="br3ak LZO is a data compression librarybr3ak which is suitable for data decompression and compression inbr3ak real-time. This means it favors speed over compression ratio.br3ak"
 SECTION="general"
 VERSION=2.10
 NAME="lzo"

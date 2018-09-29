@@ -12,9 +12,9 @@ http://ftp.gnu.org/gnu/coreutils/coreutils-8.30.tar.xz
 https://dbus.freedesktop.org/releases/dbus/dbus-1.12.10.tar.gz
 http://ftp.gnu.org/gnu/dejagnu/dejagnu-1.6.1.tar.gz
 http://ftp.gnu.org/gnu/diffutils/diffutils-3.6.tar.xz
-https://dev.gentoo.org/~blueness/eudev/eudev-3.2.5.tar.gz
+https://dev.gentoo.org/~blueness/eudev/eudev-3.2.6.tar.gz
 https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.44.4/e2fsprogs-1.44.4.tar.gz
-https://sourceware.org/ftp/elfutils/0.173/elfutils-0.173.tar.bz2
+https://sourceware.org/ftp/elfutils/0.174/elfutils-0.174.tar.bz2
 https://prdownloads.sourceforge.net/expat/expat-2.2.6.tar.bz2
 https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
 ftp://ftp.astron.com/pub/file/file-5.34.tar.gz
@@ -43,7 +43,7 @@ https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.t
 ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz
 http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.0.tar.gz
 http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz
-https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.18.8.tar.xz
+https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.18.9.tar.xz
 http://ftp.gnu.org/gnu/m4/m4-1.4.18.tar.xz
 http://ftp.gnu.org/gnu/make/make-4.2.1.tar.bz2
 http://download.savannah.gnu.org/releases/man-db/man-db-2.8.4.tar.xz
@@ -53,12 +53,12 @@ https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
 http://www.mpfr.org/mpfr-4.0.1/mpfr-4.0.1.tar.xz
 https://github.com/ninja-build/ninja/archive/v1.8.2/ninja-1.8.2.tar.gz
 http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
-https://openssl.org/source/openssl-1.1.0i.tar.gz
+https://openssl.org/source/openssl-1.1.1.tar.gz
 http://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz
 https://www.cpan.org/src/5.0/perl-5.28.0.tar.xz
 https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz
 https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
-https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.1.tar.xz
+https://sourceforge.net/projects/psmisc/files/psmisc%20devel/psmisc-23.2.tar.xz
 https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
 https://docs.python.org/ftp/python/doc/3.7.0/python-3.7.0-docs-html.tar.bz2
 http://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz

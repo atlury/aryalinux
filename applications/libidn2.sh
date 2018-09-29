@@ -7,12 +7,13 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" libidn2 is a package designed for internationalized string handling based on standards from the Internet Engineering Task Force (IETF)'s IDN working group, designed for internationalized domain names."
+DESCRIPTION="br3ak libidn2 is a package designed forbr3ak internationalized string handling based on standards from thebr3ak Internet Engineering Task Force (IETF)'s IDN working group,br3ak designed for internationalized domain names.br3ak"
 SECTION="general"
 VERSION=2.0.5
 NAME="libidn2"
 
 #REQ:libunistring
+#OPT:git
 #OPT:gtk-doc
 
 

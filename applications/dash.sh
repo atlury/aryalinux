@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Dash is a POSIX compliant shell. It can be installed as /bin/sh or as the default shell for either <code class=\"systemitem\">root or a second user with a userid of 0. It depends on fewer libraries than the Bash shell and is therefore less likely to be affected by an upgrade problem or disk failure. Dash is also useful for checking that a script is completely compatible with POSIX syntax."
+DESCRIPTION="br3ak Dash is a POSIX compliant shell.br3ak It can be installed as /bin/sh or as the default shell for eitherbr3ak <code class=\"systemitem\">root or a second user with a useridbr3ak of 0. It depends on fewer libraries than the Bash shell and is therefore less likely to bebr3ak affected by an upgrade problem or disk failure. Dash is also useful for checking that a scriptbr3ak is completely compatible with POSIX syntax.br3ak"
 SECTION="postlfs"
 VERSION=0.5.10.2
 NAME="dash"

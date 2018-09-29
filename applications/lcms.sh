@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Little CMS library is used by other programs to provide color management facilities."
+DESCRIPTION="br3ak The Little CMS library is used bybr3ak other programs to provide color management facilities.br3ak"
 SECTION="general"
 VERSION=1.19
 NAME="lcms"

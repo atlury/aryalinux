@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libgusb package contains the GObject wrappers for libusb-1.0 that makes it easy to do asynchronous control, bulk and interrupt transfers with proper cancellation and integration into a mainloop."
+DESCRIPTION="br3ak The libgusb package contains thebr3ak GObject wrappers for libusb-1.0br3ak that makes it easy to do asynchronous control, bulk and interruptbr3ak transfers with proper cancellation and integration into a mainloop.br3ak"
 SECTION="general"
 VERSION=0.3.0
 NAME="libgusb"
@@ -42,7 +42,7 @@ whoami > /tmp/currentuser
 
 mkdir build &&
 cd    build &&
-meson --prefix=/usr &&
+meson --prefix=/usr -Ddocs=false .. &&
 ninja
 
 

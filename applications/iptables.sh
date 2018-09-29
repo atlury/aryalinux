@@ -7,20 +7,20 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The next part of this chapter deals with firewalls. The principal firewall tool for Linux is Iptables. You will need to install Iptables if you intend on using any form of a firewall."
+DESCRIPTION="br3ak The next part of this chapter deals with firewalls. The principalbr3ak firewall tool for Linux is Iptables. You will need to installbr3ak Iptables if you intend on usingbr3ak any form of a firewall.br3ak"
 SECTION="postlfs"
-VERSION=1.6.2
+VERSION=1.8.0
 NAME="iptables"
 
 
 
 cd $SOURCE_DIR
 
-URL=http://www.netfilter.org/projects/iptables/files/iptables-1.6.2.tar.bz2
+URL=http://www.netfilter.org/projects/iptables/files/iptables-1.8.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.netfilter.org/projects/iptables/files/iptables-1.6.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/iptables/iptables-1.6.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/iptables/iptables-1.6.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/iptables/iptables-1.6.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/iptables/iptables-1.6.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/iptables/iptables-1.6.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/iptables/iptables-1.6.2.tar.bz2 || wget -nc ftp://ftp.netfilter.org/pub/iptables/iptables-1.6.2.tar.bz2
+wget -nc http://www.netfilter.org/projects/iptables/files/iptables-1.8.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/iptables/iptables-1.8.0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/iptables/iptables-1.8.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/iptables/iptables-1.8.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/iptables/iptables-1.8.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/iptables/iptables-1.8.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/iptables/iptables-1.8.0.tar.bz2 || wget -nc ftp://ftp.netfilter.org/pub/iptables/iptables-1.8.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -35,6 +35,10 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -i -e '/libebt_/s/^/#/' \
+       -e '/libarpt_/s/^/#/' extensions/GNUmakefile.in
+
+
 ./configure --prefix=/usr      \
             --sbindir=/sbin    \
             --disable-nftables \
@@ -46,7 +50,7 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-ln -sfv ../../sbin/xtables-multi /usr/bin/iptables-xml &&
+ln -sfv ../../sbin/xtables-legacy-multi /usr/bin/iptables-xml &&
 for file in ip4tc ip6tc ipq iptc xtables
 do
   mv -v /usr/lib/lib${file}.so.* /lib &&

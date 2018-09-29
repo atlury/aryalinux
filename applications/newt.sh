@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Newt is a programming library for color text mode, widget based user interfaces. It can be used to add stacked windows, entry widgets, checkboxes, radio buttons, labels, plain text fields, scrollbars, etc., to text mode user interfaces. Newt is based on the S-Lang library."
+DESCRIPTION="br3ak Newt is a programming library forbr3ak color text mode, widget based user interfaces. It can be used tobr3ak add stacked windows, entry widgets, checkboxes, radio buttons,br3ak labels, plain text fields, scrollbars, etc., to text mode userbr3ak interfaces. Newt is based on thebr3ak S-Lang library.br3ak"
 SECTION="general"
 VERSION=0.52.20
 NAME="newt"

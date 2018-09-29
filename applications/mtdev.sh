@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The mtdev package contains Multitouch Protocol Translation Library which is used to transform all variants of kernel MT (Multitouch) events to the slotted type B protocol."
+DESCRIPTION="br3ak The mtdev package containsbr3ak Multitouch Protocol Translation Library which is used to transformbr3ak all variants of kernel MT (Multitouch) events to the slotted type Bbr3ak protocol.br3ak"
 SECTION="general"
 VERSION=1.1.5
 NAME="mtdev"

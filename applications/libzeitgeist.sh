@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libzeitgeist package contains a client library used to access and manage the Zeitgeist event log from languages such as C and Vala. Zeitgeist is a service which logs the user's activities and events (files opened, websites visited, conversations hold with other people, etc.) and makes the relevant information available to other applications."
+DESCRIPTION="br3ak The libzeitgeist package containsbr3ak a client library used to access and manage the Zeitgeist event logbr3ak from languages such as C and Vala. Zeitgeist is a service whichbr3ak logs the user's activities and events (files opened, websitesbr3ak visited, conversations hold with other people, etc.) and makes thebr3ak relevant information available to other applications.br3ak"
 SECTION="general"
 VERSION=0.3.18
 NAME="libzeitgeist"

@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The UDisks package provides a daemon, tools and libraries to access and manipulate disks and storage devices."
+DESCRIPTION="br3ak The UDisks package provides abr3ak daemon, tools and libraries to access and manipulate disks andbr3ak storage devices.br3ak"
 SECTION="general"
-VERSION=2.7.6
+VERSION=2.8.0
 NAME="udisks2"
 
 #REQ:libatasmart
@@ -31,11 +31,11 @@ NAME="udisks2"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/storaged-project/udisks/releases/download/udisks-2.7.6/udisks-2.7.6.tar.bz2
+URL=https://github.com/storaged-project/udisks/releases/download/udisks-2.8.0/udisks-2.8.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/storaged-project/udisks/releases/download/udisks-2.7.6/udisks-2.7.6.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-2.7.6.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/udisks/udisks-2.7.6.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.7.6.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.7.6.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.7.6.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.7.6.tar.bz2
+wget -nc https://github.com/storaged-project/udisks/releases/download/udisks-2.8.0/udisks-2.8.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-2.8.0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/udisks/udisks-2.8.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.8.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.8.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.8.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.8.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Tcsh package contains “<span class=\"quote\">an enhanced but completely compatible version of the Berkeley Unix C shell (<span class=\"command\"><strong>csh</strong>)”. This is useful as an alternative shell for those who prefer C syntax to that of the <span class=\"command\"><strong>bash</strong> shell, and also because some programs require the C shell in order to perform installation tasks."
+DESCRIPTION="br3ak The Tcsh package containsbr3ak “<span class=\"quote\">an enhanced but completely compatiblebr3ak version of the Berkeley Unix C shell (<span class=\"command\"><strong>csh</strong>)”. This isbr3ak useful as an alternative shell for those who prefer C syntax tobr3ak that of the <span class=\"command\"><strong>bash</strong>br3ak shell, and also because some programs require the C shell in orderbr3ak to perform installation tasks.br3ak"
 SECTION="postlfs"
 VERSION=6.20.00
 NAME="tcsh"

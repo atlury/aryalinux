@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The jfsutils package contains administration and debugging tools for the jfs file system."
+DESCRIPTION="br3ak The jfsutils package containsbr3ak administration and debugging tools for the jfs file system.br3ak"
 SECTION="postlfs"
 VERSION=1.1.15
 NAME="jfsutils"
@@ -35,7 +35,8 @@ fi
 
 whoami > /tmp/currentuser
 
-sed "s@<unistd.h>@&\n#include <sys/types.h>@g" -i fscklog/extract.c &&
+sed -i "/unistd.h/a#include <sys/types.h>"    fscklog/extract.c &&
+sed -i "/ioctl.h/a#include <sys/sysmacros.h>" libfs/devices.c   &&
 ./configure &&
 make "-j`nproc`" || make
 

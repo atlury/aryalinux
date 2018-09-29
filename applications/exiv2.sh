@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" Exiv2 is a C++ library and a command line utility for managing image and video metadata."
+DESCRIPTION="br3ak Exiv2 is a C++ library and abr3ak command line utility for managing image and video metadata.br3ak"
 SECTION="general"
 VERSION=0.26
 NAME="exiv2"

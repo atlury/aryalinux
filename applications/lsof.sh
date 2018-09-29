@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The lsof package is useful to LiSt Open Files for a given running application or process."
+DESCRIPTION="br3ak The lsof package is useful to LiStbr3ak Open Files for a given running application or process.br3ak"
 SECTION="general"
 VERSION=4.91
 NAME="lsof"

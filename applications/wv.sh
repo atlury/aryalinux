@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" This package contains tools for reading information from an MS Word document."
+DESCRIPTION="br3ak This package contains tools for reading information from an MS Wordbr3ak document.br3ak"
 SECTION="general"
 VERSION=1.2.9
 NAME="wv"

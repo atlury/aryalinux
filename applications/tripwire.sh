@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Tripwire package contains programs used to verify the integrity of the files on a given system."
+DESCRIPTION="br3ak The Tripwire package containsbr3ak programs used to verify the integrity of the files on a givenbr3ak system.br3ak"
 SECTION="postlfs"
 VERSION=2.4.3.7
 NAME="tripwire"

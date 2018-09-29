@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The GC package contains the Boehm-Demers-Weiser conservative garbage collector, which can be used as a garbage collecting replacement for the C malloc function or C++ new operator. It allows you to allocate memory basically as you normally would, without explicitly deallocating memory that is no longer useful. The collector automatically recycles memory when it determines that it can no longer be otherwise accessed. The collector is also used by a number of programming language implementations that either use C as intermediate code, want to facilitate easier interoperation with C libraries, or just prefer the simple collector interface. Alternatively, the garbage collector may be used as a leak detector for C or C++ programs, though that is not its primary goal."
+DESCRIPTION="br3ak The GC package contains thebr3ak Boehm-Demers-Weiser conservative garbage collector, which can bebr3ak used as a garbage collecting replacement for the C malloc functionbr3ak or C++ new operator. It allows you to allocate memory basically asbr3ak you normally would, without explicitly deallocating memory that isbr3ak no longer useful. The collector automatically recycles memory whenbr3ak it determines that it can no longer be otherwise accessed. Thebr3ak collector is also used by a number of programming languagebr3ak implementations that either use C as intermediate code, want tobr3ak facilitate easier interoperation with C libraries, or just preferbr3ak the simple collector interface. Alternatively, the garbagebr3ak collector may be used as a leak detector for C or C++ programs,br3ak though that is not its primary goal.br3ak"
 SECTION="general"
 VERSION=7.6.4
 NAME="gc"

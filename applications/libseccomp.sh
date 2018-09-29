@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libseccomp package provides an easy to use and platform independent interface to the Linux kernel's syscall filtering mechanism."
+DESCRIPTION="br3ak The libseccomp package provides anbr3ak easy to use and platform independent interface to the Linux kernel's syscall filtering mechanism.br3ak"
 SECTION="general"
 VERSION=2.3.3
 NAME="libseccomp"

@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" liboauth is a collection of POSIX-C functions implementing the OAuth Core RFC 5849 standard. Liboauth provides functions to escape and encode parameters according to OAuth specification and offers high-level functionality to sign requests or verify OAuth signatures as well as perform HTTP requests."
+DESCRIPTION="br3ak liboauth is a collection ofbr3ak POSIX-C functions implementing the OAuth Core RFC 5849 standard.br3ak Liboauth provides functions to escape and encode parametersbr3ak according to OAuth specification and offers high-levelbr3ak functionality to sign requests or verify OAuth signatures as wellbr3ak as perform HTTP requests.br3ak"
 SECTION="postlfs"
 VERSION=1.0.3
 NAME="liboauth"

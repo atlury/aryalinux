@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libmng libraries are used by programs wanting to read and write Multiple-image Network Graphics (MNG) files which are the animation equivalents to PNG files."
+DESCRIPTION="br3ak The libmng libraries are used bybr3ak programs wanting to read and write Multiple-image Network Graphicsbr3ak (MNG) files which are the animation equivalents to PNG files.br3ak"
 SECTION="general"
 VERSION=2.0.3
 NAME="libmng"

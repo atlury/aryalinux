@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=" The libnfsidmap package contains a library to help mapping id's, mainly for NFSv4."
+DESCRIPTION="br3ak The libnfsidmap package contains abr3ak library to help mapping id's, mainly for NFSv4.br3ak"
 SECTION="general"
 VERSION=0.26
 NAME="libnfsidmap"

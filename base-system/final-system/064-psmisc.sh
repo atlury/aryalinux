@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="064-psmisc.sh"
-TARBALL="psmisc-23.1.tar.xz"
+TARBALL="psmisc-23.2.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

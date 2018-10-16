@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="088-meson.sh"
-TARBALL="meson-0.46.1.tar.gz"
+TARBALL="meson-0.48.0.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -30,10 +30,8 @@ then
 fi
 
 python3 setup.py build
-python3 setup.py install
-mv -v /usr/lib/python3.6/site-packages/meson-0.46.1-py3.6.egg/share/man/man1/*.1 \
-      /usr/share/man/man1
-rm -r /usr/lib/python3.6/site-packages/meson-0.46.1-py3.6.egg/share
+python3 setup.py install --root=dest
+cp -rv dest/* /
 
 
 cd $SOURCE_DIR

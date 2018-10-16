@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="003-binutils-pass1.sh"
-TARBALL="binutils-2.30.tar.xz"
+TARBALL="binutils-2.31.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -31,7 +31,7 @@ fi
 
 mkdir -v build
 cd       build
-CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ../configure --prefix=/tools            \
+../configure --prefix=/tools            \
              --with-sysroot=$LFS        \
              --with-lib-path=/tools/lib \
              --target=$LFS_TGT          \

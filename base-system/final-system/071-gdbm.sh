@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="071-gdbm.sh"
-TARBALL="gdbm-1.14.1.tar.gz"
+TARBALL="gdbm-1.18.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

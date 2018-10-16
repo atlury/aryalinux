@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="073-expat.sh"
-TARBALL="expat-2.2.5.tar.bz2"
+TARBALL="expat-2.2.6.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -32,10 +32,10 @@ fi
 sed -i 's|usr/bin/env |bin/|' run.sh.in
 CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/expat-2.2.5
+            --docdir=/usr/share/doc/expat-2.2.6
 make
 make install
-install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.5
+install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.6
 
 
 cd $SOURCE_DIR

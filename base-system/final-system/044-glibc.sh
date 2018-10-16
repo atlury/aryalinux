@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="044-glibc.sh"
-TARBALL="glibc-2.27.tar.xz"
+TARBALL="glibc-2.28.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,13 +29,13 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../glibc-2.27-fhs-1.patch
+patch -Np1 -i ../glibc-2.28-fhs-1.patch
 ln -sfv /tools/lib/gcc /usr/lib
 case $(uname -m) in
-    i?86)    GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/8.1.0/include
+    i?86)    GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/8.2.0/include
             ln -sfv ld-linux.so.2 /lib/ld-lsb.so.3
     ;;
-    x86_64) GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include
+    x86_64) GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/include
             ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64
             ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
     ;;
@@ -43,6 +43,7 @@ esac
 rm -f /usr/include/limits.h
 mkdir -v build
 cd       build
+
 CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
 CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL" ../configure --prefix=/usr                          \
              --disable-werror                       \

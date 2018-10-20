@@ -29,6 +29,11 @@ then
 	cd $DIRECTORY
 fi
 
+export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
+
+ln -sf /tools/bin/true /usr/bin/xsltproc
 ln -svf /tools/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/
 ln -svf /tools/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/
 ln -svf /tools/lib/pkgconfig/uuid.pc /usr/lib/pkgconfig/
@@ -36,7 +41,6 @@ ln -svf /tools/bin/env /usr/bin/
 ln -svf /tools/lib/libblkid.so.1 /usr/lib/
 ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
-ln -sf /tools/bin/true /usr/bin/xsltproc
 for file in /tools/lib/lib{blkid,mount,uuid}*; do
     ln -sf $file /usr/lib/
 done
@@ -47,13 +51,8 @@ patch -Np1 -i ../systemd-239-meson-0.48.0_fixes-1.patch
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 mkdir -p build
 cd       build
-
-export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
-
 PKG_CONFIG_PATH="/usr/lib/pkgconfig:/tools/lib/pkgconfig" \
-LANG=en_US.UTF-8                   \
+LANG=$(echo $LOCALE | tr a-z A-Z)                   \
 meson --prefix=/usr                \
       --sysconfdir=/etc            \
       --localstatedir=/var         \
@@ -74,11 +73,10 @@ meson --prefix=/usr                \
       -Dumount-path=/bin/umount    \
       -Db_lto=false                \
       ..
-LANG=en_US.UTF-8 ninja
-LANG=en_US.UTF-8 ninja install
+LANG=$(echo $LOCALE | tr a-z A-Z) ninja
+LANG=$(echo $LOCALE | tr a-z A-Z) ninja install
 rm -rfv /usr/lib/rpm
 rm -f /usr/bin/xsltproc
-
 rm -f /usr/lib/pkgconfig/mount.pc
 rm -f /usr/lib/pkgconfig/blkid.pc
 rm -f /usr/lib/pkgconfig/uuid.pc
@@ -90,7 +88,6 @@ cat > /lib/systemd/systemd-user-sessions << "EOF"
 rm -f /run/nologin
 EOF
 chmod 755 /lib/systemd/systemd-user-sessions
-
 
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]

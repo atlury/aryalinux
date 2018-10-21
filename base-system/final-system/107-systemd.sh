@@ -34,12 +34,12 @@ export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
 ln -sf /tools/bin/true /usr/bin/xsltproc
-ln -svf /tools/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/
-ln -svf /tools/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/
-ln -svf /tools/lib/pkgconfig/uuid.pc /usr/lib/pkgconfig/
-ln -svf /tools/bin/env /usr/bin/
-ln -svf /tools/lib/libblkid.so.1 /usr/lib/
-ln -svf /tools/lib/libmount.so.1 /usr/lib/
+#ln -svf /tools/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/
+#ln -svf /tools/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/
+#ln -svf /tools/lib/pkgconfig/uuid.pc /usr/lib/pkgconfig/
+#ln -svf /tools/bin/env /usr/bin/
+#ln -svf /tools/lib/libblkid.so.1 /usr/lib/
+#ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
 for file in /tools/lib/lib{blkid,mount,uuid}*; do
     ln -sf $file /usr/lib/
@@ -77,10 +77,10 @@ LANG=$(echo $LOCALE | tr a-z A-Z) ninja
 LANG=$(echo $LOCALE | tr a-z A-Z) ninja install
 rm -rfv /usr/lib/rpm
 rm -f /usr/bin/xsltproc
-rm -f /usr/lib/pkgconfig/mount.pc
-rm -f /usr/lib/pkgconfig/blkid.pc
-rm -f /usr/lib/pkgconfig/uuid.pc
-rm -f /usr/bin/env
+#rm -f /usr/lib/pkgconfig/mount.pc
+#rm -f /usr/lib/pkgconfig/blkid.pc
+#rm -f /usr/lib/pkgconfig/uuid.pc
+#rm -f /usr/bin/env
 
 systemd-machine-id-setup
 cat > /lib/systemd/systemd-user-sessions << "EOF"

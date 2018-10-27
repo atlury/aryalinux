@@ -34,7 +34,6 @@ export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 
 ln -sf /tools/bin/true /usr/bin/xsltproc
-
 for file in /tools/lib/lib{blkid,mount,uuid}*; do
     ln -sf $file /usr/lib/
 done
@@ -71,13 +70,13 @@ LANG=$(echo $LOCALE | tr a-z A-Z) ninja
 LANG=$(echo $LOCALE | tr a-z A-Z) ninja install
 rm -rfv /usr/lib/rpm
 rm -f /usr/bin/xsltproc
-
 systemd-machine-id-setup
 cat > /lib/systemd/systemd-user-sessions << "EOF"
 #!/bin/bash
 rm -f /run/nologin
 EOF
 chmod 755 /lib/systemd/systemd-user-sessions
+
 
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]

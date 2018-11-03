@@ -53,6 +53,11 @@ else
 	cp ../config-64 ./.config
 fi
 
+if [ `uname -m` != "x86_64" ]
+then
+	turnOff CONFIG_64BIT
+fi
+
 export CFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CXXFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"
 export CPPFLAGS="-march=$BUILD_ARCH -mtune=$BUILD_TUNE -O$BUILD_OPT_LEVEL"

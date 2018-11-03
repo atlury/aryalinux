@@ -7,12 +7,12 @@ set +h
 . /var/lib/alps/functions
 
 #REQ:perl-modules#perl-lwp
-#REQ:perl-modules#io-socket-ssl
+#REQ:perl-modules#perl-io-socket-ssl
 #REQ:perl-modules#mozilla-ca
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/M/MS/MSCHILLI/LWP-Protocol-https-6.06.tar.gz"
-VERSION=6.06
+URL="https://www.cpan.org/authors/id/O/OA/OALDERS/LWP-Protocol-https-6.07.tar.gz"
+VERSION=6.07
 NAME="perl-modules#perl-lwp-protocol-https"
 
 cd $SOURCE_DIR

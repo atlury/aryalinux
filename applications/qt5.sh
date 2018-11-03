@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Qt5 is a cross-platformbr3ak application framework that is widely used for developingbr3ak application software with a graphical user interface (GUI) (inbr3ak which cases Qt5 is classified as abr3ak widget toolkit), and also used for developing non-GUI programs suchbr3ak as command-line tools and consoles for servers. One of the majorbr3ak users of Qt is KDE Frameworks 5 (KF5).br3ak"
 SECTION="x"
-VERSION=5.11.0
+VERSION=5.11.2
 NAME="qt5"
 
 #REQ:x7lib
@@ -47,11 +47,12 @@ NAME="qt5"
 
 cd $SOURCE_DIR
 
-URL=https://download.qt.io/archive/qt/5.11/5.11.0/single/qt-everywhere-src-5.11.0.tar.xz
+URL=https://download.qt.io/archive/qt/5.11/5.11.2/single/qt-everywhere-src-5.11.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.qt.io/archive/qt/5.11/5.11.0/single/qt-everywhere-src-5.11.0.tar.xz
+wget -nc https://download.qt.io/archive/qt/5.11/5.11.2/single/qt-everywhere-src-5.11.2.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/qt-5.11.2-glibc228-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/qt/qt-5.11.2-glibc228-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -71,13 +72,27 @@ export QT5PREFIX=/opt/qt5
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.11.0
-ln -sfnv qt-5.11.0 /opt/qt5
+mkdir /opt/qt-5.11.2
+ln -sfnv qt-5.11.2 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
+
+
+patch -Np1 -i ../qt-5.11.2-glibc228-1.patch
+
+
+-archdatadir    /usr/lib/qt5                \
+            -bindir         /usr/bin                    \
+            -plugindir      /usr/lib/qt5/plugins        \
+            -importdir      /usr/lib/qt5/imports        \
+            -headerdir      /usr/include/qt5            \
+            -datadir        /usr/share/qt5              \
+            -docdir         /usr/share/doc/qt5          \
+            -translationdir /usr/share/qt5/translations \
+            -examplesdir    /usr/share/doc/qt5/examples
 
 
 ./configure -prefix /opt/qt5                          \
@@ -90,7 +105,7 @@ sudo rm rootscript.sh
             -system-sqlite                              \
             -nomake examples                            \
             -no-rpath                                   \
-            -skip qtwebengine                          &&
+            -skip qtwebengine                           &&
 make "-j`nproc`" || make
 
 

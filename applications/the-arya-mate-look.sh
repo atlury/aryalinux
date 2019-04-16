@@ -5,6 +5,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=the-arya-mate-look
+
 cd $SOURCE_DIR
 
 gsettings set org.mate.background picture-filename '/usr/share/backgrounds/wall.png'

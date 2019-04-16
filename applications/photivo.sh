@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=photivo
+
 #REQ:mercurial
 #REQ:graphicsmagick
 #REQ:liblqr

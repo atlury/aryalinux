@@ -6,6 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=alacarte
+VERSION=3.11.91
+
 #REQ:gnome-menus
 
 URL="http://archive.ubuntu.com/ubuntu/pool/universe/a/alacarte/alacarte_3.11.91.orig.tar.xz"

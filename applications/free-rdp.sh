@@ -6,6 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=free-rdp
+VERSION=
+
 #REQ:cmake
 #REQ:cups
 #REQ:wayland

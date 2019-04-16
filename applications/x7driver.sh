@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=x7driver
+
 ## Individual drivers starts from here... ##
 
 

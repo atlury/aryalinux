@@ -5,6 +5,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=aryalinux-mate-themes
+
 cd $SOURCE_DIR
 
 wget -nc "https://sourceforge.net/projects/aryalinux-bin/files/artifacts/Ambiance&Radiance-Flat-Colors-16-04-1-LTS-GTK-3-18Theme.tar.gz"

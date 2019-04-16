@@ -6,6 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=graphicsmagick
+VERSION=1.3.24
+
 URL=https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/1.3.24/GraphicsMagick-1.3.24.tar.xz/download
 cd $SOURCE_DIR
 

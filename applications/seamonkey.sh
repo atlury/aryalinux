@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=seamonkey
+URL=https://archive.mozilla.org/pub/seamonkey/releases/2.49.4/source/seamonkey-2.49.4.source.tar.xz
+DESCRIPTION="SeaMonkey is a browser suite, the Open Source sibling of Netscape. It includes the browser, composer, mail and news clients, and an IRC client. It is the follow-on to the Mozilla browser suite."
+VERSION=2.49.4.source
+
 #REQ:autoconf213
 #REQ:gtk2
 #REQ:gtk3
@@ -24,17 +29,9 @@ cd $SOURCE_DIR
 
 wget -nc https://archive.mozilla.org/pub/seamonkey/releases/2.49.4/source/seamonkey-2.49.4.source.tar.xz
 
-NAME=seamonkey
-VERSION=2.49.4.source
-URL=https://archive.mozilla.org/pub/seamonkey/releases/2.49.4/source/seamonkey-2.49.4.source.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -42,7 +39,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.
@@ -170,7 +170,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

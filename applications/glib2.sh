@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=glib2
+URL=http://ftp.gnome.org/pub/gnome/sources/glib/2.60/glib-2.60.0.tar.xz
+DESCRIPTION="The GLib package contains low-level libraries useful for providing data structure handling for C, portability wrappers and interfaces for such runtime functionality as an event loop, threads, dynamic loading and an object system."
+VERSION=2.60.0
+
 #REC:libxslt
 #REC:pcre
 #REC:gobject-introspection
@@ -16,17 +21,9 @@ wget -nc http://ftp.gnome.org/pub/gnome/sources/glib/2.60/glib-2.60.0.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/glib/2.60/glib-2.60.0.tar.xz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/glib-2.60.0-skip_warnings-1.patch
 
-NAME=glib2
-VERSION=2.60.0
-URL=http://ftp.gnome.org/pub/gnome/sources/glib/2.60/glib-2.60.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -34,7 +31,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../glib-2.60.0-skip_warnings-1.patch
 mkdir build &&
@@ -57,7 +57,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,22 +6,19 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=xdg-user-dirs
+URL=https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.17.tar.gz
+DESCRIPTION="Xdg-user-dirs is a tool to help manage well known user directories like the desktop folder and the music folder. It also handles localization (i.e. translation) of the filenames."
+VERSION=0.17
+
 
 cd $SOURCE_DIR
 
 wget -nc https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.17.tar.gz
 
-NAME=xdg-user-dirs
-VERSION=0.17
-URL=https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.17.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,7 +26,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr --sysconfdir=/etc &&
 make
@@ -42,7 +42,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

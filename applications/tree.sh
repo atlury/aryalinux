@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=tree
+URL=http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz
+DESCRIPTION="The tree application, as the name suggests, is useful to display, in a terminal, directory contents, including directories, files, links."
+VERSION=1.8.0
+
 
 cd $SOURCE_DIR
 
 wget -nc http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz
 wget -nc ftp://mama.indstate.edu/linux/tree/tree-1.8.0.tgz
 
-NAME=tree
-VERSION=1.8.0
-URL=http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 make
 
@@ -43,7 +43,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,22 +6,19 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=gavl
+URL=https://downloads.sourceforge.net/gmerlin/gavl-1.4.0.tar.gz
+DESCRIPTION="Gavl is short for Gmerlin Audio Video Library. It is a low level library that handles the details of audio and video formats like colorspaces, samplerates, multichannel configurations etc. It provides standardized definitions for those formats as well as container structures for carrying audio samples or video images inside an application."
+VERSION=1.4.0
+
 
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/gmerlin/gavl-1.4.0.tar.gz
 
-NAME=gavl
-VERSION=1.4.0
-URL=https://downloads.sourceforge.net/gmerlin/gavl-1.4.0.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,7 +26,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 LIBS=-lm \
 ./configure --prefix=/usr \
@@ -45,7 +45,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

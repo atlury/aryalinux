@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=speex
+URL=https://downloads.xiph.org/releases/speex/speex-1.2.0.tar.gz
+DESCRIPTION="Speex is an audio compression format designed especially for speech. It is well-adapted to internet applications and provides useful features that are not present in most other CODECs."
+VERSION=1.2.0
+
 #REQ:libogg
 
 cd $SOURCE_DIR
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 wget -nc https://downloads.xiph.org/releases/speex/speex-1.2.0.tar.gz
 wget -nc https://downloads.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz
 
-NAME=speex
-VERSION=1.2.0
-URL=https://downloads.xiph.org/releases/speex/speex-1.2.0.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr \
 --disable-static \
@@ -66,6 +66,7 @@ sudo rm -rf /tmp/rootscript.sh
 cd ..
 sudo rm -rf speexdsp-1.2rc3.tar.gz
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

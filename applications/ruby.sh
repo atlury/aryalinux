@@ -6,22 +6,19 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=ruby
+URL=http://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.2.tar.xz
+DESCRIPTION="The Ruby package contains the Ruby development environment. This is useful for object-oriented scripting."
+VERSION=2.6.2
+
 
 cd $SOURCE_DIR
 
 wget -nc http://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.2.tar.xz
 
-NAME=ruby
-VERSION=2.6.2
-URL=http://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.2.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,7 +26,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr \
 --enable-shared \
@@ -45,7 +45,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=breeze-icons
+URL=http://download.kde.org/stable/frameworks/5.55/breeze-icons-5.55.0.tar.xz
+DESCRIPTION="The Breeze Icons package contains the default icons for KDE Plasma 5 applications, but it can be used for other window environments."
+VERSION=5.55.0
+
 #REQ:extra-cmake-modules
 #REQ:qt5
 
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 
 wget -nc http://download.kde.org/stable/frameworks/5.55/breeze-icons-5.55.0.tar.xz
 
-NAME=breeze-icons
-VERSION=5.55.0
-URL=http://download.kde.org/stable/frameworks/5.55/breeze-icons-5.55.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 mkdir build &&
 cd build &&
@@ -48,7 +48,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

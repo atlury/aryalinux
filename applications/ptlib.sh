@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=ptlib
+URL=http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz
+DESCRIPTION="The Ptlib (Portable Tools Library) package contains a class library that has its genesis many years ago as PWLib (portable Windows Library), a method to produce applications to run on various platforms."
+VERSION=2.10.11
+
 #REC:alsa-lib
 
 cd $SOURCE_DIR
@@ -15,17 +20,9 @@ wget -nc ftp://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/ptlib-2.10.11-bison_fixes-2.patch
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/ptlib-2.10.11-openssl-1.1.0-1.patch
 
-NAME=ptlib
-VERSION=2.10.11
-URL=http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -33,7 +30,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i "s/sbin\.Right(1) == '\\\\0')/strlen(sbin\.Right(1)) == 0)/" \
 src/ptclib/podbc.cxx &&
@@ -55,7 +55,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

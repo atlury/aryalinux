@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=xdg-utils
+URL=https://portland.freedesktop.org/download/xdg-utils-1.1.3.tar.gz
+DESCRIPTION="xdg-utils is a a set of command line tools that assist applications with a variety of desktop integration tasks. It is required for Linux Standards Base (LSB) conformance."
+VERSION=1.1.3
+
 #REQ:xmlto
 #REQ:lynx
 #REQ:w3m
@@ -16,17 +21,9 @@ cd $SOURCE_DIR
 
 wget -nc https://portland.freedesktop.org/download/xdg-utils-1.1.3.tar.gz
 
-NAME=xdg-utils
-VERSION=1.1.3
-URL=https://portland.freedesktop.org/download/xdg-utils-1.1.3.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -34,7 +31,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr --mandir=/usr/share/man &&
 make
@@ -47,7 +47,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

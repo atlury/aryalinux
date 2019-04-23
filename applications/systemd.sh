@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=systemd
+URL=https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
+DESCRIPTION="While systemd was installed when building LFS, there are many features provided by the package that were not included in the initial installation because Linux-PAM was not yet installed. The systemd package needs to be rebuilt to provide a working <span class=\command\><strong>systemd-logind</strong> service, which provides many additional features for dependent packages."
+VERSION=241
+
 #REQ:linux-pam
 #REC:polkit
 
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 
 wget -nc https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
 
-NAME=systemd
-VERSION=241
-URL=https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 mkdir build &&
@@ -126,7 +126,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

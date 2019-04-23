@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=libmad
+URL=https://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
+DESCRIPTION="libmad is a high-quality MPEG audio decoder capable of 24-bit output."
+VERSION=0.15.1b
+
 
 cd $SOURCE_DIR
 
@@ -13,17 +18,9 @@ wget -nc https://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
 wget -nc ftp://ftp.mars.org/pub/mpeg/libmad-0.15.1b.tar.gz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/libmad-0.15.1b-fixes-1.patch
 
-NAME=libmad
-VERSION=0.15.1b
-URL=https://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../libmad-0.15.1b-fixes-1.patch &&
 sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
@@ -70,7 +70,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

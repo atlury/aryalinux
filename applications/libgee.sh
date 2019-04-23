@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=libgee
+URL=http://ftp.gnome.org/pub/gnome/sources/libgee/0.20/libgee-0.20.1.tar.xz
+DESCRIPTION="The libgee package is a collection library providing GObject based interfaces and classes for commonly used data structures."
+VERSION=0.20.1
+
 #REQ:glib2
 #REC:gobject-introspection
 #REC:vala
@@ -15,17 +20,9 @@ cd $SOURCE_DIR
 wget -nc http://ftp.gnome.org/pub/gnome/sources/libgee/0.20/libgee-0.20.1.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libgee/0.20/libgee-0.20.1.tar.xz
 
-NAME=libgee
-VERSION=0.20.1
-URL=http://ftp.gnome.org/pub/gnome/sources/libgee/0.20/libgee-0.20.1.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -33,7 +30,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr &&
 make
@@ -46,7 +46,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

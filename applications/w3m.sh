@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=w3m
+URL=https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
+DESCRIPTION="w3m is primarily a pager but it can also be used as a text-mode WWW browser."
+VERSION=0.5.3
+
 #REQ:gc
 
 cd $SOURCE_DIR
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 wget -nc https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/w3m-0.5.3-bdwgc72-2.patch
 
-NAME=w3m
-VERSION=0.5.3
-URL=https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../w3m-0.5.3-bdwgc72-2.patch &&
 sed -i 's/file_handle/file_foo/' istream.{c,h} &&
@@ -55,7 +55,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

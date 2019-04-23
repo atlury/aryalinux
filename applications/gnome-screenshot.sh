@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=gnome-screenshot
+URL=http://ftp.acc.umu.se/pub/gnome/sources/gnome-screenshot/3.32/gnome-screenshot-3.32.0.tar.xz
+DESCRIPTION="The GNOME Screenshot is a utility used for taking screenshots of the entire screen, a window or a user-defined area of the screen, with optional beautifying border effects."
+VERSION=3.32.0
+
 #REQ:gtk3
 #REQ:libcanberra
 
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 
 wget -nc http://ftp.acc.umu.se/pub/gnome/sources/gnome-screenshot/3.32/gnome-screenshot-3.32.0.tar.xz
 
-NAME=gnome-screenshot
-VERSION=3.32.0
-URL=http://ftp.acc.umu.se/pub/gnome/sources/gnome-screenshot/3.32/gnome-screenshot-3.32.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 mkdir build &&
 cd build &&
@@ -47,7 +47,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

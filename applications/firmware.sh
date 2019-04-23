@@ -6,21 +6,18 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=firmware
+URL=
+DESCRIPTION="%DESCRIPTION%"
+VERSION=
+
 
 cd $SOURCE_DIR
 
 
-NAME=firmware
-VERSION=""
-URL=""
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -28,7 +25,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 head -n7 /proc/cpuinfo
 mkdir -pv /lib/firmware/intel-ucode
@@ -56,6 +56,7 @@ python extract_firmware.py
 mkdir -p /lib/firmware/nouveau
 cp -d nv* vuc-* /lib/firmware/nouveau/
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

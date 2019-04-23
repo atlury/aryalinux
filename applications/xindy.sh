@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=xindy
+URL=http://tug.ctan.org/support/xindy/base/xindy-2.5.1.tar.gz
+DESCRIPTION="Xindy is an index processor that can be used to generate book-like indexes for arbitrary document-preparation systems. This includes systems such as TeX and LaTeX, the roff-family, SGML/XML-based systems (e.g., HTML) that process some kind of text and generate indexing information."
+VERSION=2.5.1
+
 #REQ:clisp
 #REQ:texlive
 
@@ -14,17 +19,9 @@ cd $SOURCE_DIR
 wget -nc http://tug.ctan.org/support/xindy/base/xindy-2.5.1.tar.gz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/xindy-2.5.1-upstream_fixes-1.patch
 
-NAME=xindy
-VERSION=2.5.1
-URL=http://tug.ctan.org/support/xindy/base/xindy-2.5.1.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 
@@ -59,7 +59,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,22 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=postgresql
+URL=http://ftp.postgresql.org/pub/source/v11.2/postgresql-11.2.tar.bz2
+DESCRIPTION="PostgreSQL is an advanced object-relational database management system (ORDBMS), derived from the Berkeley Postgres database management system."
+VERSION=11.2
+
 
 cd $SOURCE_DIR
 
 wget -nc http://ftp.postgresql.org/pub/source/v11.2/postgresql-11.2.tar.bz2
-
-NAME=postgresql
-VERSION=11.2
-URL=http://ftp.postgresql.org/pub/source/v11.2/postgresql-11.2.tar.bz2
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,8 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -124,7 +124,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=fltk
+URL=http://fltk.org/pub/fltk/1.3.5/fltk-1.3.5-source.tar.gz
+DESCRIPTION="FLTK (pronounced \fulltick\) is a cross-platform C++ GUI toolkit. FLTK provides modern GUI functionality and supports 3D graphics via OpenGL and its built-in GLUT emulation libraries used for creating graphical user interfaces for applications."
+VERSION=1.3.4-2
+
 #REQ:x7lib
 #REC:hicolor-icon-theme
 #REC:libjpeg
@@ -15,17 +20,9 @@ cd $SOURCE_DIR
 
 wget -nc http://fltk.org/pub/fltk/1.3.5/fltk-1.3.5-source.tar.gz
 
-NAME=fltk
-VERSION=1.3.4-2
-URL=http://fltk.org/pub/fltk/1.3.5/fltk-1.3.5-source.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -33,7 +30,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i -e '/cat./d' documentation/Makefile &&
 
@@ -60,7 +60,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

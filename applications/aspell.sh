@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=aspell
+URL=https://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz
+DESCRIPTION="The Aspell package contains an interactive spell checking program and the Aspell libraries. Aspell can either be used as a library or as an independent spell checker."
+VERSION=0.60.6.1
+
 #REQ:which
 
 cd $SOURCE_DIR
@@ -14,17 +19,9 @@ wget -nc https://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz
 wget -nc ftp://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz
 wget -nc https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2018.04.16-0.tar.bz2
 
-NAME=aspell
-VERSION=0.60.6.1
-URL=https://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i '/ top.do_check ==/s/top.do_check/*&/' modules/filter/tex.cpp &&
 sed -i '/word ==/s/word/*&/' prog/check_funs.cpp
@@ -91,6 +91,7 @@ sudo rm -rf /tmp/rootscript.sh
 cd ..
 rm -r aspell6-en-2018.04.16-0
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=opencv
+URL=https://github.com/opencv/opencv/archive/4.0.1/opencv-4.0.1.tar.gz
+DESCRIPTION="The opencv package contains graphics libraries mainly aimed at real-time computer vision."
+VERSION=4.0.1
+
 #REQ:cmake
 #REQ:unzip
 #REC:ffmpeg
@@ -24,17 +29,9 @@ cd $SOURCE_DIR
 wget -nc https://github.com/opencv/opencv/archive/4.0.1/opencv-4.0.1.tar.gz
 wget -nc https://github.com/opencv/opencv_contrib/archive/4.0.1/opencv_contrib-4.0.1.tar.gz
 
-NAME=opencv
-VERSION=4.0.1
-URL=https://github.com/opencv/opencv/archive/4.0.1/opencv-4.0.1.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -42,7 +39,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 tar xf ../opencv_contrib-4.0.1.tar.gz
 mkdir build &&
@@ -68,7 +68,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

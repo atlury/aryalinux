@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=linux-pam
+URL=http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2
+DESCRIPTION="The Linux PAM package contains Pluggable Authentication Modules used to enable the local system administrator to choose how applications authenticate users."
+VERSION=1.3.0
+
 
 cd $SOURCE_DIR
 
 wget -nc http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2
 wget -nc http://linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2
 
-NAME=linux-pam
-VERSION=1.3.0
-URL=http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 tar -xf ../Linux-PAM-1.2.0-docs.tar.bz2 --strip-components=1
 ./configure --prefix=/usr \
@@ -177,7 +177,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

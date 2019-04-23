@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=biber
+URL=https://github.com/plk/biber/archive/v2.12.tar.gz
+DESCRIPTION="Biber is a BibTeX replacement for users of biblatex, written in Perl, with full Unicode support."
+VERSION=2.12
+
 #REQ:perl-autovivification
 #REQ:perl-business-isbn
 #REQ:perl-business-ismn
@@ -48,17 +53,9 @@ cd $SOURCE_DIR
 wget -nc https://github.com/plk/biber/archive/v2.12.tar.gz
 wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.12/biblatex-3.12.tds.tgz
 
-NAME=biber
-VERSION=2.12
-URL=https://github.com/plk/biber/archive/v2.12.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -66,8 +63,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 perl ./Build.PL &&
 ./Build
@@ -82,7 +81,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

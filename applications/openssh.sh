@@ -6,23 +6,21 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=openssh
+URL=http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz
+DESCRIPTION="The OpenSSH package contains <span class=\command\><strong>ssh</strong> clients and the <span class=\command\><strong>sshd</strong> daemon. This is useful for encrypting authentication and subsequent traffic over a network. The <span class=\command\><strong>ssh</strong> and <span class=\command\><strong>scp</strong> commands are secure implementations of <span class=\command\><strong>telnet</strong> and <span class=\command\><strong>rcp</strong> respectively."
+VERSION=7.9p1
+
 
 cd $SOURCE_DIR
 
 wget -nc http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/openssh-7.9p1-security_fix-1.patch
-
-NAME=openssh
-VERSION=7.9p1
-URL=http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,8 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -110,7 +110,7 @@ popd
 popd
 sudo rm -rf $SOURCE_DIR/blfs-systemd-units-20180105
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

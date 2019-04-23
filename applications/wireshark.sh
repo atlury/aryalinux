@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=wireshark
+URL=https://www.wireshark.org/download/src/all-versions/wireshark-3.0.0.tar.xz
+DESCRIPTION="The Wireshark package contains a network protocol analyzer, also known as a sniffer. This is useful for analyzing data captured off the wire from a live network connection, or data read from a capture file."
+VERSION=3.0.0
+
 #REQ:glib2
 #REQ:libgcrypt
 #REQ:qt5
@@ -15,17 +20,9 @@ cd $SOURCE_DIR
 
 wget -nc https://www.wireshark.org/download/src/all-versions/wireshark-3.0.0.tar.xz
 
-NAME=wireshark
-VERSION=3.0.0
-URL=https://www.wireshark.org/download/src/all-versions/wireshark-3.0.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -33,8 +30,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -102,7 +101,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=gdm
+URL=http://ftp.acc.umu.se/pub/gnome/sources/gdm/3.32/gdm-3.32.0.tar.xz
+DESCRIPTION="GDM is a system service that is responsible for providing graphical logins and managing local and remote displays."
+VERSION=3.32.0
+
 #REQ:accountsservice
 #REQ:gtk3
 #REQ:iso-codes
@@ -22,17 +27,9 @@ cd $SOURCE_DIR
 
 wget -nc http://ftp.acc.umu.se/pub/gnome/sources/gdm/3.32/gdm-3.32.0.tar.xz
 
-NAME=gdm
-VERSION=3.32.0
-URL=http://ftp.acc.umu.se/pub/gnome/sources/gdm/3.32/gdm-3.32.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -40,8 +37,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -100,6 +99,7 @@ DefaultSession=gnome-xorg.desktop
 #Enable=true
 EOF
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=gnome-online-accounts
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-online-accounts/3.32/gnome-online-accounts-3.32.0.tar.xz
+DESCRIPTION="The GNOME Online Accounts package contains a framework used to access the user's online accounts."
+VERSION=3.32.0
+
 #REQ:gcr
 #REQ:json-glib
 #REQ:rest
@@ -19,17 +24,9 @@ cd $SOURCE_DIR
 wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-online-accounts/3.32/gnome-online-accounts-3.32.0.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-online-accounts/3.32/gnome-online-accounts-3.32.0.tar.xz
 
-NAME=gnome-online-accounts
-VERSION=3.32.0
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-online-accounts/3.32/gnome-online-accounts-3.32.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -37,7 +34,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr \
 --disable-static \
@@ -53,7 +53,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

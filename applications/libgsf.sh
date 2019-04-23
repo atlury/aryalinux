@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=libgsf
+URL=http://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.45.tar.xz
+DESCRIPTION="The libgsf package contains a library used for providing an extensible input/output abstraction layer for structured file formats."
+VERSION=1.14.45
+
 #REQ:glib2
 #REQ:libxml2
 #REC:gdk-pixbuf
@@ -15,17 +20,9 @@ cd $SOURCE_DIR
 wget -nc http://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.45.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.45.tar.xz
 
-NAME=libgsf
-VERSION=1.14.45
-URL=http://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.45.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -33,7 +30,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr --disable-static &&
 make
@@ -46,7 +46,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

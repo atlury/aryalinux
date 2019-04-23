@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=mesa
+URL=https://mesa.freedesktop.org/archive/mesa-19.0.0.tar.xz
+DESCRIPTION="Mesa is an OpenGL compatible 3D graphics library."
+VERSION=19.0.0
+
 #REQ:x7lib
 #REQ:libdrm
 #REQ:mako
@@ -20,17 +25,9 @@ wget -nc https://mesa.freedesktop.org/archive/mesa-19.0.0.tar.xz
 wget -nc ftp://ftp.freedesktop.org/pub/mesa/mesa-19.0.0.tar.xz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/mesa-19.0.0-add_xdemos-2.patch
 
-NAME=mesa
-VERSION=19.0.0
-URL=https://mesa.freedesktop.org/archive/mesa-19.0.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -38,7 +35,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../mesa-19.0.0-add_xdemos-2.patch
 export XORG_PREFIX=/usr
@@ -80,6 +80,7 @@ sudo make -C ../xdemos DEMOS_PREFIX=$XORG_PREFIX install
 sudo install -v -dm755 /usr/share/doc/mesa-19.0.0
 sudo cp -rfv ../docs/* /usr/share/doc/mesa-19.0.0
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

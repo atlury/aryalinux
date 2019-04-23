@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=mutt
+URL=http://ftp.mutt.org/pub/mutt/mutt-1.11.4.tar.gz
+DESCRIPTION="The Mutt package contains a Mail User Agent. This is useful for reading, writing, replying to, saving, and deleting your email."
+VERSION=1.11.4
+
 
 cd $SOURCE_DIR
 
 wget -nc http://ftp.mutt.org/pub/mutt/mutt-1.11.4.tar.gz
 wget -nc ftp://ftp.mutt.org/pub/mutt/mutt-1.11.4.tar.gz
 
-NAME=mutt
-VERSION=1.11.4
-URL=http://ftp.mutt.org/pub/mutt/mutt-1.11.4.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,8 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -88,6 +87,7 @@ chown root:mail /usr/bin/mutt_dotlock &&
 chmod -v 2755 /usr/bin/mutt_dotlock
 cat /usr/share/doc/mutt-1.11.4/samples/gpg.rc >> ~/.muttrc
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

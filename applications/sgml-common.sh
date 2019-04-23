@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=sgml-common
+URL=https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
+DESCRIPTION="The SGML Common package contains <span class=\command\><strong>install-catalog</strong>. This is useful for creating and maintaining centralized SGML catalogs."
+VERSION=0.6.3
+
 
 cd $SOURCE_DIR
 
@@ -13,17 +18,9 @@ wget -nc https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common
 wget -nc ftp://sourceware.org/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/sgml-common-0.6.3-manpage-1.patch
 
-NAME=sgml-common
-VERSION=0.6.3
-URL=https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../sgml-common-0.6.3-manpage-1.patch &&
 autoreconf -f -i
@@ -58,6 +58,7 @@ install-catalog --remove /etc/sgml/sgml-ent.cat \
 install-catalog --remove /etc/sgml/sgml-docbook.cat \
 /etc/sgml/sgml-ent.cat
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

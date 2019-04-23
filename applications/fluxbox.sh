@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=fluxbox
+URL=https://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz
+DESCRIPTION="The Fluxbox package contains a window manager."
+VERSION=1.3.7
+
 
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz
 wget -nc ftp://ftp.jaist.ac.jp/pub//sourceforge/f/fl/fluxbox/fluxbox/1.3.7/fluxbox-1.3.7.tar.xz
 
-NAME=fluxbox
-VERSION=1.3.7
-URL=https://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr &&
 make
@@ -76,6 +76,7 @@ echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.fluxbox/theme ||
 [ -d ~/.fluxbox/theme ] &&
 echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.fluxbox/theme/theme.cfg
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

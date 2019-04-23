@@ -6,23 +6,21 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=iptables
+URL=http://www.netfilter.org/projects/iptables/files/iptables-1.8.2.tar.bz2
+DESCRIPTION="The next part of this chapter deals with firewalls. The principal firewall tool for Linux is Iptables. You will need to install Iptables if you intend on using any form of a firewall."
+VERSION=1.8.2
+
 
 cd $SOURCE_DIR
 
 wget -nc http://www.netfilter.org/projects/iptables/files/iptables-1.8.2.tar.bz2
 wget -nc ftp://ftp.netfilter.org/pub/iptables/iptables-1.8.2.tar.bz2
-
-NAME=iptables
-VERSION=1.8.2
-URL=http://www.netfilter.org/projects/iptables/files/iptables-1.8.2.tar.bz2
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr \
 --sbindir=/sbin \
@@ -63,7 +64,7 @@ popd
 popd
 sudo rm -rf $SOURCE_DIR/blfs-systemd-units-20180105
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

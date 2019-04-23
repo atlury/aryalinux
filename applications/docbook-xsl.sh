@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=docbook-xsl
+URL=https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2
+DESCRIPTION="The DocBook XSL Stylesheets package contains XSL stylesheets. These are useful for performing transformations on XML DocBook files."
+VERSION=1.79.2
+
 #REC:libxml2
 
 cd $SOURCE_DIR
@@ -14,17 +19,9 @@ wget -nc https://github.com/docbook/xslt10-stylesheets/releases/download/release
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/docbook-xsl-nons-1.79.2-stack_fix-1.patch
 wget -nc https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-doc-1.79.2.tar.bz2
 
-NAME=docbook-xsl
-VERSION=1.79.2
-URL=https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch
 tar -xf ../docbook-xsl-doc-1.79.2.tar.bz2 --strip-components=1
@@ -109,7 +109,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

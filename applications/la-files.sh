@@ -6,21 +6,18 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=la-files
+URL=
+DESCRIPTION="In LFS we installed a package, libtool, that is used by many packages to build on a variety of Unix platforms. This includes platforms such as AIX, Solaris, IRIX, HP-UX, and Cygwin as well as Linux. The origins of this tool are quite dated. It was intended to manage libraries on systems with less advanced capabilities than a modern Linux system."
+VERSION=
+
 
 cd $SOURCE_DIR
 
 
-NAME=la-files
-VERSION=""
-URL=""
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -28,8 +25,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -99,7 +98,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

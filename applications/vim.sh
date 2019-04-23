@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=vim
+URL=http://ftp.vim.org/vim/unix/vim-8.1.tar.bz2
+DESCRIPTION="The Vim package, which is an abbreviation for VI IMproved, contains a <span class=\command\><strong>vi</strong> clone with extra features as compared to the original <span class=\command\><strong>vi</strong>."
+VERSION=8.1
+
 #REC:gtk2
 
 cd $SOURCE_DIR
 
 wget -nc http://ftp.vim.org/vim/unix/vim-8.1.tar.bz2
 
-NAME=vim
-VERSION=8.1
-URL=http://ftp.vim.org/vim/unix/vim-8.1.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h &&
 echo '#define SYS_GVIMRC_FILE "/etc/gvimrc"' >> src/feature.h &&
@@ -91,7 +91,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

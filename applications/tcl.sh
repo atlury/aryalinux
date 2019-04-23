@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=tcl
+URL=https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
+DESCRIPTION="The Tcl package contains the Tool Command Language, a robust general-purpose scripting language."
+VERSION=src
+
 
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
 wget -nc https://downloads.sourceforge.net/tcl/tcl8.6.9-html.tar.gz
 
-NAME=tcl
-VERSION=src
-URL=https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 tar -xf ../tcl8.6.9-html.tar.gz --strip-components=1
 export SRCDIR=`pwd` &&
@@ -80,7 +80,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

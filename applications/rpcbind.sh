@@ -6,24 +6,22 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=rpcbind
+URL=https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.5.tar.bz2
+DESCRIPTION="The rpcbind program is a replacement for portmap. It is required for import or export of Network File System (NFS) shared directories."
+VERSION=1.2.5
+
 #REQ:libtirpc
 
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.5.tar.bz2
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/rpcbind-1.2.5-vulnerability_fixes-1.patch
-
-NAME=rpcbind
-VERSION=1.2.5
-URL=https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.5.tar.bz2
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,8 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -71,7 +71,7 @@ popd
 popd
 sudo rm -rf $SOURCE_DIR/blfs-systemd-units-20180105
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

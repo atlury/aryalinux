@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=autoconf213
+URL=https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
+DESCRIPTION="Autoconf2.13 is an old version of Autoconf . This old version accepts switches which are not valid in more recent versions. Now that firefox has started to use python2 for configuring, this old version is required even if configure files have not been changed."
+VERSION=2.13
+
 
 cd $SOURCE_DIR
 
@@ -13,17 +18,9 @@ wget -nc https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
 wget -nc ftp://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/autoconf-2.13-consolidated_fixes-1.patch
 
-NAME=autoconf213
-VERSION=2.13
-URL=https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../autoconf-2.13-consolidated_fixes-1.patch &&
 mv -v autoconf.texi autoconf213.texi &&
@@ -49,7 +49,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

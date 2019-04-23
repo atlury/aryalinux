@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=ibus
+URL=https://github.com/ibus/ibus/releases/download/1.5.20/ibus-1.5.20.tar.gz
+DESCRIPTION="IBus is an Intelligent Input Bus. It is a new input framework for Linux OS. It provides a full featured and user friendly input method user interface."
+VERSION=1.5.20
+
 #REQ:dconf
 #REQ:iso-codes
 #REQ:vala
@@ -18,17 +23,9 @@ cd $SOURCE_DIR
 wget -nc https://github.com/ibus/ibus/releases/download/1.5.20/ibus-1.5.20.tar.gz
 wget -nc https://www.unicode.org/Public/zipped/10.0.0/UCD.zip
 
-NAME=ibus
-VERSION=1.5.20
-URL=https://github.com/ibus/ibus/releases/download/1.5.20/ibus-1.5.20.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -36,7 +33,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 mkdir -p /usr/share/unicode/ucd &&
 unzip -u ../UCD.zip -d /usr/share/unicode/ucd
@@ -57,7 +57,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

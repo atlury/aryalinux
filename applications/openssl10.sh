@@ -1,0 +1,75 @@
+#!/bin/bash
+
+set -e
+set +h
+
+. /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+NAME=openssl10
+URL=https://openssl.org/source/openssl-1.0.2o.tar.gz
+DESCRIPTION="The OpenSSL-1.0.2o package contains libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as email applications and web browsers (for accessing HTTPS sites). This package provides only the libraries and headers for packages that have not yet been ported to openssl-1.1.x or later."
+VERSION=1.0.2o
+
+#OPT:mitkrb
+
+cd $SOURCE_DIR
+
+wget -nc https://openssl.org/source/openssl-1.0.2o.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openssl/openssl-1.0.2o.tar.gz
+wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/openssl/openssl-1.0.2o.tar.gz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssl/openssl-1.0.2o.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssl/openssl-1.0.2o.tar.gz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openssl/openssl-1.0.2o.tar.gz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openssl/openssl-1.0.2o.tar.gz
+wget -nc ftp://openssl.org/source/openssl-1.0.2o.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openssl-1.0.2o-compat_versioned_symbols-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/downloads/openssl/openssl-1.0.2o-compat_versioned_symbols-1.patch
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
+cd $DIRECTORY
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
+
+patch -Np1 -i ../openssl-1.0.2o-compat_versioned_symbols-1.patch &&
+./config --prefix=/usr            \
+         --openssldir=/etc/ssl    \
+         --libdir=lib/openssl-1.0 \
+         shared                   \
+         zlib-dynamic             &&
+make depend                       &&
+make -j1
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make INSTALL_PREFIX=$PWD/Dest install_sw                      &&
+rm -rf /usr/lib/openssl-1.0                                   &&
+install -vdm755                   /usr/lib/openssl-1.0        &&
+cp -Rv Dest/usr/lib/openssl-1.0/* /usr/lib/openssl-1.0        &&
+mv -v  /usr/lib/openssl-1.0/lib{crypto,ssl}.so.1.0.0 /usr/lib &&
+ln -sv ../libssl.so.1.0.0         /usr/lib/openssl-1.0        &&
+ln -sv ../libcrypto.so.1.0.0      /usr/lib/openssl-1.0        &&
+install -vdm755                   /usr/include/openssl-1.0    &&
+cp -Rv Dest/usr/include/openssl   /usr/include/openssl-1.0    &&
+sed 's@/include$@/include/openssl-1.0@' -i /usr/lib/openssl-1.0/pkgconfig/*.pc
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+# BUILD COMMANDS END HERE
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

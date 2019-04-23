@@ -6,22 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=dhcp
+URL=ftp://ftp.isc.org/isc/dhcp/4.4.1/dhcp-4.4.1.tar.gz
+DESCRIPTION="The ISC DHCP package contains both the client and server programs for DHCP. <span class=\command\><strong>dhclient</strong> (the client) is used for connecting to a network which uses DHCP to assign network addresses. <span class=\command\><strong>dhcpd</strong> (the server) is used for assigning network addresses on private networks."
+VERSION=4.4.1
+
 
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.isc.org/isc/dhcp/4.4.1/dhcp-4.4.1.tar.gz
-
-NAME=dhcp
-VERSION=4.4.1
-URL=ftp://ftp.isc.org/isc/dhcp/4.4.1/dhcp-4.4.1.tar.gz
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ( export CFLAGS="$CFLAGS -Wall -fno-strict-aliasing \
 -D_PATH_DHCLIENT_SCRIPT='\"/sbin/dhclient-script\"' \
@@ -171,7 +172,7 @@ popd
 popd
 sudo rm -rf $SOURCE_DIR/blfs-systemd-units-20180105
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

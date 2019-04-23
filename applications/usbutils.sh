@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=usbutils
+URL=https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-010.tar.xz
+DESCRIPTION="The USB Utils package contains utilities used to display information about USB buses in the system and the devices connected to them."
+VERSION=010
+
 #REQ:libusb
 #REQ:wget
 
@@ -14,17 +19,9 @@ cd $SOURCE_DIR
 wget -nc https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-010.tar.xz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/usbutils-010-lsusb_bugfixes-1.patch
 
-NAME=usbutils
-VERSION=010
-URL=https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-010.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../usbutils-010-lsusb_bugfixes-1.patch &&
 ./configure --prefix=/usr --datadir=/usr/share/hwdata &&
@@ -89,7 +89,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

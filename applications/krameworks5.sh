@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=krameworks5
+URL=
+DESCRIPTION=""
+VERSION=5.53
+
 #REQ:kf5-intro
 #REQ:boost
 #REQ:extra-cmake-modules
@@ -39,18 +44,11 @@ set +h
 
 cd $SOURCE_DIR
 
-
-NAME=krameworks5
-VERSION=5.53
-URL=""
-
-if [ ! -z $URL ]
-then
+wget -nc -r
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -58,7 +56,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 touch krameworks5.log
 . /etc/profile.d/qt5.sh
@@ -196,6 +197,7 @@ done < frameworks-5.55.0.md5
 
 rm $SOURCE_DIR/krameworks5.log
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

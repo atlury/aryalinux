@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=cmake
+URL=https://cmake.org/files/v3.14/cmake-3.14.0.tar.gz
+DESCRIPTION="The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated <span class=\command\><strong>configure</strong> script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4."
+VERSION=3.14.0
+
 #REQ:libuv
 #REC:curl
 #REC:libarchive
@@ -14,17 +19,9 @@ cd $SOURCE_DIR
 
 wget -nc https://cmake.org/files/v3.14/cmake-3.14.0.tar.gz
 
-NAME=cmake
-VERSION=3.14.0
-URL=https://cmake.org/files/v3.14/cmake-3.14.0.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
 
@@ -52,7 +52,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

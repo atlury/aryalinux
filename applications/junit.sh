@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=junit
+URL=https://github.com/junit-team/junit4/archive/r4.12/junit4-r4.12.tar.gz
+DESCRIPTION="The JUnit package contains a simple, open source framework to write and run repeatable tests. It is an instance of the xUnit architecture for unit testing frameworks. JUnit features include assertions for testing expected results, test fixtures for sharing common test data, and test runners for running tests."
+VERSION=r4.12
+
 #REQ:maven
 #REQ:unzip
 
@@ -14,16 +19,9 @@ cd $SOURCE_DIR
 wget -nc https://github.com/junit-team/junit4/archive/r4.12/junit4-r4.12.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/junit4-r4.12-simplify_NoExitSecurityManager-1.patch
 
-NAME=junit
-VERSION=r4.12
-URL=https://github.com/junit-team/junit4/archive/r4.12/junit4-r4.12.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -e '/MethodsSorted/i @Ignore' \
 -i src/test/java/org/junit/runners/model/TestClassTest.java
@@ -59,7 +60,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

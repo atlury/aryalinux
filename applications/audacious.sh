@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=audacious
+URL=https://distfiles.audacious-media-player.org/audacious-3.10.1.tar.bz2
+DESCRIPTION="Audacious is an audio player."
+VERSION=3.10.1
+
 #REQ:gtk2
 #REQ:qt5
 #REQ:libxml2
@@ -16,17 +21,9 @@ cd $SOURCE_DIR
 wget -nc https://distfiles.audacious-media-player.org/audacious-3.10.1.tar.bz2
 wget -nc https://distfiles.audacious-media-player.org/audacious-plugins-3.10.1.tar.bz2
 
-NAME=audacious
-VERSION=3.10.1
-URL=https://distfiles.audacious-media-player.org/audacious-3.10.1.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -34,7 +31,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 TPUT=/bin/true ./configure --prefix=/usr \
 --with-buildstamp="BLFS" &&
@@ -82,7 +82,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

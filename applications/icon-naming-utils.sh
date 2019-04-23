@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=icon-naming-utils
+URL=http://tango.freedesktop.org/releases/icon-naming-utils-0.8.90.tar.bz2
+DESCRIPTION="The icon-naming-utils package contains a Perl script used for maintaining backwards compatibility with current desktop icon themes, while migrating to the names specified in the <a class=\ulink\ href=\http://standards.freedesktop.org/icon-naming-spec/latest/\>Icon Naming Specification</a>."
+VERSION=0.8.90
+
 #REQ:perl-xml-simple
 
 cd $SOURCE_DIR
 
 wget -nc http://tango.freedesktop.org/releases/icon-naming-utils-0.8.90.tar.bz2
 
-NAME=icon-naming-utils
-VERSION=0.8.90
-URL=http://tango.freedesktop.org/releases/icon-naming-utils-0.8.90.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr &&
 make
@@ -43,7 +43,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

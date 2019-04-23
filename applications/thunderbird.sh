@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=thunderbird
+URL=https://archive.mozilla.org/pub/thunderbird/releases/60.6.1/source/thunderbird-60.6.1.source.tar.xz
+DESCRIPTION="Thunderbird is a stand-alone mail/news client based on the Mozilla codebase. It uses the Gecko rendering engine to enable it to display and compose HTML emails."
+VERSION=60.6.1.source
+
 #REQ:autoconf213
 #REQ:gtk3
 #REQ:gtk2
@@ -24,17 +29,9 @@ cd $SOURCE_DIR
 
 wget -nc https://archive.mozilla.org/pub/thunderbird/releases/60.6.1/source/thunderbird-60.6.1.source.tar.xz
 
-NAME=thunderbird
-VERSION=60.6.1.source
-URL=https://archive.mozilla.org/pub/thunderbird/releases/60.6.1/source/thunderbird-60.6.1.source.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -42,7 +39,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, the build may be faster if using parallel
@@ -139,7 +139,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

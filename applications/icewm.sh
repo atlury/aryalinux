@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=icewm
+URL=https://github.com/bbidulock/icewm/releases/download/1.4.2/icewm-1.4.2.tar.bz2
+DESCRIPTION="IceWM is a window manager with the goals of speed, simplicity, and not getting in the user's way."
+VERSION=1.4.2
+
 #REQ:gdk-pixbuf
 
 cd $SOURCE_DIR
 
 wget -nc https://github.com/bbidulock/icewm/releases/download/1.4.2/icewm-1.4.2.tar.bz2
 
-NAME=icewm
-VERSION=1.4.2
-URL=https://github.com/bbidulock/icewm/releases/download/1.4.2/icewm-1.4.2.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr \
 --sysconfdir=/etc \
@@ -59,6 +59,7 @@ rox -p Default &
 EOF &&
 chmod +x ~/.icewm/startup
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=yelp-xsl
+URL=http://ftp.gnome.org/pub/gnome/sources/yelp-xsl/3.32/yelp-xsl-3.32.1.tar.xz
+DESCRIPTION="The Yelp XSL package contains XSL stylesheets that are used by the Yelp help browser to format Docbook and Mallard documents."
+VERSION=3.32.1
+
 #REQ:libxslt
 #REQ:itstool
 
@@ -14,17 +19,9 @@ cd $SOURCE_DIR
 wget -nc http://ftp.gnome.org/pub/gnome/sources/yelp-xsl/3.32/yelp-xsl-3.32.1.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/yelp-xsl/3.32/yelp-xsl-3.32.1.tar.xz
 
-NAME=yelp-xsl
-VERSION=3.32.1
-URL=http://ftp.gnome.org/pub/gnome/sources/yelp-xsl/3.32/yelp-xsl-3.32.1.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr
 
@@ -44,7 +44,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

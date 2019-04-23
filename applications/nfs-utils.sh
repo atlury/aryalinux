@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=nfs-utils
+URL=https://downloads.sourceforge.net/nfs/nfs-utils-2.3.3.tar.xz
+DESCRIPTION="The NFS Utilities package contains the userspace server and client tools necessary to use the kernel's NFS abilities. NFS is a protocol that allows sharing file systems over the network."
+VERSION=2.3.3
+
 #REQ:libtirpc
 #REQ:rpcsvc-proto
 #REQ:rpcbind
@@ -13,18 +18,11 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/nfs/nfs-utils-2.3.3.tar.xz
-
-NAME=nfs-utils
-VERSION=2.3.3
-URL=https://downloads.sourceforge.net/nfs/nfs-utils-2.3.3.tar.xz
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +30,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 groupadd -g 99 nogroup &&
 useradd -c "Unprivileged Nobody" -d /dev/null -g nogroup \
@@ -101,7 +102,7 @@ popd
 popd
 sudo rm -rf $SOURCE_DIR/blfs-systemd-units-20180105
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

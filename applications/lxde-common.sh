@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=lxde-common
+URL=https://downloads.sourceforge.net/lxde/lxde-common-0.99.2.tar.xz
+DESCRIPTION="The LXDE Common package provides a set of default configuration for LXDE."
+VERSION=0.99.2
+
 #REQ:lxde-icon-theme
 #REQ:lxpanel
 #REQ:lxsession
@@ -20,17 +25,9 @@ cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/lxde/lxde-common-0.99.2.tar.xz
 
-NAME=lxde-common
-VERSION=0.99.2
-URL=https://downloads.sourceforge.net/lxde/lxde-common-0.99.2.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -38,7 +35,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr --sysconfdir=/etc &&
 make
@@ -70,6 +70,7 @@ EOF
 startx
 startx &> ~/.x-session-errors
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

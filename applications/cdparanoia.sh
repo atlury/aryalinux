@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=cdparanoia
+URL=https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
+DESCRIPTION="The CDParanoia package contains a CD audio extraction tool. This is useful for extracting <code class=\filename\>.wav files from audio CDs. A CDDA capable CDROM drive is needed. Practically all drives supported by Linux can be used."
+VERSION=10.2.src
+
 
 cd $SOURCE_DIR
 
 wget -nc https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/cdparanoia-III-10.2-gcc_fixes-1.patch
 
-NAME=cdparanoia
-VERSION=10.2.src
-URL=https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../cdparanoia-III-10.2-gcc_fixes-1.patch &&
 ./configure --prefix=/usr --mandir=/usr/share/man &&
@@ -45,7 +45,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=texlive
+URL=ftp://tug.org/texlive/historic/2018/texlive-20180414-source.tar.xz
+DESCRIPTION="Most of TeX Live can be built from source without a pre-existing installation, but xindy (for indexing) needs working versions of <span class=\command\><strong>latex</strong> and <span class=\command\><strong>pdflatex</strong> when configure is run, and the testsuite and install for <span class=\command\><strong>asy</strong> (for vector graphics) will fail if TeX has not already been installed. Additionally, biber is not provided within the texlive source."
+VERSION=source
+
 #REC:gs
 #REC:asymptote
 #REC:fontconfig
@@ -28,17 +33,9 @@ wget -nc ftp://tug.org/texlive/historic/2018/texlive-20180414-texmf.tar.xz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/texlive-20180414-source-upstream_fixes-3.patch
 wget -nc https://cpan.metacpan.org/authors/id/S/SR/SREZIC/Tk-804.034.tar.gz
 
-NAME=texlive
-VERSION=source
-URL=ftp://tug.org/texlive/historic/2018/texlive-20180414-source.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -46,8 +43,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -130,7 +129,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

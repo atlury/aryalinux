@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=alsa-tools
+URL=ftp://ftp.alsa-project.org/pub/tools/alsa-tools-1.1.7.tar.bz2
+DESCRIPTION="The ALSA Tools package contains advanced tools for certain sound cards."
+VERSION=1.1.7
+
 #REQ:alsa-lib
 #REQ:fltk
 
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 
 wget -nc ftp://ftp.alsa-project.org/pub/tools/alsa-tools-1.1.7.tar.bz2
 
-NAME=alsa-tools
-VERSION=1.1.7
-URL=ftp://ftp.alsa-project.org/pub/tools/alsa-tools-1.1.7.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 as_root()
 {
@@ -64,6 +64,7 @@ popd
 done
 unset tool tool_dir
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

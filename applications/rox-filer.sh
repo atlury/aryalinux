@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=rox-filer
+URL=https://downloads.sourceforge.net/rox/rox-filer-2.11.tar.bz2
+DESCRIPTION="rox-filer is a fast, lightweight, gtk2 file manager."
+VERSION=2.11
+
 #REQ:libglade
 #REQ:shared-mime-info
 
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/rox/rox-filer-2.11.tar.bz2
 
-NAME=rox-filer
-VERSION=2.11
-URL=https://downloads.sourceforge.net/rox/rox-filer-2.11.tar.bz2
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 cd ROX-Filer &&
 sed -i 's:g_strdup(getenv("APP_DIR")):"/usr/share/rox":' src/main.c &&
@@ -122,7 +122,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

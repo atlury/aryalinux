@@ -6,22 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=bind
+URL=ftp://ftp.isc.org/isc/bind9/9.14.0/bind-9.14.0.tar.gz
+DESCRIPTION="The BIND package provides a DNS server and client utilities."
+VERSION=9.14.0
+
 
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.isc.org/isc/bind9/9.14.0/bind-9.14.0.tar.gz
-
-NAME=bind
-VERSION=9.14.0
-URL=ftp://ftp.isc.org/isc/bind9/9.14.0/bind-9.14.0.tar.gz
-
-if [ ! -z $URL ]
-then
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 pip3 install ply
 ./configure --prefix=/usr \
@@ -282,6 +283,7 @@ dig -x 127.0.0.1
 dig www.linuxfromscratch.org &&
 dig www.linuxfromscratch.org
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

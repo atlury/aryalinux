@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=sudo
+URL=http://www.sudo.ws/dist/sudo-1.8.27.tar.gz
+DESCRIPTION="The Sudo package allows a system administrator to give certain users (or groups of users) the ability to run some (or all) commands as <code class=\systemitem\>root or another user while logging the commands and arguments."
+VERSION=1.8.27
+
 
 cd $SOURCE_DIR
 
 wget -nc http://www.sudo.ws/dist/sudo-1.8.27.tar.gz
 wget -nc ftp://ftp.sudo.ws/pub/sudo/sudo-1.8.27.tar.gz
 
-NAME=sudo
-VERSION=1.8.27
-URL=http://www.sudo.ws/dist/sudo-1.8.27.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 ./configure --prefix=/usr \
 --libexecdir=/usr/lib \
@@ -62,7 +62,7 @@ session include system-session
 EOF
 chmod 644 /etc/pam.d/sudo
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

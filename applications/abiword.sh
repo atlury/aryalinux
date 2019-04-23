@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=abiword
+URL=http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz
+DESCRIPTION="AbiWord is a word processor which is useful for writing reports, letters and other formatted documents."
+VERSION=3.0.2
+
 #REQ:boost
 #REQ:fribidi
 #REQ:goffice010
@@ -19,17 +24,9 @@ wget -nc http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-docs-3.
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/abiword-3.0.2-gtk3_22_render_fix-1.patch
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/abiword-3.0.2-fix_flicker-1.patch
 
-NAME=abiword
-VERSION=3.0.2
-URL=http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -37,7 +34,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 patch -Np1 -i ../abiword-3.0.2-gtk3_22_render_fix-1.patch &&
 
@@ -80,6 +80,7 @@ install -v -m750 -d ~/.AbiSuite/templates &&
 install -v -m640 /usr/share/abiword-3.0/templates/normal.awt-<em class="replaceable"><code><lang></code></em> \
 ~/.AbiSuite/templates/normal.awt
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

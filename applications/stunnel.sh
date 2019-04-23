@@ -6,22 +6,19 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=stunnel
+URL=ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.50.tar.gz
+DESCRIPTION="The stunnel package contains a program that allows you to encrypt arbitrary TCP connections inside SSL (Secure Sockets Layer) so you can easily communicate with clients over secure channels. stunnel can be used to add SSL functionality to commonly used Inetd daemons such as POP-2, POP-3, and IMAP servers, along with standalone daemons such as NNTP, SMTP, and HTTP. stunnel can also be used to tunnel PPP over network sockets without changes to the server package source code."
+VERSION=5.50
+
 
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.50.tar.gz
 
-NAME=stunnel
-VERSION=5.50
-URL=ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.50.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -29,8 +26,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
 
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
@@ -125,7 +124,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

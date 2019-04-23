@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=tcsh
+URL=http://fossies.org/linux/misc/tcsh-6.20.00.tar.gz
+DESCRIPTION="The Tcsh package contains an enhanced but completely compatible version of the Berkeley Unix C shell (csh). This is useful as an alternative shell for those who prefer C syntax to that of the bash shell, and also because some programs require the C shell in order to perform installation tasks."
+VERSION=6.20.00
+
 
 cd $SOURCE_DIR
 
 wget -nc http://fossies.org/linux/misc/tcsh-6.20.00.tar.gz
 wget -nc ftp://ftp.astron.com/pub/tcsh/tcsh-6.20.00.tar.gz
 
-NAME=tcsh
-VERSION=6.20.00
-URL=http://fossies.org/linux/misc/tcsh-6.20.00.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -30,7 +27,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i 's|SVID_SOURCE|DEFAULT_SOURCE|g' config/linux &&
 sed -i 's|BSD_SOURCE|DEFAULT_SOURCE|g' config/linux
@@ -100,6 +100,7 @@ alias ls ls --color=always
 unset red green yellow blue magenta cyan yellow white end
 EOF
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

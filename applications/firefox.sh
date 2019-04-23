@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=firefox
+URL=https://archive.mozilla.org/pub/firefox/releases/66.0.2/source/firefox-66.0.2.source.tar.xz
+DESCRIPTION="Firefox is a stand-alone browser based on the Mozilla codebase."
+VERSION=66.0.2
+
 #REQ:autoconf213
 #REQ:cbindgen
 #REQ:llvm
@@ -29,17 +34,9 @@ cd $SOURCE_DIR
 
 wget -nc https://archive.mozilla.org/pub/firefox/releases/66.0.2/source/firefox-66.0.2.source.tar.xz
 
-NAME=firefox
-VERSION=66.0.2
-URL=https://archive.mozilla.org/pub/firefox/releases/66.0.2/source/firefox-66.0.2.source.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -47,7 +44,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.
@@ -176,6 +176,7 @@ EOF
 sudo ln -sfv /usr/lib/firefox/browser/chrome/icons/default/default128.png \
         /usr/share/pixmaps/firefox.png
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

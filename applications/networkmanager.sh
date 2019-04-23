@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=networkmanager
+URL=http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.16/NetworkManager-1.16.0.tar.xz
+DESCRIPTION="NetworkManager is a set of co-operative tools that make networking simple and straightforward. Whether WiFi, wired, 3G, or Bluetooth, NetworkManager allows you to quickly move from one network to another: Once a network has been configured and joined once, it can be detected and re-joined automatically the next time it's available."
+VERSION=1.16.0
+
 #REQ:dbus-glib
 #REQ:libndp
 #REQ:pygobject2
@@ -27,17 +32,9 @@ cd $SOURCE_DIR
 wget -nc http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.16/NetworkManager-1.16.0.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.16/NetworkManager-1.16.0.tar.xz
 
-NAME=networkmanager
-VERSION=1.16.0
-URL=http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.16/NetworkManager-1.16.0.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -45,7 +42,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -e '/Qt[CDN]/s/Qt/Qt5/g' \
 -e 's/-qt4/-qt5/' \
@@ -146,6 +146,7 @@ sudo rm -rf /tmp/rootscript.sh
 
 sudo /usr/sbin/usermod -a -G netdev $USER
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

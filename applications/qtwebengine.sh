@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=qtwebengine
+URL=https://download.qt.io/archive/qt/5.12/5.12.2/submodules/qtwebengine-everywhere-src-5.12.2.tar.xz
+DESCRIPTION="QtWebEngine integrates chromium\s web capabilities into Qt. It ships with its own copy of ninja which it uses for the build if it cannot find a system copy, and various copies of libraries from ffmpeg, icu, libvpx, and zlib (including libminizip) which have been forked by the chromium developers."
+VERSION=5.12.2
+
 #REQ:nss
 #REQ:python2
 #REQ:qt5
@@ -21,17 +26,9 @@ cd $SOURCE_DIR
 
 wget -nc https://download.qt.io/archive/qt/5.12/5.12.2/submodules/qtwebengine-everywhere-src-5.12.2.tar.xz
 
-NAME=qtwebengine
-VERSION=5.12.2
-URL=https://download.qt.io/archive/qt/5.12/5.12.2/submodules/qtwebengine-everywhere-src-5.12.2.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -39,7 +36,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 find -type f -name "*.pr[io]" |
 xargs sed -i -e 's|INCLUDEPATH += |&$$QTWEBENGINE_ROOT/include |'
@@ -78,7 +78,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

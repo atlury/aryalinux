@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=fop
+URL=https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.3-src.tar.gz
+DESCRIPTION="The FOP (Formatting Objects Processor) package contains a print formatter driven by XSL formatting objects (XSL-FO). It is a Java application that reads a formatting object tree and renders the resulting pages to a specified output. Output formats currently supported include PDF, PCL, PostScript, SVG, XML (area tree representation), print, AWT, MIF and ASCII text. The primary output target is PDF."
+VERSION=src
+
 #REQ:apache-ant
 
 cd $SOURCE_DIR
@@ -13,17 +18,9 @@ cd $SOURCE_DIR
 wget -nc https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.3-src.tar.gz
 wget -nc https://downloads.sourceforge.net/offo/2.2/offo-hyphenation.zip
 
-NAME=fop
-VERSION=src
-URL=https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.3-src.tar.gz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -31,7 +28,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 unzip ../offo-hyphenation.zip &&
 cp offo-hyphenation/hyph/* fop/hyph &&
@@ -65,6 +65,7 @@ FOP_OPTS="-Xmx<em class="replaceable"><code><RAM_Installed></em>m"
 FOP_HOME="/opt/fop"
 EOF
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

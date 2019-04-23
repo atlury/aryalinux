@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=libkexiv2
+URL=http://download.kde.org/stable/applications/18.12.2/src/libkexiv2-18.12.2.tar.xz
+DESCRIPTION="Libkexiv2 is a KDE wrapper around the Exiv2 library for manipulating image metadata."
+VERSION=18.12.2
+
 #REQ:krameworks5
 #REQ:exiv2
 
@@ -14,17 +19,9 @@ cd $SOURCE_DIR
 wget -nc http://download.kde.org/stable/applications/18.12.2/src/libkexiv2-18.12.2.tar.xz
 wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.5/libkexiv2-18.12.2-exiv2_0.27-1.patch
 
-NAME=libkexiv2
-VERSION=18.12.2
-URL=http://download.kde.org/stable/applications/18.12.2/src/libkexiv2-18.12.2.tar.xz
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -32,7 +29,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sed -i 's/find_package_handle_standard_args(Exiv2/find_package_handle_standard_args(exiv2/g' cmake/modules/FindExiv2.cmake
 patch -Np1 -i ../libkexiv2-18.12.2-exiv2_0.27-1.patch
@@ -53,7 +53,7 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# BUILD COMMANDS END HERE
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
-
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

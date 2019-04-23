@@ -6,21 +6,18 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+NAME=kf5-intro
+URL=
+DESCRIPTION=""
+VERSION=5.53
+
 
 cd $SOURCE_DIR
 
 
-NAME=kf5-intro
-VERSION=5.53
-URL=""
-
-if [ ! -z $URL ]
-then
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
-	sudo rm -rf $DIRECTORY
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
@@ -28,7 +25,10 @@ else
 fi
 
 cd $DIRECTORY
-fi
+
+whoami > /tmp/currentuser
+
+# BUILD COMMANDS START HERE
 
 sudo tee -a /etc/profile.d/qt5.sh << "EOF"
 # Begin kf5 extension for /etc/profile.d/qt5.sh
@@ -56,6 +56,7 @@ sudo tee -a /etc/sudoers.d/kde << "EOF"
 Defaults env_keep += KF5_PREFIX
 EOF
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# BUILD COMMANDS END HERE
 
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

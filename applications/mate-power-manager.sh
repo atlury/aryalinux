@@ -5,31 +5,42 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-NAME="mate-power-manager"
-DESCRIPTION="Power management tool for the MATE desktop"
-VERSION=1.20.1
 
-#REQ:gnome-keyring
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.20/mate-power-manager-1.20.1.tar.xz"
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
+wget -nc https://pub.mate-desktop.org/releases/1.23/mate-power-manager-1.23.1.tar.xz
 
-tar xf $TARBALL
+
+NAME=mate-power-manager
+VERSION=1.23.1
+URL=https://pub.mate-desktop.org/releases/1.23/mate-power-manager-1.23.1.tar.xz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --without-keyring --with-gtk=3.0 &&
-make "-j`nproc`"
+make
 
 sudo make install
 
-cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

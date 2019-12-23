@@ -5,74 +5,75 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The p11-kit package provides a waybr3ak to load and enumerate PKCS #11 (a Cryptographic Token Interfacebr3ak Standard) modules.br3ak"
-SECTION="postlfs"
-VERSION=0.23.12
-NAME="p11-kit"
-
-#REQ:nss
-#REC:make-ca
-#REC:libtasn1
-#OPT:nss
-#OPT:gtk-doc
-#OPT:libxslt
+#REQ:libtasn1
+#REQ:make-ca
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/p11-glue/p11-kit/releases/download/0.23.12/p11-kit-0.23.12.tar.gz
+wget -nc https://github.com/p11-glue/p11-kit/releases/download/0.23.18.1/p11-kit-0.23.18.1.tar.gz
+
+
+NAME=p11-kit
+VERSION=0.23.18.1
+URL=https://github.com/p11-glue/p11-kit/releases/download/0.23.18.1/p11-kit-0.23.18.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/p11-glue/p11-kit/releases/download/0.23.12/p11-kit-0.23.12.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/p11kit/p11-kit-0.23.12.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/p11kit/p11-kit-0.23.12.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/p11kit/p11-kit-0.23.12.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/p11kit/p11-kit-0.23.12.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/p11kit/p11-kit-0.23.12.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/p11kit/p11-kit-0.23.12.tar.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
 
+
+sed '20,$ d' -i trust/trust-extract-compat.in &&
+cat >> trust/trust-extract-compat.in << "EOF"
+# Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Generate a new trust store
+/usr/sbin/make-ca -f -g
+EOF
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --with-trust-paths=/etc/pki/anchors &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+make install &&
+ln -sfv /usr/libexec/p11-kit/trust-extract-compat \
+        /usr/bin/update-ca-certificates
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-if [ -e /usr/lib/libnssckbi.so ]; then
-  readlink /usr/lib/libnssckbi.so ||
-  rm -v /usr/lib/libnssckbi.so    &&
-  ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
-fi
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

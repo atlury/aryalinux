@@ -5,32 +5,41 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="xf86-video-vesa"
-VERSION="2.4.0"
 
-#REQ:xorg-server
-#REC:mtdev
-
-URL=https://www.x.org/releases/individual/driver/xf86-video-vesa-2.4.0.tar.bz2
-
-export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 cd $SOURCE_DIR
 
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
+wget -nc https://www.x.org/archive/individual/driver/xf86-video-vesa-2.4.0.tar.gz
 
-tar -xf $TARBALL
+
+NAME=xf86-video-vesa
+VERSION=2.4.0
+URL=https://www.x.org/archive/individual/driver/xf86-video-vesa-2.4.0.tar.gz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-./configure --prefix=/usr  &&
-make "-j`nproc`"
+./configure $XORG_CONFIG &&
+make -j$(nproc)
 sudo make install
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

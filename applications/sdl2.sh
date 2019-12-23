@@ -5,58 +5,57 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Simple DirectMedia Layer Version 2 (SDL2 for short) is a cross-platform librarybr3ak designed to make it easy to write multimedia software, such asbr3ak games and emulators.br3ak"
-SECTION="multimedia"
-VERSION=2.0.8
-NAME="sdl2"
-
-#OPT:doxygen
-#OPT:ibus
-#OPT:nasm
-#OPT:pulseaudio
-#OPT:xorg-server
 
 
 cd $SOURCE_DIR
 
-URL=http://www.libsdl.org/release/SDL2-2.0.8.tar.gz
+wget -nc http://www.libsdl.org/release/SDL2-2.0.10.tar.gz
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/SDL2-2.0.10-opengl_include_fix-1.patch
+
+
+NAME=sdl2
+VERSION=2.0.10
+URL=http://www.libsdl.org/release/SDL2-2.0.10.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.libsdl.org/release/SDL2-2.0.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/SDL/SDL2-2.0.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/SDL/SDL2-2.0.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/SDL/SDL2-2.0.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/SDL/SDL2-2.0.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/SDL/SDL2-2.0.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/SDL/SDL2-2.0.8.tar.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
 
+
+case $(uname -m) in
+   i?86) patch -Np1 -i ../SDL2-2.0.10-opengl_include_fix-1.patch ;;
+esac
 ./configure --prefix=/usr &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install              &&
 rm -v /usr/lib/libSDL2*.a
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

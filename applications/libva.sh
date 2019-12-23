@@ -5,43 +5,56 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="libva"
-VERSION="2.1.0"
-
+#REQ:libdrm
 #REQ:mesa
-#OPT:doxygen
-#OPT:wayland
+
 
 cd $SOURCE_DIR
 
-URL=http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-2.1.0.tar.bz2
+wget -nc https://github.com/intel/libva/releases/download/2.5.0/libva-2.5.0.tar.bz2
+wget -nc https://github.com/intel/intel-vaapi-driver/releases/download/2.4.0/intel-vaapi-driver-2.4.0.tar.bz2
 
-wget -nc $URL
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
+NAME=libva
+VERSION=2.5.0
+URL=https://github.com/intel/libva/releases/download/2.5.0/libva-2.5.0.tar.bz2
 
-tar xf $TARBALL
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
+echo $USER > /tmp/currentuser
+
 ./configure $XORG_CONFIG &&
 make
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

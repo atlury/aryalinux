@@ -5,72 +5,92 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak QtWebEngine integratesbr3ak chromium\"s web capabilities intobr3ak Qt. It ships with its own copy of ninja which it uses for the buildbr3ak if it cannot find a system copy, and various copies of librariesbr3ak from ffmpeg, icu, libvpx, and zlib (including libminizip) whichbr3ak have been forked by the chromiumbr3ak developers.br3ak"
-SECTION="x"
-VERSION=5.11.1
-NAME="qtwebengine"
+. /etc/alps/directories.conf
 
 #REQ:nss
-#REQ:pulseaudio
+#REQ:python2
 #REQ:qt5
-#REC:libwebp
-#REC:libxslt
-#REC:opus
-#OPT:libevent
+#REQ:alsa-lib
+#REQ:pulseaudio
+#REQ:ffmpeg
+#REQ:python-modules#jinja2
+#REQ:icu
+#REQ:libwebp
+#REQ:libxslt
+#REQ:opus
 
 
 cd $SOURCE_DIR
 
-URL=https://download.qt.io/archive/qt/5.11/5.11.1/submodules/qtwebengine-everywhere-src-5.11.1.tar.xz
+wget -nc https://download.qt.io/archive/qt/5.14/5.14.0/submodules/qtwebengine-everywhere-src-5.14.0.tar.xz
+
+
+NAME=qtwebengine
+VERSION=5.14.0
+URL=https://download.qt.io/archive/qt/5.14/5.14.0/submodules/qtwebengine-everywhere-src-5.14.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.qt.io/archive/qt/5.11/5.11.1/submodules/qtwebengine-everywhere-src-5.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qtwebengine/qtwebengine-everywhere-src-5.11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qtwebengine/qtwebengine-everywhere-src-5.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtwebengine/qtwebengine-everywhere-src-5.11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtwebengine/qtwebengine-everywhere-src-5.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qtwebengine/qtwebengine-everywhere-src-5.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qtwebengine/qtwebengine-everywhere-src-5.11.1.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
+
+find -type f -name "*.pr[io]" |
+  xargs sed -i -e 's|INCLUDEPATH += |&$$QTWEBENGINE_ROOT/include |'
+sed -e '/link_pulseaudio/s/false/true/' \
+    -i src/3rdparty/chromium/media/media_options.gni
+sed -i 's/NINJAJOBS/NINJA_JOBS/' src/core/gn_run.pro
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+if [ -e ${QT5DIR}/lib/libQt5WebEngineCore.so ]; then
+  mv -v ${QT5DIR}/lib/libQt5WebEngineCore.so{,.old}
+fi
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 mkdir build &&
 cd    build &&
-qmake ..    &&
-make "-j`nproc`" || make
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+qmake .. -- -system-ffmpeg -webengine-icu &&
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-find /opt/qt5/ -name \*.prl \
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+find $QT5DIR/ -name \*.prl \
    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

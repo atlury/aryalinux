@@ -5,99 +5,133 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The NFS Utilities package containsbr3ak the userspace server and client tools necessary to use the kernel'sbr3ak NFS abilities. NFS is a protocol that allows sharing file systemsbr3ak over the network.br3ak"
-SECTION="basicnet"
-VERSION=2.3.2
-NAME="nfs-utils"
+. /etc/alps/directories.conf
 
 #REQ:libtirpc
+#REQ:rpcsvc-proto
 #REQ:rpcbind
-#OPT:lvm2
-#OPT:libnfsidmap
-#OPT:libnsl
-#OPT:sqlite
-#OPT:mitkrb
-#OPT:libcap
 
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/nfs/nfs-utils-2.3.2.tar.xz
+wget -nc https://downloads.sourceforge.net/nfs/nfs-utils-2.4.1.tar.xz
+
+
+NAME=nfs-utils
+VERSION=2.4.1
+URL=https://downloads.sourceforge.net/nfs/nfs-utils-2.4.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/nfs/nfs-utils-2.3.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nfs-utils/nfs-utils-2.3.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nfs-utils/nfs-utils-2.3.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.2.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-if ! grep nogroup /etc/group &>/dev/null; then groupadd -g 99 nogroup; fi
-if ! grep nobody /etc/passwd &>/dev/null; then useradd -c "Unprivileged Nobody" -d /dev/null -g nogroup -s /bin/false -u 99 nobody; fi
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
+echo $USER > /tmp/currentuser
 
 
-sed -i '/strict-prototypes/d' configure.ac &&
-autoreconf -fiv
-
-
+groupadd -g 99 nogroup &&
+useradd -c "Unprivileged Nobody" -d /dev/null -g nogroup \
+    -s /bin/false -u 99 nobody
 ./configure --prefix=/usr          \
             --sysconfdir=/etc      \
             --sbindir=/sbin        \
-            --without-tcp-wrappers \
             --disable-nfsv4        \
             --disable-gss &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install                      &&
 mv -v /sbin/start-statd /usr/sbin &&
 chmod u+w,go+r /sbin/mount.nfs    &&
 chown nobody.nogroup /var/lib/nfs
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
+cat >> /etc/exports << EOF
+/home 192.168.0.0/24(rw,subtree_check,anonuid=99,anongid=99)
+EOF
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+#!/bin/bash
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+set -e
+set +h
+
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
-make install-nfs-client
-
-cd ..
-rm -rf blfs-systemd-units-20180105
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20191026.tar.xz
+tar xf blfs-systemd-units-20191026.tar.xz
+cd blfs-systemd-units-20191026
+sudo make install-nfsv4-server
 popd
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+#!/bin/bash
+
+set -e
+set +h
+
+. /etc/alps/alps.conf
+
+pushd $SOURCE_DIR
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20191026.tar.xz
+tar xf blfs-systemd-units-20191026.tar.xz
+cd blfs-systemd-units-20191026
+sudo make install-nfs-server
+popd
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+<server-name>:/home  /home nfs   rw,_netdev 0 0
+<server-name>:/usr   /usr  nfs   ro,_netdev 0 0
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+#!/bin/bash
+
+set -e
+set +h
+
+. /etc/alps/alps.conf
+
+pushd $SOURCE_DIR
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20191026.tar.xz
+tar xf blfs-systemd-units-20191026.tar.xz
+cd blfs-systemd-units-20191026
+sudo make install-nfs-client
+popd
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

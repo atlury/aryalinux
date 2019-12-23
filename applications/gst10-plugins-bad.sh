@@ -5,87 +5,62 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The GStreamer Bad Plug-ins packagebr3ak contains a set of plug-ins that aren't up to par compared to thebr3ak rest. They might be close to being good quality, but they'rebr3ak missing something - be it a good code review, some documentation, abr3ak set of tests, a real live maintainer, or some actual wide use.br3ak"
-SECTION="multimedia"
-VERSION=1.14.1
-NAME="gst10-plugins-bad"
+. /etc/alps/directories.conf
 
 #REQ:gst10-plugins-base
-#REC:libdvdread
-#REC:libdvdnav
-#REC:llvm
-#REC:soundtouch
-#OPT:bluez
-#OPT:clutter
-#OPT:curl
-#OPT:faac
-#OPT:faad2
-#OPT:gnutls
-#OPT:gtk-doc
-#OPT:gtk2
-#OPT:gtk3
-#OPT:libass
-#OPT:libexif
-#OPT:libgcrypt
-#OPT:libmpeg2
-#OPT:x7driver
-#OPT:libwebp
-#OPT:neon
-#OPT:nettle
-#OPT:opencv
-#OPT:openjpeg2
-#OPT:opus
-#OPT:qt5
-#OPT:sdl
-#OPT:valgrind
-#OPT:wayland
-#OPT:x265
-#OPT:x7lib
+#REQ:libdvdread
+#REQ:libdvdnav
+#REQ:soundtouch
 
 
 cd $SOURCE_DIR
 
-URL=https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz
+wget -nc https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.16.2.tar.xz
+
+
+NAME=gst10-plugins-bad
+VERSION=1.16.2
+URL=https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.16.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.1.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr                                           \
-            --disable-wayland                                       \
-            --disable-opencv                                        \
-            --with-package-name="GStreamer Bad Plugins 1.14.1 BLFS" \
-            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
+mkdir build &&
+cd    build &&
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+meson  --prefix=/usr       \
+       -Dbuildtype=release \
+       -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ \
+       -Dpackage-name="GStreamer 1.16.2 BLFS" &&
+ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

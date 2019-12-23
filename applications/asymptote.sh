@@ -5,70 +5,71 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Asymptote is a powerfulbr3ak descriptive vector graphics language that provides a naturalbr3ak coordinate-based framework for technical drawing. Labels andbr3ak equations can be typeset with LaTeX.br3ak"
-SECTION="pst"
-VERSION=2.44
-NAME="asymptote"
+. /etc/alps/directories.conf
 
 #REQ:gs
 #REQ:texlive
-#REC:freeglut
-#REC:gc
-#OPT:gsl
-#OPT:libsigsegv
-#OPT:fftw
-#OPT:python2
-#OPT:tk
+#REQ:freeglut
+#REQ:gc
+#REQ:glew
+#REQ:glm
+#REQ:libtirpc
+#REQ:dvisvgm
 
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/asymptote/asymptote-2.44.src.tgz
+wget -nc https://downloads.sourceforge.net/asymptote/asymptote-2.61.src.tgz
+
+
+NAME=asymptote
+VERSION=2.61
+URL=https://downloads.sourceforge.net/asymptote/asymptote-2.61.src.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/asymptote/asymptote-2.44.src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/asymptote/asymptote-2.44.src.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/asymptote/asymptote-2.44.src.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/asymptote/asymptote-2.44.src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/asymptote/asymptote-2.44.src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/asymptote/asymptote-2.44.src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/asymptote/asymptote-2.44.src.tgz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
-./configure --prefix=/opt/texlive/2018                          \
-            --bindir=/opt/texlive/2018/bin/$TEXARCH             \
-            --datarootdir=/opt/texlive/2018/texmf-dist          \
-            --infodir=/opt/texlive/2018/texmf-dist/doc/info     \
-            --libdir=/opt/texlive/2018/texmf-dist               \
-            --mandir=/opt/texlive/2018/texmf-dist/doc/man       \
+
+./configure --prefix=/opt/texlive/2019                          \
+            --bindir=/opt/texlive/2019/bin/$TEXARCH             \
+            --datarootdir=/opt/texlive/2019/texmf-dist          \
+            --infodir=/opt/texlive/2019/texmf-dist/doc/info     \
+            --libdir=/opt/texlive/2019/texmf-dist               \
+            --mandir=/opt/texlive/2019/texmf-dist/doc/man       \
             --enable-gc=system                                  \
-            --with-latex=/opt/texlive/2018/texmf-dist/tex/latex \
-            --with-context=/opt/texlive/2018/texmf-dist/tex/context/third &&
-make "-j`nproc`" || make
+            --with-latex=/opt/texlive/2019/texmf-dist/tex/latex \
+            --with-context=/opt/texlive/2019/texmf-dist/tex/context/third &&
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

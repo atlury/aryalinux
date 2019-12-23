@@ -5,58 +5,56 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The libpng package containsbr3ak libraries used by other programs for reading and writing PNG files.br3ak The PNG format was designed as a replacement for GIF and, to abr3ak lesser extent, TIFF, with many improvements and extensions and lackbr3ak of patent problems.br3ak"
-SECTION="general"
-VERSION=1.6.34
-NAME="libpng"
+. /etc/alps/directories.conf
 
 
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/libpng/libpng-1.6.34.tar.xz
+wget -nc https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz
+wget -nc https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-1.6.37-apng.patch.gz
+
+
+NAME=libpng
+VERSION=1.6.37
+URL=https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/libpng/libpng-1.6.34.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpng/libpng-1.6.34.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libpng/libpng-1.6.34.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpng/libpng-1.6.34.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpng/libpng-1.6.34.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpng/libpng-1.6.34.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpng/libpng-1.6.34.tar.xz
-wget -nc https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-1.6.34-apng.patch.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpng/libpng-1.6.34-apng.patch.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libpng/libpng-1.6.34-apng.patch.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpng/libpng-1.6.34-apng.patch.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpng/libpng-1.6.34-apng.patch.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpng/libpng-1.6.34-apng.patch.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpng/libpng-1.6.34-apng.patch.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-gzip -cd ../libpng-1.6.34-apng.patch.gz | patch -p1
+echo $USER > /tmp/currentuser
 
 
-LIBS=-lpthread ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+gzip -cd ../libpng-1.6.37-apng.patch.gz | patch -p1
+./configure --prefix=/usr --disable-static &&
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install &&
-mkdir -v /usr/share/doc/libpng-1.6.34 &&
-cp -v README libpng-manual.txt /usr/share/doc/libpng-1.6.34
-
+mkdir -v /usr/share/doc/libpng-1.6.37 &&
+cp -v README libpng-manual.txt /usr/share/doc/libpng-1.6.37
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -5,58 +5,58 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak libxkbcommon is a keymap compilerbr3ak and support library which processes a reduced subset of keymaps asbr3ak defined by the XKB specification.br3ak"
-SECTION="general"
-VERSION=0.8.0
-NAME="libxkbcommon"
+. /etc/alps/directories.conf
 
 #REQ:xkeyboard-config
-#REC:libxcb
+#REQ:libxcb
+#REQ:wayland
 
 
 cd $SOURCE_DIR
 
-URL=https://xkbcommon.org/download/libxkbcommon-0.8.0.tar.xz
+wget -nc https://xkbcommon.org/download/libxkbcommon-0.9.1.tar.xz
+
+
+NAME=libxkbcommon
+VERSION=0.9.1
+URL=https://xkbcommon.org/download/libxkbcommon-0.9.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://xkbcommon.org/download/libxkbcommon-0.8.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxkbcommon/libxkbcommon-0.8.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libxkbcommon/libxkbcommon-0.8.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxkbcommon/libxkbcommon-0.8.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxkbcommon/libxkbcommon-0.8.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxkbcommon/libxkbcommon-0.8.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxkbcommon/libxkbcommon-0.8.0.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static"
-
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static     \
-            --docdir=/usr/share/doc/libxkbcommon-0.8.0 &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
+mkdir build &&
+cd    build &&
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+meson --prefix=/usr -Denable-docs=false .. &&
+ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

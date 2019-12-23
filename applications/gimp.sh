@@ -5,12 +5,7 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gimp package contains the GNUbr3ak Image Manipulation Program which is useful for photo retouching,br3ak image composition and image authoring.br3ak"
-SECTION="xsoft"
-VERSION=2.10.2
-NAME="gimp"
+. /etc/alps/directories.conf
 
 #REQ:gegl
 #REQ:gexiv2
@@ -25,71 +20,59 @@ NAME="gimp"
 #REQ:lcms2
 #REQ:mypaint-brushes
 #REQ:poppler
-#REQ:xorg-server
-#REC:dbus-glib
-#REC:gs
-#REC:iso-codes
-#REC:libgudev
-#REC:python-modules#pygtk
-#REC:xdg-utils
-#OPT:aalib
-#OPT:alsa-lib
-#OPT:gvfs
-#OPT:libmng
-#OPT:libwebp
-#OPT:openjpeg2
-#OPT:gtk-doc
+#REQ:dbus-glib
+#REQ:gs
+#REQ:gvfs
+#REQ:iso-codes
+#REQ:libgudev
+#REQ:python-modules#pygtk
+#REQ:xdg-utils
 
 
 cd $SOURCE_DIR
 
-URL=https://download.gimp.org/pub/gimp/v2.10/gimp-2.10.2.tar.bz2
+wget -nc https://download.gimp.org/pub/gimp/v2.10/gimp-2.10.14.tar.bz2
+
+
+NAME=gimp
+VERSION=2.10.14
+URL=https://download.gimp.org/pub/gimp/v2.10/gimp-2.10.14.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.gimp.org/pub/gimp/v2.10/gimp-2.10.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gimp/gimp-2.10.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gimp/gimp-2.10.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-2.10.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-2.10.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-2.10.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-2.10.2.tar.bz2
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr \
-            --sysconfdir=/etc &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+./configure --prefix=/usr --sysconfdir=/etc &&
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-gtk-update-icon-cache &&
-update-desktop-database
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+gtk-update-icon-cache -qtf /usr/share/icons/hicolor &&
+update-desktop-database -q
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

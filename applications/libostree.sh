@@ -5,25 +5,42 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-NAME=libostree
-URL=http://aryalinux.com/files/sources/libostree-2018.5.tar.xz
-VERSION=2018.5
+. /etc/alps/directories.conf
 
 #REQ:fuse2
 
+
 cd $SOURCE_DIR
-wget -nc $URL
+
+wget -nc https://github.com/ostreedev/ostree/releases/download/v2019.4/libostree-2019.4.tar.xz
+
+
+NAME=libostree
+VERSION=2019.4
+URL=https://github.com/ostreedev/ostree/releases/download/v2019.4/libostree-2019.4.tar.xz
+
+if [ ! -z $URL ]
+then
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 
-tar xf $TARBALL
 cd $DIRECTORY
+fi
 
 ./configure --prefix=/usr &&
 make -j$(nproc)
 sudo make install
 
+
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

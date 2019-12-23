@@ -5,55 +5,62 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Extra Cmake Modules packagebr3ak contains extra CMake modules usedbr3ak by KDE Frameworks 5 and otherbr3ak packages.br3ak"
-SECTION="kde"
-VERSION=5.47
-NAME="extra-cmake-modules"
+. /etc/alps/directories.conf
 
 #REQ:cmake
 
 
 cd $SOURCE_DIR
 
-URL=http://download.kde.org/stable/frameworks/$VERSION/extra-cmake-modules-$VERSION.0.tar.xz
+wget -nc http://download.kde.org/stable/frameworks/5.64/extra-cmake-modules-5.64.0.tar.xz
+
+
+NAME=extra-cmake-modules
+VERSION=5.64.0
+URL=http://download.kde.org/stable/frameworks/5.64/extra-cmake-modules-5.64.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://download.kde.org/stable/frameworks/$VERSION/extra-cmake-modules-$VERSION.0.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
+
+sed -i '/"lib64"/s/64//' kde-modules/KDEInstallDirs.cmake &&
+
+sed -e '/PACKAGE_INIT/i set(SAVE_PACKAGE_PREFIX_DIR "${PACKAGE_PREFIX_DIR}")' \
+    -e '/^include/a set(PACKAGE_PREFIX_DIR "${SAVE_PACKAGE_PREFIX_DIR}")' \
+    -i ECMConfig.cmake.in &&
 
 mkdir build &&
 cd    build &&
+
 cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

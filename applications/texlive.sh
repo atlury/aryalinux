@@ -5,84 +5,86 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Most of TeX Live can be built from source without a pre-existingbr3ak installation, but xindy (forbr3ak indexing) needs working versions of <span class=\"command\"><strong>latex</strong> and <span class=\"command\"><strong>pdflatex</strong> when configure is run,br3ak and the testsuite and install for <span class=\"command\"><strong>asy</strong> (for vector graphics) willbr3ak fail if TeX has not already been installed. Additionally,br3ak biber is not provided within thebr3ak texlive source.br3ak"
-SECTION="pst"
-VERSION=20180414
-NAME="texlive"
-
-#REC:gs
-#REC:asymptote
-#REC:fontconfig
-#REC:freetype2
-#REC:gc
-#REC:graphite2
-#REC:harfbuzz
-#REC:icu
-#REC:libpaper
-#REC:libpng
-#REC:poppler
-#REC:potrace
-#REC:python2
-#REC:ruby
-#REC:tk
-#REC:xorg-server
+#REQ:gs
+#REQ:fontconfig
+#REQ:freetype2
+#REQ:gc
+#REQ:graphite2
+#REQ:harfbuzz
+#REQ:icu
+#REQ:libpaper
+#REQ:libpng
+#REQ:tex-path
+#REQ:python2
+#REQ:ruby
+#REQ:tk
 
 
 cd $SOURCE_DIR
 
-URL=ftp://tug.org/texlive/historic/2018/texlive-20180414-source.tar.xz
+wget -nc ftp://tug.org/texlive/historic/2019/texlive-20190410-source.tar.xz
+wget -nc ftp://tug.org/texlive/historic/2019/texlive-20190410-texmf.tar.xz
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/texlive-20190410-source-upstream_fixes-1.patch
+
+
+NAME=texlive
+VERSION=2019041
+URL=ftp://tug.org/texlive/historic/2019/texlive-20190410-source.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://tug.org/texlive/historic/2018/texlive-20180414-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20180414-source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/texlive/texlive-20180414-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20180414-source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20180414-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20180414-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20180414-source.tar.xz
-wget -nc ftp://tug.org/texlive/historic/2018/texlive-20180414-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20180414-texmf.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/texlive/texlive-20180414-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20180414-texmf.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20180414-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20180414-texmf.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20180414-texmf.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20180414-source-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20180414-source-upstream_fixes-1.patch
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 cat >> /etc/ld.so.conf << EOF
-# Begin texlive 2018 addition
-/opt/texlive/2018/lib
-# End texlive 2018 addition
+# Begin texlive 2019 addition
+
+/opt/texlive/2019/lib
+
+# End texlive 2019 addition
 EOF
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
-patch -Np1 -i ../texlive-20180414-source-upstream_fixes-1.patch &&
-mv -v texk/web2c/pdftexdir/pdftoepdf{-newpoppler,}.cc &&
-mv -v texk/web2c/pdftexdir/pdftosrc{-newpoppler,}.cc  &&
+
+patch -Np1 -i ../texlive-20190410-source-upstream_fixes-1.patch &&
+
 mkdir texlive-build &&
 cd texlive-build    &&
+
 ../configure                                                    \
-    --prefix=/opt/texlive/2018                                  \
-    --bindir=/opt/texlive/2018/bin/$TEXARCH                     \
-    --datarootdir=/opt/texlive/2018                             \
-    --includedir=/opt/texlive/2018/include                      \
-    --infodir=/opt/texlive/2018/texmf-dist/doc/info             \
-    --libdir=/opt/texlive/2018/lib                              \
-    --mandir=/opt/texlive/2018/texmf-dist/doc/man               \
+    --prefix=/opt/texlive/2019                                  \
+    --bindir=/opt/texlive/2019/bin/$TEXARCH                     \
+    --datarootdir=/opt/texlive/2019                             \
+    --includedir=/opt/texlive/2019/include                      \
+    --infodir=/opt/texlive/2019/texmf-dist/doc/info             \
+    --libdir=/opt/texlive/2019/lib                              \
+    --mandir=/opt/texlive/2019/texmf-dist/doc/man               \
     --disable-native-texlive-build                              \
     --disable-static --enable-shared                            \
+    --disable-dvisvgm                                           \
     --with-system-cairo                                         \
     --with-system-fontconfig                                    \
     --with-system-freetype2                                     \
@@ -95,61 +97,58 @@ cd texlive-build    &&
     --with-system-libpng                                        \
     --with-system-mpfr                                          \
     --with-system-pixman                                        \
-    --with-system-poppler                                       \
-    --with-system-potrace                                       \
-    --with-system-xpdf                                          \
     --with-system-zlib                                          \
     --with-banner-add=" - BLFS" &&
-make "-j`nproc`" || make
 
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+#!/bin/bash
 
+set -e
+set +h
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
-make install-strip &&
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20191026.tar.xz
+tar xf blfs-systemd-units-20191026.tar.xz
+cd blfs-systemd-units-20191026
+sudo make install-strip &&
 /sbin/ldconfig &&
 make texlinks &&
-mkdir -pv /opt/texlive/2018/tlpkg/TeXLive/ &&
-install -v -m644 ../texk/tests/TeXLive/* /opt/texlive/2018/tlpkg/TeXLive/
-
-cd ..
-rm -rf blfs-systemd-units-20180105
+mkdir -pv /opt/texlive/2019/tlpkg/TeXLive/ &&
+install -v -m644 ../texk/tests/TeXLive/* /opt/texlive/2019/tlpkg/TeXLive/
 popd
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-tar -xf ../../texlive-20180414-texmf.tar.xz -C /opt/texlive/2018 --strip-components=1
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+tar -xf ../../texlive-20190410-texmf.tar.xz -C /opt/texlive/2019 --strip-components=1
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 mktexlsr &&
 fmtutil-sys --all &&
 mtxrun --generate
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -5,58 +5,58 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak v4l-utils provides a series ofbr3ak utilities for media devices, allowing to handle the proprietarybr3ak formats available at most webcams (libv4l), and providing tools tobr3ak test V4L devices.br3ak"
-SECTION="multimedia"
-VERSION=1.14.2
-NAME="v4l-utils"
-
-#REC:alsa-lib
-#REC:glu
-#REC:libjpeg
-#OPT:doxygen
+#REQ:llvm
+#REQ:alsa-lib
+#REQ:glu
+#REQ:libjpeg
 
 
 cd $SOURCE_DIR
 
-URL=https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.14.2.tar.bz2
+wget -nc https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.18.0.tar.bz2
+
+
+NAME=v4l-utils
+VERSION=1.18.0
+URL=https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.18.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.14.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v4l-utils/v4l-utils-1.14.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/v4l-utils/v4l-utils-1.14.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v4l-utils/v4l-utils-1.14.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v4l-utils/v4l-utils-1.14.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v4l-utils/v4l-utils-1.14.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v4l-utils/v4l-utils-1.14.2.tar.bz2
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --disable-static  &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

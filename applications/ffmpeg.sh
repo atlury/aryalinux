@@ -5,65 +5,55 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak FFmpeg is a solution to record,br3ak convert and stream audio and video. It is a very fast video andbr3ak audio converter and it can also acquire from a live audio/videobr3ak source. Designed to be intuitive, the command-line interfacebr3ak (<span class=\"command\"><strong>ffmpeg</strong>) tries tobr3ak figure out all the parameters, when possible. FFmpeg can also convert from any sample ratebr3ak to any other, and resize video on the fly with a high qualitybr3ak polyphase filter. FFmpeg can use abr3ak Video4Linux compatible video source and any Open Sound System audiobr3ak source.br3ak"
-SECTION="multimedia"
-VERSION=4.0
-NAME="ffmpeg"
-
-#REC:libass
-#REC:fdk-aac
-#REC:freetype2
-#REC:lame
-#REC:libtheora
-#REC:libvorbis
-#REC:libvpx
-#REC:opus
-#REC:x264
-#REC:x265
-#REC:yasm
-#REC:alsa-lib
-#REC:x7driver
-#REC:sdl2
-#OPT:fontconfig
-#OPT:frei0r
-#OPT:libcdio
-#OPT:libwebp
-#OPT:opencv
-#OPT:openjpeg2
-#OPT:gnutls
-#OPT:pulseaudio
-#OPT:speex
-#OPT:texlive
-#OPT:tl-installer
-#OPT:v4l-utils
-#OPT:xvid
-#OPT:xorg-server
+#REQ:libass
+#REQ:fdk-aac
+#REQ:freetype2
+#REQ:lame
+#REQ:libtheora
+#REQ:libvorbis
+#REQ:libvpx
+#REQ:opus
+#REQ:x264
+#REQ:x265
+#REQ:yasm
+#REQ:alsa-lib
+#REQ:libva
+#REQ:libvdpau
+#REQ:sdl2
 
 
 cd $SOURCE_DIR
 
-URL=http://ffmpeg.org/releases/ffmpeg-4.0.tar.xz
+wget -nc http://ffmpeg.org/releases/ffmpeg-4.2.1.tar.xz
+
+
+NAME=ffmpeg
+VERSION=4.2.1
+URL=http://ffmpeg.org/releases/ffmpeg-4.2.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ffmpeg.org/releases/ffmpeg-4.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ffmpeg/ffmpeg-4.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ffmpeg/ffmpeg-4.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-4.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-4.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-4.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-4.0.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 sed -i 's/-lflite"/-lflite -lasound"/' configure &&
+
 ./configure --prefix=/usr        \
             --enable-gpl         \
             --enable-version3    \
@@ -82,26 +72,27 @@ sed -i 's/-lflite"/-lflite -lasound"/' configure &&
             --enable-libvpx      \
             --enable-libx264     \
             --enable-libx265     \
-            --docdir=/usr/share/doc/ffmpeg-4.0 &&
+            --docdir=/usr/share/doc/ffmpeg-4.2.1 &&
+
 make &&
+
 gcc tools/qt-faststart.c -o tools/qt-faststart
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install &&
+
 install -v -m755    tools/qt-faststart /usr/bin &&
-install -v -m755 -d           /usr/share/doc/ffmpeg-4.0 &&
-install -v -m644    doc/*.txt /usr/share/doc/ffmpeg-4.0
-
+install -v -m755 -d           /usr/share/doc/ffmpeg-4.2.1 &&
+install -v -m644    doc/*.txt /usr/share/doc/ffmpeg-4.2.1
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -5,29 +5,43 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="net-snmp"
-VERSION="5.7.3"
+
 
 cd $SOURCE_DIR
 
-URL=downloads.sourceforge.net/net-snmp/net-snmp-5.7.3.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-wget -nc $URL
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/artifacts/net-snmp-5.7.3-fixes.patch
+wget -nc https://sourceforge.net/projects/net-snmp/files/net-snmp/5.8/net-snmp-5.8.tar.gz
 
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
-tar xf $TARBALL
+NAME=net-snmp
+VERSION=5.8
+URL=https://sourceforge.net/projects/net-snmp/files/net-snmp/5.8/net-snmp-5.8.tar.gz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-patch -Np1 -i ../net-snmp-5.7.3-fixes.patch &&
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
-make "-j`nproc`"
+echo $USER > /tmp/currentuser
 
+./configure --prefix=/usr &&
+make
 sudo make install
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

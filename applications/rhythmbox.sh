@@ -5,36 +5,60 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-#REQ:audio-video-plugins
+#REQ:gobject-introspection
+#REQ:gtk3
+#REQ:xserver-meta
+#REQ:gdk-pixbuf
+#REQ:glib2
+#REQ:libsoup
+#REQ:libpeas
+#REQ:libxml2
 #REQ:libtdb
-#REQ:gtk-doc
-#REQ:yelp
+#REQ:json-glib
 #REQ:libmtp
-#REQ:libimobiledevice
+#REQ:grilo
+#REQ:libdmapsharing
+#REQ:brasero
+#REQ:libnotify
+#REQ:libmusicbrainz5
+#REQ:python-modules#pygobject2
 #REQ:libgpod
+#REQ:yelp
+
+
+cd $SOURCE_DIR
+
+wget -nc https://download.gnome.org/sources/rhythmbox/3.4/rhythmbox-3.4.3.tar.xz
+
 
 NAME=rhythmbox
-VERSION=3.4.2
-DESCRIPTION="Rhythmbox is a music manager and player for gnome desktop environment"
+VERSION=3.4.3
+URL=https://download.gnome.org/sources/rhythmbox/3.4/rhythmbox-3.4.3.tar.xz
 
-cd $SOURCE_DIR
+if [ ! -z $URL ]
+then
 
-URL="https://download.gnome.org/sources/rhythmbox/3.4/rhythmbox-3.4.2.tar.xz"
-wget -nc $URL
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/1.0/rhythmbox-3.4.2-gstreamer.patch
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 
-tar xf $TARBALL
 cd $DIRECTORY
+fi
 
-patch -Np1 -i ../rhythmbox-3.4.2-gstreamer.patch &&
-./configure --prefix=/usr --with-mtp --with-ipod &&
-make "-j`nproc`"
+./configure --prefix=/usr
+make
 sudo make install
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

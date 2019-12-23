@@ -5,66 +5,43 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak While systemd was installed whenbr3ak building LFS, there are many features provided by the package thatbr3ak were not included in the initial installation because Linux-PAM was not yet installed. Thebr3ak systemd package needs to bebr3ak rebuilt to provide a working <span class=\"command\"><strong>systemd-logind</strong> service, whichbr3ak provides many additional features for dependent packages.br3ak"
-SECTION="general"
-VERSION=238
-NAME="systemd"
+. /etc/alps/directories.conf
 
 #REQ:linux-pam
-#REC:polkit
-#OPT:make-ca
-#OPT:curl
-#OPT:gnutls
-#OPT:iptables
-#OPT:libgcrypt
-#OPT:libidn2
-#OPT:libseccomp
-#OPT:libxkbcommon
-#OPT:qemu
-#OPT:valgrind
-#OPT:zsh
-#OPT:docbook
-#OPT:docbook-xsl
-#OPT:libxslt
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/systemd/systemd/archive/v238/systemd-238.tar.gz
+wget -nc https://github.com/systemd/systemd/archive/v244/systemd-244.tar.gz
+
+
+NAME=systemd
+VERSION=244
+URL=https://github.com/systemd/systemd/archive/v244/systemd-244.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/systemd/systemd/archive/v238/systemd-238.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-238.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/systemd-238-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/systemd/systemd-238-upstream_fixes-1.patch
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-patch -Np1 -i ../systemd-238-upstream_fixes-1.patch
+echo $USER > /tmp/currentuser
 
 
-sed -i '527,565 d'                  src/basic/missing.h
-sed -i '24 d'                       src/core/load-fragment.c
-sed -i '53 a#include <sys/mount.h>' src/shared/bus-unit-util.c
-
-
-sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
-
-
+sed -i 's/GROUP="render", //' rules.d/50-udev-default.rules.in
 mkdir build &&
 cd    build &&
+
 meson --prefix=/usr         \
       --sysconfdir=/etc     \
       --localstatedir=/var  \
@@ -74,64 +51,91 @@ meson --prefix=/usr         \
       -Dfirstboot=false     \
       -Dinstall-tests=false \
       -Dldconfig=false      \
+      -Dman=auto            \
       -Drootprefix=         \
       -Drootlibdir=/lib     \
       -Dsplit-usr=true      \
       -Dsysusers=false      \
+      -Drpmmacrosdir=no     \
       -Db_lto=false         \
       ..                    &&
+
 ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+systemctl start rescue.target
+ENDOFROOTSCRIPT
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 ninja install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-rm -rfv /usr/lib/rpm
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+rm -fv /etc/sysctl.d/50-pid-max.conf
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 cat >> /etc/pam.d/system-session << "EOF"
 # Begin Systemd addition
- 
-session required pam_loginuid.so
-session optional pam_systemd.so
+    
+session  required    pam_loginuid.so
+session  optional    pam_systemd.so
+
 # End Systemd addition
 EOF
+
 cat > /etc/pam.d/systemd-user << "EOF"
 # Begin /etc/pam.d/systemd-user
-account required pam_access.so
-account include system-account
-session required pam_env.so
-session required pam_limits.so
-session include system-session
-auth required pam_deny.so
-password required pam_deny.so
+
+account  required    pam_access.so
+account  include     system-account
+
+session  required    pam_env.so
+session  required    pam_limits.so
+session  required    pam_unix.so
+session  required    pam_loginuid.so
+session  optional    pam_keyinit.so force revoke
+session  optional    pam_systemd.so
+
+auth     required    pam_deny.so
+password required    pam_deny.so
+
 # End /etc/pam.d/systemd-user
 EOF
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+systemctl daemon-reload
+systemctl start multi-user.target
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -3,17 +3,9 @@
 set -e
 set +h
 
-export XORG_PREFIX="/usr"
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
-    --localstatedir=/var --disable-static"
-
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-NAME="lightdm"
-DESCRIPTION="A light-weight desktop manager with greeters available in GTK/QT."
-VERSION=1.18.3
+. /etc/alps/directories.conf
 
 #REQ:xserver-meta
 #REQ:itstool
@@ -25,14 +17,28 @@ VERSION=1.18.3
 
 cd $SOURCE_DIR
 
-URL="https://launchpad.net/lightdm/1.18/1.18.3/+download/lightdm-1.18.3.tar.xz"
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-wget -nc $URL
-DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-tar -xf $TARBALL
-cd $DIRECTORY
+wget -nc https://launchpad.net/lightdm/1.18/1.18.3/+download/lightdm-1.18.3.tar.xz
 
-export MOC4=moc-qt4
+
+NAME=lightdm
+VERSION=1.18.3
+URL=https://launchpad.net/lightdm/1.18/1.18.3/+download/lightdm-1.18.3.tar.xz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
+cd $DIRECTORY
+fi
 
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
@@ -389,10 +395,12 @@ sudo getent passwd lightdm || sudo useradd -c "Light Display Manager" -u 63 -g l
 sudo chown -R lightdm:lightdm /var/lib/lightdm /var/log/lightdm
 
 sudo chown -R polkitd:polkitd /usr/share/polkit-1/rules.d
+if [ -f /etc/systemd/system/display-manager.service ]; then sudo systemctl disable gdm; fi
 sudo systemctl enable lightdm
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

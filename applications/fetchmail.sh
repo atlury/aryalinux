@@ -5,68 +5,83 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Fetchmail package contains abr3ak mail retrieval program. It retrieves mail from remote mail serversbr3ak and forwards it to the local (client) machine's delivery system, sobr3ak it can then be read by normal mail user agents.br3ak"
-SECTION="basicnet"
-VERSION=6.3.26
-NAME="fetchmail"
-
-#REC:procmail
-#OPT:python2
-#OPT:tk
+#REQ:procmail
 
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz
+wget -nc https://downloads.sourceforge.net/fetchmail/fetchmail-6.4.1.tar.xz
+
+
+NAME=fetchmail
+VERSION=6.4.1
+URL=https://downloads.sourceforge.net/fetchmail/fetchmail-6.4.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/fetchmail-6.3.26-disable_sslv3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/fetchmail/fetchmail-6.3.26-disable_sslv3-1.patch
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-patch -Np1 -i ../fetchmail-6.3.26-disable_sslv3-1.patch &&
-./configure --prefix=/usr --with-ssl --enable-fallback=procmail &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+useradd -c "Fetchmail User" -d /dev/null -g nogroup \
+        -s /bin/false -u 38 fetchmail
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+PYTHON=python3 \
+./configure --prefix=/usr \
+ --enable-fallback=procmail &&
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+make install                                  &&
+chown -v fetchmail:nogroup /usr/bin/fetchmail
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 cat > ~/.fetchmailrc << "EOF"
-set logfile /var/log/fetchmail.log
+
+# The logfile needs to exist when fetchmail is invoked, otherwise it will
+# dump the details to the screen. As with all logs, you will need to rotate
+# or clear it from time to time.
+set logfile fetchmail.log
 set no bouncemail
-set postmaster root
+# You probably want to set your local username as the postmaster
+set postmaster $(cat /tmp/currentuser)
+
 poll SERVERNAME :
- user <em class="replaceable"><code><username></em> pass <em class="replaceable"><code><password></em>;
- mda "/usr/bin/procmail -f %F -d %T";
+    user <isp_username> pass <password>;
+    mda "/usr/bin/procmail -f %F -d %T";
 EOF
+
+touch ~/fetchmail.log       &&
 chmod -v 0600 ~/.fetchmailrc
-
-
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

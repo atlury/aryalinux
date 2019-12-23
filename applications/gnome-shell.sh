@@ -5,74 +5,77 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Shell is the core userbr3ak interface of the GNOME Desktopbr3ak environment.br3ak"
-SECTION="gnome"
-VERSION=3.28.0
-NAME="gnome-shell"
-
-#REQ:caribou
 #REQ:evolution-data-server
 #REQ:gjs
+#REQ:gnome-autoar
 #REQ:gnome-control-center
 #REQ:libcroco
 #REQ:mutter
 #REQ:sassc
 #REQ:startup-notification
 #REQ:systemd
+#REQ:asciidoc
+#REQ:desktop-file-utils
+#REQ:gnome-bluetooth
+#REQ:gst10-plugins-base
+#REQ:network-manager-applet
 #REQ:adwaita-icon-theme
 #REQ:dconf
 #REQ:gdm
 #REQ:gnome-backgrounds
 #REQ:gnome-menus
-#REQ:gnome-themes-standard
+#REQ:gnome-themes-extra
 #REQ:telepathy-mission-control
-#REC:gnome-bluetooth
-#REC:gst10-plugins-base
-#REC:network-manager-applet
-#OPT:gtk-doc
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-shell/3.28/gnome-shell-3.28.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-shell/3.34/gnome-shell-3.34.2.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-shell/3.34/gnome-shell-3.34.2.tar.xz
+
+
+NAME=gnome-shell
+VERSION=3.34.2
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-shell/3.34/gnome-shell-3.34.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-shell/3.28/gnome-shell-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-shell/gnome-shell-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-shell/gnome-shell-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-shell/gnome-shell-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-shell/gnome-shell-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-shell/gnome-shell-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-shell/gnome-shell-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-shell/3.28/gnome-shell-3.28.0.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 mkdir build &&
 cd    build &&
+
 meson --prefix=/usr .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 ninja install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

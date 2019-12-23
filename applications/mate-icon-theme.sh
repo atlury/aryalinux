@@ -5,46 +5,42 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-NAME="mate-icon-theme"
-DESCRIPTION="MATE Desktop icon theme"
-VERSION=1.20.0
+
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.20/mate-icon-theme-1.20.0.tar.xz"
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
+wget -nc https://pub.mate-desktop.org/releases/1.23/mate-icon-theme-1.23.2.tar.xz
 
-tar xf $TARBALL
+
+NAME=mate-icon-theme
+VERSION=1.23.2
+URL=https://pub.mate-desktop.org/releases/1.23/mate-icon-theme-1.23.2.tar.xz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --with-gtk=3.0 &&
-make "-j`nproc`"
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
+make
 
 sudo make install
 
-cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
-
-URL="http://pub.mate-desktop.org/releases/1.18/mate-icon-theme-faenza-1.18.1.tar.xz"
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-
-tar xf $TARBALL
-cd $DIRECTORY
-
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --with-gtk=3.0 &&
-make "-j`nproc`"
-
-sudo make install
-
-cd $SOURCE_DIR
-
-cleanup "$NAME" "$DIRECTORY"
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

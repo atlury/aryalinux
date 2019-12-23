@@ -5,30 +5,42 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-NAME="murrine-gtk-engine"
-DESCRIPTION="A GTK theme engine"
-VERSION="0.98.2"
+
 
 cd $SOURCE_DIR
 
+wget -nc https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz
+
+
+NAME=murrine-gtk-engine
+VERSION=0.98.2
 URL=https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz
-wget -nc $URL
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq`
+if [ ! -z $URL ]
+then
 
-tar -xf $TARBALL
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 
 cd $DIRECTORY
+fi
 
 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
 make
+
 sudo make install
 
-cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

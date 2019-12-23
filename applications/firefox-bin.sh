@@ -3,17 +3,9 @@
 set -e
 set +h
 
-export XORG_PREFIX="/usr"
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
-    --localstatedir=/var --disable-static"
-
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-NAME="firefox-bin"
-DESCRIPTION="Firefox is a very popular open source browser that stands for the freedom of internet. This package simply downloads and installs the latest firefox binaries"
-VERSION="latest"
+. /etc/alps/directories.conf
 
 #REQ:curl
 #REQ:alsa-lib
@@ -21,30 +13,37 @@ VERSION="latest"
 #REQ:unzip
 #REQ:yasm
 #REQ:zip
-#REC:icu
-#REC:libevent
-#REC:libvpx
-#REC:nspr
-#REC:nss
-#REC:sqlite
-#OPT:curl
-#OPT:dbus-glib
-#OPT:doxygen
-#OPT:gst-plugins-base
-#OPT:gst-plugins-good
-#OPT:gst-ffmpeg
-#OPT:gst10-plugins-base
-#OPT:gst10-plugins-good
-#OPT:gst10-libav
-#OPT:libnotify
-#OPT:openjdk
-#OPT:pulseaudio
-#OPT:startup-notification
-#OPT:wget
-#OPT:wireless_tools
+#REQ:icu
+#REQ:libevent
+#REQ:libvpx
+#REQ:nspr
+#REQ:nss
+#REQ:sqlite
 
 
 cd $SOURCE_DIR
+
+
+
+NAME=firefox-bin
+VERSION=08-2019
+
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
+cd $DIRECTORY
+fi
 
 if [ "x$INSTALL_LANGUAGE" == "x" ]; then
 
@@ -104,9 +103,13 @@ chmod a+x 1434987998846.sh
 sudo ./1434987998846.sh
 sudo rm -rf 1434987998846.sh
 
+if [ -f /usr/bin/firefox ]; then
+	sudo rm /usr/bin/firefox
+	sudo rm -rf /usr/lib/firefox/
+fi
 
- 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
- 
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

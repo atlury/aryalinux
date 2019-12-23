@@ -5,28 +5,42 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="network-manager-openconnect"
-VERSION="1.2.4"
 
-#REQ:openconnect
 
+cd $SOURCE_DIR
+
+wget -nc https://ftp.gnome.org/pub/gnome/sources/NetworkManager-openconnect/1.2/NetworkManager-openconnect-1.2.4.tar.xz
+
+
+NAME=network-manager-openconnect
+VERSION=1.2.4
 URL=https://ftp.gnome.org/pub/gnome/sources/NetworkManager-openconnect/1.2/NetworkManager-openconnect-1.2.4.tar.xz
 
-cd $SOURCE_DIR
+if [ ! -z $URL ]
+then
 
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 
-tar -xf $TARBALL
 cd $DIRECTORY
+fi
 
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --with-gnome &&
-make "-j`nproc`"
+if grep "gnome-desktop-environment" /etc/alps/installed-list &> /dev/null; then WITH_GNOME="--with-gnome"; fi
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var $WITH_GNOME &&
+make
 sudo make install
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -1,25 +1,45 @@
 #!/bin/bash
+
 set -e
 set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-NAME="aryalinux-gnome-settings"
-VERSION=2017.08
-DESCRIPTION="Fonts of the aryalinux XFCE, Mate, KDE and Gnome Desktops"
+
 
 cd $SOURCE_DIR
 
-URL=https://sourceforge.net/projects/aryalinux-bin/files/releases/1.0/aryalinux-gnome-defaults.tar.gz
-wget -nc $URL
+wget -nc https://sourceforge.net/projects/aryalinux/files/releases/2.0/aryalinux-gnome-defaults-2.0.tar.xz
 
-THEUSER=$(echo $USER)
-sudo tar xf aryalinux-gnome-defaults.tar.gz -C /
-sudo cp -r /etc/skel/.config ~
-sudo cp -r /etc/skel/.Xresources ~
-sudo cp -r /etc/skel/.bash{_logout,_profile,rc}  ~
+
+NAME=aryalinux-gnome-settings
+VERSION=2.0
+
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
+cd $DIRECTORY
+fi
+
+sudo tar xf aryalinux-gnome-defaults-2.0.tar.xz -C /
+sudo cp -r /etc/skel/{.config,.Xresources}* ~
 sudo chown -R $USER:$USER ~
 
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -5,26 +5,42 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
+
+
+
+cd $SOURCE_DIR
+
+wget -nc https://www.samba.org/ftp/tdb/tdb-1.3.17.tar.gz
+
 
 NAME=libtdb
-VERSION=1.3.14
-DESCRIPTION="libtdb is a simple database API. It was inspired by the realisation that in Samba we have several ad-hoc bits of code that essentially implement small databases for sharing structures between parts of Samba."
+VERSION=1.3.17
+URL=https://www.samba.org/ftp/tdb/tdb-1.3.17.tar.gz
 
-cd $SOURCE_DIR
+if [ ! -z $URL ]
+then
 
-URL="https://www.samba.org/ftp/tdb/tdb-1.3.14.tar.gz"
-wget -nc $URL
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 
-tar xf $TARBALL
 cd $DIRECTORY
+fi
 
+sed -i "s@../../buildtools@buildtools@g" Makefile
 ./configure --prefix=/usr &&
-make "-j`nproc`"
+make
 sudo make install
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

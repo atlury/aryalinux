@@ -5,66 +5,74 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Mutter is the window manager forbr3ak GNOME. It is not invoked directly,br3ak but from GNOME Session (on abr3ak machine with a hardware accelerated video driver).br3ak"
-SECTION="gnome"
-VERSION=3.28.0
-NAME="mutter"
+. /etc/alps/directories.conf
 
 #REQ:clutter
 #REQ:gnome-desktop
+#REQ:libcanberra
 #REQ:libwacom
 #REQ:libxkbcommon
+#REQ:pipewire
 #REQ:upower
 #REQ:zenity
-#REC:gobject-introspection
-#REC:libcanberra
-#REC:startup-notification
-#REC:x7driver
-#REC:wayland
-#REC:wayland-protocols
-#REC:xorg-server
-#REC:gtk3
+#REQ:desktop-file-utils
+#REQ:gobject-introspection
+#REQ:startup-notification
+#REQ:libinput
+#REQ:wayland
+#REQ:wayland-protocols
+#REQ:xorg-server
+#REQ:gtk3
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/mutter/3.28/mutter-3.28.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/mutter/3.34/mutter-3.34.1.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/mutter/3.34/mutter-3.34.1.tar.xz
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/mutter-3.34.1-upstream_fixes-1.patch
+
+
+NAME=mutter
+VERSION=3.34.1
+URL=http://ftp.gnome.org/pub/gnome/sources/mutter/3.34/mutter-3.34.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/mutter/3.28/mutter-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mutter/mutter-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mutter/mutter-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutter/mutter-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutter/mutter-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mutter/mutter-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mutter/mutter-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/mutter/3.28/mutter-3.28.0.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr --disable-static &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
+patch -Np1 -i ../mutter-3.34.1-upstream_fixes-1.patch
+mkdir build &&
+cd    build &&
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+meson --prefix=/usr -Dprofiler=false .. &&
+ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

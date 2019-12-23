@@ -5,12 +5,7 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Inkscape is a what you see is whatbr3ak you get Scalable Vector Graphics editor. It is useful for creating,br3ak viewing and changing SVG images.br3ak"
-SECTION="xsoft"
-VERSION=0.92.3
-NAME="inkscape"
+. /etc/alps/directories.conf
 
 #REQ:boost
 #REQ:gc
@@ -21,82 +16,74 @@ NAME="inkscape"
 #REQ:poppler
 #REQ:popt
 #REQ:wget
-#REC:imagemagick6
-#REC:lcms2
-#REC:lcms
-#REC:potrace
-#REC:python-modules#lxml
-#REC:python-modules#scour
-#OPT:aspell
-#OPT:dbus
-#OPT:doxygen
+#REQ:imagemagick6
+#REQ:lcms2
+#REQ:lcms
+#REQ:libcanberra
+#REQ:potrace
+#REQ:python-modules#lxml
+#REQ:python-modules#scour
 
 
 cd $SOURCE_DIR
 
-URL=https://media.inkscape.org/dl/resources/file/inkscape-0.92.3.tar.bz2
+wget -nc https://media.inkscape.org/dl/resources/file/inkscape-0.92.4.tar.bz2
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/inkscape-0.92.4-use_versioned_ImageMagick6-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/inkscape-0.92.4-upstream_fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/inkscape-0.92.4-poppler_0_83_0_fixes-1.patch
+
+
+NAME=inkscape
+VERSION=0.92.4
+URL=https://media.inkscape.org/dl/resources/file/inkscape-0.92.4.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://media.inkscape.org/dl/resources/file/inkscape-0.92.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/inkscape-0.92.3-use_versioned_ImageMagick6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.3-use_versioned_ImageMagick6-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/inkscape-0.92.3-poppler65-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.3-poppler65-1.patch
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-patch -Np1 -i ../inkscape-0.92.3-use_versioned_ImageMagick6-1.patch &&
-patch -Np1 -i ../inkscape-0.92.3-poppler65-1.patch
+echo $USER > /tmp/currentuser
 
 
-sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
-
-
+sed -e 's|new Lexer(xref, obj)|obj|g' -i src/extension/internal/pdfinput/pdf-parser.cpp
+sed -e 's|Unicode \*u|Unicode const *u|g' -i src/extension/internal/pdfinput/*
+patch -Np1 -i ../inkscape-0.92.4-poppler_0_83_0_fixes-1.patch
+patch -Np1 -i ../inkscape-0.92.4-use_versioned_ImageMagick6-1.patch
+patch -Np1 -i ../inkscape-0.92.4-upstream_fixes-1.patch
 bash download-gtest.sh
-
-
 mkdir build &&
 cd    build &&
+
 cmake -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_BUILD_TYPE=Release  \
       ..                          &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install                      &&
 rm -v /usr/lib/inkscape/lib*_LIB.a
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-gtk-update-icon-cache &&
-update-desktop-database
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
+gtk-update-icon-cache -qtf /usr/share/icons/hicolor &&
+update-desktop-database -q
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -3,38 +3,37 @@
 set -e
 set +h
 
-export XORG_PREFIX="/usr"
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
-    --localstatedir=/var --disable-static"
-
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME=lightdm-gtk-greeter
-VERSION=2.0.1
-DESCRIPTION="GTK Based greeter for lightdm display manager"
-
-#REQ:xserver-meta
-#REQ:itstool
-#REQ:libgcrypt
-#REQ:libxklavier
-#REQ:systemd
-#REQ:polkit
 #REQ:lightdm
-#REQ:aryalinux-wallpapers
-#REC:aryalinux-fonts
-#REQ:flat-remix-icon-theme
-#REQ:adapta-gtk-theme
-#REQ:accountsservice
+
 
 cd $SOURCE_DIR
 
-URL="https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/lightdm-gtk-greeter/2.0.1-2ubuntu4/lightdm-gtk-greeter_2.0.1.orig.tar.gz"
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-wget -nc $URL
-DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-tar -xf $TARBALL
+wget -nc https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/lightdm-gtk-greeter/2.0.1-2ubuntu4/lightdm-gtk-greeter_2.0.1.orig.tar.gz
+
+
+NAME=lightdm-gtk-greeter
+VERSION=2.0.1
+URL=https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/lightdm-gtk-greeter/2.0.1-2ubuntu4/lightdm-gtk-greeter_2.0.1.orig.tar.gz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
 export CFLAGS="-Wno-error=format-nonliteral"
 ./configure --prefix=/usr --sysconfdir=/etc --disable-liblightdm-qt &&
@@ -55,12 +54,13 @@ xft-antialias = true
 xft-rgba = rgb
 icon-theme-name = 'Flat Remix'
 theme-name = Adapta-Nokto
-background = /usr/share/backgrounds/aryalinux/pexels-photo-459059.jpeg
+background = /usr/share/backgrounds/aryalinux/default-lock-screen-wallpaper.jpeg
 font-name = Droid Sans 10
 EOF
 
- 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
- 
+
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -5,66 +5,67 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The GLib package containsbr3ak low-level libraries useful for providing data structure handlingbr3ak for C, portability wrappers and interfaces for such runtimebr3ak functionality as an event loop, threads, dynamic loading and anbr3ak object system.br3ak"
-SECTION="general"
-VERSION=2.56.1
-NAME="glib2"
-
-#REC:pcre
-#OPT:dbus
-#OPT:docbook
-#OPT:docbook-xsl
-#OPT:gtk-doc
-#OPT:libxslt
-#OPT:shared-mime-info
-#OPT:desktop-file-utils
+#REQ:libxslt
+#REQ:pcre
+#REQ:gobject-introspection
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.1.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/glib/2.62/glib-2.62.4.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/glib/2.62/glib-2.62.4.tar.xz
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/glib-2.62.4-skip_warnings-1.patch
+
+
+NAME=glib2
+VERSION=2.62.4
+URL=http://ftp.gnome.org/pub/gnome/sources/glib/2.62/glib-2.62.4.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/glib/glib-2.56.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.1.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/glib-2.56.1-skip_warnings-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/glib/glib-2.56.1-skip_warnings-1.patch
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-patch -Np1 -i ../glib-2.56.1-skip_warnings-1.patch
+echo $USER > /tmp/currentuser
 
 
-./configure --prefix=/usr      \
-            --with-pcre=system \
-            --with-python=/usr/bin/python3 &&
-make "-j`nproc`" || make
+patch -Np1 -i ../glib-2.62.4-skip_warnings-1.patch
+mkdir build &&
+cd    build &&
 
+meson --prefix=/usr      \
+      -Dman=true         \
+      -Dselinux=disabled \
+      ..                 &&
+ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install &&
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+mkdir -p /usr/share/doc/glib-2.62.4 &&
+cp -r ../docs/reference/{NEWS,gio,glib,gobject} /usr/share/doc/glib-2.62.4
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

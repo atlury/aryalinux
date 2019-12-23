@@ -5,33 +5,46 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
 #REQ:libsass
 
-NAME=sassc
-DESCRIPTION="libsass command line driver"
-VERSION=3.5.0
-
-URL=https://github.com/sass/sassc/archive/3.5.0/sassc-3.5.0.tar.gz
 
 cd $SOURCE_DIR
 
-wget -nc $URL
-wget -nc https://github.com/sass/libsass/archive/3.5.2/libsass-3.5.2.tar.gz
+wget -nc https://github.com/sass/sassc/archive/3.6.1/sassc-3.6.1.tar.gz
+
+
+NAME=sassc
+VERSION=3.6.1
+URL=https://github.com/sass/sassc/archive/3.6.1/sassc-3.6.1.tar.gz
+
+if [ ! -z $URL ]
+then
 
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 
-tar xf $TARBALL
 cd $DIRECTORY
+fi
+
+echo $USER > /tmp/currentuser
 
 autoreconf -fi &&
+
 ./configure --prefix=/usr --disable-static &&
 make
 sudo make install
 
-cd $SOURCE_DIR
-sudo rm -rf sassc-3.5.0
 
-echo "sassc=>$(date)" | sudo tee -a /etc/alps/installed-list
-echo "sassc:$VERSION" | sudo tee -a /etc/alps/versions
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

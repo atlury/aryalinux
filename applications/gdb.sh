@@ -5,59 +5,73 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak GDB, the GNU Project debugger,br3ak allows you to see what is going on “<span class=\"quote\">inside” another program while it executes --br3ak or what another program was doing at the moment it crashed. Notebr3ak that GDB is most effective whenbr3ak tracing programs and libraries that were built with debuggingbr3ak symbols and not stripped.br3ak"
-SECTION="general"
-VERSION=8.1
-NAME="gdb"
-
-#OPT:dejagnu
-#OPT:doxygen
-#OPT:gcc
-#OPT:guile
-#OPT:python2
-#OPT:rust
-#OPT:valgrind
+#REQ:python-modules#six
 
 
 cd $SOURCE_DIR
 
-URL=https://ftp.gnu.org/gnu/gdb/gdb-8.1.tar.xz
+wget -nc https://ftp.gnu.org/gnu/gdb/gdb-8.3.1.tar.xz
+wget -nc ftp://ftp.gnu.org/gnu/gdb/gdb-8.3.1.tar.xz
+
+
+NAME=gdb
+VERSION=8.3.1
+URL=https://ftp.gnu.org/gnu/gdb/gdb-8.3.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://ftp.gnu.org/gnu/gdb/gdb-8.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gdb/gdb-8.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gdb/gdb-8.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gdb/gdb-8.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gdb/gdb-8.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gdb/gdb-8.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gdb/gdb-8.1.tar.xz || wget -nc ftp://ftp.gnu.org/gnu/gdb/gdb-8.1.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr --with-system-readline --without-guile &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+./configure --prefix=/usr \
+            --with-system-readline \
+            --with-python=/usr/bin/python3 &&
+make
+make -C gdb/doc doxy
+pushd gdb/testsuite &&
+make  site.exp      &&
+echo  "set gdb_test_timeout 120" >> site.exp &&
+runtest
+popd
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make -C gdb install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+install -d /usr/share/doc/gdb-8.3.1 &&
+rm -rf gdb/doc/doxy/xml &&
+cp -Rv gdb/doc/doxy /usr/share/doc/gdb-8.3.1
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

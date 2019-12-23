@@ -5,58 +5,61 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Konsole package is a KF5 basedbr3ak terminal emulator.br3ak"
-SECTION="kde"
-VERSION=18.04.1
-NAME="konsole5"
-
-#REQ:kframeworks5
+#REQ:krameworks5
 
 
 cd $SOURCE_DIR
 
-URL=http://download.kde.org/stable/applications/18.04.1/src/konsole-18.04.1.tar.xz
+wget -nc http://download.kde.org/stable/applications/19.08.3/src/konsole-19.08.3.tar.xz
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/konsole-19.08.3-scrollbar-1.patch
+
+
+NAME=konsole5
+VERSION=19.08.3
+URL=http://download.kde.org/stable/applications/19.08.3/src/konsole-19.08.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://download.kde.org/stable/applications/18.04.1/src/konsole-18.04.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/konsole/konsole-18.04.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/konsole/konsole-18.04.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/konsole/konsole-18.04.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/konsole/konsole-18.04.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/konsole/konsole-18.04.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/konsole/konsole-18.04.1.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
 
+
+patch -Np1 -i ../konsole-19.08.3-scrollbar-1.patch
 mkdir build &&
 cd    build &&
-cmake -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_BUILD_TYPE=Release         \
       -DBUILD_TESTING=OFF                \
       -Wno-dev .. &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

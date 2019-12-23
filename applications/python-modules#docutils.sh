@@ -5,52 +5,55 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="%DESCRIPTION%"
-SECTION="general"
-VERSION=0.14
-NAME="python-modules#docutils"
-
-#REC:python2
 
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/docutils/docutils-0.14.tar.gz
+wget -nc http://downloads.sourceforge.net/docutils/docutils-0.15.tar.gz
+
+
+NAME=python-modules#docutils
+VERSION=0.15
+URL=http://downloads.sourceforge.net/docutils/docutils-0.15.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://downloads.sourceforge.net/docutils/docutils-0.14.tar.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-python setup.py build
 
+echo $USER > /tmp/currentuser
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-python setup.py install --optimize=1 &&
+python3 setup.py build
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+python3 setup.py install --optimize=1 &&
 
 for f in /usr/bin/rst*.py; do
   ln -svf $(basename $f) /usr/bin/$(basename $f .py)
 done
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

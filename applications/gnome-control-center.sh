@@ -5,12 +5,7 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The GNOME Control Center packagebr3ak contains the GNOME settingsbr3ak manager.br3ak"
-SECTION="gnome"
-VERSION=3.28.0
-NAME="gnome-control-center"
+. /etc/alps/directories.conf
 
 #REQ:accountsservice
 #REQ:clutter-gtk
@@ -18,63 +13,68 @@ NAME="gnome-control-center"
 #REQ:gnome-online-accounts
 #REQ:gnome-settings-daemon
 #REQ:grilo
+#REQ:gsound
 #REQ:libgtop
 #REQ:libpwquality
 #REQ:mitkrb
 #REQ:shared-mime-info
-#REC:cheese
-#REC:cups
-#REC:samba
-#REC:gnome-bluetooth
-#REC:ibus
-#REC:ModemManager
-#REC:network-manager-applet
-#OPT:cups-pk-helper
-#OPT:gnome-color-manager
-#OPT:sound-theme-freedesktop
-#OPT:vino
+#REQ:udisks2
+#REQ:cheese
+#REQ:cups
+#REQ:samba
+#REQ:gnome-bluetooth
+#REQ:ibus
+#REQ:libhandy
+#REQ:modemmanager
+#REQ:network-manager-applet
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-control-center/3.28/gnome-control-center-3.28.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-control-center/3.34/gnome-control-center-3.34.2.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-control-center/3.34/gnome-control-center-3.34.2.tar.xz
+
+
+NAME=gnome-control-center
+VERSION=3.34.2
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-control-center/3.34/gnome-control-center-3.34.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-control-center/3.28/gnome-control-center-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-control-center/gnome-control-center-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-control-center/gnome-control-center-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-control-center/gnome-control-center-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-control-center/gnome-control-center-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-control-center/gnome-control-center-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-control-center/gnome-control-center-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-control-center/3.28/gnome-control-center-3.28.0.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
 
-sed -i '/ln -s/s/s /sf /' panels/user-accounts/meson.build &&
+
 mkdir build &&
 cd    build &&
-meson --prefix=/usr &&
+
+meson --prefix=/usr .. &&
 ninja
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 ninja install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -1,48 +1,46 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="pavucontrol"
-VERSION="3.0"
-
-#REQ:alsa-utils
-#REQ:gtk2
-#REQ:glibmm
-#REQ:gtkmm2
-#REQ:gtkmm3
 #REQ:pulseaudio
 
 
 cd $SOURCE_DIR
 
-URL=http://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-3.0.tar.xz
+wget -nc http://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-3.0.tar.gz
 
-wget -nc $URL
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+NAME=pavucontrol
+VERSION=3.0
+URL=http://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-3.0.tar.gz
 
-tar xf $TARBALL
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr --disable-gtk3 &&
-make "-j`nproc`"
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
+./configure --prefix=/usr
+make
+sudo make install
 
 
-cd $SOURCE_DIR
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
-cleanup "$NAME" "$DIRECTORY"
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

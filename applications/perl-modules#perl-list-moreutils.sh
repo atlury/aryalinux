@@ -5,38 +5,54 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-#REQ:perl-modules#list-moreutils-xs
-#REQ:perl-modules#exporter-tiny
+#REQ:perl-deps#perl-exporter-tiny
+#REQ:perl-deps#perl-list-moreutils-xs
 
-SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.428.tar.gz"
+
+cd $SOURCE_DIR
+
+wget -nc https://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.428.tar.gz
+
+
+NAME=perl-modules#perl-list-moreutils
 VERSION=0.428
-NAME="perl-modules#perl-list-moreutils"
+URL=https://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.428.tar.gz
 
-cd $SOURCE_DIR
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
+if [ ! -z $URL ]
+then
 
-tar xf $TARBALL
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
-
-if [ -f Build.PL ]
-then
-perl Build.PL &&
-./Build &&
-sudo ./Build install
 fi
 
-if [ -f Makefile.PL ]
-then
+
+echo $USER > /tmp/currentuser
+
 perl Makefile.PL &&
-make &&
-sudo make install
-fi
-cd $SOURCE_DIR
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+make install
+ENDOFROOTSCRIPT
 
-cleanup "$NAME" "$DIRECTORY"
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

@@ -5,41 +5,58 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-#REQ:qt5
+#REQ:xserver-meta
+#REQ:kernel-headers
 
-NAME=virtualbox
-VERSION=5.2.14
 
 cd $SOURCE_DIR
 
-export KERNEL_VERSION=$(uname -r)
 
-if [ `uname -m` == "x86_64" ]
+
+NAME=virtualbox
+VERSION=nightly
+
+
+if [ ! -z $URL ]
 then
-	URL=https://download.virtualbox.org/virtualbox/5.2.14/VirtualBox-5.2.14-123301-Linux_amd64.run
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
 else
-	URL=https://download.virtualbox.org/virtualbox/5.2.14/VirtualBox-5.2.14-123301-Linux_x86.run
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
 fi
 
-KERNEL_URL=https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$KERNEL_VERSION.tar.xz
-KERNEL_TARBALL=$(echo $KERNEL_URL | rev | cut -d/ -f1 | rev)
-VBOX_INSTALLER=$(echo $URL | rev | cut -d/ -f1 | rev)
+cd $DIRECTORY
+fi
 
-wget -nc $URL
-wget -nc $KERNEL_URL
+sudo pip install bs4
 
-KERNEL_DIR=$(tar tf $KERNEL_TARBALL | cut -d/ -f1 | uniq)
+wget https://www.virtualbox.org/wiki/Linux_Downloads -O Linux_Downloads
 
-mkdir -pv /usr/src/
-sudo tar xf $KERNEL_TARBALL -C /usr/src
-sudo ln -svf /usr/src/$KERNEL_DIR /lib/modules/$KERNEL_VERSION/build
+cat > /tmp/parser.py<<"EOF"
+from bs4 import BeautifulSoup
 
-pushd /usr/src/$KERNEL_DIR
-sudo make oldconfig
-sudo make prepare
-sudo make scripts
-popd
+with open('Linux_Downloads') as fp:
+	doc = BeautifulSoup(fp.read(), features="html.parser")
+
+for anchor in doc.select('a[href]'):
+	if 'All distributions' in str(anchor):
+		print(anchor['href'])
+EOF
+
+url=$(python /tmp/parser.py)
+tarball=$(echo $url | rev | cut -d/ -f1 | rev)
+
+VBOX_INSTALLER=$(echo $url | rev | cut -d/ -f1 | rev)
+VERSION=$(echo $VBOX_INSTALLER | cut -d "-" -f2)
+
+wget -nc $url
 
 chmod a+x $VBOX_INSTALLER
 
@@ -49,6 +66,9 @@ sudo ln -svf /opt/VirtualBox/virtualbox.desktop /usr/share/applications/
 sudo update-desktop-database
 sudo update-mime-database /usr/share/mime
 
-cd $SOURCE_DIR
+
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

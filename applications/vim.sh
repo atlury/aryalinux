@@ -5,88 +5,79 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Vim package, which is anbr3ak abbreviation for VI IMproved, contains a <span class=\"command\"><strong>vi</strong> clone with extra features asbr3ak compared to the original <span class=\"command\"><strong>vi</strong>.br3ak"
-SECTION="postlfs"
-VERSION=8.1
-NAME="vim"
-
-#REC:gtk2
-#REC:xorg-server
-#OPT:gpm
-#OPT:lua
-#OPT:python2
-#OPT:ruby
-#OPT:tcl
+#REQ:gtk3
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.vim.org/vim/unix/vim-8.1.tar.bz2
+wget -nc http://github.com/vim/vim/archive/v8.2.0024/vim-8.2.0024.tar.gz
+
+
+NAME=vim
+VERSION=8.2.0024
+URL=http://github.com/vim/vim/archive/v8.2.0024/vim-8.2.0024.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.vim.org/vim/unix/vim-8.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vim/vim-8.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/vim/vim-8.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vim/vim-8.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vim/vim-8.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vim/vim-8.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vim/vim-8.1.tar.bz2
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 echo '#define SYS_VIMRC_FILE  "/etc/vimrc"' >>  src/feature.h &&
 echo '#define SYS_GVIMRC_FILE "/etc/gvimrc"' >> src/feature.h &&
-./configure --prefix=/usr \
+
+./configure --prefix=/usr        \
             --with-features=huge \
+            --enable-gui=gtk3    \
             --with-tlib=ncursesw &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ln -snfv ../vim/vim80/doc /usr/share/doc/vim-8.1
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ln -snfv ../vim/vim82/doc /usr/share/doc/vim-8.2.0024
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 rsync -avzcP --exclude="/dos/" --exclude="/spell/" \
     ftp.nluug.nl::Vim/runtime/ ./runtime/
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make -C src installruntime &&
-vim -c ":helptags /usr/share/doc/vim-8.1" -c ":q"
-
+vim -c ":helptags /usr/share/doc/vim-8.2.0024" -c ":q"
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 cat > /usr/share/applications/gvim.desktop << "EOF"
 [Desktop Entry]
 Name=GVim Text Editor
@@ -101,15 +92,15 @@ Categories=Utility;TextEditor;
 StartupNotify=true
 MimeType=text/plain;
 EOF
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

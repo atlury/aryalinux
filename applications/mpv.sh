@@ -5,34 +5,44 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="MPV is a free, open source, and cross-platform media player"
-SECTION="multimedia"
-VERSION=0.29.0
-NAME="mpv"
+#REQ:xserver-meta
+#REQ:mesa
+#REQ:alsa-lib
+#REQ:pulseaudio
+#REQ:libass
+#REQ:libjpeg
+#REQ:gnutls
+#REQ:x264
+#REQ:lame
+#REQ:fdk-aac
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/mpv-player/mpv/archive/v0.29.0.tar.gz
+wget -nc https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz
+
+
+NAME=mpv
+VERSION=0.29.1
+URL=https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
-
-whoami > /tmp/currentuser
 
 ./bootstrap.py &&
 ./waf configure --enable-libmpv-shared --enable-vaapi --enable-vdpau --prefix=/usr &&
@@ -43,3 +53,4 @@ sudo ./waf install --prefix=/usr
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

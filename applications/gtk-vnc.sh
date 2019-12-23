@@ -5,62 +5,62 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gtk VNC package contains a VNCbr3ak viewer widget for GTK+. It isbr3ak built using coroutines allowing it to be completely asynchronousbr3ak while remaining single threaded.br3ak"
-SECTION="x"
-VERSION=0.7.2
-NAME="gtk-vnc"
+. /etc/alps/directories.conf
 
 #REQ:gnutls
 #REQ:gtk3
 #REQ:libgcrypt
-#REC:gobject-introspection
-#REC:vala
-#OPT:cyrus-sasl
-#OPT:pulseaudio
+#REQ:gobject-introspection
+#REQ:python2
+#REQ:vala
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gtk-vnc/0.7/gtk-vnc-0.7.2.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk-vnc/1.0/gtk-vnc-1.0.0.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk-vnc/1.0/gtk-vnc-1.0.0.tar.xz
+
+
+NAME=gtk-vnc
+VERSION=1.0.0
+URL=http://ftp.gnome.org/pub/gnome/sources/gtk-vnc/1.0/gtk-vnc-1.0.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk-vnc/0.7/gtk-vnc-0.7.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk-vnc/gtk-vnc-0.7.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gtk-vnc/gtk-vnc-0.7.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-vnc/gtk-vnc-0.7.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-vnc/gtk-vnc-0.7.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk-vnc/gtk-vnc-0.7.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk-vnc/gtk-vnc-0.7.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk-vnc/0.7/gtk-vnc-0.7.2.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr  \
-            --with-gtk=3.0 \
-            --enable-vala  \
-            --without-sasl &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
+mkdir build &&
+cd    build &&
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+meson --prefix=/usr .. &&
+ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

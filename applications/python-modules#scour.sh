@@ -5,48 +5,55 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="%DESCRIPTION%"
-SECTION="general"
-VERSION=0.36
-NAME="python-modules#scour"
-
-#OPT:python-modules#six
+#REQ:python-modules#six
+#REQ:python2
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/scour-project/scour/archive/v0.36/scour-0.36.tar.gz
+wget -nc https://github.com/scour-project/scour/archive/v0.37/scour-0.37.tar.gz
+
+
+NAME=python-modules#scour
+VERSION=0.37
+URL=https://github.com/scour-project/scour/archive/v0.37/scour-0.37.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/scour-project/scour/archive/v0.36/scour-0.36.tar.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-python setup.py build
 
+echo $USER > /tmp/currentuser
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-python setup.py install --optimize=1
+python2 setup.py build &&
+python3 setup.py build
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+python2 setup.py install --optimize=1 &&
+python3 setup.py install --optimize=1
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

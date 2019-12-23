@@ -5,36 +5,39 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Xorg's ancestor (X11R1, in 1987)br3ak at first only provided bitmap fonts, with a tool (<span class=\"command\"><strong>bdftopcf</strong>) to assist in theirbr3ak installation. With the introduction of xorg-server-1.19.0 and libXfont2 many people will not need them.br3ak There are still a few old packages which might require, or benefitbr3ak from, these deprecated fonts and so the following packages arebr3ak shown here.br3ak"
-SECTION="x"
-NAME="x7legacy"
+. /etc/alps/directories.conf
 
 #REQ:xcursor-themes
 
 
 cd $SOURCE_DIR
 
-URL=
+wget -nc https://www.x.org/pub/individual/
+wget -nc ftp://ftp.x.org/pub/individual/
+
+
+NAME=x7legacy
+VERSION=
+URL=https://www.x.org/pub/individual/
 
 if [ ! -z $URL ]
 then
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
 
-export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 cat > legacy.dat << "EOF"
@@ -45,16 +48,12 @@ cb7b57d7800fd9e28ec35d85761ed278 font/ font-jis-misc-1.0.3.tar.bz2
 0571bf77f8fab465a5454569d9989506 font/ font-daewoo-misc-1.0.3.tar.bz2
 a2401caccbdcf5698e001784dbd43f1a font/ font-isas-misc-1.0.3.tar.bz2
 EOF
-
-
 mkdir legacy &&
 cd legacy &&
 grep -v '^#' ../legacy.dat | awk '{print $2$3}' | wget -i- -c \
      -B https://www.x.org/pub/individual/ &&
 grep -v '^#' ../legacy.dat | awk '{print $1 " " $3}' > ../legacy.md5 &&
 md5sum -c ../legacy.md5
-
-
 as_root()
 {
   if   [ $EUID = 0 ];        then $*
@@ -62,31 +61,25 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
+
 export -f as_root
-
-
-
-
-
+bash -e
 for package in $(grep -v '^#' ../legacy.md5 | awk '{print $2}')
 do
   packagedir=${package%.tar.bz2}
   tar -xf $package
   pushd $packagedir
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
-  make "-j`nproc`" || make
-  as_root make install
+    ./configure $XORG_CONFIG
+    make
+    as_root make install
   popd
   rm -rf $packagedir
   as_root /sbin/ldconfig
 done
-
-
-
-
-
+exit
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

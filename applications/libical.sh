@@ -5,62 +5,66 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The libical package contains anbr3ak implementation of the iCalendar protocols and data formats.br3ak"
-SECTION="general"
-VERSION=3.0.3
-NAME="libical"
+. /etc/alps/directories.conf
 
 #REQ:cmake
-#OPT:db
-#OPT:doxygen
-#OPT:gobject-introspection
-#OPT:icu
+#REQ:gobject-introspection
+#REQ:vala
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/libical/libical/releases/download/v3.0.3/libical-3.0.3.tar.gz
+wget -nc https://github.com/libical/libical/releases/download/v3.0.7/libical-3.0.7.tar.gz
+
+
+NAME=libical
+VERSION=3.0.7
+URL=https://github.com/libical/libical/releases/download/v3.0.7/libical-3.0.7.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/libical/libical/releases/download/v3.0.3/libical-3.0.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libical/libical-3.0.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libical/libical-3.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libical/libical-3.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libical/libical-3.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libical/libical-3.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libical/libical-3.0.3.tar.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 mkdir build &&
 cd    build &&
-cmake -DCMAKE_INSTALL_PREFIX=/usr      \
-      -DCMAKE_BUILD_TYPE=Release       \
-      -DSHARED_ONLY=yes                \
+
+  
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr  \
+      -DCMAKE_BUILD_TYPE=Release   \
+      -DSHARED_ONLY=yes            \
+      -DICAL_BUILD_DOCS=false      \
+      -DGOBJECT_INTROSPECTION=true \
+      -DICAL_GLIB_VAPI=true        \
       .. &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

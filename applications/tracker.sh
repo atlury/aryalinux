@@ -5,64 +5,74 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Tracker is the file indexing andbr3ak search provider used in the GNOMEbr3ak desktop environment.br3ak"
-SECTION="gnome"
-VERSION=2.0.3
-NAME="tracker"
+. /etc/alps/directories.conf
 
 #REQ:json-glib
 #REQ:libseccomp
 #REQ:libsoup
-#REQ:python2
 #REQ:vala
-#REC:icu
-#REC:networkmanager
-#REC:sqlite
-#REC:upower
-#OPT:gtk-doc
+#REQ:gobject-introspection
+#REQ:icu
+#REQ:networkmanager
+#REQ:sqlite
+#REQ:upower
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/tracker/2.0/tracker-2.0.3.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/tracker/2.3/tracker-2.3.1.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/tracker/2.3/tracker-2.3.1.tar.xz
+
+
+NAME=tracker
+VERSION=2.3.1
+URL=http://ftp.gnome.org/pub/gnome/sources/tracker/2.3/tracker-2.3.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/tracker/2.0/tracker-2.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tracker/tracker-2.0.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/tracker/tracker-2.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tracker/tracker-2.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tracker/tracker-2.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tracker/tracker-2.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tracker/tracker-2.0.3.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/tracker/2.0/tracker-2.0.3.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --with-session-bus-services-dir=/usr/share/dbus-1/services &&
-make "-j`nproc`" || make
+echo $USER > /tmp/currentuser
 
 
+mkdir build &&
+cd    build &&
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+meson --prefix=/usr --sysconfdir=/etc .. &&
+ninja
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+glib-compile-schemas /usr/share/glib-2.0/schemas
+ENDOFROOTSCRIPT
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

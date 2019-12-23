@@ -5,83 +5,52 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-SOURCE_ONLY=n
-DESCRIPTION="br3ak PHP is the PHP Hypertextbr3ak Preprocessor. Primarily used in dynamic web sites, it allows forbr3ak programming code to be directly embedded into the HTML markup. Itbr3ak is also useful as a general purpose scripting language.br3ak"
-SECTION="general"
-VERSION=7.2.6
-NAME="php"
-
-#REC:apache
-#REC:libxml2
-#REC:aspell
-#REC:enchant
-#REC:libxslt
-#REC:pcre
-#REC:pth
-#REC:freetype2
-#REC:libexif
-#REC:libjpeg
-#REC:libpng
-#REC:libtiff
-#REC:curl
-#REC:tidy-html5
-#REC:db
-#REC:openldap
-#REC:postgresql
-#REC:sqlite
-#REC:unixodbc
-#REC:cyrus-sasl
-#REC:xorg-server
-#REC:t1lib
-#REC:gd
-#REC:net-snmp
-#OPT:aspell
-#OPT:enchant
-#OPT:libxslt
-#OPT:pcre
-#OPT:pth
-#OPT:freetype2
-#OPT:libexif
-#OPT:libjpeg
-#OPT:libpng
-#OPT:libtiff
-#OPT:curl
-#OPT:tidy-html5
-#OPT:db
-#OPT:mariadb
-#OPT:openldap
-#OPT:postgresql
-#OPT:sqlite
-#OPT:unixodbc
-#OPT:cyrus-sasl
-#OPT:mitkrb
-#OPT:xorg-server
+#REQ:apache
+#REQ:libxml2
+#REQ:libgd
+#REQ:postgresql
+#REQ:net-snmp
+#REQ:tidy-html5
 
 
 cd $SOURCE_DIR
 
-URL=http://www.php.net/distributions/php-7.2.6.tar.xz
+wget -nc http://www.php.net/distributions/php-7.4.0.tar.xz
+wget -nc https://www.php.net/distributions/manual/php_manual_en.html.gz
+wget -nc https://www.php.net/distributions/manual/php_manual_en.tar.gz
+wget -nc http://www.php.net/download-docs.php
+
+
+NAME=php
+VERSION=7.4.0
+URL=http://www.php.net/distributions/php-7.4.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.php.net/distributions/php-7.2.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/php/php-7.2.6.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/php/php-7.2.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/php/php-7.2.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/php/php-7.2.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/php/php-7.2.6.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/php/php-7.2.6.tar.xz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 ./configure --prefix=/usr                    \
+            --datadir=/usr/share/php         \
             --sysconfdir=/etc                \
+            --enable-libxml                  \
+            --with-pear                      \
             --with-apxs2                     \
             --with-config-file-path=/etc     \
             --disable-ipv6                   \
@@ -104,17 +73,15 @@ whoami > /tmp/currentuser
             --with-zlib-dir=/usr             \
             --with-xpm-dir=/usr/X11R6/lib    \
             --with-freetype-dir=/usr         \
-            --with-t1lib                     \
             --with-gettext                   \
             --with-gmp                       \
             --with-ldap                      \
             --with-ldap-sasl                 \
             --enable-mbstring                \
-            --with-mysql                     \
-            --with-mysqli=mysqlnd            \
-            --with-mysql-sock=/var/run/mysql \
+            --with-mysqli=shared            \
+            --with-mysql-sock=/run/mysqld/mysqld.sock \
             --with-unixODBC=/usr             \
-            --with-pdo-mysql                 \
+            --with-pdo-mysql=shared          \
             --with-pdo-odbc=unixODBC,/usr    \
             --with-pdo-pgsql                 \
             --without-pdo-sqlite             \
@@ -123,7 +90,7 @@ whoami > /tmp/currentuser
             --with-readline                  \
             --with-snmp                      \
             --enable-sockets                 \
-            --with-tidy                      \
+            --with-tidy=shared               \
             --with-xsl                       \
             --enable-fpm                     \
             --with-fpm-user=apache           \
@@ -132,94 +99,91 @@ whoami > /tmp/currentuser
             --with-iconv                     &&
 make
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install                                     &&
 install -v -m644 php.ini-production /etc/php.ini &&
-install -v -m755 -d /usr/share/doc/php-7.2.6 &&
-install -v -m644    CODING_STANDARDS EXTENSIONS INSTALL NEWS README* UPGRADING* php.gif \
-                    /usr/share/doc/php-7.2.6 &&
-ln -v -sfn          /usr/lib/php/doc/Archive_Tar/docs/Archive_Tar.txt \
-                    /usr/share/doc/php-7.2.6 &&
-ln -v -sfn          /usr/lib/php/doc/Structures_Graph/docs \
-                    /usr/share/doc/php-7.2.6
 
+install -v -m755 -d /usr/share/doc/php-7.4.0 &&
+install -v -m644    CODING_STANDARDS* EXTENSIONS NEWS README* UPGRADING* \
+                    /usr/share/doc/php-7.4.0
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 if [ -f /etc/php-fpm.conf.default ]; then
   mv -v /etc/php-fpm.conf{.default,} &&
   mv -v /etc/php-fpm.d/www.conf{.default,}
 fi
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+wget http://pear.php.net/go-pear.phar
+php ./go-pear.phar
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 sed -i 's@php/includes"@&\ninclude_path = ".:/usr/lib/php"@' \
     /etc/php.ini
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 sed -i -e '/proxy_module/s/^#//'      \
        -e '/proxy_fcgi_module/s/^#//' \
        /etc/httpd/httpd.conf
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 echo \
 'ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/srv/www/$1' >> \
 /etc/httpd/httpd.conf
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+#!/bin/bash
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+set -e
+set +h
+
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
-make install-php-fpm
-
-cd ..
-rm -rf blfs-systemd-units-20180105
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20191026.tar.xz
+tar xf blfs-systemd-units-20191026.tar.xz
+cd blfs-systemd-units-20191026
+sudo make install-php-fpm
 popd
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
+sudo systemctl enable php-fpm && sudo systemctl start php-fpm && sudo systemctl restart httpd
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

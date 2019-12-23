@@ -5,59 +5,59 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak The Thunar Volume Manager is anbr3ak extension for the Thunar filebr3ak manager, which enables automatic management of removable drives andbr3ak media.br3ak"
-SECTION="xfce"
-VERSION=0.8.1
-NAME="thunar-volman"
+. /etc/alps/directories.conf
 
 #REQ:exo
 #REQ:libgudev
 #REQ:libxfce4ui
-#REC:libnotify
-#REC:startup-notification
-#REC:gvfs
-#REC:polkit-gnome
+#REQ:libnotify
+#REQ:startup-notification
+#REQ:gvfs
+#REQ:polkit-gnome
 
 
 cd $SOURCE_DIR
 
-URL=http://archive.xfce.org/src/xfce/thunar-volman/0.8/thunar-volman-0.8.1.tar.bz2
+wget -nc http://archive.xfce.org/src/xfce/thunar-volman/0.9/thunar-volman-0.9.5.tar.bz2
+
+
+NAME=thunar-volman
+VERSION=0.9.5
+URL=http://archive.xfce.org/src/xfce/thunar-volman/0.9/thunar-volman-0.9.5.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://archive.xfce.org/src/xfce/thunar-volman/0.8/thunar-volman-0.8.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/thunar/thunar-volman-0.8.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/thunar/thunar-volman-0.8.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/thunar/thunar-volman-0.8.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/thunar/thunar-volman-0.8.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/thunar/thunar-volman-0.8.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/thunar/thunar-volman-0.8.1.tar.bz2
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
 
 ./configure --prefix=/usr &&
-make "-j`nproc`" || make
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

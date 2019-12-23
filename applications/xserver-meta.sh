@@ -5,20 +5,13 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=y
-NAME="xserver-meta"
-DESCRIPTION="meta-package to install xserver components"
-VERSION=
-
-whoami > /tmp/currentuser
-sudo usermod -a -G video `cat /tmp/currentuser`
+. /etc/alps/directories.conf
 
 #REQ:libxml2
 #REQ:util-macros
 #REQ:xorgproto
-#REQ:libXau
-#REQ:libXdmcp
+#REQ:libxau
+#REQ:libxdmcp
 #REQ:xcb-proto
 #REQ:libxcb
 #REQ:x7lib
@@ -37,16 +30,11 @@ sudo usermod -a -G video `cat /tmp/currentuser`
 #REQ:xkeyboard-config
 #REQ:xorg-server
 #REQ:x7driver
-#OPT:xf86-video-mga
-#OPT:xf86-video-sis
 #REQ:xf86-video-cirrus
 #REQ:xf86-video-mach64
 #REQ:xf86-video-openchrome
-#OPT:xf86-video-r128
-#OPT:xf86-video-savage
-#OPT:xf86-video-tdfx
 #REQ:xf86-video-vesa
-#REQ:libva-intel-driver
+#REQ:intel-vaapi-driver
 #REQ:libvdpau
 #REQ:libvdpau-va-gl
 #REQ:twm
@@ -55,6 +43,35 @@ sudo usermod -a -G video `cat /tmp/currentuser`
 #REQ:xinit
 #REQ:wayland-protocols
 
-sudo rm -f /etc/X11/xorg.conf.d/*
+
+cd $SOURCE_DIR
+
+
+
+NAME=xserver-meta
+VERSION=1.20.3
+
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
+cd $DIRECTORY
+fi
+
+sudo rm -f /etc/X11/xorg.conf.d/*.conf
+
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

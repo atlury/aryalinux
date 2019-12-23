@@ -5,108 +5,108 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
-
-SOURCE_ONLY=n
-DESCRIPTION="br3ak Mesa is an OpenGL compatible 3Dbr3ak graphics library.br3ak"
-SECTION="x"
-VERSION=18.1.7
-NAME="mesa"
+. /etc/alps/directories.conf
 
 #REQ:x7lib
 #REQ:libdrm
-#REQ:python-modules#Mako
-#REQ:python2
-#REQ:wayland
-#REC:wayland-protocols
-#REC:llvm
-#REC:wayland
-#REC:libva-wo-mesa
-#REC:libvdpau
-#OPT:libgcrypt
-#OPT:nettle
+#REQ:python-modules#mako
+#REQ:libva
+#REQ:libvdpau
+#REQ:llvm
+#REQ:wayland-protocols
 
 
 cd $SOURCE_DIR
 
-URL=https://mesa.freedesktop.org/archive/$NAME-$VERSION.tar.xz
+wget -nc https://mesa.freedesktop.org/archive/mesa-19.3.1.tar.xz
+wget -nc ftp://ftp.freedesktop.org/pub/mesa/mesa-19.3.1.tar.xz
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.0/mesa-19.3.1-add_xdemos-1.patch
+wget -nc ftp://ftp.freedesktop.org/pub/mesa/demos/
 
-echo "PATH : $PATH"
+
+NAME=mesa
+VERSION=19.3.1
+URL=https://mesa.freedesktop.org/archive/mesa-19.3.1.tar.xz
 
 if [ ! -z $URL ]
 then
 
-wget -nc $URL
-
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
-	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
 	tar --no-overwrite-dir -xf $TARBALL
 else
 	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
 	unzip_file $TARBALL $NAME
 fi
+
 cd $DIRECTORY
 fi
 
-whoami > /tmp/currentuser
+echo $USER > /tmp/currentuser
+
+export XORG_PREFIX="/usr"
+
+patch -Np1 -i ../mesa-19.3.1-add_xdemos-1.patch
+GALLIUM_DRV="i915,nouveau,r600,radeonsi,svga,swrast,virgl"
+DRI_DRIVERS="i965,nouveau"
 
 export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-DRI_DRIVERS="i915,i965,nouveau,r200,radeon,swrast"
-GALLIUM_DRIVERS="nouveau,r300,r600,svga,radeonsi,swrast,virgl"
-VULKAN=" --with-vulkan-drivers=intel,radeon "
-EGL_PLATFORMS="drm,x11"
+mkdir build &&
+cd    build &&
 
+meson --prefix=$XORG_PREFIX          \
+      --sysconfdir=/etc              \
+      -Dllvm=true                    \
+      -Dshared-llvm=true             \
+      -Degl=true                     \
+      -Dshared-glapi=true            \
+      -Dgallium-xa=true              \
+      -Dgallium-nine=true            \
+      -Dgallium-vdpau=true           \
+      -Dgallium-va=true              \
+      -Ddri3=true                    \
+      -Dglx=dri                      \
+      -Dosmesa=gallium               \
+      -Dgbm=true                     \
+      -Dglx-direct=true              \
+      -Dgles1=true                   \
+      -Dgles2=true                   \
+      -Dvalgrind=false               \
+      -Ddri-drivers=auto             \
+      -Dgallium-drivers=auto         \
+      -Dplatforms=auto               \
+      -Dvulkan-drivers=auto          \
+      ..                             &&
 
-./configure CFLAGS='-O2' CXXFLAGS='-O2' LDFLAGS=-lLLVM \
-  --prefix=$XORG_PREFIX \
-  --sysconfdir=/etc \
-  --with-dri-driverdir=/usr/lib${LIBDIRSUFFIX}/xorg/modules/dri \
-  --with-dri-drivers="$DRI_DRIVERS" \
-  --with-gallium-drivers="$GALLIUM_DRIVERS" \
-  --with-egl-platforms="$EGL_PLATFORMS" \
-  $VULKAN \
-  --enable-llvm \
-  --enable-llvm-shared-libs \
-  --enable-egl \
-  --enable-texture-float \
-  --enable-shared-glapi \
-  --enable-xa \
-  --enable-nine \
-  --enable-osmesa \
-  --enable-dri \
-  --enable-dri3 \
-  --enable-gbm \
-  --enable-glx \
-  --enable-glx-tls \
-  --enable-gles1 \
-  --enable-gles2 \
-  --enable-vdpau \
-  --enable-va
-make "-j`nproc`" || make
+unset GALLIUM_DRIVERS DRI_DRIVERS EGL_PLATFORMS &&
 
+ninja
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+ninja install
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -dm755 /usr/share/doc/$NAME-$VERSION &&
-cp -rfv docs/* /usr/share/doc/$NAME-$VERSION
-
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+install -v -dm755 /usr/share/doc/mesa-19.3.1 &&
+cp -rfv ../docs/* /usr/share/doc/mesa-19.3.1
 ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
+
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
+
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

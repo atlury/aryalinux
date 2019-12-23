@@ -5,26 +5,45 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="ppp"
-VERSION="2.4.7"
 
-URL=https://www.samba.org/ftp/ppp/ppp-2.4.7.tar.gz
 
 cd $SOURCE_DIR
 
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
-tar -xf $TARBALL
+
+NAME=ppp
+VERSION=2.4
+
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-./configure --prefix=/usr  &&
-make "-j`nproc`"
+git clone https://github.com/paulusmack/ppp.git
+cd ppp
+./configure --prefix=/usr
+make
 sudo make install
+cd ..
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+rm -rf ppp
+
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

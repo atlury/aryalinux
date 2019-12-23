@@ -5,33 +5,43 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-NAME="openvpn"
-VERSION="2.4.4"
-
-#REQ:liblzo2
 #REQ:net-tools
 
-URL=https://swupdate.openvpn.org/community/releases/openvpn-2.4.4.tar.xz
 
 cd $SOURCE_DIR
 
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
+wget -nc https://swupdate.openvpn.org/community/releases/openvpn-2.4.7.tar.xz
 
-tar -xf $TARBALL
+
+NAME=openvpn
+VERSION=2.4.7
+URL=https://swupdate.openvpn.org/community/releases/openvpn-2.4.7.tar.xz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-./configure --prefix=/usr --enable-systemd &&
-make "-j`nproc`"
+if grep "gnome-desktop-environment" /etc/alps/installed-list &> /dev/null; then export WITH_GNOME="--with-gnome"; fi
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var $WITH_GNOME &&
+make
 sudo make install
-sudo mkdir -pv /var/run/openvpn/
-sudo cp ./distro/systemd/openvpn-client@.service /lib/systemd/system/
-sudo cp ./distro/systemd/openvpn-server@.service /lib/systemd/system/
-sudo systemctl enable openvpn-client@.service
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

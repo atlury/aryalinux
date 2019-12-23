@@ -5,37 +5,55 @@ set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
+. /etc/alps/directories.conf
 
-#REQ:perl-modules#perl-capture-tiny
+#REQ:perl-deps#perl-config-autoconf
+#REQ:perl-deps#perl-extutils-libbuilder
 
-SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/A/AM/AMBS/Text-BibTeX-0.85.tar.gz"
-VERSION=0.85
-NAME="perl-modules#perl-text-bibtex"
 
 cd $SOURCE_DIR
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
-tar xf $TARBALL
+wget -nc https://www.cpan.org/authors/id/A/AM/AMBS/Text-BibTeX-0.88.tar.gz
+
+
+NAME=perl-modules#perl-text-bibtex
+VERSION=0.88
+URL=https://www.cpan.org/authors/id/A/AM/AMBS/Text-BibTeX-0.88.tar.gz
+
+if [ ! -z $URL ]
+then
+
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+	sudo rm -rf $DIRECTORY
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
+
 cd $DIRECTORY
+fi
 
-if [ -f Build.PL ]
-then
+
+echo $USER > /tmp/currentuser
+
 perl Build.PL &&
-./Build &&
-sudo ./Build install
-fi
+./Build       &&
+./Build test
+sudo rm -rf /tmp/rootscript.sh
+cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
+./Build install
+ENDOFROOTSCRIPT
 
-if [ -f Makefile.PL ]
-then
-perl Makefile.PL &&
-make &&
-sudo make install
-fi
-cd $SOURCE_DIR
+chmod a+x /tmp/rootscript.sh
+sudo /tmp/rootscript.sh
+sudo rm -rf /tmp/rootscript.sh
 
-cleanup "$NAME" "$DIRECTORY"
+
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+

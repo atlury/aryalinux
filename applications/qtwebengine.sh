@@ -22,7 +22,7 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://download.qt.io/archive/qt/5.13/5.13.0/submodules/qtwebengine-everywhere-src-5.13.0.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/qtwebengine-5.13.0-background_rendering_fix-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/qtwebengine-5.13.0-background_rendering_fix-1.patch
 
 
 NAME=qtwebengine

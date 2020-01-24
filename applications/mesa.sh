@@ -20,7 +20,7 @@ cd $SOURCE_DIR
 
 wget -nc https://mesa.freedesktop.org/archive/mesa-19.1.4.tar.xz
 wget -nc ftp://ftp.freedesktop.org/pub/mesa/mesa-19.1.4.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/mesa-19.1.4-add_xdemos-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/mesa-19.1.4-add_xdemos-1.patch
 wget -nc ftp://ftp.freedesktop.org/pub/mesa/demos/
 
 

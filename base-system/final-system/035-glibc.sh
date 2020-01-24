@@ -50,6 +50,7 @@ make
 make install_root=$PWD/DESTDIR install
 install -vdm755 /usr/lib32
 cp -Rv DESTDIR/usr/lib32/* /usr/lib32/
+mkdir -pv /usr/include/gnu/
 install -vm644 DESTDIR/usr/include/gnu/{lib-names,stubs}-32.h \
          /usr/include/gnu/
 ln -sv ../usr/lib32/ld-linux.so.2 /lib/ld-linux.so.2

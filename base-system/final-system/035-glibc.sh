@@ -32,8 +32,8 @@ case $(uname -m) in
 esac
 
 
-mkdir -v ../build32
-pushd ../build32
+mkdir -v build32
+pushd build32
 CC="gcc -m32" \
 CXX="g++ -m32" \
 ../configure --prefix=/usr                   \

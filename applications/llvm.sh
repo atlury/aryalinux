@@ -64,12 +64,52 @@ ninja
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 ninja install
+mv /usr/include/llvm/Config/llvm-config{,-64}.h
+cat > /usr/include/llvm/Config/llvm-config.h << EOF
+#include <bits/wordsize.h>
+
+#if __WORDSIZE == 32
+#include "llvm-config-32.h"
+#elif __WORDSIZE == 64
+#include "llvm-config-64.h"
+#else
+#error "Unknown word size"
+#endif
+EOF
 ENDOFROOTSCRIPT
 
 chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+cd ..
+
+mkdir -v build32
+cd       build32
+
+CC="gcc -m32" \
+CXX="g++ -m32" \
+PKG_CONFIG_PATH="/usr/lib32/pkgconfig" \	
+cmake .. -G Ninja \
+      -DCMAKE_INSTALL_PREFIX=/usr           \
+      -DLLVM_ENABLE_FFI=ON                  \
+      -DCMAKE_BUILD_TYPE=Release            \
+      -DLLVM_BUILD_LLVM_DYLIB=ON            \
+      -DLLVM_LINK_LLVM_DYLIB=ON             \
+      -DLLVM_TARGETS_TO_BUILD="X86;AMDGPU;BPF" \
+      -DLLVM_LIBDIR_SUFFIX=32               \
+      -DCMAKE_C_FLAGS:STRING=-m32           \
+      -DCMAKE_CXX_FLAGS:STRING=-m32         \
+      -DLLVM_TARGET_ARCH:STRING=i686        \
+      -DLLVM_DEFAULT_TARGET_TRIPLE="i686-pc-linux-gnu" \
+      -Wno-dev
+ninja
+DESTDIR=$PWD/DESTDIR ninja install
+
+sudo cp -Rv DESTDIR/usr/lib32/* /usr/lib32/
+
+sudo install -m 0755 -D DESTDIR/usr/bin/llvm-config /usr/bin/llvm-config-32
+sudo install -m 0644 -D DESTDIR/usr/include/llvm/Config/llvm-config.h /usr/include/llvm/Config/llvm-config-32.h
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

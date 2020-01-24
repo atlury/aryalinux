@@ -68,7 +68,25 @@ sudo rm -rf /tmp/rootscript.sh
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
-export PYTHONDOCS=/usr/share/doc/python-3/html
+mv /usr/include/python3.7m/pyconfig{,-64}.h
+cat > /usr/include/python3.7m/ <<EOF
+/* pyconfig.h stub */
+
+#ifndef __STUB__PYCONFIG_H__
+#define __STUB__PYCONFIG_H__
+
+#if defined(__x86_64__) || \
+    defined(__sparc64__) || \
+    defined(__arch64__) || \
+    defined(__powerpc64__) || \
+    defined(__s390x__)
+#include "pyconfig-64.h"
+#else
+#include "pyconfig-32.h"
+#endif
+
+#endif
+EOF
 ENDOFROOTSCRIPT
 
 chmod a+x /tmp/rootscript.sh

@@ -56,6 +56,7 @@ install -vm644 DESTDIR/usr/include/gnu/{lib-names,stubs}-32.h \
 ln -sv ../usr/lib32/ld-linux.so.2 /lib/ld-linux.so.2
 ln -sv ../usr/lib32/ld-linux.so.2 /lib/ld-lsb.so.3
 ln -sv ../lib/locale /usr/lib32/locale
+mkdir -pv /etc/ld.so.conf.d/
 echo "/usr/lib32" > /etc/ld.so.conf.d/lib32.conf
 
 popd

@@ -34,7 +34,7 @@ RANLIB=$LFS_TGT-ranlib         \
 make
 make install
 make -C ld clean
-make -C ld LIB_PATH=/usr/lib:/lib
+make -C ld LIB_PATH=/usr/lib:/lib:/usr/lib32:/lib32
 cp -v ld/ld-new /tools/bin
 
 fi

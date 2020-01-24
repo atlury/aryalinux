@@ -30,6 +30,35 @@ case $(uname -m) in
             ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
     ;;
 esac
+
+
+mkdir -v ../build32
+pushd ../build32
+CC="gcc -m32" \
+CXX="g++ -m32" \
+../configure --prefix=/usr                   \
+             --disable-werror                \
+             --enable-kernel=3.2             \
+             --enable-multi-arch             \
+             --enable-obsolete-rpc           \
+             --enable-stack-protector=strong \
+             --libdir=/usr/lib32             \
+	           --libexecdir=/usr/lib32         \
+             libc_cv_slibdir=/usr/lib32      \
+             i686-pc-linux-gnu
+make
+make install_root=$PWD/DESTDIR install
+install -vdm755 /usr/lib32
+cp -Rv DESTDIR/usr/lib32/* /usr/lib32/
+install -vm644 DESTDIR/usr/include/gnu/{lib-names,stubs}-32.h \
+         /usr/include/gnu/
+ln -sv ../usr/lib32/ld-linux.so.2 /lib/ld-linux.so.2
+ln -sv ../usr/lib32/ld-linux.so.2 /lib/ld-lsb.so.3
+ln -sv ../lib/locale /usr/lib32/locale
+echo "/usr/lib32" > /etc/ld.so.conf.d/lib32.conf
+
+popd
+
 mkdir -v build
 cd       build
 CC="gcc -ffile-prefix-map=/tools=/usr" \
@@ -38,6 +67,7 @@ CC="gcc -ffile-prefix-map=/tools=/usr" \
              --enable-kernel=3.2                    \
              --enable-stack-protector=strong        \
              --with-headers=/usr/include            \
+             --enable-multi-arch --enable-obsolete-rpc \
              libc_cv_slibdir=/lib
 make
 case $(uname -m) in

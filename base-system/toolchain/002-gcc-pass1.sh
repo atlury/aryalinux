@@ -38,12 +38,9 @@ do
 #define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
   touch $file.orig
 done
-case $(uname -m) in
-  x86_64)
-    sed -e '/m64=/s/lib64/lib/' \
-        -i.orig gcc/config/i386/t-linux64
- ;;
-esac
+sed -i -e 's@/lib/ld-linux.so.2@/lib32/ld-linux.so.2@g' gcc/config/i386/linux64.h
+sed -i -e '/MULTILIB_OSDIRNAMES/d' gcc/config/i386/t-linux64
+echo "MULTILIB_OSDIRNAMES = m64=../lib m32=../lib32 mx32=../libx32" >> gcc/config/i386/t-linux64
 mkdir -v build
 cd       build
 ../configure                                       \
@@ -57,7 +54,7 @@ cd       build
     --with-native-system-header-dir=/tools/include \
     --disable-nls                                  \
     --disable-shared                               \
-    --disable-multilib                             \
+    --with-multilib-list=m32,m64                             \
     --disable-decimal-float                        \
     --disable-threads                              \
     --disable-libatomic                            \

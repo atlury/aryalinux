@@ -30,7 +30,8 @@ cd       build
              --enable-shared     \
              --disable-werror    \
              --enable-64-bit-bfd \
-             --with-system-zlib
+             --with-system-zlib  \
+             --enable-multilib --with-lib-path=/usr/lib:/lib:/usr/lib32
 make tooldir=/usr
 make tooldir=/usr install
 

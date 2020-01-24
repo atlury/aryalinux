@@ -33,7 +33,8 @@ SED=sed                               \
              --enable-languages=c,c++ \
              --disable-multilib       \
              --disable-bootstrap      \
-             --with-system-zlib
+             --with-system-zlib       \
+             --enable-multilib
 make
 make install
 rm -rf /usr/lib/gcc/$(gcc -dumpmachine)/9.2.0/include-fixed/bits/

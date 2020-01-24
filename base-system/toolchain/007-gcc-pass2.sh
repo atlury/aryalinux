@@ -34,12 +34,9 @@ do
 #define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
   touch $file.orig
 done
-case $(uname -m) in
-  x86_64)
-    sed -e '/m64=/s/lib64/lib/' \
-        -i.orig gcc/config/i386/t-linux64
-  ;;
-esac
+sed -i -e 's@/lib/ld-linux.so.2@/lib32/ld-linux.so.2@g' gcc/config/i386/linux64.h
+sed -i -e '/MULTILIB_OSDIRNAMES/d' gcc/config/i386/t-linux64
+echo "MULTILIB_OSDIRNAMES = m64=../lib m32=../lib32 mx32=../libx32" >> gcc/config/i386/t-linux64
 tar -xf ../mpfr-4.0.2.tar.xz
 mv -v mpfr-4.0.2 mpfr
 tar -xf ../gmp-6.1.2.tar.xz
@@ -58,16 +55,12 @@ RANLIB=$LFS_TGT-ranlib                             \
     --with-native-system-header-dir=/tools/include \
     --enable-languages=c,c++                       \
     --disable-libstdcxx-pch                        \
-    --disable-multilib                             \
+    --with-multilib-list=m32,m64                             \
     --disable-bootstrap                            \
     --disable-libgomp
 make
 make install
 ln -sv gcc /tools/bin/cc
-echo 'int main(){}' > dummy.c
-cc dummy.c
-readelf -l a.out | grep ': /tools'
-rm -v dummy.c a.out
 
 fi
 

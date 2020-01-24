@@ -24,14 +24,14 @@ mkdir -v build
 cd       build
 ../configure --prefix=/tools            \
              --with-sysroot=$LFS        \
-             --with-lib-path=/tools/lib \
+             --with-lib-path=/tools/lib:/tools/lib32 \
              --target=$LFS_TGT          \
              --disable-nls              \
              --disable-werror
+
 make
-case $(uname -m) in
-  x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
-esac
+mkdir -p /tools/{lib32,lib} &&
+ln -sv lib /tools/lib64
 make install
 
 fi

@@ -32,7 +32,7 @@ case $(uname -m) in
 esac
 
 
-mkdir -v build32
+mkdir -pv build32
 pushd build32
 CC="gcc -m32" \
 CXX="g++ -m32" \
@@ -61,7 +61,7 @@ echo "/usr/lib32" > /etc/ld.so.conf.d/lib32.conf
 
 popd
 
-mkdir -v build
+mkdir -pv build
 cd       build
 CC="gcc -ffile-prefix-map=/tools=/usr" \
 ../configure --prefix=/usr                          \

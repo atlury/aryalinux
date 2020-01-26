@@ -26,13 +26,13 @@ cd $SOURCE_DIR
 
 wget -nc ftp://tug.org/texlive/historic/2019/texlive-20190410-source.tar.xz
 wget -nc ftp://tug.org/texlive/historic/2019/texlive-20190410-texmf.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/texlive-20190410-source-upstream_fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/texlive-20190410-source-upstream_fixes-1.patch
 
 
 NAME=texlive
 VERSION=2019041
 URL=ftp://tug.org/texlive/historic/2019/texlive-20190410-source.tar.xz
-SECTION="Printing and Typesetting"
+SECTION="Typesetting"
 DESCRIPTION="Most of TeX Live can be built from source without a pre-existing installation, but xindy (for indexing) needs working versions of latex and pdflatex when configure is run, and the testsuite and install for asy (for vector graphics) will fail if TeX has not already been installed. Additionally, biber is not provided within the texlive source."
 
 if [ ! -z $URL ]

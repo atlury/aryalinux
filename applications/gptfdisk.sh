@@ -13,13 +13,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.4.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/gptfdisk-1.0.4-convenience-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/gptfdisk-1.0.4-convenience-1.patch
 
 
 NAME=gptfdisk
 VERSION=1.0.4
 URL=https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.4.tar.gz
-SECTION="Filesystems and disk management"
+SECTION="File Systems and Disk Management"
 DESCRIPTION="The gptfdisk package is a set of programs for creation and maintenance of GUID Partition Table (GPT) disk drives. A GPT partitioned disk is required for drives greater than 2 TB and is a modern replacement for legacy PC-BIOS partitioned disk drives that use a Master Boot Record (MBR). The main program, gdisk, has an inteface similar to the classic fdisk program."
 
 if [ ! -z $URL ]

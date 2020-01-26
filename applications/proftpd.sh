@@ -12,13 +12,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.proftpd.org/distrib/source/proftpd-1.3.6.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/proftpd-1.3.6-consolidated_fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/proftpd-1.3.6-consolidated_fixes-1.patch
 
 
 NAME=proftpd
 VERSION=1.3.6
 URL=ftp://ftp.proftpd.org/distrib/source/proftpd-1.3.6.tar.gz
-SECTION="Servers"
+SECTION="Major Servers"
 DESCRIPTION="The ProFTPD package contains a secure and highly configurable FTP daemon. This is useful for serving large file archives over a network."
 
 if [ ! -z $URL ]

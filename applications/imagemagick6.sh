@@ -14,13 +14,13 @@ cd $SOURCE_DIR
 
 wget -nc https://www.imagemagick.org/download/releases/ImageMagick-6.9.10-60.tar.xz
 wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-6.9.10-60.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/ImageMagick-6.9.10-60-libs_only-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/ImageMagick-6.9.10-60-libs_only-1.patch
 
 
 NAME=imagemagick6
 VERSION=6.9.1
 URL=https://www.imagemagick.org/download/releases/ImageMagick-6.9.10-60.tar.xz
-SECTION="General Libraries and Utilities"
+SECTION="General Utilities"
 DESCRIPTION="ImageMagick underwent many changes in its libraries between versions 6 and 7. Most packages in BLFS which use ImageMagick can use version 7, but for the others this page will install only the libraries, headers and general documentation (not programs, manpages, perl modules), and it will rename the unversioned pkgconfig files so that they do not overwrite the same-named files from version 7."
 
 if [ ! -z $URL ]

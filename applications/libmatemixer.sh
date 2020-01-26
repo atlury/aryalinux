@@ -17,6 +17,8 @@ wget -nc https://pub.mate-desktop.org/releases/1.23/libmatemixer-1.23.0.tar.xz
 NAME=libmatemixer
 VERSION=1.23.0
 URL=https://pub.mate-desktop.org/releases/1.23/libmatemixer-1.23.0.tar.xz
+SECTION="Mate Desktop"
+DESCRIPTION="Mixer library for MATE Desktop"
 
 if [ ! -z $URL ]
 then

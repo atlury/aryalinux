@@ -13,13 +13,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.5.tar.bz2
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/rpcbind-1.2.5-vulnerability_fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/rpcbind-1.2.5-vulnerability_fixes-1.patch
 
 
 NAME=rpcbind
 VERSION=1.2.5
 URL=https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.5.tar.bz2
-SECTION="Networking"
+SECTION="Networking Programs"
 DESCRIPTION="The rpcbind program is a replacement for portmap. It is required for import or export of Network File System (NFS) shared directories."
 
 if [ ! -z $URL ]

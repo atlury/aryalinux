@@ -12,13 +12,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://hewlettpackard.github.io/wireless-tools/wireless_tools.29.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/wireless_tools-29-fix_iwlist_scanning-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/wireless_tools-29-fix_iwlist_scanning-1.patch
 
 
 NAME=wireless_tools
 VERSION=.29
 URL=https://hewlettpackard.github.io/wireless-tools/wireless_tools.29.tar.gz
-SECTION="Networking"
+SECTION="Networking Programs"
 DESCRIPTION="The Wireless Extension (WE) is a generic API in the Linux kernel allowing a driver to expose configuration and statistics specific to common Wireless LANs to user space. A single set of tools can support all the variations of Wireless LANs, regardless of their type as long as the driver supports Wireless Extensions. WE parameters may also be changed on the fly without restarting the driver (or Linux)."
 
 if [ ! -z $URL ]

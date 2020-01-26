@@ -18,14 +18,14 @@ cd $SOURCE_DIR
 
 wget -nc http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz
 wget -nc http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-docs-3.0.2.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/abiword-3.0.2-gtk3_22_render_fix-1.patch
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/abiword-3.0.2-fix_flicker-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/abiword-3.0.2-gtk3_22_render_fix-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/abiword-3.0.2-fix_flicker-1.patch
 
 
 NAME=abiword
 VERSION=3.0.2
 URL=http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz
-SECTION="Others"
+SECTION="Office Programs"
 DESCRIPTION="AbiWord is a word processor which is useful for writing reports, letters and other formatted documents."
 
 if [ ! -z $URL ]

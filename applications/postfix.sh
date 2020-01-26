@@ -15,13 +15,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.4.6.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/postfix-3.4.6-glibc230_fix-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/postfix-3.4.6-glibc230_fix-1.patch
 
 
 NAME=postfix
 VERSION=3.4.6
 URL=ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.4.6.tar.gz
-SECTION="Servers"
+SECTION="Mail Server Software"
 DESCRIPTION="The Postfix package contains a Mail Transport Agent (MTA). This is useful for sending email to other users of your host machine. It can also be configured to be a central mail server for your domain, a mail relay agent or simply a mail delivery agent to your local Internet Service Provider."
 
 if [ ! -z $URL ]

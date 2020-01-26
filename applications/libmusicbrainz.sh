@@ -13,13 +13,13 @@ cd $SOURCE_DIR
 
 wget -nc http://ftp.musicbrainz.org/pub/musicbrainz/historical/libmusicbrainz-2.1.5.tar.gz
 wget -nc ftp://ftp.musicbrainz.org/pub/musicbrainz/historical/libmusicbrainz-2.1.5.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/libmusicbrainz-2.1.5-missing-includes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/libmusicbrainz-2.1.5-missing-includes-1.patch
 
 
 NAME=libmusicbrainz
 VERSION=2.1.5
 URL=http://ftp.musicbrainz.org/pub/musicbrainz/historical/libmusicbrainz-2.1.5.tar.gz
-SECTION="Multimedia"
+SECTION="Multimedia Libraries and Drivers"
 DESCRIPTION="The libmusicbrainz package contains a library which allows you to access the data held on the MusicBrainz server. This is useful for adding MusicBrainz lookup capabilities to other applications."
 
 if [ ! -z $URL ]

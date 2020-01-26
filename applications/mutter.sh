@@ -28,13 +28,13 @@ cd $SOURCE_DIR
 
 wget -nc http://ftp.gnome.org/pub/gnome/sources/mutter/3.32/mutter-3.32.2.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/mutter/3.32/mutter-3.32.2.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/mutter-3.32.2-upstream_fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/mutter-3.32.2-upstream_fixes-1.patch
 
 
 NAME=mutter
 VERSION=3.32.2
 URL=http://ftp.gnome.org/pub/gnome/sources/mutter/3.32/mutter-3.32.2.tar.xz
-SECTION="Gnome"
+SECTION="GNOME Libraries and Desktop"
 DESCRIPTION="Mutter is the window manager for GNOME. It is not invoked directly, but from GNOME Session (on a machine with a hardware accelerated video driver)."
 
 if [ ! -z $URL ]

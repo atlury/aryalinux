@@ -16,13 +16,13 @@ cd $SOURCE_DIR
 
 wget -nc http://xmlsoft.org/sources/libxslt-1.1.33.tar.gz
 wget -nc ftp://xmlsoft.org/libxslt/libxslt-1.1.33.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/libxslt-1.1.33-security_fix-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/libxslt-1.1.33-security_fix-1.patch
 
 
 NAME=libxslt
 VERSION=1.1.33
 URL=http://xmlsoft.org/sources/libxslt-1.1.33.tar.gz
-SECTION="General Libraries and Utilities"
+SECTION="General Libraries"
 DESCRIPTION="The libxslt package contains XSLT libraries used for extending libxml2 libraries to support XSLT files."
 
 if [ ! -z $URL ]

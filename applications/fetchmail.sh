@@ -13,7 +13,7 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/fetchmail-6.3.26-disable_sslv3-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/fetchmail-6.3.26-disable_sslv3-1.patch
 
 
 NAME=fetchmail

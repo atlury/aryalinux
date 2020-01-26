@@ -13,13 +13,13 @@ cd $SOURCE_DIR
 
 wget -nc https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
 wget -nc ftp://sourceware.org/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/sgml-common-0.6.3-manpage-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/sgml-common-0.6.3-manpage-1.patch
 
 
 NAME=sgml-common
 VERSION=0.6.3
 URL=https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
-SECTION="Printing and Typesetting"
+SECTION="Standard Generalized Markup Language (SGML)"
 DESCRIPTION="The SGML Common package contains install-catalog. This is useful for creating and maintaining centralized SGML catalogs."
 
 if [ ! -z $URL ]

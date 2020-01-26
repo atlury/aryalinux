@@ -14,13 +14,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://downloads.sourceforge.net/xarchiver/xarchiver-0.5.4.tar.bz2
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/xarchiver-0.5.4-fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/xarchiver-0.5.4-fixes-1.patch
 
 
 NAME=xarchiver
 VERSION=0.5.4
 URL=https://downloads.sourceforge.net/xarchiver/xarchiver-0.5.4.tar.bz2
-SECTION="Office Productivity"
+SECTION="Other X-based Programs"
 DESCRIPTION="XArchiver is a GTK+ archive manager with support for tar, xz, bzip2, gzip, zip, 7z, rar, lzo and many other archive formats."
 
 if [ ! -z $URL ]

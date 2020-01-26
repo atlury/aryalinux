@@ -14,13 +14,13 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.15.2.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/sendmail.8.15.2-openssl-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/sendmail.8.15.2-openssl-1.patch
 
 
 NAME=sendmail
 VERSION=.8.15.2
 URL=ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.15.2.tar.gz
-SECTION="Servers"
+SECTION="Mail Server Software"
 DESCRIPTION="The sendmail package contains a Mail Transport Agent (MTA)."
 
 if [ ! -z $URL ]

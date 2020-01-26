@@ -77,7 +77,7 @@ sudo rm -rf /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
 mv /usr/include/python2.7/pyconfig{,-64}.h
-cat > /usr/include/python2.7/ << EOF
+cat > /usr/include/python2.7/pyconfig.h << EOF
 /* pyconfig.h stub */
 
 #ifndef __STUB__PYCONFIG_H__

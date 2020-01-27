@@ -12,7 +12,7 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.proftpd.org/distrib/source/proftpd-1.3.6.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/proftpd-1.3.6-consolidated_fixes-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/proftpd-1.3.6-consolidated_fixes-1.patch
 
 
 NAME=proftpd

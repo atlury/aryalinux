@@ -15,7 +15,7 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.4.6.tar.gz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/postfix-3.4.6-glibc230_fix-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/postfix-3.4.6-glibc230_fix-1.patch
 
 
 NAME=postfix

@@ -18,7 +18,7 @@ wget -nc https://docs.python.org/ftp/python/doc/2.7.16/python-2.7.16-docs-html.t
 NAME=python2
 VERSION=2.7.16
 URL=https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tar.xz
-SECTION="General Libraries and Utilities"
+SECTION="Programming"
 DESCRIPTION="The Python 2 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs or developing entire applications. This version is for backward compatibility with other dependent packages."
 
 if [ ! -z $URL ]
@@ -76,49 +76,13 @@ sudo rm -rf /tmp/rootscript.sh
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
-mv /usr/include/python2.7/pyconfig{,-64}.h
-cat > /usr/include/python2.7/pyconfig.h << EOF
-/* pyconfig.h stub */
-
-#ifndef __STUB__PYCONFIG_H__
-#define __STUB__PYCONFIG_H__
-
-#if defined(__x86_64__) || \
-    defined(__sparc64__) || \
-    defined(__arch64__) || \
-    defined(__powerpc64__) || \
-    defined(__s390x__)
-#include "pyconfig-64.h"
-#else
-#include "pyconfig-32.h"
-#endif
-
-#endif
-EOF
+export PYTHONDOCS=/usr/share/doc/python-2.7.16
 ENDOFROOTSCRIPT
 
 chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
-# 32 bit install
-
-cd $SOURCE_DIR/$DIRECTORY
-
-CC="gcc -m32" \
-CXX="g++ -m32" \
-PKG_CONFIG_PATH="/usr/lib32/pkgconfig" \
-./configure --prefix=/usr       \
-            --libdir=/usr/lib32 \
-            --enable-shared     \
-            --with-system-expat \
-            --with-system-ffi   \
-            --with-ensurepip=yes \
-            --enable-unicode=ucs4 &&
-make
-make DESTDIR=$PWD/DESTDIR install
-sudo cp -Rv DESTDIR/usr/lib32/* /usr/lib32
-sudo mv /usr/include/python2.7/pyconfig{,-32}.h
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

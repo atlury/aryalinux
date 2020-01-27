@@ -17,7 +17,7 @@ wget -nc https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz
 NAME=python3
 VERSION=3.7.4
 URL=https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz
-SECTION="General Libraries and Utilities"
+SECTION="Programming"
 DESCRIPTION="The Python 3 package contains the Python development environment. This is useful for object-oriented programming, writing scripts, prototyping large programs or developing entire applications."
 
 if [ ! -z $URL ]
@@ -68,44 +68,12 @@ sudo rm -rf /tmp/rootscript.sh
 
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
-mv /usr/include/python3.7m/pyconfig{,-64}.h
-cat > /usr/include/python3.7m/pyconfig.h <<EOF
-/* pyconfig.h stub */
-
-#ifndef __STUB__PYCONFIG_H__
-#define __STUB__PYCONFIG_H__
-
-#if defined(__x86_64__) || \
-    defined(__sparc64__) || \
-    defined(__arch64__) || \
-    defined(__powerpc64__) || \
-    defined(__s390x__)
-#include "pyconfig-64.h"
-#else
-#include "pyconfig-32.h"
-#endif
-
-#endif
-EOF
+export PYTHONDOCS=/usr/share/doc/python-3/html
 ENDOFROOTSCRIPT
 
 chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
-
-CC="gcc -m32" \
-CXX="g++ -m32" \
-PKG_CONFIG_PATH="/usr/lib32/pkgconfig" \
-./configure --prefix=/usr       \
-            --libdir=/usr/lib32 \
-            --enable-shared     \
-            --with-system-expat \
-            --with-system-ffi   \
-            --with-ensurepip=yes &&
-make
-make DESTDIR=$PWD/DESTDIR install
-sudo cp -Rv DESTDIR/usr/lib32/* /usr/lib32
-sudo mv /usr/include/python3.7m/pyconfig{,-32}.h
 
 
 

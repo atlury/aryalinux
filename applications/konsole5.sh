@@ -13,7 +13,7 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc http://download.kde.org/stable/applications/19.08.0/src/konsole-19.08.0.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/konsole-19.08.0-scrollbar-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/konsole-19.08.0-scrollbar-1.patch
 
 
 NAME=konsole5

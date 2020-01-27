@@ -25,7 +25,7 @@ cd $SOURCE_DIR
 
 wget -nc http://ftp.gnome.org/pub/gnome/sources/cheese/3.32/cheese-3.32.1.tar.xz
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/cheese/3.32/cheese-3.32.1.tar.xz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/cheese-3.32.1-gst_debug_disabled-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/cheese-3.32.1-gst_debug_disabled-1.patch
 
 
 NAME=cheese

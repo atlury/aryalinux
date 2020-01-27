@@ -13,7 +13,7 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.48.tgz
-wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1/openldap-2.4.48-consolidated-1.patch
+wget -nc https://bitbucket.org/chandrakantsingh/patches/raw/2.1.1/openldap-2.4.48-consolidated-1.patch
 wget -nc http://www.openldap.org/doc/admin24/
 wget -nc http://www.openldap.org/pub/
 

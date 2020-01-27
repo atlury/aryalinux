@@ -12,13 +12,13 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc https://ftp.gnome.org/pub/gnome/sources/gspell/1.8/gspell-1.8.1.tar.xz
-wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gspell/1.8/gspell-1.8.1.tar.xz
+wget -nc https://ftp.gnome.org/pub/gnome/sources/gspell/1.8/gspell-1.8.2.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gspell/1.8/gspell-1.8.2.tar.xz
 
 
 NAME=gspell
-VERSION=1.8.1
-URL=https://ftp.gnome.org/pub/gnome/sources/gspell/1.8/gspell-1.8.1.tar.xz
+VERSION=1.8.2
+URL=https://ftp.gnome.org/pub/gnome/sources/gspell/1.8/gspell-1.8.2.tar.xz
 SECTION="General Libraries"
 DESCRIPTION="The gspell package provides a flexible API to add spell checking to a GTK+ application."
 

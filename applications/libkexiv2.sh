@@ -13,12 +13,12 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc http://download.kde.org/stable/applications/19.08.0/src/libkexiv2-19.08.0.tar.xz
+wget -nc http://download.kde.org/stable/applications/19.08.3/src/libkexiv2-19.08.3.tar.xz
 
 
 NAME=libkexiv2
-VERSION=19.08.0
-URL=http://download.kde.org/stable/applications/19.08.0/src/libkexiv2-19.08.0.tar.xz
+VERSION=19.08.3
+URL=http://download.kde.org/stable/applications/19.08.3/src/libkexiv2-19.08.3.tar.xz
 SECTION="KDE Frameworks 5 Based Applications"
 DESCRIPTION="Libkexiv2 is a KDE wrapper around the Exiv2 library for manipulating image metadata."
 

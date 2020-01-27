@@ -13,7 +13,7 @@ if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=binutils-2.32.tar.xz
+TARBALL=binutils-2.33.1.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL
@@ -34,7 +34,7 @@ RANLIB=$LFS_TGT-ranlib         \
 make
 make install
 make -C ld clean
-make -C ld LIB_PATH=/usr/lib:/lib:/usr/lib32:/lib32
+make -C ld LIB_PATH=/usr/lib:/lib
 cp -v ld/ld-new /tools/bin
 
 fi

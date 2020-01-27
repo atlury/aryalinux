@@ -13,12 +13,12 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc http://download.kde.org/stable/applications/19.08.0/src/libkdcraw-19.08.0.tar.xz
+wget -nc http://download.kde.org/stable/applications/19.08.3/src/libkdcraw-19.08.3.tar.xz
 
 
 NAME=libkdcraw
-VERSION=19.08.0
-URL=http://download.kde.org/stable/applications/19.08.0/src/libkdcraw-19.08.0.tar.xz
+VERSION=19.08.3
+URL=http://download.kde.org/stable/applications/19.08.3/src/libkdcraw-19.08.3.tar.xz
 SECTION="KDE Frameworks 5 Based Applications"
 DESCRIPTION="Libkdcraw is a KDE wrapper around the libraw-0.19.5 library for manipulating image metadata."
 

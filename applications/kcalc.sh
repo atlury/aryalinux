@@ -17,6 +17,8 @@ wget -nc https://download.kde.org/stable/applications/19.08.0/src/kcalc-19.08.0.
 NAME=kcalc
 VERSION=19.08.0
 URL=https://download.kde.org/stable/applications/19.08.0/src/kcalc-19.08.0.tar.xz
+SECTION="KDE Frameworks 5 Based Applications"
+DESCRIPTION="DescriptionKCalc is the software calculator integrated with the KDE Software Compilation. In the default view it includes a number pad, buttons for adding, subtracting, multiplying, and dividing, brackets, memory keys, percent, reciprocal, factorial, square, square root, and x to the power of y buttons."
 
 if [ ! -z $URL ]
 then

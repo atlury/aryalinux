@@ -13,13 +13,13 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc https://github.com/shadow-maint/shadow/releases/download/4.7/shadow-4.7.tar.xz
+wget -nc https://github.com/shadow-maint/shadow/releases/download/4.8/shadow-4.8.tar.xz
 wget -nc http://www.deer-run.com/~hal/linux_passwords_pam.html
 
 
 NAME=shadow
-VERSION=4.7
-URL=https://github.com/shadow-maint/shadow/releases/download/4.7/shadow-4.7.tar.xz
+VERSION=4.8
+URL=https://github.com/shadow-maint/shadow/releases/download/4.8/shadow-4.8.tar.xz
 SECTION="Security"
 DESCRIPTION="Shadow was indeed installed in LFS and there is no reason to reinstall it unless you installed CrackLib or Linux-PAM after your LFS system was completed. If you have installed CrackLib after LFS, then reinstalling Shadow will enable strong password support. If you have installed Linux-PAM, reinstalling Shadow will allow programs such as login and su to utilize PAM."
 
@@ -58,8 +58,7 @@ sed -i 's/1000/999/' etc/useradd                           &&
 make
 sudo rm -rf /tmp/rootscript.sh
 cat > /tmp/rootscript.sh <<"ENDOFROOTSCRIPT"
-make install &&
-mv -v /usr/bin/passwd /bin
+make install
 ENDOFROOTSCRIPT
 
 chmod a+x /tmp/rootscript.sh

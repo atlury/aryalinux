@@ -13,12 +13,12 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc http://invisible-mirror.net/archives/xterm/xterm-348.tgz
+wget -nc http://invisible-mirror.net/archives/xterm/xterm-352.tgz
 
 
 NAME=xterm
-VERSION=348
-URL=http://invisible-mirror.net/archives/xterm/xterm-348.tgz
+VERSION=352
+URL=http://invisible-mirror.net/archives/xterm/xterm-352.tgz
 SECTION="X Window System Environment"
 DESCRIPTION="xterm is a terminal emulator for the X Window System."
 

@@ -11,12 +11,12 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
+wget -nc https://github.com/libarchive/libarchive/releases/download/v3.4.1/libarchive-3.4.1.tar.xz
 
 
 NAME=libarchive
-VERSION=3.4.0
-URL=https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
+VERSION=3.4.1
+URL=https://github.com/libarchive/libarchive/releases/download/v3.4.1/libarchive-3.4.1.tar.xz
 SECTION="General Libraries"
 DESCRIPTION="The libarchive library provides a single interface for reading/writing various compression formats."
 

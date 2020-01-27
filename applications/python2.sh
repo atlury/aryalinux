@@ -101,6 +101,24 @@ chmod a+x /tmp/rootscript.sh
 sudo /tmp/rootscript.sh
 sudo rm -rf /tmp/rootscript.sh
 
+# 32 bit install
+
+cd $SOURCE_DIR/$DIRECTORY
+
+CC="gcc -m32" \
+CXX="g++ -m32" \
+PKG_CONFIG_PATH="/usr/lib32/pkgconfig" \
+./configure --prefix=/usr       \
+            --libdir=/usr/lib32 \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes \
+            --enable-unicode=ucs4 &&
+make
+make DESTDIR=$PWD/DESTDIR install
+sudo cp -Rv DESTDIR/usr/lib32/* /usr/lib32
+sudo mv /usr/include/python2.7/pyconfig{,-32}.h
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

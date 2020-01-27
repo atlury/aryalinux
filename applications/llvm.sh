@@ -85,11 +85,11 @@ sudo rm -rf /tmp/rootscript.sh
 cd ..
 
 mkdir -v build32
-cd       build32
+cd build32
 
 CC="gcc -m32" \
 CXX="g++ -m32" \
-PKG_CONFIG_PATH="/usr/lib32/pkgconfig" \	
+PKG_CONFIG_PATH="/usr/lib32/pkgconfig" \
 cmake .. -G Ninja \
       -DCMAKE_INSTALL_PREFIX=/usr           \
       -DLLVM_ENABLE_FFI=ON                  \

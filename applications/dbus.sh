@@ -13,9 +13,7 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz
-wget -nc http://www.linuxfromscratch.org/hints/downloads/files/execute-session-scripts-using-kdm.txt
-
+wget -nc https://dbus.freedesktop.org/releases/dbus/dbus-1.13.12.tar.xz
 
 NAME=dbus
 VERSION=1.12.16

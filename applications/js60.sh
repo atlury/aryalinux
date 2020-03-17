@@ -11,18 +11,20 @@ set +h
 #REQ:icu
 #REQ:python2
 #REQ:which
+#REQ:rust
 #REQ:zip
 
 
 cd $SOURCE_DIR
 
 wget -nc http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-60.8.0.tar.bz2
-wget -nc ftp://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-60.8.0.tar.bz2
 
 
 NAME=js60
-VERSION=60.8.0
+VERSION=68.4.2
 URL=http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-60.8.0.tar.bz2
+SECTION="General Libraries"
+DESCRIPTION="JS is Mozilla's JavaScript engine written in C."
 
 if [ ! -z $URL ]
 then
@@ -42,6 +44,14 @@ fi
 
 echo $USER > /tmp/currentuser
 
+
+if ! grep -ri "/opt/rustc/lib" /etc/ld.so.conf &> /dev/null; then
+	echo "/opt/rustc/lib" | sudo tee -a /etc/ld.so.conf
+	sudo ldconfig
+fi
+
+sudo ldconfig
+. /etc/profile.d/rustc.sh
 
 mkdir mozjs-build &&
 cd    mozjs-build &&

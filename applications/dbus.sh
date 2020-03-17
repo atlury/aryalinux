@@ -13,7 +13,7 @@ set +h
 
 cd $SOURCE_DIR
 
-wget -nc https://dbus.freedesktop.org/releases/dbus/dbus-1.13.12.tar.xz
+wget -nc https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz
 
 NAME=dbus
 VERSION=1.12.16

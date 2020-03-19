@@ -166,6 +166,10 @@ def freshBuild(startFrom):
 			print 'Error occured while executing stage 2'
 			exit()
 
+	# Remove the following two lines...
+	print 'Toolchain built successfully. Please try the toolchain tarball in /sources/'
+	exit()
+
 	if startFrom == 4:
 		logCurrentStage('4')
 		try:

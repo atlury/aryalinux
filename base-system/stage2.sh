@@ -13,4 +13,8 @@ done
 
 echo "Creating toolchain backup"
 
-tar -cJvf /sources/toolchain-$OS_VERSION-$(uname -m).tar.xz /tools
+tar --exclude=$LFS/sources \
+    $LFS/sources/toolchain-$OS_VERSION-$(uname -m).tar.xz \
+    $LFS
+
+echo "Backup done"

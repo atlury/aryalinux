@@ -141,30 +141,31 @@ def freshBuild(startFrom):
 		try:
 			logCurrentStage('2')
 			runScript('stage1.sh', None)
-			startFrom = startFrom + 1
+			# Skipping stage 3 - toolchain building entirely...
+			startFrom = startFrom + 2
 		except:
 			print 'Error occured while executing stage 1'
 			exit()
 
-	if startFrom == 3:
-		logCurrentStage('3')
-		env={}
-		LFS='/mnt/lfs'
-		LC_ALL='POSIX'
-		LFS_TGT=check_output("echo $(uname -m)-lfs-linux-gnu", shell=True).strip('\n')
-		PATH='/tools/bin:/bin:/usr/bin'
-
-		env['LFS'] = LFS
-		env['LC_ALL'] = LC_ALL
-		env['PATH'] = PATH
-		env['LFS_TGT']=LFS_TGT
-
-		try:
-			runScriptWithEnvAs('lfs', 'stage2.sh', env, '/home/lfs')
-			startFrom = startFrom + 1
-		except:
-			print 'Error occured while executing stage 2'
-			exit()
+#	if startFrom == 3:
+#		logCurrentStage('3')
+#		env={}
+#		LFS='/mnt/lfs'
+#		LC_ALL='POSIX'
+#		LFS_TGT=check_output("echo $(uname -m)-lfs-linux-gnu", shell=True).strip('\n')
+#		PATH='/tools/bin:/bin:/usr/bin'
+#
+#		env['LFS'] = LFS
+#		env['LC_ALL'] = LC_ALL
+#		env['PATH'] = PATH
+#		env['LFS_TGT']=LFS_TGT
+#
+#		try:
+#			runScriptWithEnvAs('lfs', 'stage2.sh', env, '/home/lfs')
+#			startFrom = startFrom + 1
+#		except:
+#			print 'Error occured while executing stage 2'
+#			exit()
 
 	if startFrom == 4:
 		logCurrentStage('4')

@@ -19,7 +19,7 @@ unzip master.zip
 tar -cJvf efivar-master.tar.xz efivar-master
 rm -rf efivar-master master.zip
 
-wget -c https://github.com/rhboot/efibootmgr/archive/17.tar.gz -O efibootmgr-17.tar.gz
+wget -nc https://github.com/rhboot/efibootmgr/archive/17/efibootmgr-17.tar.gz
 wget -nc https://downloads.sourceforge.net/freetype/freetype-2.9.tar.bz2
 wget -nc https://ftp.gnu.org/gnu/unifont/unifont-7.0.05/unifont-7.0.05.pcf.gz
 wget -nc https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.5.tar.xz

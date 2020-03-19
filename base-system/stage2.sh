@@ -11,4 +11,4 @@ set -e
 
 #done
 
-tar xf toolchain-2.5-x86_64.tar.xz -C $LFS
+tar xf /sources/toolchain-2.5-x86_64.tar.xz -C $LFS

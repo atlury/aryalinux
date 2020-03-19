@@ -4,17 +4,11 @@ set -e
 
 . /sources/build-properties
 
-for script in /sources/toolchain/*.sh
-do
+#for script in /sources/toolchain/*.sh
+#do
 
-bash $script
+#bash $script
 
-done
+#done
 
-echo "Creating toolchain backup"
-
-tar --exclude=$LFS/sources \
-    $LFS/sources/toolchain-$OS_VERSION-$(uname -m).tar.xz \
-    $LFS
-
-echo "Backup done"
+tar xf toolchain-2.5-x86_64.tar.xz -C $LFS

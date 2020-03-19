@@ -8,6 +8,7 @@ VERSION=2.5
 CURRENT_DIR=$(pwd)
 pushd ~/sources
 
+wget -nc https://sourceforge.net/projects/aryalinux/files/releases/2.5/toolchain-2.5-x86_64.tar.xz
 wget -nc https://github.com/dosfstools/dosfstools/releases/download/v4.1/dosfstools-4.1.tar.xz
 wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
 wget -nc http://mirrors.ocf.berkeley.edu/tanglu/pool/main/o/os-prober/os-prober_1.71.tar.xz

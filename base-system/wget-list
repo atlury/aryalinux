@@ -66,7 +66,6 @@ http://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz
 https://github.com/shadow-maint/shadow/releases/download/4.8.1/shadow-4.8.1.tar.xz
 http://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz
 https://github.com/systemd/systemd/archive/v244/systemd-244.tar.gz
-http://anduin.linuxfromscratch.org/LFS/systemd-man-pages-244.tar.xz
 http://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.96.tar.xz
 http://ftp.gnu.org/gnu/tar/tar-1.32.tar.xz
 https://downloads.sourceforge.net/tcl/tcl8.6.10-src.tar.gz

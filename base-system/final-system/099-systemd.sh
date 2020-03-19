@@ -24,7 +24,6 @@ ln -sf /tools/bin/true /usr/bin/xsltproc
 for file in /tools/lib/lib{blkid,mount,uuid}.so*; do
     ln -sf $file /usr/lib/
 done
-tar -xf ../systemd-man-pages-244.tar.xz
 sed '177,$ d' -i src/resolve/meson.build
 sed -i 's/GROUP="render", //' rules.d/50-udev-default.rules.in
 mkdir -p build

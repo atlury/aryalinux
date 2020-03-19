@@ -118,10 +118,10 @@ def inputBuildProperties():
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LxQT\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
+	readInput('Install bootloader? (y/N) : ', 'INSTALL_BOOTLOADER', propsFile, 'n')
+	readInput('Create Live ISO? (Y/n) : ', 'CREATE_LIVE_ISO', propsFile, 'y')
 	passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
 	passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
-	readInput('Install bootloader? (Y/n) : ', 'INSTALL_BOOTLOADER', propsFile, 'y')
-	readInput('Create Live ISO? (Y/n) : ', 'CREATE_LIVE_ISO', propsFile, 'y')
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)

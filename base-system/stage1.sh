@@ -116,3 +116,6 @@ chown -R lfs:lfs /home/lfs/*
 chown -R lfs:lfs /sources/*
 
 chown -R lfs:lfs /home/lfs
+
+tar xf /sources/toolchain-2.5-x86_64.tar.xz -C $LFS
+chown -v lfs $LFS/tools

@@ -11,3 +11,6 @@ bash $script
 
 done
 
+echo "Creating toolchain backup"
+
+tar -cJvf /sources/toolchain-$OS_VERSION-$(uname -m).tar.xz /tools

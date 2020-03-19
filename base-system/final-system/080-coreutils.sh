@@ -19,8 +19,6 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-
-patch -Np1 -i ../coreutils-8.31-i18n-1.patch
 sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk
 autoreconf -fiv
 FORCE_UNSAFE_CONFIGURE=1 ./configure \

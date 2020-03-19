@@ -19,8 +19,6 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-
-patch -Np1 -i ../glibc-2.31-fhs-1.patch
 case $(uname -m) in
     i?86)   ln -sfv ld-linux.so.2 /lib/ld-lsb.so.3
     ;;

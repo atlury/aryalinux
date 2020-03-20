@@ -27,7 +27,6 @@ sed -i 's|usr/bin/env |bin/|' run.sh.in
             --docdir=/usr/share/doc/expat-2.2.9
 make
 make install
-install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.9
 
 fi
 

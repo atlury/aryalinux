@@ -28,9 +28,7 @@ cp -v configfsf.sub   config.sub
             --disable-static \
             --docdir=/usr/share/doc/gmp-6.2.0
 make
-make html
 make install
-make install-html
 
 fi
 

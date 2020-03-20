@@ -26,9 +26,7 @@ cd $DIRECTORY
             --enable-thread-safe \
             --docdir=/usr/share/doc/mpfr-4.0.2
 make
-make html
 make install
-make install-html
 
 fi
 

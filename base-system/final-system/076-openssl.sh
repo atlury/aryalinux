@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=076-openssl
+PKG_NAME=openssl
+TARBALL=openssl-1.1.1d.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=openssl-1.1.1d.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

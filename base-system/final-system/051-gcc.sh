@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=051-gcc
+PKG_NAME=gcc
+TARBALL=gcc-9.2.0.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=gcc-9.2.0.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

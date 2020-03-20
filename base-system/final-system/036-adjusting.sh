@@ -7,6 +7,7 @@ set +h
 . /sources/build-functions
 
 NAME=036-adjusting
+PKG_NAME=adjusting
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then

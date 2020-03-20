@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=072-kmod
+PKG_NAME=kmod
+TARBALL=kmod-27.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=kmod-27.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

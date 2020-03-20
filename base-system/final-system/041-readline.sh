@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=041-readline
+PKG_NAME=readline
+TARBALL=readline-8.0.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=readline-8.0.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=091-kbd
+PKG_NAME=kbd
+TARBALL=kbd-2.2.0.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=kbd-2.2.0.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

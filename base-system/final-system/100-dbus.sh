@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=100-dbus
+PKG_NAME=dbus
+TARBALL=dbus-1.12.16.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=dbus-1.12.16.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

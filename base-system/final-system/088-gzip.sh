@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=088-gzip
+PKG_NAME=gzip
+TARBALL=gzip-1.10.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=gzip-1.10.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

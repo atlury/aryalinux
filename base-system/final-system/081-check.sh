@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=081-check
+PKG_NAME=check
+TARBALL=check-0.14.0.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=check-0.14.0.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

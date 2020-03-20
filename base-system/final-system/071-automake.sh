@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=071-automake
+PKG_NAME=automake
+TARBALL=automake-1.16.1.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=automake-1.16.1.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

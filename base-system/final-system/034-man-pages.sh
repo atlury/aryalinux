@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=034-man-pages
+PKG_NAME=man-pages
+TARBALL=man-pages-5.05.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=man-pages-5.05.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

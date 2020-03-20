@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=090-iproute2
+PKG_NAME=iproute2
+TARBALL=iproute2-5.5.0.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=iproute2-5.5.0.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

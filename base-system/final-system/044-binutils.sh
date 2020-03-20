@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=044-binutils
+PKG_NAME=binutils
+TARBALL=binutils-2.34.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=binutils-2.34.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

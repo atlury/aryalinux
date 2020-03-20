@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=050-shadow
+PKG_NAME=shadow
+TARBALL=shadow-4.8.1.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=shadow-4.8.1.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

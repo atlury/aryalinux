@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=033-linux-headers
+PKG_NAME=linux-headers
+TARBALL=linux-5.5.8.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=linux-5.5.8.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

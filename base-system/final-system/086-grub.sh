@@ -8,8 +8,8 @@ set +h
 export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="098-grub.sh"
 TARBALL="grub-2.04.tar.xz"
+STEPNAME="098-grub.sh"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then

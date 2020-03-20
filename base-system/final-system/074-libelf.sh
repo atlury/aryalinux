@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=074-libelf
+PKG_NAME=libelf
+TARBALL=elfutils-0.178.tar.bz2
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=elfutils-0.178.tar.bz2
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

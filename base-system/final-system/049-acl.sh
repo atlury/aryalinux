@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=049-acl
+PKG_NAME=acl
+TARBALL=acl-2.2.53.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=acl-2.2.53.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

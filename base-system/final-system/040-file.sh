@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=040-file
+PKG_NAME=file
+TARBALL=file-5.38.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=file-5.38.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

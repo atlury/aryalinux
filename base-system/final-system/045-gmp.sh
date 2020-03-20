@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=045-gmp
+PKG_NAME=gmp
+TARBALL=gmp-6.2.0.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=gmp-6.2.0.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

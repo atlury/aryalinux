@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=097-texinfo
+PKG_NAME=texinfo
+TARBALL=texinfo-6.7.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=texinfo-6.7.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

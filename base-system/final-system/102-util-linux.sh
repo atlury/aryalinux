@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=102-util-linux
+PKG_NAME=util-linux
+TARBALL=util-linux-2.35.1.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=util-linux-2.35.1.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

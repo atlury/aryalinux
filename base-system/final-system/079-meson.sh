@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=079-meson
+PKG_NAME=meson
+TARBALL=meson-0.53.2.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=meson-0.53.2.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

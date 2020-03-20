@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=053-ncurses
+PKG_NAME=ncurses
+TARBALL=ncurses-6.2.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=ncurses-6.2.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

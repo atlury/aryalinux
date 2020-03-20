@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=042-m4
+PKG_NAME=m4
+TARBALL=m4-1.4.18.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=m4-1.4.18.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

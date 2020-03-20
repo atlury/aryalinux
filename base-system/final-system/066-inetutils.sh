@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=066-inetutils
+PKG_NAME=inetutils
+TARBALL=inetutils-1.9.4.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=inetutils-1.9.4.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

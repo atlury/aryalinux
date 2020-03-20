@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=103-e2fsprogs
+PKG_NAME=e2fsprogs
+TARBALL=e2fsprogs-1.45.5.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=e2fsprogs-1.45.5.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

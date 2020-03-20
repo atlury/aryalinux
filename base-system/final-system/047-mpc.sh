@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=047-mpc
+PKG_NAME=mpc
+TARBALL=mpc-1.1.0.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=mpc-1.1.0.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

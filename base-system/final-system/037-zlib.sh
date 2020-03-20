@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=037-zlib
+PKG_NAME=zlib
+TARBALL=zlib-1.2.11.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=zlib-1.2.11.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=048-attr
+PKG_NAME=attr
+TARBALL=attr-2.4.48.tar.gz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=attr-2.4.48.tar.gz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL

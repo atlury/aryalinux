@@ -7,13 +7,14 @@ set +h
 . /sources/build-functions
 
 NAME=077-python
+PKG_NAME=python
+TARBALL=Python-3.8.2.tar.xz
 
 touch /sources/build-log
 if ! grep "$NAME" /sources/build-log; then
 
 cd /sources
 
-TARBALL=Python-3.8.2.tar.xz
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL
